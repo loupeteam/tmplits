@@ -83,16 +83,17 @@ class Widgets {
     getLibraries(libraries, callback) {
         let libraryCount = 0;
         let scope = this
-
+        if(libraries.length == 0){
+            next()
+        }
         function next() {
             libraryCount++
-            if (libraries.length == libraryCount) {
+            if (libraries.length <= libraryCount) {
                 if (callback) {
                     callback()
                 }
             }
         }
-
         function processPartial(data) {
             data.text()
                 .then((partial) => {
@@ -119,9 +120,13 @@ class Widgets {
         let scope = this
         let pageCount = 0;
 
+        if(pages.length == 0){
+            next()
+        }
+
         function next() {
             pageCount++
-            if (pages.length == pageCount) {
+            if (pages.length <= pageCount) {
                 if (callback) {
                     callback()
                 }
