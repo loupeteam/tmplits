@@ -1,0 +1,18 @@
+{
+    "startPage" : {
+        "container" : "main",
+        "name": "main"
+    },
+    "pages": [
+        {
+            "name": "main",
+            "file": "main.handlebars"
+        },
+        {
+            "name": "components",
+            "file": "components.handlebars"
+        }
+    ],
+    "libraries":[
+    ]
+}
