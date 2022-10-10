@@ -1,0 +1,51 @@
+.error {
+    border-color: red;
+    border-style: solid;
+    width: fit-content;
+    margin: -1px
+}
+
+.error .error {
+    margin: -2px 0px 5px 0px;
+    border-width: 5px
+}
+
+.form-control.label-led {
+    display: inline-flex;
+    align-items: center;
+}
+
+.form-control.label-led .led {
+    margin: 20px;
+}
+.label-led h1, 
+.label-led h2,
+.label-led h3,
+.label-led h4,
+.label-led h5,
+.label-led h6 {
+    margin : auto;
+}     
+.lui-grid { margin: 5px; } 
+.lui-grid .lui-grid { margin: 0px; } 
+.lui-grid-labeled{border-style: solid;border-radius: 5px;border-width: 2px; } 
+.lui-grid-heading{font-size: 20px;font-weight: bolder;}
+
+.container ::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius:10px;      
+}
+ 
+.container ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius:10px;      
+    width: 0px;
+}
+ 
+.container ::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius:10px;      
+}
