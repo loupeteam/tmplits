@@ -49,3 +49,22 @@
   outline: 1px solid slategrey;
   border-radius:10px;      
 }
+
+.slide-container{
+    z-index: 0;
+    position: fixed;
+    bottom: 10px;
+}
+.slider{
+    width: 40px;
+    height: 80px;
+    /* background-color: #303030; */
+    border-color: #303030;
+    border-style: solid;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px;
+}
+.slider-bar{
+    background-color: #2FA1D6;
+}

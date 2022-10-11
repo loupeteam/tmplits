@@ -427,11 +427,18 @@ function createWidget(widget, ...args) {
     let context = args.slice(0,-1)
     
     try{
-        var fn = eval(widget)
+        var fn = eval('Widget'+widget)
     }
     catch(e){
-        var error = `<div class='error'>could not find widget ${widget}</div>`
+        try{
+            fn = eval(widget)
+            console.warn('Widgets names should prepend "Widget" to their name for clarity');
+        }
+        catch{
+            var error = `<div class='error'>could not find widget ${widget}</div>`
+        }
     }
+
     if( typeof fn != 'function'){
         var error = `<div class='error'>could not find widget ${widget}</div>`
         fn = ()=>{ return error}

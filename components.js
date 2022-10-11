@@ -1,9 +1,11 @@
 let scope = this
+
 function htmlToElements(html) {
     var template = document.createElement('template');
     template.innerHTML = html;
     return template.content.childNodes;
 }
+
 function htmlToElement(html) {
     var template = document.createElement('template');
     html = html.trim(); // Never return a text node of whitespace as the result
@@ -38,14 +40,14 @@ function getButtonType(type, classList){
                 return true
             break
             case 'momentary':
-                classList.push('webhmi-btn-momentary')                
+                classList.push('webhmi-btn-momentary')
                 classList.push('webhmi-led')
                 return true
             break      
             default:
                 break;
         }
-    }    
+    }
     return false;
 }
 /*Example Button usage
@@ -54,10 +56,10 @@ function getButtonType(type, classList){
 {{/widget}}
 {{widget 'button' class="led-on" style="color:blue" children="Thank you" }}
 */
-function Button(context, args){
+function WidgetButton(context, args) {
 
     let {buttonType='', ..._args} = args.hash
-    
+
     //Get cleaned up values from args
     let {classList, attr} = cleanArgs( _args )
 
@@ -75,18 +77,18 @@ function Button(context, args){
     return `<button type='button' class="${classList.join(" ")}"  ${attr}> ${args.children ? args.children : 'Label'} </button>`
 }
 
-function dropDownSelected(el, click){
+function dropDownSelected(el, click) {
     let item = el.closest('.dropdown-scope')
-    let selection = el.textContent.trim(); 
+    let selection = el.textContent.trim();
     let text = item.querySelectorAll('.selected-item-text:not(.noset)')
     if( text.length ){
         text.forEach(e => {
             e.innerHTML = selection
             if(el.value){
-                e.value = el.value; 
+                e.value = el.value;
             }
             else{
-                e.value = selection; 
+                e.value = selection;
             }
             if(!e.options)
                 e.options = {}
@@ -135,7 +137,7 @@ Example drop down usage:
     <option>Extra Option</option>
     {{/widget}}
 */
-function dropdownTable(context, args){
+function WidgetDropdownTable(context, args) {
 
     let {set=true, style='', ..._args} = args.hash
     //Get cleaned up values from args
@@ -160,7 +162,7 @@ function dropdownTable(context, args){
             })
         }
         if(el.tagName == 'OPTION'){
-            let e = el            
+            let e = el
             let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
             e = jQuery.parseHTML(`<tr><td> ${e.innerHTML} </td></tr>`)
             e[0].setAttribute('onclick', click)
@@ -176,7 +178,7 @@ function dropdownTable(context, args){
                     e[0].setAttribute('data-index', index++)
                     options += e[0].outerHTML
                 }
-            })    
+            })
         }
     })
     if( field == '' ){
@@ -234,7 +236,7 @@ Example drop down usage:
     <dropdown>
     {{/widget}}
 */
-function dropdown(context, args){
+function WidgetDropdown(context, args) {
 
     let {set=true, style='', ..._args} = args.hash
     //Get cleaned up values from args
@@ -252,7 +254,7 @@ function dropdown(context, args){
             el.childNodes.forEach((e)=>{
                 if(e.classList){
                     e.classList.add('form-control')
-                    
+
                     if( set && e.querySelectorAll(".selected-item-text").length == 0){
                         e.classList.add('selected-item-text')
                     }
@@ -265,8 +267,8 @@ function dropdown(context, args){
                 let click = `dropDownSelected(this, '${ e.getAttribute('onclick') }');`
                 e.setAttribute('onclick', click)
                 e.setAttribute('data-index', index++)
-            })   
-            dropdown = el.innerHTML             
+            })
+            dropdown = el.innerHTML
         }
     })
     if( field == '' ){
@@ -290,13 +292,13 @@ return`
 `
 }
 
-function LabeledLed(context, args){
     let {side = 'middle', ['data-var-name']: dataVarName, buttonType='', buttonVarName='', ..._args} = args.hash
+function WidgetLabeledLed(context, args) {
     //Get cleaned up values from args
     let { classList, attr} = cleanArgs( _args )
 
     classList = classList.concat(['input-group','form-control','label-led'])
-    
+
     if( args.children == "" && context[0]){
         args.children = `<h3>${context[0]}</h3><h3/>`
     }
@@ -328,10 +330,10 @@ function LabeledLed(context, args){
    `
 }
 
-function LabeledNumericInput(context, args){
+function WidgetLabeledNumericInput(context, args) {
 
     let {['data-var-name']: dataVarName, ..._args} = args.hash
-    
+
     //Get cleaned up values from args
     let {classList,  attr} = cleanArgs( _args )
 
@@ -350,7 +352,7 @@ return`
    `
 }
 
-function LabeledTextInput(context, args){
+function WidgetLabeledTextInput(context, args) {
 
     //Get cleaned up values from args
     let {classList, attr} = cleanArgs( args.hash )
@@ -370,8 +372,8 @@ return`
    `
 }
 
-function LabeledList(context, args){
     let {style='', ..._args} =args.hash
+function WidgetLabeledList(context, args) {
 
     //Get cleaned values
     let {classList, attr} = cleanArgs(_args)
@@ -386,7 +388,7 @@ function LabeledList(context, args){
     </div> `
 }
 
-function ColumnsBs(context, args){
+function WidgetColumnsBs(context, args) {
 
     let {style='', maxColumns=3, ..._args} =args.hash
 
@@ -419,7 +421,7 @@ function ColumnsBs(context, args){
    `
 }
 
-function Columns(context, args){
+function WidgetColumns(context, args) {
 
     let {style='', centerItems, maxColumns=3, columnFlow=0, ..._args} =args.hash
 
@@ -442,7 +444,7 @@ function Columns(context, args){
     style += `;display:grid; grid-gap:5px;`
     style += `grid-auto-rows: max-content;`
     if(centerItems){
-        style += `align-items:center;justify-items:center;` 
+        style += `align-items:center;justify-items:center;`
     }
     //Setup columns and rows based on the flow direction
     style += `${ columnFlow > 0 ? `grid-template: repeat(${rows},1fr) / repeat(${columns},1fr); grid-auto-flow : column;` : `grid-template-columns : repeat(${columns},1fr);`}`
@@ -453,7 +455,7 @@ function Columns(context, args){
    `
 }
 
-function LabeledColumns(context, args){
+function WidgetLabeledColumns(context, args) {
     //Pull out any attributes we need
     let {style='', centerItems, maxColumns=3, columnFlow=0, ..._args} =args.hash
 
@@ -480,7 +482,7 @@ function LabeledColumns(context, args){
     style += `;display:grid; grid-gap:5px;`
     style += `grid-auto-rows: max-content;`
     if(centerItems){
-        style += `align-items:center;justify-items:center;` 
+        style += `align-items:center;justify-items:center;`
     }
     //Setup columns and rows based on the flow direction
     style += `${ columnFlow > 0 ? `grid-template: repeat(${rows},1fr) / repeat(${columns},1fr); grid-auto-flow : column;` : `grid-template-columns : repeat(${columns},1fr);`}`
@@ -495,14 +497,14 @@ function LabeledColumns(context, args){
    `
 }
 
-function pageSelect(context, args){
     let {active, template, dom, title, ..._args} =args.hash
+function WidgetPageSelect(context, args) {
     //Get cleaned values
     let {classList, attr} = cleanArgs(_args)
     classList = classList.concat(['nav-tabs-item'])
     if(active){
         classList = classList.concat(['active'])
-    }    
+    }
 return `
 <li class="${classList.join(' ')}" >
     <a data-page='${template}' data-target-dom='${dom}' ${attr}>${title}</a>
@@ -511,7 +513,7 @@ return `
 }
 //Handle changing the page if a tab is clicked
 function luiIncrementValue( selected ){
-  
+
     let scope = selected.target.closest('.lui-increment-scope')
     let target = scope.querySelectorAll('.lui-increment-value')
     if(target.length == 0){
@@ -536,20 +538,20 @@ function luiIncrementValue( selected ){
 }
 $(document).on({"click":luiIncrementValue},'.lui-increment');
 
-function ValueUpDown(context, args){
     let {style='', 
-        ['data-var-name']: dataVarName,
+function WidgetValueUpDown(context, args) {
+            ['data-var-name']: dataVarName,
         increment=1,   
-        buttonStyle = '',
+            buttonStyle = '',
         inputStyle= '',
         ..._args} =args.hash
 
     //Get cleaned values
     let {classList, attr} = cleanArgs(_args)
     classList = classList.concat(['lui-increment-scope'])
-    style = 'display:inline-flex; grid-template-columns: auto 1fr auto; border-style:solid; border-radius: 40px;width:fit-content;height:fit-content;' + style; 
+    style = 'display:inline-flex; grid-template-columns: auto 1fr auto; border-style:solid; border-radius: 40px;width:fit-content;height:fit-content;' + style;
     buttonStyle = ';padding:20px; font-size:20px;' + buttonStyle
-    inputStyle  = `;padding: 1px;margin: -1px;text-align: center;width: 100px;font-size: 20px;font-weight: bold;border-width: 1px;` + inputStyle
+    inputStyle = `;padding: 1px;margin: -1px;text-align: center;width: 100px;font-size: 20px;font-weight: bold;border-width: 1px;` + inputStyle
     let innerClassList = ['lui-increment-value']
     if( dataVarName ){
         innerClassList.push('webhmi-num-value')
@@ -571,8 +573,8 @@ function ValueUpDown(context, args){
 `
 }
 
-function page(context, args){
 return `
+function WidgetPage(context, args) {
 <div class='container' style="width: 100%; height: 94vh; overflow:auto; border-style: solid; border-radius: 10px;">
     <div class='row'>
         <div class='col-sm-12'>
@@ -587,7 +589,7 @@ function selectTab( selected ){
     selected = $(selected.currentTarget)
     let tabs = selected.closest('.nav-tabs').children('.nav-tabs-item')
     tabs.removeClass('active')
-    selected.addClass('active')      
+    selected.addClass('active')
 }
 $(document).on({"click":selectTab},'.nav-tabs-item');
 
