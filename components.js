@@ -12,23 +12,28 @@ function htmlToElement(html) {
     template.innerHTML = html;
     return template.content.firstChild;
 }
-function cleanArgs( args ){
+
+function cleanArgs(args) {
     let _args = args
     let classList = []
-    if( _args.class ){
-        classList = classList.concat(_args.class.split(' ') )
+    if (_args.class) {
+        classList = classList.concat(_args.class.split(' '))
         delete _args.class
     }
 
-    let attr = Object.keys(_args).map((v)=>{
+    let attr = Object.keys(_args).map((v) => {
         return `${v}="${_args[v]}"`
     })
-    return { classList, attr }
+    return {
+        classList,
+        attr
+    }
 }
-function getButtonType(type, classList){
+
+function getButtonType(type, classList) {
 
     //See if there is a button type
-    if( type ){
+    if (type) {
         switch (type.trim().toLowerCase()) {
             case 'set':
                 classList.push('webhmi-btn-set')
@@ -38,12 +43,12 @@ function getButtonType(type, classList){
                 classList.push('webhmi-btn-toggle')
                 classList.push('webhmi-led')
                 return true
-            break
+                break
             case 'momentary':
                 classList.push('webhmi-btn-momentary')
                 classList.push('webhmi-led')
                 return true
-            break      
+                break
             default:
                 break;
         }
@@ -58,16 +63,21 @@ function getButtonType(type, classList){
 */
 function WidgetButton(context, args) {
 
-    let {buttonType='', ..._args} = args.hash
+    let {
+        buttonType = '', ..._args
+    } = args.hash
 
     //Get cleaned up values from args
-    let {classList, attr} = cleanArgs( _args )
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
 
     //Add class items from this component
     classList = classList.concat(['btn'])
 
     //If there are no children, the first item in the context is the label
-    if( args.children == "" && context[0]){
+    if (args.children == "" && context[0]) {
         args.children = `${context[0]}`
     }
 
@@ -81,27 +91,28 @@ function dropDownSelected(el, click) {
     let item = el.closest('.dropdown-scope')
     let selection = el.textContent.trim();
     let text = item.querySelectorAll('.selected-item-text:not(.noset)')
-    if( text.length ){
+    if (text.length) {
         text.forEach(e => {
             e.innerHTML = selection
-            if(el.value){
+            if (el.value) {
                 e.value = el.value;
-            }
-            else{
+            } else {
                 e.value = selection;
             }
-            if(!e.options)
+            if (!e.options)
                 e.options = {}
             e.options.selectedIndex = e.value
-            let evt = new Event("change", {"bubbles":true, "cancelable":true});
+            let evt = new Event("change", {
+                "bubbles": true,
+                "cancelable": true
+            });
             e.dispatchEvent(evt);
         });
     }
-    if(click){
-        try{
+    if (click) {
+        try {
             eval(click)
-        }
-        catch(e){
+        } catch (e) {
             throw `error from user event: '${click}' ` + e
         }
     }
@@ -139,29 +150,34 @@ Example drop down usage:
 */
 function WidgetDropdownTable(context, args) {
 
-    let {set=true, style='', ..._args} = args.hash
+    let {
+        set = true, style = '', ..._args
+    } = args.hash
     //Get cleaned up values from args
-    let {classList, attr} = cleanArgs( args.hash )
+    let {
+        classList,
+        attr
+    } = cleanArgs(args.hash)
     style = 'margin:auto;' + style;
-    classList = classList.concat(['input-group','dropdown-scope'])
+    classList = classList.concat(['input-group', 'dropdown-scope'])
 
     let trimmed = args.children.trim()
     let field = ''
     let options = ''
     let index = 0
-    $(jQuery.parseHTML(trimmed)).each((i, el)=>{
-        if(el.tagName == 'FIELD'){
-            el.childNodes.forEach((e)=>{
-                if(e.classList){
+    $(jQuery.parseHTML(trimmed)).each((i, el) => {
+        if (el.tagName == 'FIELD') {
+            el.childNodes.forEach((e) => {
+                if (e.classList) {
                     e.classList.add('form-control')
-                    if(set){
+                    if (set) {
                         e.classList.add('selected-item-text')
                     }
                     field += e.outerHTML
                 }
             })
         }
-        if(el.tagName == 'OPTION'){
+        if (el.tagName == 'OPTION') {
             let e = el
             let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
             e = jQuery.parseHTML(`<tr><td> ${e.innerHTML} </td></tr>`)
@@ -169,9 +185,9 @@ function WidgetDropdownTable(context, args) {
             e[0].setAttribute('data-index', index++)
             options += e[0].outerHTML
         }
-        if(el.tagName == 'OPTIONS'){
-            el.childNodes.forEach((e)=>{
-                if(e.getAttribute){
+        if (el.tagName == 'OPTIONS') {
+            el.childNodes.forEach((e) => {
+                if (e.getAttribute) {
                     let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
                     e = jQuery.parseHTML(`<tr><td> ${e.outerHTML} </td></tr>`)
                     e[0].setAttribute('onclick', click)
@@ -181,11 +197,11 @@ function WidgetDropdownTable(context, args) {
             })
         }
     })
-    if( field == '' ){
-        field= `<input class='form-control selected-item-text'>`
+    if (field == '') {
+        field = `<input class='form-control selected-item-text'>`
     }
     let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.()"` : ''
-return`
+    return `
 <div class="${classList.join(' ')}" style="${style}" >
         <div class="input-group-btn">
             <button type="button" 
@@ -238,32 +254,37 @@ Example drop down usage:
 */
 function WidgetDropdown(context, args) {
 
-    let {set=true, style='', ..._args} = args.hash
+    let {
+        set = true, style = '', ..._args
+    } = args.hash
     //Get cleaned up values from args
-    let {classList, attr} = cleanArgs( args.hash )
+    let {
+        classList,
+        attr
+    } = cleanArgs(args.hash)
     style = 'margin:auto;' + style;
-    classList = classList.concat(['input-group','dropdown-scope'])
+    classList = classList.concat(['input-group', 'dropdown-scope'])
 
     let trimmed = args.children.trim()
 
     let field = ''
     let index = 0
     let dropdown = 'missing &lt;dropdown&gt;'
-    $(jQuery.parseHTML(trimmed)).each((i, el)=>{
-        if(el.tagName == 'FIELD'){
-            el.childNodes.forEach((e)=>{
-                if(e.classList){
+    $(jQuery.parseHTML(trimmed)).each((i, el) => {
+        if (el.tagName == 'FIELD') {
+            el.childNodes.forEach((e) => {
+                if (e.classList) {
                     e.classList.add('form-control')
 
-                    if( set && e.querySelectorAll(".selected-item-text").length == 0){
+                    if (set && e.querySelectorAll(".selected-item-text").length == 0) {
                         e.classList.add('selected-item-text')
                     }
                     field += e.outerHTML
                 }
             })
         }
-        if(el.tagName == 'DROPDOWN'){
-            el.querySelectorAll('.option').forEach((e)=>{
+        if (el.tagName == 'DROPDOWN') {
+            el.querySelectorAll('.option').forEach((e) => {
                 let click = `dropDownSelected(this, '${ e.getAttribute('onclick') }');`
                 e.setAttribute('onclick', click)
                 e.setAttribute('data-index', index++)
@@ -271,11 +292,11 @@ function WidgetDropdown(context, args) {
             dropdown = el.innerHTML
         }
     })
-    if( field == '' ){
-        field= `<div class='form-control selected-item-text'></div>`
+    if (field == '') {
+        field = `<div class='form-control selected-item-text'></div>`
     }
     let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.()"` : ''
-return`
+    return `
 <div class="${classList.join(' ')}" style="${style}" >
         <div class="input-group-btn">
             <button type="button" 
@@ -292,20 +313,25 @@ return`
 `
 }
 
-    let {side = 'middle', ['data-var-name']: dataVarName, buttonType='', buttonVarName='', ..._args} = args.hash
 function WidgetLabeledLed(context, args) {
+    let {
+        side = 'middle', ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', ..._args
+    } = args.hash
     //Get cleaned up values from args
-    let { classList, attr} = cleanArgs( _args )
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
 
-    classList = classList.concat(['input-group','form-control','label-led'])
+    classList = classList.concat(['input-group', 'form-control', 'label-led'])
 
-    if( args.children == "" && context[0]){
+    if (args.children == "" && context[0]) {
         args.children = `<h3>${context[0]}</h3><h3/>`
     }
     const result = args.children.replace(/([A-Z])/g, " $1");
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
     let labelStyle = ''
-    switch( side.trim().toLowerCase() ){
+    switch (side.trim().toLowerCase()) {
         case 'middle':
             labelStyle += 'margin-right: auto; margin-left: auto;'
             break;
@@ -314,15 +340,16 @@ function WidgetLabeledLed(context, args) {
             break
     }
 
-    if( getButtonType(buttonType, classList) )
-    {
-        if( buttonVarName == '' ){
+    if (getButtonType(buttonType, classList)) {
+        if (buttonVarName == '') {
             buttonVarName = dataVarName
-            classList.splice(classList.findIndex((e)=>{return e=='webhmi-led'}))
+            classList.splice(classList.findIndex((e) => {
+                return e == 'webhmi-led'
+            }))
         }
         attr += `data-var-name='${buttonVarName}'`
     }
-    return`
+    return `
     <div class="${classList.join(' ')}" ${attr}>
     <div class='led webhmi-led' data-led-false='led-off' data-led-true='led-green' data-var-name='${dataVarName}' ${attr}></div>
     <div class='led-label' style='${labelStyle}' >${finalResult}</div>
@@ -332,19 +359,24 @@ function WidgetLabeledLed(context, args) {
 
 function WidgetLabeledNumericInput(context, args) {
 
-    let {['data-var-name']: dataVarName, ..._args} = args.hash
+    let {
+        ['data-var-name']: dataVarName, ..._args
+    } = args.hash
 
     //Get cleaned up values from args
-    let {classList,  attr} = cleanArgs( _args )
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
 
     classList = classList.concat(['input-group'])
 
-    if( args.children == "" && context[0]){
+    if (args.children == "" && context[0]) {
         args.children = `${context[0]}`
     }
     const result = args.children.replace(/([A-Z])/g, " $1");
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-return`
+    return `
     <div class="${classList.join(' ')}" ${attr} >
     <input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>
     <span class='input-group-addon'>${finalResult}</span>
@@ -355,16 +387,19 @@ return`
 function WidgetLabeledTextInput(context, args) {
 
     //Get cleaned up values from args
-    let {classList, attr} = cleanArgs( args.hash )
+    let {
+        classList,
+        attr
+    } = cleanArgs(args.hash)
 
     classList = classList.concat(['input-group'])
 
-    if( args.children == "" && context[0]){
+    if (args.children == "" && context[0]) {
         args.children = `${context[0]}`
     }
     const result = args.children.replace(/([A-Z])/g, " $1");
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-return`
+    return `
     <div class="${classList.join(' ')}" ${attr} >
     <input class='form-control webhmi-text-value' ${attr}/>
     <span class='input-group-addon'>${finalResult}</span>
@@ -372,15 +407,20 @@ return`
    `
 }
 
-    let {style='', ..._args} =args.hash
 function WidgetLabeledList(context, args) {
+    let {
+        style = '', ..._args
+    } = args.hash
 
     //Get cleaned values
-    let {classList, attr} = cleanArgs(_args)
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
 
     classList = classList.concat(['lui-grid'])
 
-    return`
+    return `
     <div class="row">
         <div class="col-sm-12">
             ${args.children}
@@ -390,31 +430,36 @@ function WidgetLabeledList(context, args) {
 
 function WidgetColumnsBs(context, args) {
 
-    let {style='', maxColumns=3, ..._args} =args.hash
+    let {
+        style = '', maxColumns = 3, ..._args
+    } = args.hash
 
     //Get cleaned values
-    let {classList, attr} = cleanArgs(_args)
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
 
     let nodes = $(jQuery.parseHTML(args.children)).not('text')
     let count = nodes.length
 
     maxColumns = maxColumns > 12 ? 12 : maxColumns
     let columns = count > maxColumns ? maxColumns : count
-    let columnSize = Math.floor( 12 / columns )
-    let rows = Math.ceil( count / columns )
+    let columnSize = Math.floor(12 / columns)
+    let rows = Math.ceil(count / columns)
     classList.push(`col-sm-${columnSize}`)
 
     let children = ''
-    nodes.each((i, el)=>{
-        if( i % columns == 0 ){
+    nodes.each((i, el) => {
+        if (i % columns == 0) {
             children += `<div class="row">`
         }
         children += `<div class="${classList.join(' ')}" style='${style}'>${el.outerHTML}</div>`
-        if( i % columns == (columns-1) ){
+        if (i % columns == (columns - 1)) {
             children += `</div>`
         }
     })
-    return`
+    return `
     <div class="container">
         ${children}
     </div>
@@ -423,10 +468,15 @@ function WidgetColumnsBs(context, args) {
 
 function WidgetColumns(context, args) {
 
-    let {style='', centerItems, maxColumns=3, columnFlow=0, ..._args} =args.hash
+    let {
+        style = '', centerItems, maxColumns = 3, columnFlow = 0, ..._args
+    } = args.hash
 
     //Get cleaned values
-    let {classList, attr} = cleanArgs(_args)
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
 
     classList = classList.concat(['lui-grid'])
 
@@ -434,7 +484,7 @@ function WidgetColumns(context, args) {
     let nodes = $(jQuery.parseHTML(args.children)).not('text')
     let count = nodes.length
     let children = ''
-    nodes.each((i, el)=>{
+    nodes.each((i, el) => {
         children += `${el.outerHTML}`
     })
     let columns = count > maxColumns ? maxColumns : count
@@ -443,12 +493,12 @@ function WidgetColumns(context, args) {
     //Generate the style
     style += `;display:grid; grid-gap:5px;`
     style += `grid-auto-rows: max-content;`
-    if(centerItems){
+    if (centerItems) {
         style += `align-items:center;justify-items:center;`
     }
     //Setup columns and rows based on the flow direction
     style += `${ columnFlow > 0 ? `grid-template: repeat(${rows},1fr) / repeat(${columns},1fr); grid-auto-flow : column;` : `grid-template-columns : repeat(${columns},1fr);`}`
-    return`
+    return `
     <div ${attr} class='${classList.join(' ')}' style="${style}">
         ${children}
     </div>
@@ -457,13 +507,18 @@ function WidgetColumns(context, args) {
 
 function WidgetLabeledColumns(context, args) {
     //Pull out any attributes we need
-    let {style='', centerItems, maxColumns=3, columnFlow=0, ..._args} =args.hash
+    let {
+        style = '', centerItems, maxColumns = 3, columnFlow = 0, ..._args
+    } = args.hash
 
     //Get cleaned values
-    let {classList, attr} = cleanArgs(_args)
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
 
     //Add our classes
-    classList = classList.concat(['lui-grid','lui-grid-labeled'])
+    classList = classList.concat(['lui-grid', 'lui-grid-labeled'])
 
     //Get the header
     let header = context?.[0] || ' '
@@ -472,7 +527,7 @@ function WidgetLabeledColumns(context, args) {
     let nodes = $(jQuery.parseHTML(args.children)).not('text')
     let count = nodes.length
     let children = ''
-    nodes.each((i, el)=>{
+    nodes.each((i, el) => {
         children += `${el.outerHTML}`
     })
     let columns = count > maxColumns ? maxColumns : count
@@ -481,7 +536,7 @@ function WidgetLabeledColumns(context, args) {
     //Generate the style
     style += `;display:grid; grid-gap:5px;`
     style += `grid-auto-rows: max-content;`
-    if(centerItems){
+    if (centerItems) {
         style += `align-items:center;justify-items:center;`
     }
     //Setup columns and rows based on the flow direction
@@ -489,7 +544,7 @@ function WidgetLabeledColumns(context, args) {
     //This ensures the size is the same but there is a small gap for the border
     style += `padding: 2px; margin: -2px;`
 
-    return`
+    return `
     <div ${attr} class='${classList.join(' ')}' style="${style};">
         <div class='lui-grid-heading' style="grid-column: span ${columns}; margin: auto;">${header}</div>
         ${children}
@@ -497,74 +552,95 @@ function WidgetLabeledColumns(context, args) {
    `
 }
 
-    let {active, template, dom, title, ..._args} =args.hash
 function WidgetPageSelect(context, args) {
+    let {
+        active,
+        template,
+        dom,
+        title,
+        ..._args
+    } = args.hash
     //Get cleaned values
-    let {classList, attr} = cleanArgs(_args)
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
     classList = classList.concat(['nav-tabs-item'])
-    if(active){
+    if (active) {
         classList = classList.concat(['active'])
     }
-return `
+    return `
 <li class="${classList.join(' ')}" >
     <a data-page='${template}' data-target-dom='${dom}' ${attr}>${title}</a>
 </li>
 `
 }
+
 //Handle changing the page if a tab is clicked
-function luiIncrementValue( selected ){
+function luiIncrementValue(selected) {
 
     let scope = selected.target.closest('.lui-increment-scope')
     let target = scope.querySelectorAll('.lui-increment-value')
-    if(target.length == 0){
-        let evt = new Event("change", {"bubbles":true, "cancelable":true});
+    if (target.length == 0) {
+        let evt = new Event("change", {
+            "bubbles": true,
+            "cancelable": true
+        });
         scope.dispatchEvent(evt);
         return
     }
     let value;
-    if( target?.[0].getAttribute('data-var-name') ){
+    if (target?.[0].getAttribute('data-var-name')) {
         value = WEBHMI.getValue($(target?.[0]))
-    }
-    else{
+    } else {
         value = +target?.[0].value
     }
 
     let increment = +selected.currentTarget.getAttribute('increment');
-    target.forEach((e)=>{
+    target.forEach((e) => {
         e.value = value + increment
-        let evt = new Event("change", {"bubbles":true, "cancelable":true});
+        let evt = new Event("change", {
+            "bubbles": true,
+            "cancelable": true
+        });
         e.dispatchEvent(evt);
     })
 }
-$(document).on({"click":luiIncrementValue},'.lui-increment');
+$(document).on({
+    "click": luiIncrementValue
+}, '.lui-increment');
 
-    let {style='', 
 function WidgetValueUpDown(context, args) {
+    let {
+        style = '',
             ['data-var-name']: dataVarName,
-        increment=1,   
+            increment = 1,
             buttonStyle = '',
-        inputStyle= '',
-        ..._args} =args.hash
+            inputStyle = '',
+            ..._args
+    } = args.hash
 
     //Get cleaned values
-    let {classList, attr} = cleanArgs(_args)
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
     classList = classList.concat(['lui-increment-scope'])
     style = 'display:inline-flex; grid-template-columns: auto 1fr auto; border-style:solid; border-radius: 40px;width:fit-content;height:fit-content;' + style;
     buttonStyle = ';padding:20px; font-size:20px;' + buttonStyle
     inputStyle = `;padding: 1px;margin: -1px;text-align: center;width: 100px;font-size: 20px;font-weight: bold;border-width: 1px;` + inputStyle
     let innerClassList = ['lui-increment-value']
-    if( dataVarName ){
+    if (dataVarName) {
         innerClassList.push('webhmi-num-value')
     }
     let inner;
-    if(args.children){
+    if (args.children) {
         inner = `<input class='${innerClassList.join(' ')}' value="${context}" style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''} />`
         inner += args.children
-    }
-    else{
+    } else {
         inner = `<input class='${innerClassList.join(' ')}' value="${context}" style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''} />`
     }
-    return`
+    return `
     <div class="${classList.join(' ')}" style='${style}'>
     <span class='glyphicon glyphicon-chevron-down lui-increment' increment=${-increment}  style="${buttonStyle}"></span>
     ${inner}
@@ -573,8 +649,8 @@ function WidgetValueUpDown(context, args) {
 `
 }
 
-return `
 function WidgetPage(context, args) {
+    return `
 <div class='container' style="width: 100%; height: 94vh; overflow:auto; border-style: solid; border-radius: 10px;">
     <div class='row'>
         <div class='col-sm-12'>
@@ -584,23 +660,225 @@ function WidgetPage(context, args) {
 </div>`
 }
 
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+class LuiSlider {
+    //Handle changing the page if a tab is clicked
+    static luiSlideStart(evt) {
+
+        let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
+        scope.classList.add('lui-slider-active')
+        scope.classList.add('editing')
+        let target = scope.querySelectorAll('.lui-slider-value')
+        let value;
+        if (target?.[0].getAttribute('data-var-name')) {
+            try{
+                value = WEBHMI.getValue($(target?.[0]))
+            }
+            catch(e){
+                value = +target?.[0].value
+            }
+        } else {
+            value = +target?.[0].value
+        }
+        scope.setAttribute('lui-slider-start', value)
+        scope.setAttribute('lui-slider-screen-x-start', evt.screenX)
+        scope.setAttribute('lui-slider-screen-y-start', evt.screenY)
+    }
+    //Handle changing the page if a tab is clicked
+    static luiSlideEnd(selected) {
+
+        let scope = document.querySelectorAll('.lui-slider-scope')
+        scope.forEach((e) => {
+            e.classList.remove('lui-slider-active')
+            e.classList.remove('editing')
+        })
+    }
+    //Handle changing the page if a tab is clicked
+    static luiSlideChange(evt) {
+
+        evt.preventDefault()
+        let scope = document.querySelectorAll('.lui-slider-scope.lui-slider-active')
+
+        // let scope = evt.target.classList.contains('lui-slider-scope')? evt.target : evt.target.closest('.lui-slider-scope')
+        if (scope.length == 0) {
+            return;
+        } else if (scope.length > 1) {
+            scope.forEach((e) => {
+                e.classList.remove('lui-slider-active')
+            })
+        } else {
+            scope = scope[0]
+        }
+        let target = scope.querySelectorAll('.lui-slider-value')
+        if (target.length == 0) {
+            let evt = new Event("change", {
+                "bubbles": true,
+                "cancelable": true
+            });
+            scope.dispatchEvent(evt);
+            return
+        }
+
+        let screenScale = +scope.getAttribute('lui-slider-scale')
+        let value = +scope.getAttribute('lui-slider-start')
+        let direction = scope.getAttribute('direction')
+        let screenStart = +(direction ? scope.getAttribute('lui-slider-screen-x-start') : scope.getAttribute('lui-slider-screen-y-start'))
+        let screenNew = +(direction ? evt.screenX : evt.screenY)
+        value = value + ((screenNew - screenStart)/(-scope.scrollHeight*0.9/2)) * screenScale
+        let max = +scope.getAttribute('lui-slider-max')
+        let min = +scope.getAttribute('lui-slider-min')
+        value = clamp(value, min, max)
+        target.forEach((e) => {
+            e.value = value
+            e.setAttribute('value', value)
+            let evt = new Event("change", {
+                "bubbles": true,
+                "cancelable": true
+            });
+            try{
+                e.dispatchEvent(evt);
+            }catch{
+
+            }
+        })
+    }
+    static luiSliderSet(evt) {
+        let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
+        LuiSlider.luiSliderUpdateSlider(scope, +evt.target.getAttribute('value'))
+    }
+    static luiSliderUpdateSlider(scope, value) {
+
+        let sliderBar = scope.querySelectorAll('.slider-bar')
+        let max = +scope.getAttribute('lui-slider-max')
+        let min = +scope.getAttribute('lui-slider-min')
+        value = clamp(value, min, max)
+        let total = max - min;
+        let percent = ((max - value) / total) * 90 //92 keeps the bar from going past the bottom
+
+        sliderBar.forEach((e) => {
+            e.style.top = percent + '%';
+        })
+        return value
+    }
+
+}
+
+$(document).on({
+    "mousedown": LuiSlider.luiSlideStart
+}, '.lui-slider-scope');
+$(document).on({
+    "touchstart": LuiSlider.luiSlideStart
+}, '.lui-slider-scope');
+
+$(document).on({
+    "change": LuiSlider.luiSliderSet,
+}, '.lui-slider-value');
+
+$(document).on({
+    "mousemove": LuiSlider.luiSlideChange
+});
+$(document).on({
+    "touchmove": LuiSlider.luiSlideChange
+});
+
+$(document).on({
+    "mouseup": LuiSlider.luiSlideEnd
+});
+$(document).on({
+    "touchend": LuiSlider.luiSlideEnd
+});
+
+function WidgetSlider(context, args) {
+    let {
+        style = '',
+            ['data-var-name']: dataVarName,
+            increment = 1,
+            buttonStyle = '',
+            inputStyle = '',
+            screenScale = 1,
+            min = -1,
+            max = 1,
+            ..._args
+    } = args.hash
+
+    //Get cleaned values
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
+    classList = classList.concat(['lui-slider-scope', 'slider'])
+    style = 'height:150px;width:40px;' + style;
+    inputStyle = `position:relative;width:150%;top:0%;border-style:none;background:transparent;display:none` + inputStyle
+    // inputStyle = `border-style:none;background:transparent;` + inputStyle
+    let innerClassList = ['lui-slider-value']
+    if (dataVarName) {
+        innerClassList.push('webhmi-num-value')
+    }
+    let inner;
+    if (args.children) {
+        inner = `<invisible-input class='${innerClassList.join(' ')}' value="${context}" style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''} />`
+        inner += args.children
+    } else {
+        inner = `<invisible-input type='number' min='${min}' max='${max}' class='${innerClassList.join(' ')}' value="${context}" style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''} />`
+    }
+    let bar = document.createElement("div");
+    bar.classList.add('slider-bar');
+    bar.style.position = "relative";
+    bar.style.top = "50%";
+    bar.style.height = "10%";
+    bar.style.margin = "0px";
+    bar.style.widows = "100%";
+    bar.style.borderRadius = '3px'
+    bar.style.zIndex = 100;
+    
+    // bar.appendChild( htmlToElement(inner) )
+
+    return `
+    <div class="${classList.join(' ')}" style='${style}' lui-slider-min=${min} lui-slider-max=${max} lui-slider-scale=${screenScale} ${attr}>
+        ${bar.outerHTML}
+        ${inner}
+    </div>
+`
+}
+
+function WidgetPopSlider(context, args) {
+
+}
+
+function WidgetMultiSelect(context, args) {
+
+}
+
+function WidgetXXX(context, args) {
+
+    return `
+    paste from XD..
+    
+    `
+}
+
 //Handle setting active if a tab is clicked
-function selectTab( selected ){
+function selectTab(selected) {
     selected = $(selected.currentTarget)
     let tabs = selected.closest('.nav-tabs').children('.nav-tabs-item')
     tabs.removeClass('active')
     selected.addClass('active')
 }
-$(document).on({"click":selectTab},'.nav-tabs-item');
+$(document).on({
+    "click": selectTab
+}, '.nav-tabs-item');
 
 //Handle changing the page if a tab is clicked
-function selectPage( selected ){
+function selectPage(selected) {
     selected = $(selected.currentTarget)
-    let page = selected.attr( 'data-page' )
-    let dom = selected.attr( 'data-target-dom' )
-    widgets.loadPage( dom, page )
+    let page = selected.attr('data-page')
+    let dom = selected.attr('data-target-dom')
+    widgets.loadPage(dom, page)
 }
-$(document).on({"click":selectPage},'[data-page]');
+$(document).on({
+    "click": selectPage
+}, '[data-page]');
 
 /*
 let css =

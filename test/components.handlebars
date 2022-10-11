@@ -10,7 +10,8 @@
         {{widget 'Button' 'Momentary Button' 'momentary' }}
         {{widget 'LabeledLed' "side=right" side="right" }}
         {{widget 'LabeledLed' "side=middle" side="middle" }}
-        {{widget 'LabeledLed' "side=left" side="left" }}
+        {{widget 'LabeledLed' "side=left" side="left" }}    
+        <div>mydiv</div>
         {{#widget 'LabeledColumns' 'Test Elements' style="grid-column: span 3;" }}
             {{widget 'Button' 'Set Power' 'set' class='btn-primary' style="color:red" data-var-name="gMotorBasic[0].IN.CMD.Power"}}
             {{widget 'Button' 'Toggle Power' 'toggle'  class='btn-danger' data-var-name="gMotorBasic[0].IN.CMD.Power"}}
@@ -31,6 +32,11 @@
             {{widget 'LabeledTextInput' 'Text Input' data-var-name="gMotorBasic[0].OUT.State.PowerOn"}}
         {{/widget}}
     {{/widget}}                
+    <h3>Slider</h3>
+    {{widget 'Slider' '0' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+    {{widget 'Slider' style='height:200px;' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+    {{widget 'Slider' style='height:400px;width:100px;' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+    {{widget 'Slider' style='height:400px;width:100px;' }}
     <h3>ValueUpDown</h3>
     {{W 'ValueUpDown' 1 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" buttonStyle='padding:10px' inputStyle="width:50px" }}
     {{W 'ValueUpDown'  data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" buttonStyle='padding:20px' inputStyle="width:50px"}}
