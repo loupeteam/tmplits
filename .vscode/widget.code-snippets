@@ -1,0 +1,25 @@
+{
+  "Widget": {
+    "prefix": "widget",
+    "body": [
+      "{{widget '${1:widgetName}${0}' }}"
+    ],
+    "description": "Create a widget"
+  },
+  "Block Widget": {
+    "prefix": "#widget",
+    "body": [
+      "{{#widget ''${1:widgetName}${0}' }}",
+      "${0}",
+      "{{/widget}}"
+    ],
+    "description": "Create a block widget"
+  },
+  "Widgets Name": {
+    "prefix": "'WidgetName'",
+    "body": [
+      "'${1|Button,TabWidget,NumWidget,LabeledColumns,DropdownTable,Dropdown|}${0}'"
+    ],
+    "description": "Select a widget"
+  },
+}

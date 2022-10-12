@@ -1,7 +1,291 @@
 {
-    "widget": {
-      "prefix": "widget",
-      "body": ["{{widget '${1|TabWidget,NumWidget|}' ${2|context1|} ${3|context2|} ${4|attr=''|} ${5|attr..=''|} }}"],
-      "description": "Get some widgets."
-    }
-  }
+  "Widget Snippet": {
+    "prefix": "NewWidget",
+    "body": [
+      "\t\"${1:name}\": {",
+      "\t\t\"prefix\": \"'${1}'\",",
+      "\t\t\"body\":[",
+      "\t\t\t\"'${1}' ${2:context} ${1}Props properties\\${0}\"",
+      "\t\t],",
+      "\t\t\"description\":\"${1:name}\"",
+      "\t},\n",
+      "\t\"${1:name}Props\": {",
+      "\t\t\"prefix\": \"${1}Props\",",
+      "\t\t\"body\":[",
+      "\t\t\t\"${1||} ${1}Props\"",
+      "\t\t],",
+      "\t\t\"description\":\"${1:name}\"",
+      "\t},\n"
+    ],
+    "description": "Create a new widget snippet"
+  },
+  "Widget Props Snippet": {
+    "prefix": "NewWidgetProps",
+    "body": [
+      "\t\"${1:name}Props\": {",
+      "\t\t\"prefix\": \"${1}Props\",",
+      "\t\t\"body\":[",
+      "\t\t\t\"${1||} ${1}Props\"",
+      "\t\t],",
+      "\t\t\"description\":\"${1:name}\"",
+      "\t},\n"
+    ],
+    "description": "Create a new widget snippet"
+  },
+
+  "Side": {
+    "prefix": "side",
+    "body": [
+      "side='${1|right,middle,left|}'"
+    ],
+    "description": "How is item shown"
+  },
+  "Button Type": {
+    "prefix": "'buttonType'",
+    "body": [
+      "buttonType='${1|set,toggle,momentary|}'"
+    ],
+    "description": "What kind of button"
+  },
+  "Button Variable Name": {
+    "prefix": "'buttonVarName'",
+    "body": [
+      "buttonVarName='scope:name'"
+    ],
+    "description": "Button Variabl Name if it is different than data-var-name"
+  },
+  //Button widget
+  "Button": {
+    "prefix": "'Button'",
+    "body": [
+      "'Button' '${2:Label}' properties${0}"
+    ],
+    "description": "Button widget"
+  },
+  //Drop down table widget
+  "Dropdown Table Properties": {
+    "prefix": "'DropdownTableProps'",
+    "body": [
+      "${1|set:'false'|} DropdownTableProps"
+    ],
+    "description": "Dropdown Table"
+  },
+  "Dropdown Table Children": {
+    "prefix": "'DropdownTableChildren'",
+    "body": [
+      "${1|<option>${0}</option>,<options></options>,<field></field>|}"
+    ],
+    "description": "Dropdown Table children"
+  },
+  "Dropdown Table": {
+    "prefix": "'DropdownTable'",
+    "body": [
+      "'DropdownTable' DropdownTableProps${3} properties${0}"
+    ],
+    "description": "Dropdown with user options"
+  },
+  //Drop down widget
+  "Dropdown Properties": {
+    "prefix": "'DropdownProps'",
+    "body": [
+      "${1|set:'false'|} DropdownProps"
+    ],
+    "description": "Dropdown with user dropdown"
+  },
+  "Dropdown Children": {
+    "prefix": "'DropdownChildren'",
+    "body": [
+      "${1|<dropdown>Add dropdown here and add class='option' to anything that is selectable ${0}</dropdown>,<field></field>|}"
+    ],
+    "description": "Dropdown Table children"
+  },
+  "Dropdown": {
+    "prefix": "'Dropdown'",
+    "body": [
+      "'Dropdown' DropdownProps${3} properties${0}"
+    ],
+    "description": "Dropdown Table"
+  },
+  //Labeled column widget        
+  "Labeled Columns": {
+    "prefix": "'LabeledColumns'",
+    "body": [
+      "'LabeledColumns' '${2:Label}' properties${0}"
+    ],
+    "description": "Labeled column widget"
+  },
+  //Labeled widget        
+  "Labeled Properties": {
+    "prefix": "'LabeledLedProps'",
+    "body": [
+      "${1|side,buttonType,buttonVarName,data-var-name|} LabeledLedProps"
+    ],
+    "description": "Labeled column widget"
+  },
+  "Labeled LED": {
+    "prefix": "'LabeledLed'",
+    "body": [
+      "'LabeledLed' '${2:Label}' LabeledLedProps${3} properties${0}"
+    ],
+    "description": "Labeled column widget"
+  },
+  //Numeric input widget        
+  "Numeric Input Properties": {
+    "prefix": "'NumericInputProps'",
+    "body": [
+      "${1|data-var-name|}"
+    ],
+    "description": "Labeled column widget"
+  },
+  "Numeric Input": {
+    "prefix": "'NumericInput'",
+    "body": [
+      "'NumericInput' NumericInputProps${1} properties${0}"
+    ],
+    "description": "Labeled column widget"
+  },
+  "Labeled Numeric Input": {
+    "prefix": "'LabeledNumericInput'",
+    "body": [
+      "'LabeledNumericInput' '${2:Label}' NumericInputProps${3} properties${0}"
+    ],
+    "description": "Labeled Numeric Input widget"
+  },
+  //Text input widget        
+  "Text Input Properties": {
+    "prefix": "'TextInputProps'",
+    "body": [
+      "${1|data-var-name|}"
+    ],
+    "description": "Text input properties"
+  },
+  "Labeled Text Input": {
+    "prefix": "'LabeledTextInput'",
+    "body": [
+      "'LabeledTextInput' '${2:Label}' TextInputProps${1} properties${0}"
+    ],
+    "description": "Labeled text input widget"
+  },
+  "LabeledList": {
+    "prefix": "LabeledList",
+    "body": [
+      "'LabeledList' '${label}' LabelListProps properties${0}"
+    ],
+    "description": "LabelList"
+  },
+  "ColumnBs": {
+    "prefix": "ColumnBs",
+    "body": [
+      "'ColumnBs' properties${0}"
+    ],
+    "description": "ColumnBs"
+  },
+  "ColumnsProps": {
+    "prefix": "ColumnsProps",
+    "body": [
+      "${1|centerItems='true',maxColumns=3,columnFlow=0|} ColumnsProps"
+    ],
+    "description": "ColumnProps"
+  },
+  "Columns": {
+    "prefix": "'Columns'",
+    "body": [
+      "'Columns' ColumnsProps${1} properties${0}"
+    ],
+    "description": "Columns"
+  },
+  "LabeledColumns": {
+    "prefix": "'LabeledColumns'",
+    "body":[
+      "'LabeledColumns' ${1:Label} ColumnsProps${2} properties${0}"
+    ],
+    "description":"LabeledColumns"
+  },  
+  "PageSelectProps": {
+    "prefix": "PageSelectProps",
+    "body":[
+      "${1|active='true',template='',dom=''|} PageSelectProps"
+    ],
+    "description":"PageSelect"
+  },  
+  "PageSelect": {
+    "prefix": "'PageSelect'",
+    "body":[
+      "'PageSelect' '${1:Label}' PageSelectProps${2} properties${0}"
+    ],
+    "description":"PageSelect"
+  },
+  "ValueUpDown": {
+    "prefix": "'ValueUpDown'",
+    "body":[
+      "'ValueUpDown' '${1:value}' ValueUpDownProps{2} properties${0}"
+    ],
+    "description":"ValueUpDown"
+  },
+
+  "ValueUpDownProps": {
+    "prefix": "ValueUpDownProps",
+    "body":[
+      "${1|data-var-name='',increment=1,buttonStyle='attr:value;',inputStyle='attr:value;'|} ValueUpDownProps"
+    ],
+    "description":"ValueUpDown"
+  },
+
+  "Page": {
+    "prefix": "'Page'",
+    "body":[
+      "'Page' PageProps properties${0}"
+    ],
+    "description":"Page"
+  },
+
+  "PageProps": {
+    "prefix": "PageProps",
+    "body":[
+      "${1||} PageProps"
+    ],
+    "description":"Page"
+  },
+
+  "Slider": {
+    "prefix": "'Slider'",
+    "body":[
+      "'Slider' '${1:value}' SliderProps${2} properties${0}"
+    ],
+    "description":"Slider"
+  },
+
+  "SliderProps": {
+    "prefix": "SliderProps",
+    "body":[
+      "${1|data-var-name='',inputStyle='attr:value;',screenScale=1,min=1,max=1,direction=1|} SliderProps"
+    ],
+    "description":"Slider"
+  },
+
+  "MultiSelect": {
+    "prefix": "{{widget 'MultiSelect' }}",
+    "body":[
+      "{{#widget 'MultiSelect' 'value' MultiSelectProps properties${0} }}",
+      "\t<options>",
+      "\t\t<div>Option 1</div>",
+      "\t\t<div>Option 2</div>",
+      "\t</options>",
+      "\t<option>",
+      "\t\t<div>Option 3</div>",
+      "\t</option>",
+      "{{/widget}}"
+    ],
+    "description":"MultiSelect"
+  },
+
+  "MultiSelectProps": {
+    "prefix": "MultiSelectProps",
+    "body":[
+      "${1|data-var-name=''|} MultiSelectProps"
+    ],
+    "description":"MultiSelect"
+  },
+
+
+}
