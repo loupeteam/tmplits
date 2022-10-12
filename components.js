@@ -784,6 +784,65 @@ class LuiSlider {
             }
         })
     }
+    //Handle changing the page if a tab is clicked
+    static luiSlideMouse(evt) {
+
+        evt.preventDefault()
+        let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
+        if( scope == null){
+            return
+        }
+        scope.classList.add('lui-slider-active')
+        if (scope.length == 0) {
+            return;
+        } 
+
+        let target = scope.querySelectorAll('.lui-slider-value')
+        if (target.length == 0) {
+            let evt = new Event("change", {
+                "bubbles": true,
+                "cancelable": true
+            });
+            scope.dispatchEvent(evt);
+            return
+        }
+
+        let startValue = +target[0].getAttribute('value')
+        let max = +scope.getAttribute('lui-slider-max')
+        let min = +scope.getAttribute('lui-slider-min')
+        let direction = scope.getAttribute('direction') > 0
+        let scrollDistance =(direction ? scope.clientWidth : scope.clientHeight)*10
+        let value = startValue + evt.deltaY/scrollDistance
+        value = clamp(value, min, max)
+
+        target.forEach((e) => {
+            e.value = value
+            e.classList.add('editing')
+            e.setAttribute('value', value)
+            let evt = new Event("change", {
+                "bubbles": true,
+                "cancelable": true
+            });
+            try{
+                e.dispatchEvent(evt);
+            }catch{
+
+            }
+        })
+        let oldTimeout = scope.getAttribute('timeout')
+        if(oldTimeout!=null){
+            clearTimeout(oldTimeout)
+        }
+        let timeout = setTimeout(()=>{
+            target.forEach((e) => {
+                e.classList.remove('editing')
+            })    
+            scope.classList.remove('lui-slider-active')
+            scope.removeAttribute('timeout')
+        }, 500)
+        scope.setAttribute('timeout', timeout)
+    }
+
     static luiSliderSet(evt) {
         let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
         LuiSlider.luiSliderUpdateSlider(scope, +evt.target.getAttribute('value'))
@@ -828,6 +887,7 @@ $(document).on({
 $(document).on({
     "touchmove": LuiSlider.luiSlideChange
 });
+window.addEventListener("wheel", LuiSlider.luiSlideMouse, { passive:false })
 
 $(document).on({
     "mouseup": LuiSlider.luiSlideEnd
