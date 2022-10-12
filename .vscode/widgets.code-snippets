@@ -1,0 +1,7 @@
+{
+    "widget": {
+      "prefix": "widget",
+      "body": ["{{widget '${1|TabWidget,NumWidget|}' ${2|context1|} ${3|context2|} ${4|attr=''|} ${5|attr..=''|} }}"],
+      "description": "Get some widgets."
+    }
+  }
