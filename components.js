@@ -581,7 +581,6 @@ function WidgetPageSelect(context, args) {
         active,
         template,
         dom,
-        title,
         ..._args
     } = args.hash
     //Get cleaned values
@@ -595,7 +594,7 @@ function WidgetPageSelect(context, args) {
     }
     return `
 <li class="${classList.join(' ')}" >
-    <a data-page='${template}' data-target-dom='${dom}' ${attr}>${title}</a>
+    <a data-page='${template}' data-target-dom='${dom}' ${attr}>${context[0]}</a>
 </li>
 `
 }
@@ -841,8 +840,6 @@ function WidgetSlider(context, args) {
     let {
         style = '',
             ['data-var-name']: dataVarName,
-            increment = 1,
-            buttonStyle = '',
             inputStyle = '',
             screenScale = 1,
             min = -1,
@@ -923,6 +920,7 @@ class multiOptionSelector{
                 throw `error from user event: '${click}' ` + e
             }
         }
+        multiOptionSelector.updateSelection(scope, +index)
     }
     static updateSelection(scope, value){
         let options = scope.querySelectorAll('.option')
@@ -935,7 +933,7 @@ class multiOptionSelector{
             else{
                 option.classList.remove('active')
             }
-        })
+        })        
     }
     static setSelected(evt) {
         let scope = evt.target.classList.contains('select-scope') ? evt.target : evt.target.closest('.select-scope')
