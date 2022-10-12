@@ -356,7 +356,31 @@ function WidgetLabeledLed(context, args) {
     </div>
    `
 }
+function WidgetNumericInput(context, args) {
 
+    let {
+        ['data-var-name']: dataVarName, ..._args
+    } = args.hash
+
+    //Get cleaned up values from args
+    let {
+        classList,
+        attr
+    } = cleanArgs(_args)
+
+    classList = classList.concat(['input-group'])
+
+    if (args.children == "" && context[0]) {
+        args.children = `${context[0]}`
+    }
+    const result = args.children.replace(/([A-Z])/g, " $1");
+    const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+    return `
+    <div class="${classList.join(' ')}">
+    <input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>
+    </div>
+   `
+}
 function WidgetLabeledNumericInput(context, args) {
 
     let {
@@ -460,9 +484,9 @@ function WidgetColumnsBs(context, args) {
         }
     })
     return `
-    <div class="container">
+<!--    <div class="container"> -->
         ${children}
-    </div>
+        <!--    </div> -->
    `
 }
 
@@ -542,7 +566,7 @@ function WidgetLabeledColumns(context, args) {
     //Setup columns and rows based on the flow direction
     style += `${ columnFlow > 0 ? `grid-template: repeat(${rows},1fr) / repeat(${columns},1fr); grid-auto-flow : column;` : `grid-template-columns : repeat(${columns},1fr);`}`
     //This ensures the size is the same but there is a small gap for the border
-    style += `padding: 2px; margin: -2px;`
+    // style += `padding: 2px; margin: -2px;`
 
     return `
     <div ${attr} class='${classList.join(' ')}' style="${style};">
@@ -668,8 +692,11 @@ class LuiSlider {
 
         let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
         scope.classList.add('lui-slider-active')
-        scope.classList.add('editing')
+
         let target = scope.querySelectorAll('.lui-slider-value')
+        target.forEach((input)=>{
+            input.classList.add('editing')
+        })
         let value;
         if (target?.[0].getAttribute('data-var-name')) {
             try{
@@ -681,17 +708,28 @@ class LuiSlider {
         } else {
             value = +target?.[0].value
         }
+
+        let max = +scope.getAttribute('lui-slider-max')
+        let min = +scope.getAttribute('lui-slider-min')
+        value = clamp(value, min, max)
         scope.setAttribute('lui-slider-start', value)
         scope.setAttribute('lui-slider-screen-x-start', evt.screenX)
         scope.setAttribute('lui-slider-screen-y-start', evt.screenY)
     }
     //Handle changing the page if a tab is clicked
     static luiSlideEnd(selected) {
-
-        let scope = document.querySelectorAll('.lui-slider-scope')
+        let scope = document.querySelectorAll('.lui-slider-scope.lui-slider-active')
         scope.forEach((e) => {
+            let pop = e.getAttribute('pop-position')            
+            let target = e.querySelectorAll('.lui-slider-value')
+            target.forEach((input)=>{
+                //Pop is a bit buggy, seems like maybe a debounce issue
+                if(pop){
+                    input.value = pop                
+                }
+                input.classList.remove('editing')
+            })
             e.classList.remove('lui-slider-active')
-            e.classList.remove('editing')
         })
     }
     //Handle changing the page if a tab is clicked
@@ -721,14 +759,18 @@ class LuiSlider {
         }
 
         let screenScale = +scope.getAttribute('lui-slider-scale')
-        let value = +scope.getAttribute('lui-slider-start')
-        let direction = scope.getAttribute('direction')
-        let screenStart = +(direction ? scope.getAttribute('lui-slider-screen-x-start') : scope.getAttribute('lui-slider-screen-y-start'))
-        let screenNew = +(direction ? evt.screenX : evt.screenY)
-        value = value + ((screenNew - screenStart)/(-scope.scrollHeight*0.9/2)) * screenScale
+        let startValue = +scope.getAttribute('lui-slider-start')
+        let direction = scope.getAttribute('direction') > 0
         let max = +scope.getAttribute('lui-slider-max')
         let min = +scope.getAttribute('lui-slider-min')
+        let total = max - min;
+        let screenStart = +(direction  ? scope.getAttribute('lui-slider-screen-x-start') : scope.getAttribute('lui-slider-screen-y-start'))
+        let screenNew = +(direction ? evt.screenX : evt.screenY)
+        let scrollDistance =-(direction ? scope.clientWidth : scope.clientHeight)
+        let scrollBarPercent = (((screenNew - screenStart)/(scrollDistance*0.9)) * screenScale)
+        let value = startValue + scrollBarPercent*total
         value = clamp(value, min, max)
+
         target.forEach((e) => {
             e.value = value
             e.setAttribute('value', value)
@@ -749,15 +791,21 @@ class LuiSlider {
     }
     static luiSliderUpdateSlider(scope, value) {
 
+        let direction = scope.getAttribute('direction') > 0
         let sliderBar = scope.querySelectorAll('.slider-bar')
         let max = +scope.getAttribute('lui-slider-max')
         let min = +scope.getAttribute('lui-slider-min')
         value = clamp(value, min, max)
         let total = max - min;
-        let percent = ((max - value) / total) * 90 //92 keeps the bar from going past the bottom
+        let percent = ((max - value) / total) * 90 //90 keeps the bar from going past the bottom
 
         sliderBar.forEach((e) => {
-            e.style.top = percent + '%';
+            if(direction){
+                e.style.left = (percent+10) + '%';
+            }
+            else{
+                e.style.top = (percent) + '%';
+            }
         })
         return value
     }
@@ -799,6 +847,7 @@ function WidgetSlider(context, args) {
             screenScale = 1,
             min = -1,
             max = 1,
+            direction = 0,
             ..._args
     } = args.hash
 
@@ -808,55 +857,153 @@ function WidgetSlider(context, args) {
         attr
     } = cleanArgs(_args)
     classList = classList.concat(['lui-slider-scope', 'slider'])
-    style = 'height:150px;width:40px;' + style;
     inputStyle = `position:relative;width:150%;top:0%;border-style:none;background:transparent;display:none` + inputStyle
-    // inputStyle = `border-style:none;background:transparent;` + inputStyle
     let innerClassList = ['lui-slider-value']
     if (dataVarName) {
         innerClassList.push('webhmi-num-value')
     }
-    let inner;
+    let inner = '';
     if (args.children) {
-        inner = `<invisible-input class='${innerClassList.join(' ')}' value="${context}" style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''} />`
-        inner += args.children
+        inner += 
+        inner += `<invisible-input class='${innerClassList.join(' ')}' value="${context}" style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
     } else {
-        inner = `<invisible-input type='number' min='${min}' max='${max}' class='${innerClassList.join(' ')}' value="${context}" style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''} />`
+        inner = `<invisible-input type='number' min='${min}' max='${max}' class='${innerClassList.join(' ')}' value="${context}" style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
     }
+
     let bar = document.createElement("div");
     bar.classList.add('slider-bar');
     bar.style.position = "relative";
-    bar.style.top = "50%";
-    bar.style.height = "10%";
     bar.style.margin = "0px";
-    bar.style.widows = "100%";
     bar.style.borderRadius = '3px'
     bar.style.zIndex = 100;
-    
-    // bar.appendChild( htmlToElement(inner) )
+    bar.style.opacity = '75%';
+    bar.style.float = 'left'
+    if(direction){
+        bar.style.width = "10%";
+        bar.style.height = "100%";
+        bar.style.marginLeft = `-10%`;
+        bar.style.left = "60%";
+        style = 'width:150px;height:40px;position:relative;' + style;
+    }
+    else{
+        bar.style.width = "100%";
+        bar.style.top = "40%";
+        // bar.style.marginTop = `-10%`;
+        bar.style.height = "10%";
+        style = 'height:150px;width:40px;position:relative;' + style;
+    }
 
     return `
-    <div class="${classList.join(' ')}" style='${style}' lui-slider-min=${min} lui-slider-max=${max} lui-slider-scale=${screenScale} ${attr}>
+    <div class="${classList.join(' ')}" direction=${direction} style='${style}' lui-slider-min=${min} lui-slider-max=${max} lui-slider-scale=${screenScale} ${attr}>
         ${bar.outerHTML}
         ${inner}
+        <div style='position:absolute;'>
+            ${args.children}
+        </div>
     </div>
 `
 }
 
-function WidgetPopSlider(context, args) {
+class multiOptionSelector{
+    static selected(el, click) {
+        let index = el.getAttribute('data-index')
+        let value = el.getAttribute('data-value')
+        let scope = el.closest('.select-scope')
+        scope.setAttribute('selectedIndex', index)
 
+        let targets = scope.querySelectorAll('.lui-select-value')
+        targets.forEach((target)=>{
+            target.value = value || +index;
+        })
+
+        if (click) {
+            try {
+                eval(click)
+            } catch (e) {
+                throw `error from user event: '${click}' ` + e
+            }
+        }
+    }
+    static updateSelection(scope, value){
+        let options = scope.querySelectorAll('.option')
+        options.forEach((option)=>{
+            let dataValue =  option.getAttribute('data-value')
+            if( (dataValue == null && option.getAttribute('data-index') == Math.floor(value)) ||  dataValue == value )
+            {
+                option.classList.add('active')
+            }
+            else{
+                option.classList.remove('active')
+            }
+        })
+    }
+    static setSelected(evt) {
+        let scope = evt.target.classList.contains('select-scope') ? evt.target : evt.target.closest('.select-scope')
+        multiOptionSelector.updateSelection(scope, +evt.target.getAttribute('value'))
+    }    
 }
+
+$(document).on({
+    "change": multiOptionSelector.setSelected,
+}, '.lui-select-value');
 
 function WidgetMultiSelect(context, args) {
 
-}
+    let {        
+        ['data-var-name']:dataVarName,
+        style = '', ..._args
+    } = args.hash
+    //Get cleaned up values from args
+    let {
+        classList,
+        attr
+    } = cleanArgs(args.hash)
+    style = 'margin:auto;' + style;
+    classList = classList.concat(['input-group', 'select-scope'])
 
-function WidgetXXX(context, args) {
+    let trimmed = args.children.trim()
+    let options = ''
+    let index = 0
+    $(jQuery.parseHTML(trimmed)).each((i, el) => {
+        if (el.tagName == 'OPTION') {
+            let e = el
+            let dataValue = e.getAttribute('data-value')
+            let click = `multiOptionSelector.selected(this, '${e.getAttribute('onclick') }');`
+            e = jQuery.parseHTML(`<div class="option"> ${e.innerHTML} </div>`)
+            if( dataValue != null ){
+                e[0].setAttribute('data-value', dataValue)            
+            }
+            e[0].setAttribute('onclick', click)            
+            e[0].setAttribute('data-index', index)
+            index++
+            options += e[0].outerHTML
+        }
+        if (el.tagName == 'OPTIONS') {
+            el.childNodes.forEach((e) => {
+                if (e.getAttribute) {
+                    let dataValue = e.getAttribute('data-value')
+                    let click = `multiOptionSelector.selected(this, '${e.getAttribute('onclick') }');`
+                    e = jQuery.parseHTML(`<div class="option"> ${e.outerHTML} </div>`)
+                    if( dataValue != null){
+                        e[0].setAttribute('data-value', dataValue)            
+                    }
+                    e[0].setAttribute('onclick', click)
+                    e[0].setAttribute('data-index', index)
+                    index++
+                    options += e[0].outerHTML
+                }
+            })
+        }
+    })
+    options += `<invisible-input class="lui-select-value webhmi-num-value" style="display:none" value="${context}" ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
 
+    args.children = options
+    let inner = WidgetColumns( context, args)
     return `
-    paste from XD..
-    
-    `
+<div class="${classList.join(' ')}">${inner}</div>    
+    ` 
 }
+
 
 //Handle setting active if a tab is clicked
 function selectTab(selected) {

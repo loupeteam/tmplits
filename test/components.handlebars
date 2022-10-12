@@ -1,7 +1,7 @@
 
 {{#W 'Page'}}
-    <h3>Inputs</h3>    
-    {{#widget 'Columns' }}
+<h2>Demo Components</h2>
+    {{#widget 'LabeledColumns' 'Inputs' }}
         {{widget 'LabeledLed' "Led"}}
         {{widget 'LabeledTextInput' "TextInput"}}
         {{widget 'LabeledNumericInput' "NumericInput"}}
@@ -32,18 +32,115 @@
             {{widget 'LabeledTextInput' 'Text Input' data-var-name="gMotorBasic[0].OUT.State.PowerOn"}}
         {{/widget}}
     {{/widget}}                
-    <h3>Slider</h3>
-    {{widget 'Slider' '0' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
-    {{widget 'Slider' style='height:200px;' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
-    {{widget 'Slider' style='height:400px;width:100px;' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
-    {{widget 'Slider' style='height:400px;width:100px;' }}
-    <h3>ValueUpDown</h3>
+    {{#widget 'LabeledColumns' 'Sliders in a centered grid' centerItems=1}}
+        {{#widget 'Slider' '0' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" min=-10 max= 10}}
+            {{widget 'NumericInput' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" style="width:100px; margin-left:-30px;bottom:-150px;"}}
+        {{/widget}}
+        {{widget 'Slider' style='height:200px;' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+        {{widget 'Slider' style='height:100px;width:50px;' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+        {{widget 'Slider' direction=1 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+        {{#widget 'Slider' style='height:100px;width:300px;grid-column:span 2' direction=1 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+        {{widget 'NumericInput' data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" style="width:100px;left:100px;top:30px; "}}
+        {{/widget}}
+        {{#widget 'Slider' style='height:30px;width:100%;grid-column:span 3' direction=1 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+        {{/widget}}
+    {{/widget}}
+    {{#widget 'LabeledColumns' 'ValueUpDown' }}
+
     {{W 'ValueUpDown' 1 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" buttonStyle='padding:10px' inputStyle="width:50px" }}
     {{W 'ValueUpDown'  data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" buttonStyle='padding:20px' inputStyle="width:50px"}}
     {{W 'ValueUpDown'  data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" buttonStyle='padding:30px' inputStyle="width:200px"}}
     {{#W 'ValueUpDown' 1 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" }}
     <div> </div>
     {{/W}}
+    {{/widget}}
+        <h3>Dropdowns</h3>
+    {{#widget 'Columns' maxColumns=4}}
+    <h3>Empty Dropdown</h3>
+    {{widget 'Dropdown'}}
+    <h3>Non Selectable Options</h3>
+    {{#widget 'Dropdown'}}
+    <dropdown>
+        <div>Not Option</div>
+        <div class="option">Option 1</div>
+        <div>Not Option</div>
+        <div class="option">Option 2</div>
+        <div>Not Option</div>
+        <div class="option">Option 3</div>
+    </dropdown>
+    {{/widget}}
+    <h3>Table based</h3>
+    {{#widget 'DropdownTable'}}
+    <options>
+        <div>Option many :!</div>
+        <div>Option many ::</div>
+        <div>Option many :)</div>
+        <div>Option many :(</div>
+    </options>
+    <option>
+        <div>Indvidual Option 1</div>
+    </option>
+    <option>
+        <div>Indvidual Option 2</div>
+    </option>
+    <options>
+        {{#repeat 4}}
+        <div>Repeat {{@index}}</div>
+        {{/repeat}}
+    </options>
+    {{/widget}}
+    <h3>Custom Field</h3>
+    {{#widget 'Dropdown'}}
+    <dropdown>
+        <div class="option">Option 1</div>
+        <div class="option">Option 2</div>
+        <div class="option">Option 3</div>
+    </dropdown>
+    <field>
+        <div style="background-color: cadetblue;"><span class="selected-item-text">Remove</span><span> [units]</span></div>
+    </field>
+    {{/widget}}
+    {{/widget}}
+    {{#widget 'MultiSelect' maxColumns=10 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+    <options>
+        <div>Option many :!</div>
+        <div>Option many ::</div>
+        <div>Option many :)</div>
+        <div>Option many :(</div>
+    </options>
+    <option data-value="4.5">
+        <div>data-value=4.5</div>
+    </option>
+    <option>
+        <div>Indvidual Option 2</div>
+    </option>
+    <options>
+        {{#repeat 4}}
+        <div>Repeat {{@index}}</div>
+        {{/repeat}}
+    </options>
+    {{/widget}}
+
+    {{#widget 'MultiSelect' maxColumns=10 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+    <options>
+        <div>Option many :!</div>
+        <div>Option many ::</div>
+        <div>Option many :)</div>
+        <div>Option many :(</div>
+    </options>
+    <option>
+        <div>Indvidual Option 1</div>
+    </option>
+    <option>
+        <div>Indvidual Option 2</div>
+    </option>
+    <options>
+        {{#repeat 4}}
+        <div>Repeat {{@index}}</div>
+        {{/repeat}}
+    </options>
+    {{/widget}}
+
     {{#widget 'LabeledColumns' 'ValueUpDown in a centered grid' centerItems=1}}
         {{W 'ValueUpDown' 1 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" buttonStyle='padding:10px' }}
         {{W 'ValueUpDown'  data-var-name="gMotorBasic[0].IN.PAR.JogVelocity" buttonStyle='padding:20px' }}
@@ -146,57 +243,6 @@
     {{widget 'LabeledLed' "Input5"}}
     {{widget 'LabeledLed' "Input6"}}
     {{/widget}}
-
-    <h3>Inputs</h3>
-
-    <h3>Dropdowns</h3>
-    {{#widget 'Columns' maxColumns=4}}
-    <h3>Empty Dropdown</h3>
-    {{widget 'Dropdown'}}
-    <h3>Non Selectable Options</h3>
-    {{#widget 'Dropdown'}}
-    <dropdown>
-        <div>Not Option</div>
-        <div class="option">Option 1</div>
-        <div>Not Option</div>
-        <div class="option">Option 2</div>
-        <div>Not Option</div>
-        <div class="option">Option 3</div>
-    </dropdown>
-    {{/widget}}
-    <h3>Table based</h3>
-    {{#widget 'DropdownTable'}}
-    <options>
-        <div>Option many :!</div>
-        <div>Option many ::</div>
-        <div>Option many :)</div>
-        <div>Option many :(</div>
-    </options>
-    <option>
-        <div>Indvidual Option 1</div>
-    </option>
-    <option>
-        <div>Indvidual Option 2</div>
-    </option>
-    <options>
-        {{#repeat 4}}
-        <div>Repeat {{@index}}</div>
-        {{/repeat}}
-    </options>
-    {{/widget}}
-    <h3>Custom Field</h3>
-    {{#widget 'Dropdown'}}
-    <dropdown>
-        <div class="option">Option 1</div>
-        <div class="option">Option 2</div>
-        <div class="option">Option 3</div>
-    </dropdown>
-    <field>
-        <div style="background-color: cadetblue;"><span class="selected-item-text">Remove</span><span> [units]</span></div>
-    </field>
-    {{/widget}}
-    {{/widget}}
-
 
     <h3>Create object helper</h3>
     {{obj "{title:'test'}"}}

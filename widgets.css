@@ -26,10 +26,22 @@
 .label-led h6 {
     margin : auto;
 }     
-.lui-grid { margin: 5px; } 
-.lui-grid .lui-grid { margin: 0px; } 
+.lui-grid { margin: 5px; padding: 5px;} 
+/* .lui-grid .lui-grid { margin: 0px; }  */
+.lui-grid .lui-grid { margin: -2px; padding: 2px; } 
+.lui-grid-labeled .lui-grid { margin: -2px; padding: 2px; } 
 .lui-grid-labeled{border-style: solid;border-radius: 5px;border-width: 2px; } 
 .lui-grid-heading{font-size: 20px;font-weight: bolder;}
+
+.option{
+    border-style: solid;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.option.active{
+    background-color: cadetblue;
+}
 
 .container ::-webkit-scrollbar {
     width: 0.5em;
