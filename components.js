@@ -766,7 +766,7 @@ class LuiSlider {
         let total = max - min;
         let screenStart = +(direction  ? scope.getAttribute('lui-slider-screen-x-start') : scope.getAttribute('lui-slider-screen-y-start'))
         let screenNew = +(direction ? evt.screenX : evt.screenY)
-        let scrollDistance =-(direction ? scope.clientWidth : scope.clientHeight)
+        let scrollDistance =-(direction ? -scope.clientWidth : scope.clientHeight)
         let scrollBarPercent = (((screenNew - screenStart)/(scrollDistance*0.9)) * screenScale)
         let value = startValue + scrollBarPercent*total
         value = clamp(value, min, max)
@@ -801,7 +801,7 @@ class LuiSlider {
 
         sliderBar.forEach((e) => {
             if(direction){
-                e.style.left = (percent+10) + '%';
+                e.style.left = (100 - percent) + '%';
             }
             else{
                 e.style.top = (percent) + '%';
