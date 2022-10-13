@@ -1,5 +1,10 @@
 let scope = this
 
+function evalInContext(js, context) {
+    //# Return the results of the in-line anonymous function we .call with the passed context
+    return function() { return eval(js); }.call(context);
+}
+
 function htmlToElements(html) {
     var template = document.createElement('template');
     template.innerHTML = html;
@@ -89,7 +94,12 @@ function WidgetButton(context, args) {
 
 function dropDownSelected(el, click) {
     let item = el.closest('.dropdown-scope')
-    let selection = el.textContent.trim();
+    let selection = el.textContent;
+    let query = el.querySelector('.select-text')
+    if( query != null){
+        selection = query.textContent;
+    }
+    selection = selection.trim()
     let text = item.querySelectorAll('.selected-item-text:not(.noset)')
     if (text.length) {
         text.forEach(e => {
@@ -111,13 +121,12 @@ function dropDownSelected(el, click) {
     }
     if (click) {
         try {
-            eval(click)
+            evalInContext(click, el)
         } catch (e) {
             throw `error from user event: '${click}' ` + e
         }
     }
 }
-
 /*
 Create a dropdown and field
 The dropdown is a table where each row is defined by an 'option'
@@ -151,7 +160,10 @@ Example drop down usage:
 function WidgetDropdownTable(context, args) {
 
     let {
-        set = true, style = '', ..._args
+        set = true, 
+        style = '', 
+        ['data-var-name-field'] : dataVarNameField,
+        ..._args
     } = args.hash
     //Get cleaned up values from args
     let {
@@ -165,40 +177,46 @@ function WidgetDropdownTable(context, args) {
     let field = ''
     let options = ''
     let index = 0
+    let children = ''
     $(jQuery.parseHTML(trimmed)).each((i, el) => {
-        if (el.tagName == 'FIELD') {
-            el.childNodes.forEach((e) => {
-                if (e.classList) {
-                    e.classList.add('form-control')
-                    if (set) {
-                        e.classList.add('selected-item-text')
+        switch (el.tagName) {
+            case 'FIELD':
+                el.childNodes.forEach((e) => {
+                    if (e.classList) {
+                        e.classList.add('form-control')
+                        if (set) {
+                            e.classList.add('selected-item-text')
+                        }
+                        field += e.outerHTML
                     }
-                    field += e.outerHTML
-                }
-            })
-        }
-        if (el.tagName == 'OPTION') {
-            let e = el
-            let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
-            e = jQuery.parseHTML(`<tr><td> ${e.innerHTML} </td></tr>`)
-            e[0].setAttribute('onclick', click)
-            e[0].setAttribute('data-index', index++)
-            options += e[0].outerHTML
-        }
-        if (el.tagName == 'OPTIONS') {
-            el.childNodes.forEach((e) => {
-                if (e.getAttribute) {
-                    let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
-                    e = jQuery.parseHTML(`<tr><td> ${e.outerHTML} </td></tr>`)
-                    e[0].setAttribute('onclick', click)
-                    e[0].setAttribute('data-index', index++)
-                    options += e[0].outerHTML
-                }
-            })
+                })                    
+                break;
+            case 'OPTION':
+                let e = el
+                let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
+                e = jQuery.parseHTML(`<tr><td> ${e.innerHTML} </td></tr>`)
+                e[0].setAttribute('onclick', click)
+                e[0].setAttribute('data-index', index++)
+                options += e[0].outerHTML    
+                break;
+            case 'OPTIONS':
+                el.childNodes.forEach((e) => {
+                    if (e.getAttribute) {
+                        let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
+                        e = jQuery.parseHTML(`<tr><td> ${e.outerHTML} </td></tr>`)
+                        e[0].setAttribute('onclick', click)
+                        e[0].setAttribute('data-index', index++)
+                        options += e[0].outerHTML
+                    }
+                })    
+            break;
+            default:
+                children += el.outerHTML? el.outerHTML: el.textContent
+                break;
         }
     })
     if (field == '') {
-        field = `<input class='form-control selected-item-text'>`
+        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} selected-item-text${dataVarNameField ? ' webhmi-text-value' : ''}'>`
     }
     let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.()"` : ''
     return `
@@ -218,8 +236,17 @@ function WidgetDropdownTable(context, args) {
             </div>
         </div>
         ${field}
+        ${children}
     </div>
 `
+}
+
+function updateSelectOptions(el, index) {
+    el.querySelectorAll('.option').forEach((e) => {
+        let click = `dropDownSelected(this, '${ e.getAttribute('onclick') }');`
+        e.setAttribute('onclick', click)
+        e.setAttribute('data-index', index++)
+    })
 }
 
 /*
@@ -255,7 +282,11 @@ Example drop down usage:
 function WidgetDropdown(context, args) {
 
     let {
-        set = true, style = '', ..._args
+        set = true, style = '', 
+        willOpen,
+        ['data-var-name-willopen'] : willOpenPV,
+        ['data-var-name-field'] : dataVarNameField,
+        ..._args
     } = args.hash
     //Get cleaned up values from args
     let {
@@ -270,8 +301,10 @@ function WidgetDropdown(context, args) {
     let field = ''
     let index = 0
     let dropdown = 'missing &lt;dropdown&gt;'
+    let children = ''
     $(jQuery.parseHTML(trimmed)).each((i, el) => {
-        if (el.tagName == 'FIELD') {
+        switch (el.tagName) {
+        case 'FIELD':
             el.childNodes.forEach((e) => {
                 if (e.classList) {
                     e.classList.add('form-control')
@@ -282,26 +315,35 @@ function WidgetDropdown(context, args) {
                     field += e.outerHTML
                 }
             })
-        }
-        if (el.tagName == 'DROPDOWN') {
-            el.querySelectorAll('.option').forEach((e) => {
-                let click = `dropDownSelected(this, '${ e.getAttribute('onclick') }');`
-                e.setAttribute('onclick', click)
-                e.setAttribute('data-index', index++)
-            })
+        break
+        case 'DROPDOWN':
+            index = updateSelectOptions(el, index)
             dropdown = el.innerHTML
+        break;
+        default:
+            children += el.outerHTML? el.outerHTML: el.textContent
+        break;
         }
     })
     if (field == '') {
-        field = `<div class='form-control selected-item-text'></div>`
+        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} selected-item-text${dataVarNameField ? ' webhmi-text-value' : ''}'>`
     }
-    let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.()"` : ''
+    let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.();"` : ''
+
+    let willOpenButton  = 'onclick="'
+    if( args.delegate ){
+        willOpenButton += `args.delegate?.willOpen?.();`;
+    }
+    if( willOpen ){
+        willOpenButton = `evalInContext(${willOpen})`
+    }
+    willOpenButton += '"'
     return `
 <div class="${classList.join(' ')}" style="${style}" >
         <div class="input-group-btn">
             <button type="button" 
-            ${delegate}
-            class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ${willOpenButton}
+            class="btn dropdown-toggle${willOpenPV ? " webhmi-btn-set" : ''}" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
             </button>
             <div class="dropdown-menu" >
@@ -309,6 +351,7 @@ function WidgetDropdown(context, args) {
             </div>
         </div>
         ${field}
+        ${children}
     </div>
 `
 }
@@ -787,11 +830,11 @@ class LuiSlider {
     //Handle changing the page if a tab is clicked
     static luiSlideMouse(evt) {
 
-        evt.preventDefault()
         let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
         if( scope == null){
             return
         }
+        evt.preventDefault()
         scope.classList.add('lui-slider-active')
         if (scope.length == 0) {
             return;
@@ -975,7 +1018,7 @@ class multiOptionSelector{
 
         if (click) {
             try {
-                eval(click)
+                evalInContext(click, el)
             } catch (e) {
                 throw `error from user event: '${click}' ` + e
             }
@@ -1062,6 +1105,138 @@ function WidgetMultiSelect(context, args) {
     ` 
 }
 
+
+class luiDirectory{
+    static updateDirectory(evt){
+        let data = JSON.parse( evt.currentTarget.value )
+
+        let scope = evt.currentTarget.closest('.dropdown-scope')
+        let target = scope.querySelectorAll('.dropdown-menu')
+        
+        let table = ''
+        table += '<table class="table filter-table">'
+        table += '<tbody>'
+ 
+        let folders = data.files.filter( e => e.name.slice(-1) == '/' )
+        let files = data.files.filter( e => e.name.slice(-1) != '/' )
+ 
+        folders.forEach((file)=>{
+            table += `<tr class='option' onclick="luiDirectory.fileSelect(this)"><td class='select-text'>${file.name}</td><td>${file.date}</td><td>${file.size}</td></tr>`
+        })
+        files.forEach((file)=>{
+            table += `<tr class='option' onclick="luiDirectory.fileSelect(this)"><td class='select-text'>${file.name}</td><td>${file.date}</td><td>${file.size}</td></tr>`
+        })
+        table += '</tbody>'
+        table += '</table>'        
+
+        let tableEl = htmlToElement(table)
+        document.addEventListener('keydown', ( e )=>{
+            luiDirectory.filter(tableEl, e.key)
+        })
+        target.forEach(element => {
+            element.replaceChildren(tableEl)
+            updateSelectOptions(element)
+        });
+
+    }
+    static fileSelect(el){
+        let item = el.closest('.dropdown-scope')
+        let selection = el.textContent;
+        let query = el.querySelector('.select-text')
+        if( query != null){
+            selection = query.textContent;
+        }
+        selection = selection.trim()
+        let text = item.querySelector('.selected-item-text')
+        if (text != null) {
+            let cleanPath = []
+            let path = text.value.split("/")
+            path = path.filter((e, i,arr)=>{return ((e != '') || (i == (arr.length-1)))})
+            path.pop()
+            path = path.concat( selection.split("/") )
+            path.forEach((el, i)=>{
+                if( (el == '.' || el == ' ' )){
+                    if( i == 0 ){
+                        cleanPath.push('.')
+                    }
+                }
+                else if( el == '..'){
+                    cleanPath.pop()
+                }
+                else{
+                    if(cleanPath.length==0){
+                        cleanPath.push('.')
+                    }
+                    cleanPath.push(el)
+                }
+            })
+            if(cleanPath.length == 1){
+                cleanPath.push('')
+            }
+            text.innerHTML = cleanPath.join("/")            
+            text.value = cleanPath.join("/")            
+            let evt = new Event("change", {
+                "bubbles": true,
+                "cancelable": true
+            });
+            text.dispatchEvent(evt);
+        }    
+    }
+    static filter(e, key){
+        let filter = e.getAttribute('filter') || ''
+
+        switch(key.toLowerCase()){
+            case 'backspace':
+                filter = filter.slice(0, -1);
+            break;
+            case 'escape':
+                filter = ''
+            break;
+            default:
+                if(key.length == 1){
+                    filter += key                    
+                }
+            break
+        }
+        e.setAttribute('filter', filter)
+        for( let row of e.rows){
+            if( row.textContent.toLowerCase().includes(filter) ){
+                row.style.display = ''
+            }
+            else{
+                row.style.display = 'none'
+            }
+        } 
+        if (e.nextSibling) {
+            e.nextSibling.innerHTML = filter
+        } else {
+            let el = document.createElement('div')
+            el.innerHTML = filter
+            el.classList.add('form-control')
+            e.parentNode.appendChild(el);
+        }
+    }
+}
+
+$(document).on({
+    "change": luiDirectory.updateDirectory,
+}, '.lui-directory-data');
+
+function WidgetDirectoryBrowser( context, args){
+    let {        
+        ['data-var-name']:dataVarName,
+        ['data-var-name-files']:dataVarNameFiles,
+        style = '', ..._args
+    } = args.hash
+    if(dataVarNameFiles){
+        args.hash['data-var-name-field'] = dataVarName
+    }
+    args.hash.set = false
+    args.children += `<invisible-input style='display:none' class='webhmi-text-value lui-directory-data' data-var-name='${dataVarNameFiles}'></invisible-input><dropdown>No Data</dropdown>`
+    return `    
+    ${WidgetDropdown( context, args )}
+`
+}
 
 //Handle setting active if a tab is clicked
 function selectTab(selected) {
