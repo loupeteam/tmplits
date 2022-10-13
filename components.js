@@ -1110,6 +1110,10 @@ class luiDirectory{
     static updateDirectory(evt){
         let data = JSON.parse( evt.currentTarget.value )
 
+        if( typeof data.files == 'undefined'){
+            return
+        }
+
         let scope = evt.currentTarget.closest('.dropdown-scope')
         let target = scope.querySelectorAll('.dropdown-menu')
         
