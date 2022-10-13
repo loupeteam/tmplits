@@ -1126,7 +1126,7 @@ class invisibleInput extends HTMLElement {
         this.dispatchEvent(evt);
     }
     get value( ){
-        return this._value || 0
+        return this._value
     }
 }
       

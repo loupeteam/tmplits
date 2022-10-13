@@ -1108,8 +1108,12 @@ function WidgetMultiSelect(context, args) {
 
 class luiDirectory{
     static updateDirectory(evt){
-        let data = JSON.parse( evt.currentTarget.value )
-
+        try{
+            var data = JSON.parse( evt.currentTarget.value )
+        }
+        catch{
+            return
+        }
         if( typeof data.files == 'undefined'){
             return
         }
