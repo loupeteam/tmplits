@@ -635,6 +635,16 @@ Handlebars.registerHelper('repeat', function (context, options) {
     return ret;
 });
 
+Handlebars.registerHelper('concat', function (...args){
+
+    // let options = Object.assign( {}, args[args.length-1])
+    let context = args.slice(0,-1)
+    let ret = ''
+    context.forEach(e=>{
+        ret += e;
+    })
+    return ret
+})
 Handlebars.registerHelper('widget', createWidget)
 Handlebars.registerHelper('W', createWidget)
 Handlebars.registerHelper('obj', createObject)

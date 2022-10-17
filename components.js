@@ -1,3 +1,5 @@
+'use strict';
+
 let scope = this
 
 function evalInContext(js, context) {
@@ -178,7 +180,11 @@ function WidgetDropdownTable(context, args) {
     let options = ''
     let index = 0
     let children = ''
-    $(jQuery.parseHTML(trimmed)).each((i, el) => {
+
+    let nodes = htmlToElements(trimmed)
+
+    for( let i in nodes){
+        let el = nodes[i]        
         switch (el.tagName) {
             case 'FIELD':
                 el.childNodes.forEach((e) => {
@@ -194,27 +200,31 @@ function WidgetDropdownTable(context, args) {
             case 'OPTION':
                 let e = el
                 let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
-                e = jQuery.parseHTML(`<tr><td> ${e.innerHTML} </td></tr>`)
-                e[0].setAttribute('onclick', click)
-                e[0].setAttribute('data-index', index++)
-                options += e[0].outerHTML    
+                e = htmlToElement(`<tr><td> ${e.innerHTML} </td></tr>`)
+                e.setAttribute('onclick', click)
+                e.setAttribute('data-index', index++)
+                options += e.outerHTML    
                 break;
             case 'OPTIONS':
                 el.childNodes.forEach((e) => {
                     if (e.getAttribute) {
                         let click = `dropDownSelected(this, '${e.getAttribute('onclick') }');`
-                        e = jQuery.parseHTML(`<tr><td> ${e.outerHTML} </td></tr>`)
-                        e[0].setAttribute('onclick', click)
-                        e[0].setAttribute('data-index', index++)
-                        options += e[0].outerHTML
+                        e = htmlToElement(`<tr><td> ${e.outerHTML} </td></tr>`)
+                        e.setAttribute('onclick', click)
+                        e.setAttribute('data-index', index++)
+                        options += e.outerHTML
                     }
                 })    
             break;
+            case undefined:
+
+            break
             default:
                 children += el.outerHTML? el.outerHTML: el.textContent
                 break;
         }
-    })
+    }
+    
     if (field == '') {
         field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} selected-item-text${dataVarNameField ? ' webhmi-text-value' : ''}'>`
     }
@@ -302,7 +312,11 @@ function WidgetDropdown(context, args) {
     let index = 0
     let dropdown = 'missing &lt;dropdown&gt;'
     let children = ''
-    $(jQuery.parseHTML(trimmed)).each((i, el) => {
+    let nodes = htmlToElements(trimmed)
+
+    for( let i in nodes){
+        let el = nodes[i]        
+
         switch (el.tagName) {
         case 'FIELD':
             el.childNodes.forEach((e) => {
@@ -320,11 +334,14 @@ function WidgetDropdown(context, args) {
             index = updateSelectOptions(el, index)
             dropdown = el.innerHTML
         break;
+        case undefined:
+
+        break;
         default:
             children += el.outerHTML? el.outerHTML: el.textContent
         break;
         }
-    })
+    }
     if (field == '') {
         field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} selected-item-text${dataVarNameField ? ' webhmi-text-value' : ''}'>`
     }
@@ -507,7 +524,7 @@ function WidgetColumnsBs(context, args) {
         attr
     } = cleanArgs(_args)
 
-    let nodes = $(jQuery.parseHTML(args.children)).not('text')
+    let nodes = htmlToElements(args.children)
     let count = nodes.length
 
     maxColumns = maxColumns > 12 ? 12 : maxColumns
@@ -517,15 +534,24 @@ function WidgetColumnsBs(context, args) {
     classList.push(`col-sm-${columnSize}`)
 
     let children = ''
-    nodes.each((i, el) => {
-        if (i % columns == 0) {
-            children += `<div class="row">`
+    let i=0;
+    for( let e in nodes){
+        let el = nodes[e]        
+        switch (el.tagName) {
+        case undefined:
+            break
+        default:
+            if (i % columns == 0) {
+                children += `<div class="row">`
+            }
+            children += `<div class="${classList.join(' ')}" style='${style}'>${el.outerHTML}</div>`
+            if (i % columns == (columns - 1)) {
+                children += `</div>`
+            }
+            i++;
+        break;
         }
-        children += `<div class="${classList.join(' ')}" style='${style}'>${el.outerHTML}</div>`
-        if (i % columns == (columns - 1)) {
-            children += `</div>`
-        }
-    })
+    }
     return `
 <!--    <div class="container"> -->
         ${children}
@@ -548,12 +574,23 @@ function WidgetColumns(context, args) {
     classList = classList.concat(['lui-grid'])
 
     //Read the nodes and clean them up to figure out how many columns/rows
-    let nodes = $(jQuery.parseHTML(args.children)).not('text')
-    let count = nodes.length
+
+    let nodes = htmlToElements(args.children)
+
+    let count = 0;
     let children = ''
-    nodes.each((i, el) => {
-        children += `${el.outerHTML}`
-    })
+
+    for( let i in nodes){
+        let el = nodes[i]
+        switch (el.tagName) {
+            case undefined:
+                break
+            default:
+            children += `${el.outerHTML}`
+            count++;
+        }
+    }
+
     let columns = count > maxColumns ? maxColumns : count
     let rows = Math.floor(count / columns)
 
@@ -591,12 +628,15 @@ function WidgetLabeledColumns(context, args) {
     let header = context?.[0] || ' '
 
     //Read the nodes and clean them up to figure out how many columns/rows
-    let nodes = $(jQuery.parseHTML(args.children)).not('text')
-    let count = nodes.length
+    let nodes = htmlToElements(args.children)
     let children = ''
-    nodes.each((i, el) => {
-        children += `${el.outerHTML}`
-    })
+    for(let i in nodes){
+        let el = nodes[i]
+        if(el.outerHTML){
+            children += el.outerHTML        
+        }
+    }
+    let count = nodes.length
     let columns = count > maxColumns ? maxColumns : count
     let rows = Math.floor(count / columns)
 
@@ -1065,37 +1105,43 @@ function WidgetMultiSelect(context, args) {
     let trimmed = args.children.trim()
     let options = ''
     let index = 0
-    $(jQuery.parseHTML(trimmed)).each((i, el) => {
+
+
+    let nodes = htmlToElements(trimmed)
+    for( let i in nodes){
+        let el = nodes[i]
         if (el.tagName == 'OPTION') {
             let e = el
             let dataValue = e.getAttribute('data-value')
             let click = `multiOptionSelector.selected(this, '${e.getAttribute('onclick') }');`
-            e = jQuery.parseHTML(`<div class="option"> ${e.innerHTML} </div>`)
+
+            e = htmlToElement(`<div class="option"> ${e.innerHTML} </div>`)
             if( dataValue != null ){
-                e[0].setAttribute('data-value', dataValue)            
+                e.setAttribute('data-value', dataValue)            
             }
-            e[0].setAttribute('onclick', click)            
-            e[0].setAttribute('data-index', index)
+            e.setAttribute('onclick', click)            
+            e.setAttribute('data-index', index)
             index++
-            options += e[0].outerHTML
+            options += e.outerHTML
         }
         if (el.tagName == 'OPTIONS') {
             el.childNodes.forEach((e) => {
                 if (e.getAttribute) {
                     let dataValue = e.getAttribute('data-value')
                     let click = `multiOptionSelector.selected(this, '${e.getAttribute('onclick') }');`
-                    e = jQuery.parseHTML(`<div class="option"> ${e.outerHTML} </div>`)
+                    e = htmlToElement(`<div class="option"> ${e.outerHTML} </div>`)
                     if( dataValue != null){
-                        e[0].setAttribute('data-value', dataValue)            
+                        e.setAttribute('data-value', dataValue)            
                     }
-                    e[0].setAttribute('onclick', click)
-                    e[0].setAttribute('data-index', index)
+                    e.setAttribute('onclick', click)
+                    e.setAttribute('data-index', index)
                     index++
-                    options += e[0].outerHTML
+                    options += e.outerHTML
                 }
             })
         }
-    })
+    }
+
     options += `<invisible-input class="lui-select-value webhmi-num-value" style="display:none" value="${context}" ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
 
     args.children = options
