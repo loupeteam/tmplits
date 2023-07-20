@@ -11,5 +11,8 @@
     "url": "git+https://github.com/loupeteam/widgets.git"
   },
   "author": "jpolansky",
-  "license": "SEE LICENSE IN LICENSE.txt"
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  }
 }
