@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/widgets-gizmo",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,10 @@
   },
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loupeteam/widgets.git"
+  },
   "dependencies": {
     "@loupeteam/widgets": "^0.0.2"
   }
