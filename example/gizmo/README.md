@@ -7,10 +7,15 @@ the important parts are a
 - Package.json that includes a name with the prefix 
     - @loupeteam/widget-[your widgets name]
     - Version number
+    - Link to repo the repo (the local one or widgets)    
 ```json
 {
     "name": "@loupeteam/widgets-[WidgetName]",
     "version": "x.x.x",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/loupeteam/widgets.git"
+    },
 }
 ```
 
