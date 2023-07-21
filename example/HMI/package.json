@@ -1,0 +1,27 @@
+{
+  "name": "@loupeteam/widget-template",
+  "version": "0.0.5",
+  "description": "Template widget based project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loupeteam/widgets.git"
+  },
+  "author": "Josh Polansky",
+  "license": "ISC",
+  "dependencies": {
+    "@loupeteam/webhmi": "^1.4.0",
+    "@loupeteam/widgets": "^0.0.2",
+    "@loupeteam/widgets-gizmo": "0.0.1",
+    "bootstrap": "^3.3.4",
+    "handlebars": "^4.7.7",
+    "jquery": "^3.7.0"
+  },
+  "lpm":{
+    "type" : "project"
+  }  
+
+}
