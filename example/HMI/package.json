@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/widget-template",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Template widget based project",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,9 @@
     "bootstrap": "^3.3.4",
     "handlebars": "^4.7.7",
     "jquery": "^3.7.0"
-  }
+  },
+  "lpm":{
+    "type" : "project"
+  }  
+
 }
