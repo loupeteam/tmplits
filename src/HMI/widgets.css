@@ -13,6 +13,9 @@
 .form-control.label-led {
     display: inline-flex;
     align-items: center;
+    font-family: Space Grotesk;
+    font-size: 0.5vw;
+    color: #555555;
 }
 
 .form-control.label-led .led {
@@ -29,9 +32,9 @@
 .lui-grid { margin: 5px; padding: 5px;} 
 /* .lui-grid .lui-grid { margin: 0px; }  */
 .lui-grid .lui-grid { margin: -2px; padding: 2px; } 
-.lui-grid-labeled .lui-grid { margin: -2px; padding: 2px; } 
-.lui-grid-labeled{border-style: solid;border-radius: 5px;border-width: 2px; } 
-.lui-grid-heading{font-size: 20px;font-weight: bolder;}
+.lui-grid-labeled .lui-grid { margin: -2px; padding: 5px; } 
+.lui-grid-labeled{border-style: solid; border-radius: 1px; border-width: 0.5px; border-color: #ccc;} 
+.lui-grid-heading{font-size: 20px; font-weight: bolder;}
 
 .option{
     border-style: solid;
@@ -80,3 +83,38 @@
 .slider-bar{
     background-color: #2FA1D6;
 }
+.grid {
+    border-collapse: collapse;
+}
+.grid td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+.green {
+    background-color: #CCFFCC;
+}
+.beige {
+    background-color: #FAEBCF;
+}
+.red {
+    background-color: #FF9999;
+}
+.size-fill-parent{
+    height:100%;
+    width:100%;
+}
+
+.list-viewer-window{
+    height:calc(100% - 40px);
+    width:100%;
+}
+.list-viewer-selected-file-name{
+    width:calc(100% - 40px);
+    height:40px;
+}
+.list-viewer-refresh-button{
+    width:40px;
+    height:40px;
+}
+  

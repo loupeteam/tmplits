@@ -230,13 +230,17 @@ class Widgets {
     }
     loadPage(containerId, pageName, context) {
         var template = this.get(pageName);
-        context = context ? context : window            
+        context = context ? context : window                    
         console.log(`Loading page: ${pageName}`)
+        let dom = containerId
         try{
-            $('#' + containerId).html(template(context))
+            if( typeof containerId == 'string'){
+                dom = '#' + containerId;    
+            }
+            $(dom).html(template(context))
         }
         catch(e){
-            $('#' + containerId).html(`<div class="error">Error loading the page '${pageName}' ${e} </div>` )
+            $(dom).html(`<div class="error">Error loading the page '${pageName}' ${e} </div>` )
         }
         WEBHMI.queryDom()
         WEBHMI.updateHMI()
@@ -585,6 +589,33 @@ Handlebars.registerHelper('controller', function (context, options) {
         } catch (e) {
             try {
                 context = eval('machine["' + context + '"]');
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
+
+    return delegatePartial(context, options, delegate, uid, '')
+});
+
+Handlebars.registerHelper('controllerIndex', function (context, options) {
+
+    let _utils = Handlebars.Utils;
+    let uid = viewDelegate.getUniqueID()
+    let delegate = context;
+
+    if (_utils.isFunction(context)) {
+        context = context.call(this);
+    }
+
+    if (typeof context == 'string') {
+        let contextHead = context.substring(0, context.lastIndexOf('['));
+        let contextIndex = context.substring(context.lastIndexOf('['));
+        try {
+            context = eval(context);
+        } catch (e) {
+            try {
+                context = eval('machine["' + contextHead + '"]' + contextIndex);
             } catch (e) {
                 console.log(e)
             }
