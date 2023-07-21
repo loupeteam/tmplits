@@ -15,6 +15,7 @@
   "dependencies": {
     "@loupeteam/webhmi": "^1.4.0",
     "@loupeteam/widgets": "file://../../src/HMI/",
+    "@loupeteam/widgets-gizmo": "0.0.1",    
     "bootstrap": "^3.3.4",
     "handlebars": "^4.7.7",
     "jquery": "^3.7.0"
