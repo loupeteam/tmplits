@@ -1,13 +1,21 @@
 This is a template gizmo
 
+Use this template by running:
+```
+lpm install widgets-gizmo
+```
+then modify it for your needs.
+
+Settings up the template:
+
 This gizmo can be installed using NPM install and will get loaded by the widget system
 the important parts are a 
 - library.handlebars - this is your template
-- loader.js - this is an optional js file that will run after loading the templates
+- loader.js - js file that will run after loading the templates. This can do work to instantiate things or contain function widgets
 - Package.json that includes a name with the prefix 
     - @loupeteam/widget-[your widgets name]
     - Version number
-    - Link to repo the repo (the local one or widgets)    
+    - Link to repo the repo (the local one or widgets, this is important because it is how the package gets it's access rights)    
 ```json
 {
     "name": "@loupeteam/widgets-[WidgetName]",
@@ -55,8 +63,12 @@ Usage:
 ```javascript
 //loader.js
 console.log("Loaded gizmo!")
+function WidgetCustomWidget( ... ){
+ ...
+}
 ```
 ```handlebars
 <!--main.handlbars-->
 {{> gizmo}}
+{{W CustomWidget}}
 ```
