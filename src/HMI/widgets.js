@@ -6,9 +6,11 @@ class Widgets {
         this.compinedScript = ''
         this.loadedCallback = loadedCallback
         this.retryScripts = []        
-        if (fileName) {
-            this.load(fileName)
-        }
+        this.loadPackageJson(()=>{
+            if (fileName) {
+                this.load(fileName)
+            }    
+        })
     }
     refreshDynamicDom() {
         $('[dynamic-template]').each((i, el) => {
@@ -157,6 +159,13 @@ class Widgets {
                 });
         });
 
+        pages.forEach(element => {
+            if(element.script){
+                $.getScript(element.script, function() {
+                    console.log(`loaded script ${element.script}`);
+                 });
+            }
+        });
     }
     retries( callback ){
         let retryAgain = []
@@ -266,6 +275,12 @@ class Widgets {
                     scope.refreshDynamicEl(el)
                 })
             });
+            
+            //Append the package pages to the pages
+            raw.pages = raw.pages ? raw.pages : [];
+            scope.package.pages.forEach((e)=>{
+                raw.pages.push(e)
+            })
 
             scope.getLibraries(raw.libraries, function () {
                 scope.getPages(raw.pages, function () {
@@ -277,6 +292,33 @@ class Widgets {
                 })
             })
         });
+    }
+    //This function loads a package json and finds the packages installed in 
+    //@loupeteam/widgets/ and loads them into libraries and pages
+    //Then it searches for loader.js and runs it for each package
+    loadPackageJson( callback ){
+        let scope = this
+        $.get('./package.json', function (raw) {
+            scope.package = raw
+            //Search through the package.json for @loupeteam/widgets/*
+            //by going through iterating through each member of the dependcy object
+            //and adding the package to the libraries and pages
+            raw.pages = raw.pages ? raw.pages : [];
+            raw.loaderScripts = raw.loaderScripts ? raw.loaderScripts : [];
+            for( let dep in raw.dependencies ){
+                if( dep.startsWith('@loupeteam/widgets-') ){
+                    //Add the package to the pages where the name is the package name withouth the @loupeteam/widgets/
+                    //and the file is the library.handlebars
+                    raw.pages.push( {
+                        name: dep.replace('@loupeteam/widgets-', ''), 
+                        file: './node_modules/' + dep + '/library.handlebars',
+                        script: './node_modules/' + dep + '/loader.js'} )
+                }
+            }    
+            if( callback ){
+                callback()
+            }
+        });        
     }
 }
 
