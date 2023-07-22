@@ -1,4 +1,4 @@
 console.log("Loaded gizmo!")
-function WidgetHelloWorld(args, context){
-    return `Hello ${context}!`
+function WidgetHelloWorld(context, args){
+    return `Hello ${context[0]}!`
 }
