@@ -244,6 +244,10 @@
     {{widget 'LabeledLed' "Input5"}}
     {{widget 'LabeledLed' "Input6"}}
     {{/widget}}
+    
+    {{#widget 'LabeledColumns' 'Recipe Browser' }}
+        {{> recipe-browser workingDirectoryPv="RecipeEdit:f.in.cwd" jsonDirectoryPv="RecipeEdit:Directory" refreshPv="RecipeEdit:f.in.refresh" uiStructure="RecipeEdit:CSVFileMgr_HMI"}}
+    {{/widget}}
 
     <h3>Create object helper</h3>
     {{obj "{title:'test'}"}}
@@ -261,5 +265,7 @@
     {{widget 'dropdownerror'}}
     {{#widget 'dropdownerrorblk'}}
         <h3>Child<h3>
-    {{/widget }}
+    {{/widget }}    
+
 {{/W}}
+
