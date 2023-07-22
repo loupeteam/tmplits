@@ -1,23 +1,38 @@
 class Widgets {
     constructor(fileName, loadedCallback ) {
+        
+        //Get any base element from the page
+        let base = document.querySelector('base')
+        this.base = './'
+        if( base ){
+            //If the base href contains node_modules we need to go up a level
+            this.base = base.href.indexOf('node_modules') > -1 ? '../' : './'
+        }
+
         this.cache = {}
         this.compiled = {}
         this.raw = '{}'
         this.compinedScript = ''
-        this.loadedCallback = loadedCallback
-        this.retryScripts = []        
-        this.loadPackageJson(()=>{
-            if (fileName) {
-                this.load(fileName)
-            }    
-        })
+        this.retryScripts = []
+        this.loadPackageLockJson(this.base + 'package-lock.json')
+        .then(()=>{return this.loadPackageJson(this.base + 'package.json')})
+        .then(()=>{return this.loadJson(fileName)})
+        .then(()=>{return this.getLibraries(this.libraries)})
+        .then(()=>{return this.getPages(this.pages)})
+        .then(()=>{return this.retries()})
+        .then(()=>{return loadedCallback(this.native)}) 
     }
+
+    //This function refreshes all dynamic elements
     refreshDynamicDom() {
         $('[dynamic-template]').each((i, el) => {
             this.refreshDynamicEl(el)
         })
     }
 
+    //This function refreshes a dynamic element
+    //by getting the template and context and adding it to the element
+    //el is the element to refresh
     refreshDynamicEl(el) {
         var template = this.get(el.getAttribute('dynamic-template'));
         let context = eval(el.getAttribute('context'))
@@ -31,6 +46,7 @@ class Widgets {
         }
     }
 
+    //This function loads a script into the window
     importScript(script){
         const encodedJs = encodeURIComponent(script);
         const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
@@ -47,7 +63,11 @@ class Widgets {
         }                  
     }
 
+    //This function reads the libraries and adds each item with the type='text/x-handlebars-template'
+    //to the cache
+    //it also adds the scripts to the compinedScript
     readLibraries(raw) {
+        console.log('processing libraries' )
         let scope = this
         let html = $.parseHTML(raw)
         if (html) {
@@ -82,152 +102,181 @@ class Widgets {
         }
     }
 
-    getLibraries(libraries, callback) {
-        let libraryCount = 0;
+    //This function loads all the libraries that were found
+    //it resolves the libraries then processess them by compiling them
+    //and adding them to the cache
+    getLibraries(libraries) {
+
         let scope = this
-        if(libraries.length == 0){
-            next()
-        }
-        function next() {
-            libraryCount++
-            if (libraries.length <= libraryCount) {
-                if (callback) {
-                    callback()
+        let chain = new Promise((resolve, reject)=>{          
+            console.log('loading libraries')
+            let libraryCount = 0;
+            if(libraries.length == 0){
+                next()
+            }
+            function next() {
+                libraryCount++
+                if (libraries.length <= libraryCount) {
+                    resolve()
                 }
             }
-        }
-        function processPartial(data) {
-            data.text()
-                .then((partial) => {
-                    scope.readLibraries(partial)
-                    next()
-                })
-                .catch(error => {
-                    console.log( 'error loading library ' + error )
-                    next()                    
-                })
-        }
-
-        libraries.forEach(element => {
-            fetch(element)
-                .then(processPartial)
-                .catch(error => {
-                    console.log( 'error loading library ' + error )
-                    next()
-                });
-        });
-
-    }
-    getPages(pages, callback) {
-        let scope = this
-        let pageCount = 0;
-
-        if(pages.length == 0){
-            next()
-        }
-
-        function next() {
-            pageCount++
-            if (pages.length <= pageCount) {
-                if (callback) {
-                    callback()
-                }
-            }
-        }
-
-        function processPartial(element, partial) {
-            scope.readLibraries(partial)
-            scope.cache[element.name] = partial;
-            Handlebars.registerPartial(
-                element.name,
-                partial
-            )
-            next()
-        }
-
-        pages.forEach(element => {
-            fetch(element.file)
-                .then((data)=>{
-                    data.text()
+            function processPartial(data) {
+                data.text()
                     .then((partial) => {
-                        processPartial(element, partial)
+                        scope.readLibraries(partial)
+                        next()
                     })
-                })
-                .catch(error => {
-                    console.log('failed to get page: ' + error);
-                    next()
-                });
-        });
-
-        pages.forEach(element => {
-            if(element.script){
-                $.getScript(element.script, function() {
-                    console.log(`loaded script ${element.script}`);
-                 });
+                    .catch(error => {
+                        console.log( 'error loading library ' + error )
+                        next()                    
+                    })
             }
-        });
+
+            libraries.forEach(element => {
+                fetch(element)
+                    .then(processPartial)
+                    .catch(error => {
+                        console.log( 'error loading library ' + error )
+                        next()
+                    });
+            });
+        })
+        return chain
+
     }
-    retries( callback ){
-        let retryAgain = []
 
-        let scriptCount = 0;
-        let numberScript = this.retryScripts.length
+    //This function loads all the template pages that were found
+    //it resolves the pages then processess them by compiling them
+    //and adding them to the cache
+    getPages( pagesObj ) {        
+        let scope = this
+        let chain = new Promise((resolve, reject)=>{          
+            console.log('loading pages')
+            let pageCount = 0;
 
-        function next() {
-            scriptCount++
-            if (numberScript <= scriptCount) {
-                if( retryAgain.length > 0 && retryAgain.length < numberScript )
-                {
-                    setTimeout( ()=>{
-                        this.retryScripts = retryAgain
-                        this.retries(callback)
-                    }, 0)
+            //go throught pages object members and add each to an array of pages
+            let pages = []
+            for( let page in pagesObj ){
+                pages.push( pagesObj[page] )
+            }
+
+            if(pages.length == 0){
+                next()
+            }
+
+            function next() {
+                pageCount++
+                if (pages.length <= pageCount) {
+                    resolve()
                 }
-                else{
-                    retryAgain.forEach((el)=>{
+            }
+
+            function processPartial(element, partial) {
+                scope.readLibraries(partial)
+                scope.cache[element.name] = partial;
+                Handlebars.registerPartial(
+                    element.name,
+                    partial
+                )
+                next()
+            }
+
+            pages.forEach(element => {
+                fetch(element.file)
+                    .then((data)=>{
+                        data.text()
+                        .then((partial) => {
+                            processPartial(element, partial)
+                        })
+                    })
+                    .catch(error => {
+                        console.log('failed to get page: ' + error);
+                        next()
+                    });
+            });
+
+            pages.forEach(element => {
+                if(element.script){
+                    $.getScript(element.script, function() {
+                        console.log(`loaded script ${element.script}`);
+                    });
+                }
+            });
+        })
+        return chain
+    }
+
+    //This function retries to load scripts that failed to load
+    //and loads them into the container
+    retries( ){
+        let scope = this
+        let chain = new Promise((resolve, reject)=>{    
+            let retryAgain = []
+
+            let scriptCount = 0;
+            let numberScript = this.retryScripts.length
+
+            function next() {
+                scriptCount++
+                if (numberScript <= scriptCount) {
+                    if( retryAgain.length > 0 && retryAgain.length < numberScript )
+                    {
+                        setTimeout( ()=>{
+                            this.retryScripts = retryAgain
+                            this.retries()
+                        }, 0)
+                    }
+                    else{
+                        retryAgain.forEach((el)=>{
+                            const encodedJs = encodeURIComponent(el.innerHTML);
+                            const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
+                            console.log(`failing: ${el.id}`);
+                            import(dataUri).then(ns => {
+                                Object.assign(window, ns);
+                            })
+                        })            
+                        resolve()
+                    }
+                }
+            }
+
+            if( this.retryScripts.length > 0 ){
+                console.log('retrying to load scripts' )
+                this.retryScripts.forEach((el)=>{
+                    try{
                         const encodedJs = encodeURIComponent(el.innerHTML);
                         const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
-                        console.log(`failing: ${el.id}`);
+                        console.log(`retrying: ${el.id}`);
                         import(dataUri).then(ns => {
                             Object.assign(window, ns);
                         })
-                    })            
-                    if(callback){
-                        callback()
-                    }            
-                }
-            }
-        }
-
-        if( this.retryScripts.length > 0 ){
-            this.retryScripts.forEach((el)=>{
-                try{
-                    const encodedJs = encodeURIComponent(el.innerHTML);
-                    const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
-                    console.log(`retrying: ${el.id}`);
-                    import(dataUri).then(ns => {
-                        Object.assign(window, ns);
-                    })
-                    .then(()=>{
-                        next()                    
-                    })
-                    .catch((error)=>{
-                        console.log('failed to parse script, will retry: ' + error);
+                        .then(()=>{
+                            next()                    
+                        })
+                        .catch((error)=>{
+                            console.log('failed to parse script, will retry: ' + error);
+                            retryAgain.push(el)                        
+                            next()                    
+                        })
+                    }
+                    catch(e){
                         retryAgain.push(el)                        
                         next()                    
-                    })
-                }
-                catch(e){
-                    retryAgain.push(el)                        
-                    next()                    
-                }                  
-            })     
-        }
-        else{
-            next()
-        }
-   
+                    }                  
+                })     
+            }
+            else{
+                next()
+            }
+        })
+        return chain;
     }
+
+    //This function loads a page defined by the user
+    //and loads them into the container
+    //containerId is the id of the container to load the page into
+    //pageName is the name of the page to load
+    //context is the context to load the page with
     loadPage(containerId, pageName, context) {
         var template = this.get(pageName);
         context = context ? context : window                    
@@ -246,6 +295,8 @@ class Widgets {
         WEBHMI.updateHMI()
     }
 
+    //This function pushes a template to a container
+    //and updates the HMI
     pushTemplate(container, template, context) {
         console.log(`Pushing template: ${template}`)
         var template = this.get(template);
@@ -260,6 +311,8 @@ class Widgets {
         WEBHMI.updateHMI()
     }
 
+    //This function gets a partial from the cache
+    //and compiles it if it has not been compiled yet
     get(partial) {
         if (this.compiled[partial]) {
             return this.compiled[partial];
@@ -270,59 +323,121 @@ class Widgets {
         return this.compiled[partial]
     }
 
-    load(fileName) {
+    //This function loads a json file defined by the user
+    //and loads them into pages and libraries
+    loadJson( fileName ) {
         let scope = this
-        $.get(fileName, function (raw) {
-            scope.raw = raw
-            $(document).on('DOMNodeInserted', function (e) {
-                $('[dynamic-template]').not("[dom-added=true]").each((i, el) => {
-                    scope.refreshDynamicEl(el)
-                })
-            });
-            
-            //Append the package pages to the pages
-            raw.pages = raw.pages ? raw.pages : [];
-            scope.package.pages.forEach((e)=>{
-                raw.pages.push(e)
-            })
+        let chain = new Promise((resolve, reject)=>{    
+            console.log('loading ' + fileName)
+            $.get(fileName, function (raw) {
+                scope.native = raw
+                $(document).on('DOMNodeInserted', function (e) {
+                    $('[dynamic-template]').not("[dom-added=true]").each((i, el) => {
+                        scope.refreshDynamicEl(el)
+                    })
+                });
 
-            scope.getLibraries(raw.libraries, function () {
-                scope.getPages(raw.pages, function () {
-                    scope.retries(()=>{
-                        if(scope.loadedCallback){
-                            scope.loadedCallback( raw )
-                        }
-                    })                    
+                //Append the package pages to the pages
+                scope.pages = scope.pages ? scope.pages : [];
+                raw.pages.forEach((e)=>{
+                    if(e.file[0] !== '.'){
+                        e.file = scope.base + e.file
+                    }
+                    e.source = fileName
+                    scope.pages[e.name] = e
                 })
-            })
-        });
+
+                scope.libraries = scope.libraries ? scope.libraries : [];
+                raw.libraries.forEach((e)=>{
+                    if(e.file[0] !== '.'){
+                        e.file = scope.base + e.file
+                    }
+                    e.source = fileName
+                    scope.libraries.push(e)
+                })
+                resolve();
+            }).fail(()=>{
+                console.log(fileName + ' not found, may not load all widgets')
+                resolve();
+            });
+        })
+        return chain
+
     }
+
     //This function loads a package json and finds the packages installed in 
-    //@loupeteam/widgets/ and loads them into libraries and pages
+    //@loupeteam/widgets/ and loads them into pages
     //Then it searches for loader.js and runs it for each package
-    loadPackageJson( callback ){
+    loadPackageJson( name ){
         let scope = this
-        $.get('./package.json', function (raw) {
-            scope.package = raw
-            //Search through the package.json for @loupeteam/widgets/*
-            //by going through iterating through each member of the dependcy object
-            //and adding the package to the libraries and pages
-            raw.pages = raw.pages ? raw.pages : [];
-            raw.loaderScripts = raw.loaderScripts ? raw.loaderScripts : [];
-            for( let dep in raw.dependencies ){
-                if( dep.startsWith('@loupeteam/widgets-') ){
-                    //Add the package to the pages where the name is the package name withouth the @loupeteam/widgets/
-                    //and the file is the library.handlebars
-                    raw.pages.push( {
-                        name: dep.replace('@loupeteam/widgets-', ''), 
-                        file: './node_modules/' + dep + '/library.handlebars',
-                        script: './node_modules/' + dep + '/loader.js'} )
-                }
-            }    
-            if( callback ){
-                callback()
-            }
-        });        
+        let chain = new Promise((resolve, reject)=>{
+            $.get( name, function (raw) {
+                console.log('loading ' + name)
+                scope.package = raw
+                //Search through the package.json for @loupeteam/widgets/*
+                //by going through iterating through each member of the dependcy object
+                //and adding the package to the libraries and pages
+                scope.pages = scope.pages ? scope.pages : [];
+                scope.loaderScripts = scope.loaderScripts ? scope.loaderScripts : [];
+                for( let dep in raw.dependencies ){
+                    if( dep.startsWith('@loupeteam/widgets-') ){
+                        //Add the package to the pages where the name is the package name withouth the @loupeteam/widgets/
+                        //and the file is the library.handlebars
+                        let name = dep.replace('@loupeteam/widgets-', '');
+                        scope.pages[name] = {
+                            name: dep.replace('@loupeteam/widgets-', ''), 
+                            file:  dep + '/library.handlebars',
+                            script: dep + '/loader.js',
+                            source: name
+                        } 
+                    }
+                    
+                }    
+                resolve();
+            }).fail(()=>{
+                console.log('package.json not found, may not load all widgets')
+                resolve();
+            });      
+        })
+        return chain
+    }
+    
+    //This function loads a package-lock json and finds the packages installed in 
+    //@loupeteam/widgets/ and loads them into pages
+    //Then it searches for loader.js and runs it for each package
+    loadPackageLockJson(name){
+        let scope = this
+        let chain = new Promise((resolve, reject)=>{
+            console.log('loading ' + name)
+            $.get(name, function (raw) {
+                scope.packageLock = raw
+                //Search through the package.json for @loupeteam/widgets/*
+                //by going through iterating through each member of the dependcy object
+                //and adding the package to the libraries and pages
+                scope.pages = scope.pages ? scope.pages : [];
+                scope.loaderScripts = scope.loaderScripts ? scope.loaderScripts : [];
+                for( let dep in raw.packages ){
+                    if( dep.startsWith('node_modules/@loupeteam/widgets-') ){
+                        //Add the package to the pages where the name is the package name withouth the @loupeteam/widgets/
+                        //and the file is the library.handlebars
+                        if( dep.replace('node_modules/@loupeteam/widgets-', '').indexOf('/') == -1 ){                        
+                            let name = dep.replace('node_modules/@loupeteam/widgets-', '');
+                            scope.pages[name] = {
+                                name: name,
+                                file: dep.replace('node_modules/','') + '/library.handlebars',
+                                script: dep.replace('node_modules/','') + '/loader.js',
+                                source: name
+                            } 
+                        }
+                    }
+                }    
+                resolve();
+            }).fail(()=>{
+                console.log('package-lock.json not found, may not load all dependent widgets')
+                resolve()
+            });                 
+        })
+        return chain
     }
 }
 
