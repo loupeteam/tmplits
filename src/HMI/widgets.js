@@ -1,3 +1,4 @@
+
 class Widgets {
     constructor(fileName, loadedCallback ) {
         
@@ -838,3 +839,4 @@ Handlebars.registerHelper('W', createWidget)
 Handlebars.registerHelper('obj', createObject)
 
 
+export default Widgets

@@ -537,7 +537,7 @@ function getButtonType(type, classList) {
 {{/widget}}
 {{widget 'button' class="led-on" style="color:blue" children="Thank you" }}
 */
-function WidgetButton(context, args) {
+export function WidgetButton(context, args) {
 
     let {
         buttonType = '', ..._args
@@ -563,7 +563,7 @@ function WidgetButton(context, args) {
     return `<button type='button' class="${classList.join(" ")}"  ${attr}> ${args.children ? args.children : 'Label'} </button>`
 }
 
-function dropDownSelected(el, click) {
+export function dropDownSelected(el, click) {
     let item = el.closest('.dropdown-scope')
     let selection = el.textContent;
     let query = el.querySelector('.select-text')
@@ -641,7 +641,7 @@ Example drop down usage:
     <option>Extra Option</option>
     {{/widget}}
 */
-function WidgetDropdownTable(context, args) {
+export function WidgetDropdownTable(context, args) {
 
     let {
         set = true, 
@@ -748,7 +748,7 @@ function WidgetDropdownTable(context, args) {
 `
 }
 
-function WidgetDropdownTableText(context, args) {
+export function WidgetDropdownTableText(context, args) {
 
     let {
         set = true, 
@@ -893,7 +893,7 @@ Example drop down usage:
     <dropdown>
     {{/widget}}
 */
-function WidgetDropdown(context, args) {
+export function WidgetDropdown(context, args) {
 
     let {
         set = true, style = '', 
@@ -983,7 +983,7 @@ function WidgetDropdown(context, args) {
 `
 }
 
-function WidgetTableSelect(context, args) {
+export function WidgetTableSelect(context, args) {
 
     let {
         set = true, style = '', 
@@ -1073,7 +1073,7 @@ function WidgetTableSelect(context, args) {
 `
 }
 
-function WidgetMultiSelect(context, args) {
+export function WidgetMultiSelect(context, args) {
 
     let {        
         ['data-var-name']:dataVarName,
@@ -1136,7 +1136,7 @@ function WidgetMultiSelect(context, args) {
     ` 
 }
 
-function WidgetMultiSelectText(context, args) {
+export function WidgetMultiSelectText(context, args) {
 
     let {        
         ['data-var-name']:dataVarName,
@@ -1199,7 +1199,7 @@ function WidgetMultiSelectText(context, args) {
     ` 
 }
 
-function WidgetLabeledLed(context, args) {
+export function WidgetLabeledLed(context, args) {
     let {
         side = 'middle', ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', error=false, warning=false, ..._args
     } = args.hash
@@ -1245,7 +1245,7 @@ function WidgetLabeledLed(context, args) {
    `
 }
 
-function WidgetLed(context, args) {
+export function WidgetLed(context, args) {
     let {
         ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', error=false, warning=false, ..._args
     } = args.hash
@@ -1279,7 +1279,7 @@ function WidgetLed(context, args) {
    `
 }
 
-function WidgetCheckBox(context, args) {
+export function WidgetCheckBox(context, args) {
     let {
         ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', ..._args
     } = args.hash
@@ -1313,7 +1313,7 @@ function WidgetCheckBox(context, args) {
    `
 }
 
-function WidgetNumericInput(context, args) {
+export function WidgetNumericInput(context, args) {
 
     let {
         ['data-var-name']: dataVarName, ..._args
@@ -1338,7 +1338,8 @@ function WidgetNumericInput(context, args) {
     </div>
    `
 }
-function WidgetNumericOutput(context, args) {
+
+export function WidgetNumericOutput(context, args) {
 
     let {
         ['data-var-name']: dataVarName, ..._args
@@ -1364,7 +1365,7 @@ function WidgetNumericOutput(context, args) {
    `
 }
 
-function WidgetLabeledNumericInput(context, args) {
+export function WidgetLabeledNumericInput(context, args) {
 
     let {
         ['data-var-name']: dataVarName, ..._args
@@ -1390,7 +1391,8 @@ function WidgetLabeledNumericInput(context, args) {
     </div>
    `
 }
-function WidgetLabeledNumericOutput(context, args) {
+
+export function WidgetLabeledNumericOutput(context, args) {
 
     let {
         ['data-var-name']: dataVarName, ..._args
@@ -1418,7 +1420,7 @@ function WidgetLabeledNumericOutput(context, args) {
 }
 
 
-function WidgetLabeledTextInput(context, args) {
+export function WidgetLabeledTextInput(context, args) {
 
     //Get cleaned up values from args
     let {
@@ -1440,7 +1442,8 @@ function WidgetLabeledTextInput(context, args) {
     </div>
    `
 }
-function WidgetLabeledTextOutput(context, args) {
+
+export function WidgetLabeledTextOutput(context, args) {
 
     //Get cleaned up values from args
     let {
@@ -1462,7 +1465,8 @@ function WidgetLabeledTextOutput(context, args) {
     </div>
    `
 }
-function WidgetTextOutput(context, args) {
+
+export function WidgetTextOutput(context, args) {
 
     //Get cleaned up values from args
     let {
@@ -1484,7 +1488,7 @@ function WidgetTextOutput(context, args) {
    `
 }
 
-function WidgetLabeledList(context, args) {
+export function WidgetLabeledList(context, args) {
     let {
         style = '', ..._args
     } = args.hash
@@ -1505,7 +1509,7 @@ function WidgetLabeledList(context, args) {
     </div> `
 }
 
-function WidgetColumnsBs(context, args) {
+export function WidgetColumnsBs(context, args) {
 
     let {
         style = '', maxColumns = 3, ..._args
@@ -1557,7 +1561,7 @@ function WidgetColumnsBs(context, args) {
     return `${children}`
 }
 
-function WidgetColumns(context, args) {
+export function WidgetColumns(context, args) {
 
     let {
         style = '', centerItems, maxColumns = 3, columnFlow = 0, ..._args
@@ -1607,7 +1611,7 @@ function WidgetColumns(context, args) {
    `
 }
 
-function WidgetLabeledColumns(context, args) {
+export function WidgetLabeledColumns(context, args) {
     //Pull out any attributes we need
     let {
         style = '', centerItems, maxColumns = 3, columnFlow = 0, ..._args
@@ -1661,7 +1665,7 @@ function WidgetLabeledColumns(context, args) {
    `
 }
 
-function WidgetPageSelect(context, args) {
+export function WidgetPageSelect(context, args) {
     let {
         active,
         template,
@@ -1715,7 +1719,7 @@ function luiIncrementValue(selected) {
     })
 }
 
-function WidgetValueUpDown(context, args) {
+export function WidgetValueUpDown(context, args) {
     let {
         style = '',
             ['data-var-name']: dataVarName,
@@ -1754,7 +1758,7 @@ function WidgetValueUpDown(context, args) {
 `
 }
 
-function WidgetPage(context, args) {
+export function WidgetPage(context, args) {
     return `
 <div class='container' style="width: 100%; height: 94vh; overflow:auto; border-style: solid; border-radius: 10px;">
     <div class='row'>
@@ -1767,7 +1771,7 @@ function WidgetPage(context, args) {
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-function WidgetSlider(context, args) {
+export function WidgetSlider(context, args) {
     let {
         style = '',
             ['data-var-name']: dataVarName,
@@ -1833,7 +1837,7 @@ function WidgetSlider(context, args) {
 }
 
 
-function WidgetDirectoryBrowser( context, args){
+export function WidgetDirectoryBrowser( context, args){
     let {        
         ['data-var-name']:dataVarName,
         ['data-var-name-files']:dataVarNameFiles,
@@ -1850,7 +1854,7 @@ function WidgetDirectoryBrowser( context, args){
 `
 }
 
-function WidgetDirectoryBrowserWindow( context, args){
+export function WidgetDirectoryBrowserWindow( context, args){
     let {        
         ['data-var-name']:dataVarName,
         ['data-var-name-files']:dataVarNameFiles,
@@ -1983,7 +1987,7 @@ function numGrid() {
 }
 
 //Number grid
-function WidgetNumGrid(context, args) {
+export function WidgetNumGrid(context, args) {
     let {
         style = '',
             ['data-var-name-num-rows']: dataVarNameNumRows,

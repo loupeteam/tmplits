@@ -1,3 +1,19 @@
+//Load the style sheet
+import sheet from './widgets.css' assert { type: 'css' };
+document.adoptedStyleSheets = [sheet];
+
+//Load the widgets system
+import Widgets from './widgets.js'
+
+//Load the widget components
+import * as components from './components.js'
+
+//go through each component and add it to the global scope
+for( let key in components ){
+    window[key] = components[key]
+}
+
+//Figure out the base path so we know where to load the widgets from
 let baseEl = document.querySelector('base')
 let base = './'
 if( baseEl ){
@@ -5,7 +21,11 @@ if( baseEl ){
     base = baseEl.href.indexOf('node_modules') > -1 ? '../' : './'
 }
 
+//Load the widgets
 var widgets = new Widgets(base + "widgets.json", (data) => {
+
+  //Start the widgets
   widgets.loadPage(data.startPage.container, data.startPage.name)
+
 })
 
