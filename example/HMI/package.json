@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/widget-template",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Template widget based project",
   "main": "index.js",
   "scripts": {

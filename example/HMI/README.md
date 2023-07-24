@@ -24,7 +24,7 @@ Your package json will be something like this:
   },
   "dependencies": {
     "app":"file:./",
-    "@loupeteam/widgets-[mywidget]":"file:../../src/hmi"
+    "@loupeteam/widgets-[mywidget]":"file:../../src/HMI"
   },
 }
 ```
