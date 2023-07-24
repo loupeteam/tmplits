@@ -1,6 +1,5 @@
 
 {{#W 'Page'}}
-{{widget 'DirectoryBrowser' data-var-name-files='webHMIProg:Directory' data-var-name='webHMIProg:f.in.cwd' data-var-name-willopen='webHMIProg:f.in.refresh'}}
 <h2>Demo Components</h2>
     {{#widget 'LabeledColumns' 'Inputs' }}
         {{widget 'LabeledLed' "Led"}}
@@ -245,10 +244,6 @@
     {{widget 'LabeledLed' "Input6"}}
     {{/widget}}
     
-    {{#widget 'LabeledColumns' 'Recipe Browser' }}
-        {{> recipe-browser workingDirectoryPv="RecipeEdit:f.in.cwd" jsonDirectoryPv="RecipeEdit:Directory" refreshPv="RecipeEdit:f.in.refresh" uiStructure="RecipeEdit:CSVFileMgr_HMI"}}
-    {{/widget}}
-
     <h3>Create object helper</h3>
     {{obj "{title:'test'}"}}
 
