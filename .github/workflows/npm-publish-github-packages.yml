@@ -40,12 +40,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-  publish-hmi-template:
+  publish-gizmo-template:
     needs: build
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./example/HMI
+        working-directory: ./example/gizmo
     permissions:
       contents: read
       packages: write
@@ -59,12 +59,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-  publish-gizmo-template:
+  publish-hmi-template:
     needs: build
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./example/gizmo
+        working-directory: ./example/HMI
     permissions:
       contents: read
       packages: write
