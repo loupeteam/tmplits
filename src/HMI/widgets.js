@@ -12,7 +12,7 @@ class Widgets {
         this.cache = {}
         this.compiled = {}
         this.raw = '{}'
-        this.compinedScript = ''
+        this.combinedScript = ''
         this.retryScripts = []
         this.loadPackageLockJson(this.base + 'package-lock.json')
         .then(()=>{return this.loadPackageJson(this.base + 'package.json')})
@@ -65,7 +65,7 @@ class Widgets {
 
     //This function reads the libraries and adds each item with the type='text/x-handlebars-template'
     //to the cache
-    //it also adds the scripts to the compinedScript
+    //it also adds the scripts to the combinedScript
     readLibraries(raw) {
         console.log('processing libraries' )
         let scope = this
@@ -80,7 +80,7 @@ class Widgets {
                     scope.cache[el.id] = el.text;
                 }
                 if (el.type == "text/x-handlebars-onload") {          
-                    scope.compinedScript += el.innerHTML + '\n'
+                    scope.combinedScript += el.innerHTML + '\n'
                     console.log(`loading script ${el.id}`);
                     const encodedJs = encodeURIComponent(el.innerHTML);
                     const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
@@ -103,7 +103,7 @@ class Widgets {
     }
 
     //This function loads all the libraries that were found
-    //it resolves the libraries then processess them by compiling them
+    //it resolves the libraries then processes them by compiling them
     //and adding them to the cache
     getLibraries(libraries) {
 
@@ -146,7 +146,7 @@ class Widgets {
     }
 
     //This function loads all the template pages that were found
-    //it resolves the pages then processess them by compiling them
+    //it resolves the pages then processes them by compiling them
     //and adding them to the cache
     getPages( pagesObj ) {        
         let scope = this
@@ -154,7 +154,7 @@ class Widgets {
             console.log('loading pages')
             let pageCount = 0;
 
-            //go throught pages object members and add each to an array of pages
+            //go through pages object members and add each to an array of pages
             let pages = []
             for( let page in pagesObj ){
                 pages.push( pagesObj[page] )
@@ -375,13 +375,13 @@ class Widgets {
                 console.log('loading ' + name)
                 scope.package = raw
                 //Search through the package.json for @loupeteam/widgets/*
-                //by going through iterating through each member of the dependcy object
+                //by going through iterating through each member of the dependency object
                 //and adding the package to the libraries and pages
                 scope.pages = scope.pages ? scope.pages : [];
                 scope.loaderScripts = scope.loaderScripts ? scope.loaderScripts : [];
                 for( let dep in raw.dependencies ){
                     if( dep.startsWith('@loupeteam/widgets-') ){
-                        //Add the package to the pages where the name is the package name withouth the @loupeteam/widgets/
+                        //Add the package to the pages where the name is the package name without the @loupeteam/widgets/
                         //and the file is the library.handlebars
                         let name = dep.replace('@loupeteam/widgets-', '');
                         scope.pages[name] = {
@@ -412,13 +412,13 @@ class Widgets {
             $.get(name, function (raw) {
                 scope.packageLock = raw
                 //Search through the package.json for @loupeteam/widgets/*
-                //by going through iterating through each member of the dependcy object
+                //by going through iterating through each member of the dependency object
                 //and adding the package to the libraries and pages
                 scope.pages = scope.pages ? scope.pages : [];
                 scope.loaderScripts = scope.loaderScripts ? scope.loaderScripts : [];
                 for( let dep in raw.packages ){
                     if( dep.startsWith('node_modules/@loupeteam/widgets-') ){
-                        //Add the package to the pages where the name is the package name withouth the @loupeteam/widgets/
+                        //Add the package to the pages where the name is the package name without the @loupeteam/widgets/
                         //and the file is the library.handlebars
                         if( dep.replace('node_modules/@loupeteam/widgets-', '').indexOf('/') == -1 ){                        
                             let name = dep.replace('node_modules/@loupeteam/widgets-', '');
@@ -445,13 +445,13 @@ class viewDelegate {
     constructor() {}
     //     static observer = new MutationObserver(function (mutations) {
     // 		// Was a new webhmi element added to the DOM?
-    // 		// Use Arrray.some() instead of Array.forEach() for easy loop break when we find a webhmi element added or remove from DOM
+    // 		// Use Array.some() instead of Array.forEach() for easy loop break when we find a webhmi element added or remove from DOM
     //         let nodes = new Array()
     // 		mutations.forEach(function (mutation) {
     // 			// check added nodes for webhmi changes
     // 			mutation.addedNodes.forEach(function (node) {
     // 				if (node.nodeType == node.ELEMENT_NODE) {
-    // 					// check elem, check descendents
+    // 					// check elem, check descendants
     //                     let el = node.querySelectorAll("[delegate]");
     //                     nodes = nodes.concat( Array.from(el) )
     //                     if( node.matches("[delegate]") )
@@ -798,7 +798,7 @@ Handlebars.registerHelper('repeat', function (context, options) {
                 if (context.hasOwnProperty(key)) {
                     // We're running the iterations one step out of sync so we can detect
                     // the last iteration without have to scan the object twice and create
-                    // an itermediate keys array.
+                    // an intermediate keys array.
                     if (priorKey !== undefined) {
                         execIteration(priorKey, i - 1);
                     }
