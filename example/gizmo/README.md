@@ -68,7 +68,7 @@ function WidgetCustomWidget( ... ){
 }
 ```
 ```handlebars
-<!--main.handlbars-->
+<!--main.handlebars-->
 {{> gizmo}}
 {{W CustomWidget}}
 ```
