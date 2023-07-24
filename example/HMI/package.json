@@ -19,7 +19,7 @@
     "bootstrap": "^3.3.4",
     "handlebars": "^4.7.7",
     "jquery": "^3.7.0",
-    "app":"file:./"
+    "app":"file:../../"
   },
   "lpm": {
     "type": "project"
