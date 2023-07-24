@@ -2,11 +2,14 @@ Dynamic templating based on handlebars
 
 There are 3 (as of writing this) packages in this repo that are all managed and distrubuted sepearatly
 
-src/HMI - Main widget library
-example/HMI/ - Template hmi project using the widget system
-example/gizmo/ - Template widget package
+1. src/HMI - Main widget library
+2. example/HMI/ - Template hmi project using the widget system
+3. example/gizmo/ - Template widget package
 
-This repo currently needs to be manually published by
+
+This repo currently published using github actions when there is a new commit pushed to main
+
+To manual publish:
 - navigating to each folder that is updated
 - incrementing the version in the package json
 - publishing using:
