@@ -1,6 +1,6 @@
 Dynamic templating based on handlebars
 
-There are 3 (as of writing this) packages in this repo that are all managed and distributed separately
+There are 3 (as of writing this) packages in this repo that are all managed and distrubuted sepearatly
 
 1. src/HMI - Main widget library
 2. example/HMI/ - Template hmi project using the widget system
