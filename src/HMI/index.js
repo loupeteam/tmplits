@@ -29,3 +29,5 @@ var widgets = new Widgets(base, (data) => {
 
 })
 
+window.widgets = widgets
+

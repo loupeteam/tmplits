@@ -130,7 +130,7 @@ export class Widgets {
             }
 
             libraries.forEach(element => {
-                fetch(element)
+                fetch(element.file)
                     .then(processPartial)
                     .catch(error => {
                         console.log( 'error loading library ' + error )
@@ -289,8 +289,12 @@ export class Widgets {
             $(dom).html(`<div class="error">Error loading the page '${pageName}' ${e} </div>` )
         }
         if( typeof WEBHMI !== 'undefined'){
-            WEBHMI.queryDom()
-            WEBHMI.updateHMI()    
+            try {
+                WEBHMI.queryDom()
+                WEBHMI.updateHMI()                        
+            } catch (error) {
+                
+            }
         }
     }
 
@@ -307,8 +311,10 @@ export class Widgets {
             $(container).html(`<div class="error">Error loading the template '${template}' ${e} </div>`)
         }
         if( typeof WEBHMI !== 'undefined'){
-            WEBHMI.queryDom()
-            WEBHMI.updateHMI()
+            try {
+                WEBHMI.queryDom()
+                WEBHMI.updateHMI()                        
+            }catch{}
         }
     }
 
@@ -348,9 +354,11 @@ export class Widgets {
 
                 scope.libraries = scope.libraries ? scope.libraries : [];
                 raw.libraries.forEach((e)=>{
-                    e.file = scope.base + e.file
-                    e.source = fileName
-                    scope.libraries.push(e)
+                    let lib = {};
+                    lib.file = scope.base + e
+                    lib.source = fileName
+
+                    scope.libraries.push(lib)
                 })
                 resolve();
             }).fail(()=>{
@@ -521,8 +529,11 @@ export class viewDelegate {
                     let fn = e.fn()
                     el.innerHTML = fn
                     if( typeof WEBHMI !== 'undefined'){
-                        WEBHMI.queryDom()
-                        WEBHMI.updateHMI()
+                        try{
+                            WEBHMI.queryDom()
+                            WEBHMI.updateHMI()    
+                        }
+                        catch{}
                     }
                 })
                 keep.push(e)
@@ -835,6 +846,16 @@ Handlebars.registerHelper('concat', function (...args){
 Handlebars.registerHelper('widget', createWidget)
 Handlebars.registerHelper('W', createWidget)
 Handlebars.registerHelper('obj', createObject)
-
+Handlebars.registerHelper("math", function (lvalue, operator, rvalue) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+    return {
+        "+": lvalue + rvalue,
+        "-": lvalue - rvalue,
+        "*": lvalue * rvalue,
+        "/": lvalue / rvalue,
+        "%": lvalue % rvalue
+    } [operator];
+});
 
 export default Widgets
