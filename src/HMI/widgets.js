@@ -1,5 +1,6 @@
-
-class Widgets {
+import "../../jquery/dist/jquery.js"
+let $ = jQuery
+export class Widgets {
     constructor(node_module_directory, loadedCallback ) {
         
         //Get any base element from the page
@@ -287,8 +288,10 @@ class Widgets {
         catch(e){
             $(dom).html(`<div class="error">Error loading the page '${pageName}' ${e} </div>` )
         }
-        WEBHMI.queryDom()
-        WEBHMI.updateHMI()
+        if( typeof WEBHMI !== 'undefined'){
+            WEBHMI.queryDom()
+            WEBHMI.updateHMI()    
+        }
     }
 
     //This function pushes a template to a container
@@ -303,8 +306,10 @@ class Widgets {
         catch(e){
             $(container).html(`<div class="error">Error loading the template '${template}' ${e} </div>`)
         }
-        WEBHMI.queryDom()
-        WEBHMI.updateHMI()
+        if( typeof WEBHMI !== 'undefined'){
+            WEBHMI.queryDom()
+            WEBHMI.updateHMI()
+        }
     }
 
     //This function gets a partial from the cache
@@ -433,7 +438,7 @@ class Widgets {
     }
 }
 
-class viewDelegate {
+export class viewDelegate {
     constructor() {}
     //     static observer = new MutationObserver(function (mutations) {
     // 		// Was a new webhmi element added to the DOM?
@@ -515,8 +520,10 @@ class viewDelegate {
                 el.forEach((el) => {
                     let fn = e.fn()
                     el.innerHTML = fn
-                    WEBHMI.queryDom()
-                    WEBHMI.updateHMI()
+                    if( typeof WEBHMI !== 'undefined'){
+                        WEBHMI.queryDom()
+                        WEBHMI.updateHMI()
+                    }
                 })
                 keep.push(e)
             }
