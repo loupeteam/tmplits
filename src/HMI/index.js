@@ -15,14 +15,14 @@ for( let key in components ){
 
 //Figure out the base path so we know where to load the widgets from
 let baseEl = document.querySelector('base')
-let base = './'
+let base = './node_modules/'
 if( baseEl ){
     //If the base href contains node_modules we need to go up a level
-    base = baseEl.href.indexOf('node_modules') > -1 ? '../' : './'
+    base = baseEl.href.indexOf('node_modules') > -1 ? './' : './node_modules/'
 }
 
 //Load the widgets
-var widgets = new Widgets(base + "widgets.json", (data) => {
+var widgets = new Widgets(base, (data) => {
 
   //Start the widgets
   widgets.loadPage(data.startPage.container, data.startPage.name)

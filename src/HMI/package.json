@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/widgets",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,6 @@
   "author": "jpolansky",
   "license": "SEE LICENSE IN LICENSE.txt",
   "dependencies": {
-    "handlebars": "^4.7.7"
+    "handlebars": "*"
   }
 }

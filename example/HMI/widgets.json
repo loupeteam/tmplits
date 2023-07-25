@@ -6,11 +6,11 @@
     "pages": [
         {
             "name": "main",
-            "file": "/views/main.handlebars"
+            "file": "../views/main.handlebars"
         },
         {
             "name": "components",
-            "file": "/views/components.handlebars"
+            "file": "../views/components.handlebars"
         }
     ],
     "libraries":[

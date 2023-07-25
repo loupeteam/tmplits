@@ -1,23 +1,18 @@
 
 class Widgets {
-    constructor(fileName, loadedCallback ) {
+    constructor(node_module_directory, loadedCallback ) {
         
         //Get any base element from the page
-        let base = document.querySelector('base')
-        this.base = './'
-        if( base ){
-            //If the base href contains node_modules we need to go up a level
-            this.base = base.href.indexOf('node_modules') > -1 ? '../' : './'
-        }
+        this.base = node_module_directory
 
         this.cache = {}
         this.compiled = {}
         this.raw = '{}'
         this.compinedScript = ''
         this.retryScripts = []
-        this.loadPackageLockJson(this.base + 'package-lock.json')
-        .then(()=>{return this.loadPackageJson(this.base + 'package.json')})
-        .then(()=>{return this.loadJson(fileName)})
+        this.loadPackageLockJson(this.base + '../package-lock.json')
+        .then(()=>{return this.loadPackageJson(this.base + '../package.json')})
+        .then(()=>{return this.loadJson(this.base + '../widgets.json')})
         .then(()=>{return this.getLibraries(this.libraries)})
         .then(()=>{return this.getPages(this.pages)})
         .then(()=>{return this.retries()})
@@ -341,18 +336,14 @@ class Widgets {
                 //Append the package pages to the pages
                 scope.pages = scope.pages ? scope.pages : [];
                 raw.pages.forEach((e)=>{
-                    if(e.file[0] !== '.'){
-                        e.file = scope.base + e.file
-                    }
+                    e.file = scope.base + e.file
                     e.source = fileName
                     scope.pages[e.name] = e
                 })
 
                 scope.libraries = scope.libraries ? scope.libraries : [];
                 raw.libraries.forEach((e)=>{
-                    if(e.file[0] !== '.'){
-                        e.file = scope.base + e.file
-                    }
+                    e.file = scope.base + e.file
                     e.source = fileName
                     scope.libraries.push(e)
                 })
@@ -387,8 +378,8 @@ class Widgets {
                         let name = dep.replace('@loupeteam/widgets-', '');
                         scope.pages[name] = {
                             name: dep.replace('@loupeteam/widgets-', ''), 
-                            file:  dep + '/library.handlebars',
-                            script: dep + '/loader.js',
+                            file:  this.base + dep + '/library.handlebars',
+                            script: this.base + dep + '/loader.js',
                             source: name
                         } 
                     }
@@ -425,7 +416,7 @@ class Widgets {
                             let name = dep.replace('node_modules/@loupeteam/widgets-', '');
                             scope.pages[name] = {
                                 name: name,
-                                file: dep.replace('node_modules/','') + '/library.handlebars',
+                                file: dep.replace('node_modules/','') + this.base + '/library.handlebars',
                                 script: dep.replace('node_modules/','') + '/loader.js',
                                 source: name
                             } 
