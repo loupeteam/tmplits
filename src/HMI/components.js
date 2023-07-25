@@ -39,7 +39,7 @@ function cleanArgs(args) {
 }
 
 
-class multiOptionSelector{
+export class multiOptionSelector{
     static selected(el, click) {
         let index = el.getAttribute('data-index')
         let value = el.getAttribute('data-value')
@@ -148,7 +148,7 @@ class multiOptionSelector{
     }    
 }
 
-class LuiSlider {
+export class LuiSlider {
     //Handle changing the page if a tab is clicked
     static luiSlideStart(evt) {
 
@@ -333,7 +333,7 @@ class LuiSlider {
 
 }
 
-class luiDirectory{
+export class luiDirectory{
     static updateDirectory(evt){
         try{
             var data = JSON.parse( evt.currentTarget.value )
