@@ -1,5 +1,10 @@
 import "../../jquery/dist/jquery.js"
-let $ = jQuery
+//Check if jquery has already been loaded
+//If it hasn't then load it
+if( !window.$ ){
+    window.$ = jQuery
+    console.error('Loading JQuery in widgets.js. To avoid this ensure that JQuery is loaded before widgets.js')
+}
 export class Widgets {
     constructor(node_module_directory, loadedCallback ) {
         
