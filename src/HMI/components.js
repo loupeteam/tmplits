@@ -614,7 +614,7 @@ export function dropDownSelected(el, click) {
 /*
 Create a dropdown and field
 The dropdown is a table where each row is defined by an 'option'
-Several options can be given at once with 'options' and each node will be considered an optino
+Several options can be given at once with 'options' and each node will be considered an option
 
 Options:
 Set=false to disable setting the field to the selection
