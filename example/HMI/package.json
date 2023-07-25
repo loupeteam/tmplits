@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/widget-template",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Template widget based project",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@loupeteam/webhmi": "^1.4.0",
-    "@loupeteam/widgets": "^0.0.11",
+    "@loupeteam/widgets": "^0.0.12",
     "bootstrap": "^3.3.4",
     "handlebars": "^4.7.7",
     "jquery": "^3.7.0"
