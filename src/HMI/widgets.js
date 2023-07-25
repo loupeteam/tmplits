@@ -378,8 +378,8 @@ class Widgets {
                         let name = dep.replace('@loupeteam/widgets-', '');
                         scope.pages[name] = {
                             name: dep.replace('@loupeteam/widgets-', ''), 
-                            file:  this.base + dep + '/library.handlebars',
-                            script: this.base + dep + '/loader.js',
+                            file:  scope.base + dep + '/library.handlebars',
+                            script: scope.base + dep + '/loader.js',
                             source: name
                         } 
                     }
@@ -416,7 +416,7 @@ class Widgets {
                             let name = dep.replace('node_modules/@loupeteam/widgets-', '');
                             scope.pages[name] = {
                                 name: name,
-                                file: dep.replace('node_modules/','') + this.base + '/library.handlebars',
+                                file: dep.replace('node_modules/','') + scope.base + '/library.handlebars',
                                 script: dep.replace('node_modules/','') + '/loader.js',
                                 source: name
                             } 
