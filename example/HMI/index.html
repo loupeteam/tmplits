@@ -17,7 +17,7 @@
 
 <body>
 
-	<!-- Begin page content -->
+	<!-- Begin page content - This is a placeholder that widgets will load the page into after loading-->
 	<div class="container" id="main">
 
 	</div>
@@ -28,7 +28,7 @@
 		</div>
 	</footer>
 
-	<script src="jquery/dist/jquery.min.js" onload="if('undefined' != typeof module) window.$ = window.jQuery = module.exports;"></script>
+	<script src="jquery/dist/jquery.min.js" onload="if('undefined' != typeof module) window.$ = window.jQuery = module.exports;"></script> -->
 	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<!-- include WebHMI -->
@@ -36,10 +36,11 @@
 	<script src="@loupeteam/webhmi/webhmi-data-bind.js"></script>
 	<link  href="@loupeteam/webhmi/webhmi.css" rel="stylesheet">
 
-	<!-- handlebars -->
+	<!-- we require manually loading  before the widget system handlebars -->
 	<script src="handlebars/dist/handlebars.min.js" ></script>
 
-	<!--Default widget setup-->
+	<!--Default widget setup, you may need to copy this file 
+		into your app and modify it if you have a special case-->
 	<script src="@loupeteam/widgets/index.js" type="module"></script>
 
 	<!-- app -->
