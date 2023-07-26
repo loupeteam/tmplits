@@ -16,15 +16,20 @@ export class Widgets {
         this.raw = '{}'
         this.combinedScript = ''
         this.retryScripts = []
+        Widgets.modules["widgetsystem"] = true;
+        if(loadedCallback){
+            Widgets.loadedCallback.push(()=>{loadedCallback(this.native)})
+        }        
         this.loadPackageLockJson(this.base + '../package-lock.json')
         .then(()=>{return this.loadPackageJson(this.base + '../package.json')})
         .then(()=>{return this.loadJson(this.base + '../widgets.json')})
         .then(()=>{return this.getLibraries(this.libraries)})
         .then(()=>{return this.getPages(this.pages)})
         .then(()=>{return this.retries()})
-        .then(()=>{return loadedCallback(this.native)}) 
+        .then(()=>{return Widgets.moduleLoaded('widgetsystem')})        
     }
-
+    static modules = {}
+    static loadedCallback = []
     //This function refreshes all dynamic elements
     refreshDynamicDom() {
         $('[dynamic-template]').each((i, el) => {
@@ -184,26 +189,38 @@ export class Widgets {
             }
 
             pages.forEach(element => {
-                fetch(element.file)
-                    .then((data)=>{
-                        data.text()
-                        .then((partial) => {
-                            processPartial(element, partial)
-                        })
-                    })
-                    .catch(error => {
-                        console.log('failed to get page: ' + error);
-                        next()
-                    });
-            });
-
-            pages.forEach(element => {
                 if(element.script){
                     $.getScript(element.script, function() {
                         console.log(`loaded script ${element.script}`);
+                    }).catch((e)=>{
                     });
                 }
             });
+
+            pages.forEach(element => {
+                if(element.module){
+                    scope.loadModule(element.module)
+                }
+            });  
+
+            pages.forEach(element => {
+                fetch(element.file)
+                .then((data)=>{
+                    if(data.status != 200){
+                    }
+                    else{
+                        return data.text()                        
+                    }
+                })
+                .then((partial) => {
+                    processPartial(element, partial)
+                })
+                .catch(error => {
+                    console.log('failed to get page: ' + error);
+                    next()
+                });
+            });
+          
         })
         return chain
     }
@@ -398,6 +415,7 @@ export class Widgets {
                             name: dep.replace('@loupeteam/widgets-', ''), 
                             file:  scope.base + dep + '/library.handlebars',
                             script: scope.base + dep + '/loader.js',
+                            module: scope.base + dep + '/module.js',
                             source: name
                         } 
                     }
@@ -436,6 +454,7 @@ export class Widgets {
                                 name: name,
                                 file: dep.replace('node_modules/','') + scope.base + '/library.handlebars',
                                 script: dep.replace('node_modules/','') + '/loader.js',
+                                module: dep.replace('node_modules/','') + '/module.js',
                                 source: name
                             } 
                         }
@@ -449,6 +468,64 @@ export class Widgets {
         })
         return chain
     }
+
+    //This function will create a module script to load a module then export all the exports to the window
+    loadModule( name ){
+        let scope = this
+
+        Widgets.modules[name] = true
+
+        //Just fetch the head to check because the script will need to reload the module anyway
+        try {
+            fetch(name,{ method: "HEAD" })
+            .then((res) => {
+                if (res.ok) {
+                    let script = "" 
+                    script += `console.log("Loading Module ${name}") ;`
+                    script += `import * as module from '${name}';`
+                    script += `Object.assign(window, module);`
+                    script += `Object.assign(window, module);`
+                    script += `Widgets.moduleLoaded('${name}')`
+                    scope.moduleEval(script)        
+                }
+                else{
+                    Widgets.moduleLoaded(name)
+                } 
+            })
+            .catch((e)=>{
+                console.log(e)
+            })                
+        } catch (e) {
+            console.log(e)            
+        }
+    }
+
+    //Mark module as loaded and if all the modules are loaded, load the pages
+    static moduleLoaded( name ){
+        this.modules[name] = false
+        let allLoaded = true
+        for( let module in this.modules ){
+            if( this.modules[module] ){
+                allLoaded = false
+            }
+        }
+        if( allLoaded ){
+            Widgets.loadedCallback.forEach(callback => {
+                callback()
+            });
+        }        
+    }
+    //This function loads a module script into the window
+	moduleEval( code ) {
+        var doc = document
+		var i, val,
+			script = doc.createElement( "script" );
+
+		script.text = code;
+        script.setAttribute( 'type', "module" );
+
+		doc.head.appendChild( script ).parentNode.removeChild( script );
+	}    
 }
 
 export class viewDelegate {
@@ -862,5 +939,5 @@ Handlebars.registerHelper("math", function (lvalue, operator, rvalue) {
         "%": lvalue % rvalue
     } [operator];
 });
-
+window.Widgets = Widgets
 export default Widgets
