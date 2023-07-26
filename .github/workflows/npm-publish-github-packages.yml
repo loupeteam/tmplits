@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./example/gizmo
+        working-directory: ./src/template-gizmo
     permissions:
       contents: read
       packages: write
