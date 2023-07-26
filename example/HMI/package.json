@@ -14,7 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "@loupeteam/webhmi": "*",
-    "@loupeteam/widgets": "*",
+    "@loupeteam/widgets": "file:../../src/HMI",
+    "@loupeteam/widgets-button": "file:../../src/widgets/widgets-button",
     "bootstrap": "^3.3.4",
     "handlebars": "*",
     "jquery": "*"
