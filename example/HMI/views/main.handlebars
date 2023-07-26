@@ -1,3 +1,91 @@
 <!--{{> components}}-->
 {{widget 'Button' style="color:red"}}
+{{widget 'LabeledLed' 'testing'}}
+{{widget 'Led'}}
+{{widget 'CheckBox'}}
+{{widget 'NumericInput'}}
+{{widget 'NumericOutput'}}
+{{widget 'LabeledNumericInput' 'Labeled Numeric Input'}}
+{{widget 'LabeledNumericOutput' 'Labeled Numeric Output'}}
+{{widget 'LabeledTextInput' 'Labeled Text Input'}}
+{{widget 'LabeledTextOutput' 'Labeled Text Output'}}
+{{widget 'TextOutput'}}
+{{widget 'ValueUpDown'}}
+{{#widget 'LabeledColumns''Test Elements' style="grid-column: span 3;" }}
+    <div style="text-align:center">Column 1 Header</div>
+    <div style="text-align:center">Column 2 Header</div>
+    <div style="text-align:center">Column 3 Header</div>
+    {{#widget 'LabeledNumericOutput' 'Contents 1'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 2'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 3'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 4'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 5'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 6'}}{{/widget}}
+{{/widget}}
+{{#widget 'Columns' style="grid-column: span 3;" }}
+    <div style="text-align:center">Column 1 Header</div>
+    <div style="text-align:center">Column 2 Header</div>
+    <div style="text-align:center">Column 3 Header</div>
+    {{#widget 'LabeledNumericOutput' 'Contents 1'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 2'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 3'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 4'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 5'}}{{/widget}}
+    {{#widget 'LabeledNumericOutput' 'Contents 6'}}{{/widget}}
+{{/widget}}
+<!-- not respecting maxColumns for some reason-->
+{{#widget 'ColumnsBs' maxColumn=12}}
+    {{widget 'LabeledLed' "Input1"}}
+    {{widget 'LabeledLed' "Input2"}}
+    {{widget 'LabeledLed' "Input3"}}
+    {{widget 'LabeledLed' "Input4"}}
+    {{widget 'LabeledLed' "Input5"}}
+    {{widget 'LabeledLed' "Input6"}}
+{{/widget}}
+{{widget 'Slider'}}
+{{#widget 'Dropdown'}}
+<dropdown>
+    <div>Not Option</div>
+    <div class="option">Option 1</div>
+    <div>Not Option</div>
+    <div class="option">Option 2</div>
+    <div>Not Option</div>
+    <div class="option">Option 3</div>
+</dropdown>
+{{/widget}}
+
+<!-- what is the difference between dropdown and dropdown table? -->
+{{#widget 'DropdownTable'}}
+    <options>
+        <div>Option many :1</div>
+        <div>Option many :2</div>
+        <div>Option many :3</div>
+        <div>Option many :4</div>
+    </options>
+    <option>
+        <div>Individual Option 1</div>
+    </option>
+    <option>
+        <div>Individual Option 2</div>
+    </option>
+    <options>
+        {{#repeat 4}}
+        <div>Repeat {{@index}}</div>
+        {{/repeat}}
+    </options>
+{{/widget}}
+
+<!-- where is the text part? field? -->
+{{#widget 'DropdownTableText'}}
+    <options>
+        <div>Option many :1</div>
+        <div>Option many :2</div>
+        <div>Option many :3</div>
+        <div>Option many :4</div>
+    </options>
+{{/widget}}
+
+<!-- not sure how to demo this one -->
+{{#widget 'TableSelect'}}
+{{/widget}}
 
