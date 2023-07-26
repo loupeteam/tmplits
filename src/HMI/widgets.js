@@ -5,6 +5,11 @@ if( !window.$ ){
     window.$ = jQuery
     console.error('Loading JQuery in widgets.js. To avoid this ensure that JQuery is loaded before widgets.js')
 }
+let loglevel =1
+let log = function( t ){ if(loglevel == 0){ console.log(t) }};
+let warn = function( t ){ if(loglevel <= 1){ console.warn(t) }};
+let error = function( t ){ if(loglevel <= 2){ console.error(t) }};
+
 export class Widgets {
     constructor(node_module_directory, loadedCallback ) {
         
@@ -59,14 +64,14 @@ export class Widgets {
         const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
         try{
             import(dataUri).then(ns => {
-                console.log(`imported ${id} successfully`);
+                log(`imported ${id} successfully`);
                 Object.assign(window, ns);
             }).catch(()=>{
-                console.log(`import failed ${id}, will retry..`)
+                warn(`import failed ${id}, will retry..`)
             })
         }
         catch(e){
-            console.log(`import failed ${el.id}, will retry..`)
+            warn(`import failed ${el.id}, will retry..`)
         }                  
     }
 
@@ -74,7 +79,7 @@ export class Widgets {
     //to the cache
     //it also adds the scripts to the combinedScript
     readLibraries(raw) {
-        console.log('processing libraries' )
+        log('processing libraries' )
         let scope = this
         let html = $.parseHTML(raw)
         if (html) {
@@ -88,21 +93,21 @@ export class Widgets {
                 }
                 if (el.type == "text/x-handlebars-onload") {          
                     scope.combinedScript += el.innerHTML + '\n'
-                    console.log(`loading script ${el.id}`);
+                    log(`loading script ${el.id}`);
                     const encodedJs = encodeURIComponent(el.innerHTML);
                     const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
                     try{
                         import(dataUri).then(ns => {
-                            console.log(`imported ${el.id} successfully`);
+                            log(`imported ${el.id} successfully`);
                             Object.assign(window, ns);
                         }).catch(()=>{
-                            console.log(`import failed ${el.id}, will retry..`)
+                            warn(`import failed ${el.id}, will retry..`)
                             scope.retryScripts.push(el)                        
                         })
                     }
                     catch(e){
                         scope.retryScripts.push(el)                        
-                        console.log(`import failed ${el.id}, will retry..`)
+                        warn(`import failed ${el.id}, will retry..`)
                     }                                      
                 }
             });
@@ -116,7 +121,7 @@ export class Widgets {
 
         let scope = this
         let chain = new Promise((resolve, reject)=>{          
-            console.log('loading libraries')
+            log('loading libraries')
             let libraryCount = 0;
             if(libraries.length == 0){
                 next()
@@ -134,7 +139,7 @@ export class Widgets {
                         next()
                     })
                     .catch(error => {
-                        console.log( 'error loading library ' + error )
+                        warn( 'error loading library ' + error )
                         next()                    
                     })
             }
@@ -143,7 +148,7 @@ export class Widgets {
                 fetch(element.file)
                     .then(processPartial)
                     .catch(error => {
-                        console.log( 'error loading library ' + error )
+                        warn( 'error loading library ' + error )
                         next()
                     });
             });
@@ -158,7 +163,7 @@ export class Widgets {
     getPages( pagesObj ) {        
         let scope = this
         let chain = new Promise((resolve, reject)=>{          
-            console.log('loading pages')
+            log('loading pages')
             let pageCount = 0;
 
             //go through pages object members and add each to an array of pages
@@ -191,7 +196,7 @@ export class Widgets {
             pages.forEach(element => {
                 if(element.script){
                     $.getScript(element.script, function() {
-                        console.log(`loaded script ${element.script}`);
+                        log(`loaded script ${element.script}`);
                     }).catch((e)=>{
                     });
                 }
@@ -216,7 +221,7 @@ export class Widgets {
                     processPartial(element, partial)
                 })
                 .catch(error => {
-                    console.log('failed to get page: ' + error);
+                    warn('failed to get page: ' + error);
                     next()
                 });
             });
@@ -249,7 +254,7 @@ export class Widgets {
                         retryAgain.forEach((el)=>{
                             const encodedJs = encodeURIComponent(el.innerHTML);
                             const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
-                            console.log(`failing: ${el.id}`);
+                            log(`failing: ${el.id}`);
                             import(dataUri).then(ns => {
                                 Object.assign(window, ns);
                             })
@@ -260,12 +265,12 @@ export class Widgets {
             }
 
             if( this.retryScripts.length > 0 ){
-                console.log('retrying to load scripts' )
+                log('retrying to load scripts' )
                 this.retryScripts.forEach((el)=>{
                     try{
                         const encodedJs = encodeURIComponent(el.innerHTML);
                         const dataUri = 'data:text/javascript;charset=utf-8,' + encodedJs;
-                        console.log(`retrying: ${el.id}`);
+                        log(`retrying: ${el.id}`);
                         import(dataUri).then(ns => {
                             Object.assign(window, ns);
                         })
@@ -273,7 +278,7 @@ export class Widgets {
                             next()                    
                         })
                         .catch((error)=>{
-                            console.log('failed to parse script, will retry: ' + error);
+                            warn('failed to parse script, will retry: ' + error);
                             retryAgain.push(el)                        
                             next()                    
                         })
@@ -299,7 +304,7 @@ export class Widgets {
     loadPage(containerId, pageName, context) {
         var template = this.get(pageName);
         context = context ? context : window                    
-        console.log(`Loading page: ${pageName}`)
+        log(`Loading page: ${pageName}`)
         let dom = containerId
         try{
             if( typeof containerId == 'string'){
@@ -323,7 +328,7 @@ export class Widgets {
     //This function pushes a template to a container
     //and updates the HMI
     pushTemplate(container, template, context) {
-        console.log(`Pushing template: ${template}`)
+        log(`Pushing template: ${template}`)
         var template = this.get(template);
         context = context ? context : window
         try{
@@ -357,7 +362,7 @@ export class Widgets {
     loadJson( fileName ) {
         let scope = this
         let chain = new Promise((resolve, reject)=>{    
-            console.log('loading ' + fileName)
+            log('loading ' + fileName)
             $.get(fileName, function (raw) {
                 scope.native = raw
                 $(document).on('DOMNodeInserted', function (e) {
@@ -384,7 +389,7 @@ export class Widgets {
                 })
                 resolve();
             }).fail(()=>{
-                console.log(fileName + ' not found, may not load all widgets')
+                warn(fileName + ' not found, may not load all widgets')
                 resolve();
             });
         })
@@ -399,7 +404,7 @@ export class Widgets {
         let scope = this
         let chain = new Promise((resolve, reject)=>{
             $.get( name, function (raw) {
-                console.log('loading ' + name)
+                log('loading ' + name)
                 scope.package = raw
                 //Search through the package.json for @loupeteam/widgets/*
                 //by going through iterating through each member of the dependency object
@@ -423,7 +428,7 @@ export class Widgets {
                 }    
                 resolve();
             }).fail(()=>{
-                console.log('package.json not found, may not load all widgets')
+                warn('package.json not found, may not load all widgets')
                 resolve();
             });      
         })
@@ -436,7 +441,7 @@ export class Widgets {
     loadPackageLockJson(name){
         let scope = this
         let chain = new Promise((resolve, reject)=>{
-            console.log('loading ' + name)
+            log('loading ' + name)
             $.get(name, function (raw) {
                 scope.packageLock = raw
                 //Search through the package.json for @loupeteam/widgets/*
@@ -462,7 +467,7 @@ export class Widgets {
                 }    
                 resolve();
             }).fail(()=>{
-                console.log('package-lock.json not found, may not load all dependent widgets')
+                warn('package-lock.json not found, may not load all dependent widgets')
                 resolve()
             });                 
         })
@@ -476,28 +481,21 @@ export class Widgets {
         Widgets.modules[name] = true
 
         //Just fetch the head to check because the script will need to reload the module anyway
-        try {
-            fetch(name,{ method: "HEAD" })
-            .then((res) => {
-                if (res.ok) {
-                    let script = "" 
-                    script += `console.log("Loading Module ${name}") ;`
-                    script += `import * as module from '${name}';`
-                    script += `Object.assign(window, module);`
-                    script += `Object.assign(window, module);`
-                    script += `Widgets.moduleLoaded('${name}')`
-                    scope.moduleEval(script)        
-                }
-                else{
-                    Widgets.moduleLoaded(name)
-                } 
-            })
-            .catch((e)=>{
-                console.log(e)
-            })                
-        } catch (e) {
-            console.log(e)            
-        }
+        fetch(name,{ method: "HEAD" })
+        .then((res) => {
+            if (res.ok) {
+                let script = "" 
+//                    script += `console.log("Loading Module ${name}") ;`
+                script += `import * as module from '${name}';`
+                script += `Object.assign(window, module);`
+                script += `Object.assign(window, module);`
+                script += `Widgets.moduleLoaded('${name}')`
+                scope.moduleEval(script)        
+            }
+            else{
+                Widgets.moduleLoaded(name)
+            } 
+        })
     }
 
     //Mark module as loaded and if all the modules are loaded, load the pages
@@ -685,7 +683,10 @@ function createWidget(widget, ...args) {
     catch(e){
         try{
             fn = eval(widget)
-            console.warn('Widgets names should prepend "Widget" to their name for clarity');
+            //If function is not undefined, then it is a widget
+            if( typeof fn !== 'undefined' ){
+                console.warn('Widgets names should prepend "Widget" to their name for clarity');
+            }
         }
         catch{
             var error = `<div class='error'>could not find widget ${widget}</div>`
@@ -771,7 +772,7 @@ Handlebars.registerHelper('controllerType', function (context, options) {
             try {
                 context = eval('machine["' + context + '"]');
             } catch (e) {
-                console.log(e)
+                warn(e)
             }
         }
     }
@@ -797,7 +798,7 @@ Handlebars.registerHelper('controller', function (context, options) {
             try {
                 context = eval('machine["' + context + '"]');
             } catch (e) {
-                console.log(e)
+                warn(e)
             }
         }
     }
@@ -824,7 +825,7 @@ Handlebars.registerHelper('controllerIndex', function (context, options) {
             try {
                 context = eval('machine["' + contextHead + '"]' + contextIndex);
             } catch (e) {
-                console.log(e)
+                warn(e)
             }
         }
     }
