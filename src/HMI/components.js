@@ -2,7 +2,7 @@
 
 let scope = this
 
-function evalInContext(js, context) {
+export function evalInContext(js, context) {
     //# Return the results of the in-line anonymous function we .call with the passed context
     return function() { return eval(js); }.call(context);
 }
