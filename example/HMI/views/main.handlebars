@@ -89,3 +89,63 @@
 {{#widget 'TableSelect'}}
 {{/widget}}
 
+{{#widget 'MultiSelect' maxColumns=10 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+<options>
+    <div>Option many :1</div>
+    <div>Option many :2</div>
+    <div>Option many :3</div>
+    <div>Option many :4</div>
+</options>
+<option>
+    <div>Individual Option 1</div>
+</option>
+<option>
+    <div>Individual Option 2</div>
+</option>
+<options>
+    {{#repeat 4}}
+    <div>Repeat {{@index}}</div>
+    {{/repeat}}
+</options>
+{{/widget}}
+
+<!-- how is this different from multiselcet? -->
+{{#widget 'MultiSelectText' maxColumns=10 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+<options>
+    <div>Option many :1</div>
+    <div>Option many :2</div>
+    <div>Option many :3</div>
+    <div>Option many :4</div>
+</options>
+<option>
+    <div>Individual Option 1</div>
+</option>
+<option>
+    <div>Individual Option 2</div>
+</option>
+<options>
+    {{#repeat 4}}
+    <div>Repeat {{@index}}</div>
+    {{/repeat}}
+</options>
+{{/widget}}
+
+<!-- not sure what the labeled part is here -->
+{{#widget 'LabeledList'}}
+    <div>list item 1</div>
+    <div>list item 2</div>
+    <div>list item 3</div>
+    <div>list item 4</div>
+{{/widget}}
+
+<!-- not sure how to use this one -->
+{{#widget 'PageSelect'}}
+    {{widget 'Page'}}
+    {{widget 'Page'}}
+    {{widget 'Page'}}
+    {{widget 'Page'}}
+{{/widget}}
+
+{{widget 'DirectoryBrowser'}}
+{{widget 'DirectoryBrowserWindow'}}
+{{widget 'NumGrid'}}
