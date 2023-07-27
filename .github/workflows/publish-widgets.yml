@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        widget: ${{ needs.list-widgets.outputs.widgets }}
+        widget: [widgets-test]
     defaults:
       run:
         working-directory: src/widgets/${{ matrix.widget }}
