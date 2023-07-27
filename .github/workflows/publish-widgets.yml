@@ -14,8 +14,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: List Widgets
         run: |
+          echo "widgets=[$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | paste -sd, -)]"
           echo "widgets=[$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | paste -sd, -)]" >> $GITHUB_OUTPUT
-  
+          
   publish-all:
     needs: list-widgets
     runs-on: ubuntu-latest
