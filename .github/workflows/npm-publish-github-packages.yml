@@ -74,18 +74,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
-      - name: Check Package Version
-        id: check_version
-        run: |
-          version=$(node -p "require('./package.json').version")
-          if npm show "@owner/${{ matrix.widget }}"@$version --registry=https://npm.pkg.github.com/ 2>/dev/null; then
-            echo "Package version already exists. Skipping npm publish."
-            echo "widget_exists=true" >> $GITHUB_ENV
-          else
-            echo "widget_exists=false" >> $GITHUB_ENV
-          fi
       - name: Publish Package
-        if: env.widget_exists == 'false'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
