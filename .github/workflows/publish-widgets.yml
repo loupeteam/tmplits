@@ -15,7 +15,7 @@ jobs:
       - name: List Widgets
         id: list_step
         run: |
-          widgets=$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | sed 's/[^,]*/\\\"&\\\"/g')
+          widgets=$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | sed 's/[^,]*/\\\"&\\\"/g' | paste -sd, -)
           echo "widgets=[$widgets]"
           echo "widgets=[$widgets]" >> $GITHUB_ENV
     outputs:
