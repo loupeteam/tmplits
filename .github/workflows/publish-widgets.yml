@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: List Widgets
         run: |
-          echo "widgets=[$(find . -maxdepth 1 -type d | sed 's|./||' | sed '/^\s*$/d' | sed 's|$|,|')]" >> $GITHUB_OUTPUT
-
+          echo "widgets=[$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | paste -sd, -)]" >> $GITHUB_OUTPUT
+  
   publish-all:
     needs: list-widgets
     runs-on: ubuntu-latest
