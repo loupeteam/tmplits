@@ -15,7 +15,8 @@ jobs:
       - name: List Widgets
         id: list_step
         run: |
-          echo "widgets=[$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | paste -sd, -)]" >> $GITHUB_OUTPUT
+          widgets=$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | sed "s|.*|'&'|")
+          echo "widgets=[$(echo "$widgets" | paste -sd, -)]"
     outputs:
           widgets: ${{ steps.list_step.outputs.widgets }}          
                     
