@@ -1,0 +1,47 @@
+name: Publish Widgets
+
+on:
+  push:
+    branches: main
+
+jobs:
+  list-widgets:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/widgets
+    steps:
+      - uses: actions/checkout@v3
+      - name: List Widgets
+        id: list_step
+        run: |
+          widgets=$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | sed "s|.*|'&'|")
+          echo "widgets=[$(echo "$widgets" | paste -sd, -)]"
+          echo "widgets=[$(echo "$widgets" | paste -sd, -)]" >> $GITHUB_OUTPUT
+    outputs:
+      widgets: ${{ steps.list_step.outputs.widgets }}
+
+  publish-all:
+    needs: list-widgets
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        widget: ${{fromJson(needs.list-widgets.outputs.widgets)}}
+    defaults:
+      run:
+        working-directory: src/widgets/${{ matrix.widget }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+      - uses: JS-DevTools/npm-publish@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          registry: "https://npm.pkg.github.com"
+      - if: ${{ steps.publish.outputs.type }}
+        run: echo "Version changed!"
