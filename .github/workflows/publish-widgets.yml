@@ -10,9 +10,6 @@ on:
 jobs:
   list-widgets:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: src/widgets
     steps:
       - id: set-matrix
         run: echo "::set-output name=widgets::[$(find . -maxdepth 1 -type d -printf '\"%P\", ' | sed 's/, $//')]"
