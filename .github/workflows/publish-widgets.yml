@@ -43,5 +43,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           registry: "https://npm.pkg.github.com"
+          package: src/widgets/${{ matrix.widget }}
       - if: ${{ steps.publish.outputs.type }}
         run: echo "Version changed!"
