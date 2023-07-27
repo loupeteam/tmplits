@@ -18,6 +18,7 @@ jobs:
           widgets=$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | sed 's/[^,]*/"&"/g')
           echo "widgets=[$(echo "$widgets" | paste -sd, -)]"
           echo "widgets=[$(echo "$widgets" | paste -sd, -)]" >> $GITHUB_ENV
+
     outputs:
       widgets: ${{ steps.list_step.outputs.widgets }}
 
