@@ -21,12 +21,13 @@ jobs:
       - run: npm ci
       - run: npm test
 
-  publish-main:
+      
+  publish-all:
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src/HMI
+    strategy:
+      matrix:
+        packages: [src/HMI,src/template-gizmo,example/HMI]
     permissions:
       contents: read
       packages: write
@@ -34,47 +35,13 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           registry-url: https://npm.pkg.github.com/
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-  publish-gizmo-template:
-    needs: build
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src/template-gizmo
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: JS-DevTools/npm-publish@v2
+        id: publish
         with:
-          node-version: 16
-          registry-url: https://npm.pkg.github.com/
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-  publish-hmi-template:
-    needs: build
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./example/HMI
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          registry-url: https://npm.pkg.github.com/
-      - name: Publish Package
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          registry: "https://npm.pkg.github.com"
+          package: ${{ matrix.packages }}
+      - if: ${{ steps.publish.outputs.type }}
+        run: echo "Version changed!"

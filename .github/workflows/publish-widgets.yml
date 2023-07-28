@@ -40,6 +40,7 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
       - uses: JS-DevTools/npm-publish@v2
+        id: publish
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           registry: "https://npm.pkg.github.com"
