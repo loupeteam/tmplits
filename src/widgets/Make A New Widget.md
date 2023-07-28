@@ -1,3 +1,5 @@
+[![Publish Widgets](https://github.com/loupeteam/widgets/actions/workflows/publish-widgets.yml/badge.svg)](https://github.com/loupeteam/widgets/actions/workflows/publish-widgets.yml)
+
 Create a new folder called 
 
 ```widgets-[mywidget]```

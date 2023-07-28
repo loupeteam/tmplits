@@ -1,3 +1,5 @@
+[![Publish Widget](https://github.com/loupeteam/widgets/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/loupeteam/widgets/actions/workflows/npm-publish-github-packages.yml)
+
 Dynamic templating based on handlebars
 
 This is the core library for the widget system
