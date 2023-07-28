@@ -33,8 +33,7 @@
     {{#widget 'LabeledNumericOutput' 'Contents 5'}}{{/widget}}
     {{#widget 'LabeledNumericOutput' 'Contents 6'}}{{/widget}}
 {{/widget}}
-<!-- not respecting maxColumns for some reason-->
-{{#widget 'ColumnsBs' maxColumn=12}}
+{{#widget 'ColumnsBs' maxColumns=12}}
     {{widget 'LabeledLed' "Input1"}}
     {{widget 'LabeledLed' "Input2"}}
     {{widget 'LabeledLed' "Input3"}}
@@ -55,6 +54,7 @@
 {{/widget}}
 
 <!-- what is the difference between dropdown and dropdown table? -->
+<!-- drop down uses the dropdown html element and table does not use that but essentilly the same thing-->
 {{#widget 'DropdownTable'}}
     <options>
         <div>Option many :1</div>
@@ -75,7 +75,10 @@
     </options>
 {{/widget}}
 
-<!-- where is the text part? field? -->
+<!-- where is the text part?
+non-text returns number to plc and text returns string value
+TODO: should be combined smartly
+ -->
 {{#widget 'DropdownTableText'}}
     <options>
         <div>Option many :1</div>
@@ -85,8 +88,18 @@
     </options>
 {{/widget}}
 
-<!-- not sure how to demo this one -->
+<!-- not sure how to demo this one
+don't worry about this one could be broken -->
 {{#widget 'TableSelect'}}
+<dropdown>
+    <div>Not Option</div>
+    <div class="option">Option 1</div>
+    <div>Not Option</div>
+    <div class="option">Option 2</div>
+    <div>Not Option</div>
+    <div class="option">Option 3</div>
+</dropdown>
+<div>Hello</div>
 {{/widget}}
 
 {{#widget 'MultiSelect' maxColumns=10 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
@@ -109,7 +122,10 @@
 </options>
 {{/widget}}
 
-<!-- how is this different from multiselcet? -->
+<!-- how is this different from multiselect? 
+non-text returns number to plc and text returns string value
+TODO: should be combined smartly
+-->
 {{#widget 'MultiSelectText' maxColumns=10 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
 <options>
     <div>Option many :1</div>
@@ -130,22 +146,33 @@
 </options>
 {{/widget}}
 
-<!-- not sure what the labeled part is here -->
-{{#widget 'LabeledList'}}
+<!-- not sure what the labeled part is here 
+don't worry about this -->
+{{#widget 'LabeledList' 'Test'}}
     <div>list item 1</div>
     <div>list item 2</div>
     <div>list item 3</div>
     <div>list item 4</div>
 {{/widget}}
 
+<!-- non selected pages don't exist on the dom -->
 <!-- not sure how to use this one -->
-{{#widget 'PageSelect'}}
-    {{widget 'Page'}}
-    {{widget 'Page'}}
-    {{widget 'Page'}}
-    {{widget 'Page'}}
-{{/widget}}
+{{widget 'PageSelect' 'Page 1' dom="container1" template="page1"}}
+{{widget 'PageSelect' 'Page 2' dom="container1" template="page2"}}
+<script id="page1" type="text/x-handlebars-template">
+<!-- write your page 2 with normal html -->
+page1
+</script>
+<script id="page2" type="text/x-handlebars-template">
+<!-- write your page 2 with normal html -->
+page2
+</script>
+<div id="container1">
+
+</div>
 
 {{widget 'DirectoryBrowser'}}
 {{widget 'DirectoryBrowserWindow'}}
+
+<!-- ask katie or jack -->
 {{widget 'NumGrid'}}
