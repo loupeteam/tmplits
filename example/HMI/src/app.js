@@ -3,4 +3,4 @@ machine = new WEBHMI.Machine({
     ipAddress: '127.0.0.1',
     maxReconnectCount: 5000
   });  
-  
+  setInterval(WEBHMI.updateHMI,30)

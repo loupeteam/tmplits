@@ -1,14 +1,34 @@
-//DO NOT DELETE THIS FILE 
-//- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
+/*Example Button usage
+{{#widget 'button' style="color:red" }}
+    My Button
+{{/widget}}
+{{widget 'button' class="led-on" style="color:blue" children="Thank you" }}
+*/
 
-//This file will get loaded as a javascript module, meaning you can import other modules from here.
-//You can also export functions from here, which will be available to the client side.
+import * as util from "../widgets-utilities/module.js"
 
-//import * from "./module2.js"//Import relative to this file inside node_modules/this-module-name/
-//import * from "../widgets-some-other/module.js"//Import relative to this file inside node_modules/widgets-some-other/
-//import * from "/somewhere.js"//Import from the root of the project
+export function WidgetButton(context, args) {
 
-//Define your widget functions here and export them to make them globally available
-//export function WidgetHelloWorld(context, args){
-//    return `Hello ${context[0]}!`
-//}
+    let {
+        buttonType = '', ..._args
+    } = args.hash
+
+    //Get cleaned up values from args
+    let {
+        classList,
+        attr
+    } = util.cleanArgs(_args)
+
+    //Add class items from this component
+    classList = classList.concat(['btn'])
+
+    //If there are no children, the first item in the context is the label
+    if (args.children == "" && context[0]) {
+        args.children = `${context[0]}`
+    }
+
+    util.getButtonType(context[1], classList)
+    util.getButtonType(buttonType, classList)
+
+    return `<button type='button' class="${classList.join(" ")}"  ${attr}> ${args.children ? args.children : 'Label'} </button>`
+}

@@ -6,7 +6,7 @@ document.adoptedStyleSheets = [sheet];
 import Widgets from './widgets.js'
 
 //Load the widget components
-import * as components from './components.js'
+import * as components from '../widgets-globalclasses/module.js'
 
 //go through each component and add it to the global scope
 for( let key in components ){

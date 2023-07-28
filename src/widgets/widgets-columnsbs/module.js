@@ -1,14 +1,53 @@
-//DO NOT DELETE THIS FILE 
-//- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
+import * as util from "../widgets-utilities/module.js"
 
-//This file will get loaded as a javascript module, meaning you can import other modules from here.
-//You can also export functions from here, which will be available to the client side.
+export function WidgetColumnsBs(context, args) {
 
-//import * from "./module2.js"//Import relative to this file inside node_modules/this-module-name/
-//import * from "../widgets-some-other/module.js"//Import relative to this file inside node_modules/widgets-some-other/
-//import * from "/somewhere.js"//Import from the root of the project
+    let {
+        style = '', maxColumns = 3, ..._args
+    } = args.hash
 
-//Define your widget functions here and export them to make them globally available
-//export function WidgetHelloWorld(context, args){
-//    return `Hello ${context[0]}!`
-//}
+    //Get cleaned values
+    let {
+        classList,
+        attr
+    } = util.cleanArgs(_args)
+
+    let nodes = util.htmlToElements(args.children)
+    let count = 0
+    for( let e in nodes){
+        let el = nodes[e]        
+        switch (el.tagName) {
+        case undefined:
+        break
+        default:
+            count++
+        }
+    }
+
+    maxColumns = maxColumns > 12 ? 12 : maxColumns
+    let columns = count > maxColumns ? maxColumns : count
+    let columnSize = Math.floor(12 / columns)
+    let rows = Math.ceil(count / columns)
+    classList.push(`col-sm-${columnSize}`)
+
+    let children = ''
+    let i=0;
+    for( let e in nodes){
+        let el = nodes[e]        
+        switch (el.tagName) {
+        case undefined:
+            break
+        default:
+            if (i % columns == 0) {
+                children += `<div class="row">`
+            }
+            children += `<div class="${classList.join(' ')}" style='${style}'>${el.outerHTML}</div>`
+            if (i % columns == (columns - 1)) {
+                children += `</div>`
+            }
+            i++;
+        break;
+        }
+    }
+    return `${children}`
+}
