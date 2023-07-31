@@ -29,7 +29,7 @@ export function WidgetCheckBox(context, args) {
     }
     return `
     <div class="${classList.join(' ')}" ${attr}>
-    <div class='led webhmi-led' data-led-false='led-off' data-led-true='led-green' data-var-name='${dataVarName}' ${attr}></div>
+    <div class='led webhmi-led webhmi-btn-toggle' data-led-false='led-off' data-led-true='led-green' data-var-name='${dataVarName}' ${attr}></div>
     </div>
    `
 }
