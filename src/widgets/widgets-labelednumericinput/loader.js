@@ -1,26 +1,4 @@
-function WidgetLabeledNumericInput(context, args) {
+//DO NOT DELETE THIS FILE 
+//- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
-    let {
-        ['data-var-name']: dataVarName, ..._args
-    } = args.hash
-
-    //Get cleaned up values from args
-    let {
-        classList,
-        attr
-    } = cleanArgs(_args)
-
-    classList = classList.concat(['input-group'])
-
-    if (args.children == "" && context[0]) {
-        args.children = `${context[0]}`
-    }
-    const result = args.children.replace(/([a-z][A-Z])/g, " $1");
-    const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-    return `
-    <div class="${classList.join(' ')}" ${attr} >
-    <input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>
-    <span class='input-group-addon'>${finalResult}</span>
-    </div>
-   `
-}
+//This file will get loaded as a javascript file (not a module), meaning you can't import other modules from here.

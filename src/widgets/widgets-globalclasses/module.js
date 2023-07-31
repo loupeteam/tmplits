@@ -122,6 +122,8 @@ export class multiOptionSelector{
     }    
 }
 
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
 export class LuiSlider {
     //Handle changing the page if a tab is clicked
     static luiSlideStart(evt) {
@@ -450,15 +452,14 @@ $(document).on({
     "click": selectPage
 }, '[data-page]');
 
-
 $(document).on({
     "change": luiDirectory.updateDirectory,
 }, '.lui-directory-data');
 
-
 $(document).on({
     "mousemove": LuiSlider.luiSlideChange
 });
+
 $(document).on({
     "touchmove": LuiSlider.luiSlideChange
 });
@@ -467,6 +468,7 @@ window.addEventListener("wheel", LuiSlider.luiSlideMouse, { passive:false })
 $(document).on({
     "mouseup": LuiSlider.luiSlideEnd
 });
+
 $(document).on({
     "touchend": LuiSlider.luiSlideEnd
 });

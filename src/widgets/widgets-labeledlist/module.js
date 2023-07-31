@@ -12,3 +12,26 @@
 //export function WidgetHelloWorld(context, args){
 //    return `Hello ${context[0]}!`
 //}
+
+import * as util from "../widgets-utilities/module.js"
+
+export function WidgetLabeledList(context, args) {
+    let {
+        style = '', ..._args
+    } = args.hash
+
+    //Get cleaned values
+    let {
+        classList,
+        attr
+    } = util.cleanArgs(_args)
+
+    classList = classList.concat(['lui-grid'])
+
+    return `
+    <div class="row">
+        <div class="col-sm-12">
+            ${args.children}
+        </div>
+    </div> `
+}

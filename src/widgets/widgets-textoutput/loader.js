@@ -1,21 +1,4 @@
-function WidgetTextOutput(context, args) {
+//DO NOT DELETE THIS FILE 
+//- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
-    //Get cleaned up values from args
-    let {
-        classList,
-        attr
-    } = cleanArgs(args.hash)
-
-    classList = classList.concat(['input-group'])
-
-    if (args.children == "" && context[0]) {
-        args.children = `${context[0]}`
-    }
-    const result = args.children.replace(/([A-Z])/g, " $1");
-    const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-    return `
-    <div class="${classList.join(' ')}" ${attr} >
-    <div class='form-control webhmi-text-value' ${attr}></div>
-    </div>
-   `
-}
+//This file will get loaded as a javascript file (not a module), meaning you can't import other modules from here.

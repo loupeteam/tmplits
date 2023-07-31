@@ -1,20 +1,4 @@
-function WidgetLabeledList(context, args) {
-    let {
-        style = '', ..._args
-    } = args.hash
+//DO NOT DELETE THIS FILE 
+//- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
-    //Get cleaned values
-    let {
-        classList,
-        attr
-    } = cleanArgs(_args)
-
-    classList = classList.concat(['lui-grid'])
-
-    return `
-    <div class="row">
-        <div class="col-sm-12">
-            ${args.children}
-        </div>
-    </div> `
-}
+//This file will get loaded as a javascript file (not a module), meaning you can't import other modules from here.

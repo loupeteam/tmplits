@@ -92,8 +92,6 @@ export function updateSelectOptions(el, index) {
     })
 }
 
-const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-
 //Functionality for number grid
 export function numGridPopulate() {
     
