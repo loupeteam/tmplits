@@ -25,19 +25,22 @@ export function WidgetLabeledLed(context, args) {
         attr
     } = util.cleanArgs(_args)
 
+    // apply the Led label if there is one
+    let labelStyle = ''
+    let result;
+    let finalResult;
     if (args.children == "" && context[0]) {
         args.children = `<h3>${context[0]}</h3><h3/>`
-    }
-    const result = args.children.replace(/([A-Z])/g, " $1");
-    const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-    let labelStyle = ''
-    switch (side.trim().toLowerCase()) {
-        case 'middle':
-            labelStyle += 'margin-right: auto; margin-left: auto;'
-            break;
-        case 'right':
-            labelStyle += 'margin-left: auto;'
-            break
+        result = args.children.replace(/([A-Z])/g, " $1");
+        finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+        switch (side.trim().toLowerCase()) {
+            case 'middle':
+                labelStyle += 'margin-right: auto; margin-left: auto;'
+                break;
+            case 'right':
+                labelStyle += 'margin-left: auto;'
+                break
+        }
     }
 
     if (util.getButtonType(buttonType, classList)) {
