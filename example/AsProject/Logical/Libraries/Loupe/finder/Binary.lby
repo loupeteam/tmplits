@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Library xmlns="http://br-automation.co.at/AS/Library" SubType="Binary" Version="0.0.1">
+  <Files>
+    <File Description="Exported data types">Types.typ</File>
+    <File Description="Exported constants">Constants.var</File>
+    <File Description="Exported functions and function blocks">Finder.fun</File>
+    <File>VersionHistory.txt</File>
+    <File>License.txt</File>
+    <File Type="File">ReadMe.md</File>
+  </Files>
+  <Dependencies>
+    <Dependency ObjectName="FileIO" />
+    <Dependency ObjectName="stringext" />
+  </Dependencies>
+</Library>

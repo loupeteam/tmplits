@@ -1,1 +1,23 @@
 **/node_modules/
+
+# AS temporary directories
+Binaries/
+Diagnosis/
+Temp/
+TempObjects/
+
+# AS transfer files
+*artransfer.br
+*arTrsfmode.nv
+
+# File types
+*.bak
+*.isopen
+*.DS_Store
+*.orig
+*.log
+*.asar
+*.csvlog*
+*.set
+!**/Physical/**/*.set
+**/package-lock.json
