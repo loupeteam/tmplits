@@ -1,5 +1,5 @@
 {
-  "name": "widgets-numericoutput",
+  "name": "@loupeteam/widgets-numericoutput",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

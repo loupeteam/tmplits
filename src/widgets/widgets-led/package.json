@@ -1,5 +1,5 @@
 {
-  "name": "widgets-led",
+  "name": "@loupeteam/widgets-led",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

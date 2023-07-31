@@ -1,5 +1,5 @@
 {
-  "name": "widgets-textoutput",
+  "name": "@loupeteam/widgets-textoutput",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
