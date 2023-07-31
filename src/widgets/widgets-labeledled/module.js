@@ -25,8 +25,6 @@ export function WidgetLabeledLed(context, args) {
         attr
     } = util.cleanArgs(_args)
 
-    classList = classList.concat(['input-group', 'form-control', 'label-led' ])
-
     if (args.children == "" && context[0]) {
         args.children = `<h3>${context[0]}</h3><h3/>`
     }
@@ -52,11 +50,20 @@ export function WidgetLabeledLed(context, args) {
         attr += `data-var-name='${buttonVarName}'`
     }
 
-
-    return `
-    <div class="${classList.join(' ')}" ${attr}>
-    <div class='led webhmi-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
-    <div class='led-label' style='${labelStyle}' >${finalResult}</div>
-    </div>
-   `
+    if (context[0]){
+        classList = classList.concat(['input-group', 'form-control', 'label-led' ])
+        return `
+            <div class="${classList.join(' ')}" ${attr}>
+            <div class='led webhmi-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
+            <div class='led-label' style='${labelStyle}' >${finalResult}</div>
+            </div>
+        `
+    }
+    else{
+        return `
+        <div class="${classList.join(' ')}" ${attr}>
+        <div class='led webhmi-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
+        </div>
+       `
+    }
 }

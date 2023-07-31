@@ -36,6 +36,7 @@
     {{widget 'LabeledNumericOutput' 'Contents 5' data-var-name='widgetTest:widget.NumericOutput'}}
     {{widget 'LabeledNumericOutput' 'Contents 6' data-var-name='widgetTest:widget.NumericOutput'}}
 {{/widget}}
+
 {{#widget 'ColumnsBs' maxColumns=3}}
     {{widget 'LabeledLed' "Input1"}}
     {{widget 'LabeledLed' "Input2"}}
@@ -44,9 +45,13 @@
     {{widget 'LabeledLed' "Input5"}}
     {{widget 'LabeledLed' "Input6"}}
 {{/widget}}
+
 <!-- needs to be a REAL var range: [-1,1] -->
 {{widget 'Slider' data-var-name='widgetTest:widget.Slider'}}
-{{#widget 'Dropdown' data-var-name='widgetTest:widget.Dropdown'}}
+
+<!-- console errors below - passing undefined to handerbars compiled file?? -->
+
+{{!-- {{#widget 'Dropdown' data-var-name='widgetTest:widget.Dropdown'}}
 <dropdown>
     <div>Not Option</div>
     <div class="option">Option 1</div>
@@ -55,11 +60,12 @@
     <div>Not Option</div>
     <div class="option">Option 3</div>
 </dropdown>
-{{/widget}}
+{{/widget}} --}}
+
 
 <!-- what is the difference between dropdown and dropdown table? -->
 <!-- drop down uses the dropdown html element and table does not use that but essentially the same thing-->
-{{#widget 'DropdownTable' data-var-name='widgetTest:widget.Dropdown'}}
+{{!-- {{#widget 'DropdownTable' data-var-name='widgetTest:widget.Dropdown'}}
     <options>
         <div>Option many :1</div>
         <div>Option many :2</div>
@@ -77,7 +83,7 @@
         <div>Repeat {{@index}}</div>
         {{/repeat}}
     </options>
-{{/widget}}
+{{/widget}} --}}
 
 <!-- where is the text part?
 non-text returns number to plc and text returns string value
@@ -85,18 +91,18 @@ TODO: should be combined smartly
 Just writes the index of the dropdown as a string - is this intended?
 probably needs to retruen text string not index same as multiselecttext
  -->
-{{#widget 'DropdownTableText' data-var-name='widgetTest:widget.DropdownTableText'}}
+{{!-- {{#widget 'DropdownTableText' data-var-name='widgetTest:widget.DropdownTableText'}}
     <options>
         <div>Option many :1</div>
         <div>Option many :2</div>
         <div>Option many :3</div>
         <div>Option many :4</div>
     </options>
-{{/widget}}
+{{/widget}} --}}
 
 <!-- not sure how to demo this one
 don't worry about this one could be broken -->
-{{#widget 'TableSelect' data-var-name='widgetTest:widget.TableSelect'}}
+{{!-- {{#widget 'TableSelect' data-var-name='widgetTest:widget.TableSelect'}}
 <dropdown>
     <div>Not Option</div>
     <div class="option">Option 1</div>
@@ -106,10 +112,10 @@ don't worry about this one could be broken -->
     <div class="option">Option 3</div>
 </dropdown>
 <div>Hello</div>
-{{/widget}}
+{{/widget}} --}}
 
 <!-- writes the index integer -->
-{{#widget 'MultiSelect' maxColumns=10 data-var-name='widgetTest:widget.MultiSelect'}}
+{{!-- {{#widget 'MultiSelect' maxColumns=10 data-var-name='widgetTest:widget.MultiSelect'}}
 <options>
     <div>Option many :1</div>
     <div>Option many :2</div>
@@ -127,7 +133,8 @@ don't worry about this one could be broken -->
     <div>Repeat {{@index}}</div>
     {{/repeat}}
 </options>
-{{/widget}}
+{{/widget}} --}}
+
 
 <!-- how is this different from multiselect? 
 non-text returns number to plc and text returns string value
@@ -135,7 +142,7 @@ TODO: should be combined smartly
 writes the index as an integer
 setting to negative or a high number shows no element selected
 -->
-{{#widget 'MultiSelectText' maxColumns=10 data-var-name="widgetTest:widget.MultiSelectText"}}
+{{!-- {{#widget 'MultiSelectText' maxColumns=10 data-var-name="widgetTest:widget.MultiSelectText"}}
 <options>
     <div>Option many :1</div>
     <div>Option many :2</div>
@@ -153,7 +160,7 @@ setting to negative or a high number shows no element selected
     <div>Repeat {{@index}}</div>
     {{/repeat}}
 </options>
-{{/widget}}
+{{/widget}} --}}
 
 <!-- not sure what the labeled part is here 
 don't worry about this -->
