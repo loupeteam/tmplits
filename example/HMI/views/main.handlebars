@@ -1,39 +1,42 @@
 <!--{{> components}}-->
-{{widget 'Button' style="color:red"}}
-{{widget 'LabeledLed' 'testing'}}
-{{widget 'Led'}}
-{{widget 'CheckBox'}}
-{{widget 'NumericInput'}}
-{{widget 'NumericOutput'}}
-{{widget 'LabeledNumericInput' 'Labeled Numeric Input'}}
-{{widget 'LabeledNumericOutput' 'Labeled Numeric Output'}}
-{{widget 'LabeledTextInput' 'Labeled Text Input'}}
-{{widget 'LabeledTextOutput' 'Labeled Text Output'}}
-{{widget 'TextOutput'}}
-{{widget 'ValueUpDown'}}
+{{widget 'Button' 'SetButton' 'set' data-var-name='widgetTest:widget.SetButton'}}
+{{widget 'Button' 'ToggleButton' 'toggle' data-var-name='widgetTest:widget.ToggleButton'}}
+{{widget 'Button' 'MomentaryButton' 'momentary' data-var-name='widgetTest:widget.MomentaryButton'}}
+{{widget 'LabeledLed' 'LabeledLed' data-var-name='widgetTest:widget.LabeledLed'}}
+{{widget 'Led' data-var-name='widgetTest:widget.Led'}}
+<!-- style it different to differentiate form simple led -->
+{{widget 'CheckBox' data-var-name='widgetTest:widget.CheckBox'}}
+{{widget 'NumericInput' data-var-name='widgetTest:widget.NumericInput'}}
+{{widget 'NumericOutput' data-var-name='widgetTest:widget.NumericOutput'}}
+{{widget 'LabeledNumericInput' 'Labeled Numeric Input' data-var-name='widgetTest:widget.LabeledNumericInput'}}
+{{widget 'LabeledNumericOutput' 'Labeled Numeric Output' data-var-name='widgetTest:widget.LabeledNumericInput'}}
+{{widget 'LabeledTextInput' 'Labeled Text Input' data-var-name='widgetTest:widget.LabeledTextInput'}}
+{{widget 'LabeledTextOutput' 'Labeled Text Output'data-var-name='widgetTest:widget.LabeledTextOutput'}}
+{{widget 'TextOutput' data-var-name='widgetTest:widget.TextOutput'}}
+{{widget 'ValueUpDown'data-var-name='widgetTest:widget.ValueUpDown'}}
 {{#widget 'LabeledColumns''Test Elements' style="grid-column: span 3;" }}
     <div style="text-align:center">Column 1 Header</div>
     <div style="text-align:center">Column 2 Header</div>
     <div style="text-align:center">Column 3 Header</div>
-    {{#widget 'LabeledNumericOutput' 'Contents 1'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 2'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 3'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 4'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 5'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 6'}}{{/widget}}
+    {{widget 'LabeledNumericOutput' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 5' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 6' data-var-name='widgetTest:widget.NumericOutput'}}
 {{/widget}}
 {{#widget 'Columns' style="grid-column: span 3;" }}
     <div style="text-align:center">Column 1 Header</div>
     <div style="text-align:center">Column 2 Header</div>
     <div style="text-align:center">Column 3 Header</div>
-    {{#widget 'LabeledNumericOutput' 'Contents 1'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 2'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 3'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 4'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 5'}}{{/widget}}
-    {{#widget 'LabeledNumericOutput' 'Contents 6'}}{{/widget}}
+    {{widget 'LabeledNumericOutput' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 5' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'LabeledNumericOutput' 'Contents 6' data-var-name='widgetTest:widget.NumericOutput'}}
 {{/widget}}
-{{#widget 'ColumnsBs' maxColumns=12}}
+{{#widget 'ColumnsBs' maxColumns=3}}
     {{widget 'LabeledLed' "Input1"}}
     {{widget 'LabeledLed' "Input2"}}
     {{widget 'LabeledLed' "Input3"}}
@@ -41,8 +44,9 @@
     {{widget 'LabeledLed' "Input5"}}
     {{widget 'LabeledLed' "Input6"}}
 {{/widget}}
-{{widget 'Slider'}}
-{{#widget 'Dropdown'}}
+<!-- needs to be a REAL var range: [-1,1] -->
+{{widget 'Slider' data-var-name='widgetTest:widget.Slider'}}
+{{#widget 'Dropdown' data-var-name='widgetTest:widget.Dropdown'}}
 <dropdown>
     <div>Not Option</div>
     <div class="option">Option 1</div>
@@ -54,8 +58,8 @@
 {{/widget}}
 
 <!-- what is the difference between dropdown and dropdown table? -->
-<!-- drop down uses the dropdown html element and table does not use that but essentilly the same thing-->
-{{#widget 'DropdownTable'}}
+<!-- drop down uses the dropdown html element and table does not use that but essentially the same thing-->
+{{#widget 'DropdownTable' data-var-name='widgetTest:widget.Dropdown'}}
     <options>
         <div>Option many :1</div>
         <div>Option many :2</div>
@@ -78,8 +82,10 @@
 <!-- where is the text part?
 non-text returns number to plc and text returns string value
 TODO: should be combined smartly
+Just writes the index of the dropdown as a string - is this intended?
+probably needs to retruen text string not index same as multiselecttext
  -->
-{{#widget 'DropdownTableText'}}
+{{#widget 'DropdownTableText' data-var-name='widgetTest:widget.DropdownTableText'}}
     <options>
         <div>Option many :1</div>
         <div>Option many :2</div>
@@ -90,7 +96,7 @@ TODO: should be combined smartly
 
 <!-- not sure how to demo this one
 don't worry about this one could be broken -->
-{{#widget 'TableSelect'}}
+{{#widget 'TableSelect' data-var-name='widgetTest:widget.TableSelect'}}
 <dropdown>
     <div>Not Option</div>
     <div class="option">Option 1</div>
@@ -102,7 +108,8 @@ don't worry about this one could be broken -->
 <div>Hello</div>
 {{/widget}}
 
-{{#widget 'MultiSelect' maxColumns=10 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+<!-- writes the index integer -->
+{{#widget 'MultiSelect' maxColumns=10 data-var-name='widgetTest:widget.MultiSelect'}}
 <options>
     <div>Option many :1</div>
     <div>Option many :2</div>
@@ -125,8 +132,10 @@ don't worry about this one could be broken -->
 <!-- how is this different from multiselect? 
 non-text returns number to plc and text returns string value
 TODO: should be combined smartly
+writes the index as an integer
+setting to negative or a high number shows no element selected
 -->
-{{#widget 'MultiSelectText' maxColumns=10 data-var-name="gMotorBasic[0].IN.PAR.JogVelocity"}}
+{{#widget 'MultiSelectText' maxColumns=10 data-var-name="widgetTest:widget.MultiSelectText"}}
 <options>
     <div>Option many :1</div>
     <div>Option many :2</div>
@@ -156,7 +165,6 @@ don't worry about this -->
 {{/widget}}
 
 <!-- non selected pages don't exist on the dom -->
-<!-- not sure how to use this one -->
 {{widget 'PageSelect' 'Page 1' dom="container1" template="page1"}}
 {{widget 'PageSelect' 'Page 2' dom="container1" template="page2"}}
 <script id="page1" type="text/x-handlebars-template">
@@ -171,8 +179,11 @@ page2
 
 </div>
 
-{{widget 'DirectoryBrowser'}}
-{{widget 'DirectoryBrowserWindow'}}
+<!-- service mode when refresh bool flipped? -->
+{{widget 'DirectoryBrowser' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-will-open='widgetTest:f.in.refresh'}}
+{{widget 'DirectoryBrowserWindow' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-will-open='widgetTest:f.in.refresh'}}
 
-<!-- ask katie or jack -->
-{{widget 'NumGrid'}}
+<!-- ask katie or jack 
+{{widget 'NumGrid'}}-->
+
+<!-- reach out to katie about building widgets -->
