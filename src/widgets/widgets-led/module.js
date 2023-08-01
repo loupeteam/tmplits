@@ -17,7 +17,7 @@ import * as util from "../widgets-utilities/module.js"
 
 export function WidgetLed(context, args) {
     let {
-        ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', error=false, warning=false, ..._args
+        side = 'middle', ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', error=false, warning=false, ..._args
     } = args.hash
     //Get cleaned up values from args
     let {
@@ -25,13 +25,23 @@ export function WidgetLed(context, args) {
         attr
     } = util.cleanArgs(_args)
 
-    classList = classList.concat(['label-led'])
-
+    // apply the Led label if there is one
+    let labelStyle = ''
+    let result;
+    let finalResult;
     if (args.children == "" && context[0]) {
         args.children = `<h3>${context[0]}</h3><h3/>`
+        result = args.children.replace(/([A-Z])/g, " $1");
+        finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+        switch (side.trim().toLowerCase()) {
+            case 'middle':
+                labelStyle += 'margin-right: auto; margin-left: auto;'
+                break;
+            case 'right':
+                labelStyle += 'margin-left: auto;'
+                break
+        }
     }
-    const result = args.children.replace(/([A-Z])/g, " $1");
-    const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
 
     if (util.getButtonType(buttonType, classList)) {
         if (buttonVarName == '') {
@@ -42,9 +52,17 @@ export function WidgetLed(context, args) {
         }
         attr += `data-var-name='${buttonVarName}'`
     }
+
+    let label = '' 
+    if (context[0]){
+        classList = classList.concat(['input-group', 'form-control', 'label-led' ])
+        label = `<div class='led-label' style='${labelStyle}' >${finalResult}</div>`
+    } 
+
     return `
-    <div class="${classList.join(' ')}" ${attr}>
-    <div class='led webhmi-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
-    </div>
-   `
+        <div class="${classList.join(' ')}" ${attr}>
+        <div class='led webhmi-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
+        ${label}
+        </div>
+    `
 }

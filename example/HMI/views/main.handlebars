@@ -1,60 +1,78 @@
 <!--{{> components}}-->
-{{widget 'Button' 'SetButton' 'set' data-var-name='widgetTest:widget.SetButton'}}
-{{widget 'Button' 'ToggleButton' 'toggle' data-var-name='widgetTest:widget.ToggleButton'}}
-{{widget 'Button' 'MomentaryButton' 'momentary' data-var-name='widgetTest:widget.MomentaryButton'}}
-{{widget 'LabeledLed' 'LabeledLed' data-var-name='widgetTest:widget.LabeledLed'}}
-{{widget 'LabeledLed' data-var-name='widgetTest:widget.LabeledLed'}}
-{{widget 'Led' data-var-name='widgetTest:widget.Led'}}
-<!-- style it different to differentiate form simple led -->
-{{widget 'CheckBox' data-var-name='widgetTest:widget.CheckBox'}}
-{{widget 'NumericInput' data-var-name='widgetTest:widget.NumericInput'}}
-{{widget 'NumericOutput' data-var-name='widgetTest:widget.NumericOutput'}}
-<div>EXAMPLE</div>
-{{widget 'LabeledNumericInput' 'Labeled Numeric Input' data-var-name='widgetTest:widget.LabeledNumericInput'}}
-{{widget 'LabeledNumericInput' data-var-name='widgetTest:widget.LabeledNumericInput'}}
-<div>END OF EXAMPLE</div>
-{{widget 'LabeledNumericOutput' 'Labeled Numeric Output' data-var-name='widgetTest:widget.LabeledNumericInput'}}
-{{widget 'LabeledNumericOutput' data-var-name='widgetTest:widget.LabeledNumericInput'}}
-{{widget 'LabeledTextInput' 'Labeled Text Input' data-var-name='widgetTest:widget.LabeledTextInput'}}
-{{widget 'LabeledTextInput' data-var-name='widgetTest:widget.LabeledTextInput'}}
-{{widget 'LabeledTextOutput' 'Labeled Text Output'data-var-name='widgetTest:widget.LabeledTextOutput'}}
-{{widget 'LabeledTextOutput' data-var-name='widgetTest:widget.LabeledTextOutput'}}
-{{widget 'TextOutput' data-var-name='widgetTest:widget.TextOutput'}}
-{{widget 'ValueUpDown'data-var-name='widgetTest:widget.ValueUpDown'}}
-{{#widget 'LabeledColumns' 'Header' style="grid-column: span 3;" }}
-    <div style="text-align:center">Column 1 Header</div>
-    <div style="text-align:center">Column 2 Header</div>
-    <div style="text-align:center">Column 3 Header</div>
-    {{widget 'LabeledNumericOutput' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 5' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 6' data-var-name='widgetTest:widget.NumericOutput'}}
-{{/widget}}
-{{#widget 'LabeledColumns' style="grid-column: span 3;" }}
-    <div style="text-align:center">Column 1 Header</div>
-    <div style="text-align:center">Column 2 Header</div>
-    <div style="text-align:center">Column 3 Header</div>
-    {{widget 'LabeledNumericOutput' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 5' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'LabeledNumericOutput' 'Contents 6' data-var-name='widgetTest:widget.NumericOutput'}}
-{{/widget}}
-
-{{#widget 'ColumnsBs' maxColumns=3}}
-    {{widget 'LabeledLed' "Input1"}}
-    {{widget 'LabeledLed' "Input2"}}
-    {{widget 'LabeledLed' "Input3"}}
-    {{widget 'LabeledLed' "Input4"}}
-    {{widget 'LabeledLed' "Input5"}}
-    {{widget 'LabeledLed' "Input6"}}
-{{/widget}}
-
+<div>
+    Button
+    {{widget 'Button' 'SetButton' 'set' data-var-name='widgetTest:widget.SetButton'}}
+    {{widget 'Button' 'ToggleButton' 'toggle' data-var-name='widgetTest:widget.ToggleButton'}}
+    {{widget 'Button' 'MomentaryButton' 'momentary' data-var-name='widgetTest:widget.MomentaryButton'}}
+</div>
+<div>
+    Led
+    {{widget 'Led' 'label' data-var-name='widgetTest:widget.LabeledLed'}}
+    {{widget 'Led' data-var-name='widgetTest:widget.LabeledLed'}}
+</div>
+<!-- style it different to differentiate from simple led -->
+<div>
+    CheckBox
+    {{widget 'CheckBox' data-var-name='widgetTest:widget.CheckBox'}}
+</div>
+<div>
+    NumericInput
+    {{widget 'NumericInput' 'label' data-var-name='widgetTest:widget.NumericInput'}}
+    {{widget 'NumericInput' data-var-name='widgetTest:widget.NumericInput'}}
+</div>
+<div>
+    NumericOutput
+    {{widget 'NumericOutput' 'label' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'NumericOutput' data-var-name='widgetTest:widget.NumericOutput'}}
+</div>
+<div>
+    TextInput
+    {{widget 'TextInput' 'label' data-var-name='widgetTest:widget.LabeledTextInput'}}
+    {{widget 'TextInput' data-var-name='widgetTest:widget.LabeledTextInput'}}
+</div>
+<div>
+    TextOutput
+    {{widget 'TextOutput' 'label' data-var-name='widgetTest:widget.LabeledTextOutput'}}
+    {{widget 'TextOutput' data-var-name='widgetTest:widget.LabeledTextOutput'}}
+</div>
+<div>
+    ValueUpDown
+    {{widget 'ValueUpDown'data-var-name='widgetTest:widget.ValueUpDown'}}
+</div>
+<!-- columns aren't being counted correctly i.e. shouldn't have to specify column count here-->
+<div>
+    Columns
+    {{#widget 'Columns' 'label' maxColumns=2}}
+        <div style="text-align:center">Column 1 Header</div>
+        <div style="text-align:center">Column 2 Header</div>
+        {{widget 'NumericOutput' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'NumericOutput' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'NumericOutput' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'NumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{/widget}}
+    {{#widget 'Columns' maxColumns=2}}
+        <div style="text-align:center">Column 1 Header</div>
+        <div style="text-align:center">Column 2 Header</div>
+        {{widget 'NumericOutput' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'NumericOutput' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'NumericOutput' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'NumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{/widget}}
+</div>
+<div>
+    ColumnsBs
+    {{#widget 'ColumnsBs' maxColumns=2}}
+        {{widget 'Led' "Input1"}}
+        {{widget 'Led' "Input2"}}
+        {{widget 'Led' "Input3"}}
+        {{widget 'Led' "Input4"}}
+    {{/widget}}
+</div>
 <!-- needs to be a REAL var range: [-1,1] -->
-{{widget 'Slider' data-var-name='widgetTest:widget.Slider'}}
+<div>
+    Slider
+    {{widget 'Slider' data-var-name='widgetTest:widget.Slider'}}
+</div>
 
 <!-- console errors below - passing undefined to handerbars compiled file?? -->
 
@@ -168,16 +186,17 @@ setting to negative or a high number shows no element selected
     {{/repeat}}
 </options>
 {{/widget}} --}}
-
 <!-- not sure what the labeled part is here 
 don't worry about this -->
-{{#widget 'LabeledList' 'Test'}}
-    <div>list item 1</div>
-    <div>list item 2</div>
-    <div>list item 3</div>
-    <div>list item 4</div>
-{{/widget}}
-
+<div>
+    LabeledList
+    {{#widget 'LabeledList' 'Test'}}
+        <div>list item 1</div>
+        <div>list item 2</div>
+        <div>list item 3</div>
+        <div>list item 4</div>
+    {{/widget}}
+</div>
 <!-- non selected pages don't exist on the dom -->
 {{widget 'PageSelect' 'Page 1' dom="container1" template="page1"}}
 {{widget 'PageSelect' 'Page 2' dom="container1" template="page2"}}
@@ -190,12 +209,16 @@ page1
 page2
 </script>
 <div id="container1">
-
 </div>
-
 <!-- service mode when refresh bool flipped? -->
-{{widget 'DirectoryBrowser' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-will-open='widgetTest:f.in.refresh'}}
-{{widget 'DirectoryBrowserWindow' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-will-open='widgetTest:f.in.refresh'}}
+<div>
+    DirectoryBrowser
+    {{widget 'DirectoryBrowser' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-will-open='widgetTest:f.in.refresh'}}
+</div>
+<div>
+    DirectoryBrowserWindow
+    {{widget 'DirectoryBrowserWindow' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-will-open='widgetTest:f.in.refresh'}}
+</div>
 
 <!-- ask katie or jack 
 {{widget 'NumGrid'}}-->

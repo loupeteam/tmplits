@@ -32,11 +32,18 @@ export function WidgetNumericInput(context, args) {
     if (args.children == "" && context[0]) {
         args.children = `${context[0]}`
     }
-    const result = args.children.replace(/([A-Z])/g, " $1");
+    const result = args.children.replace(/([a-z][A-Z])/g, " $1");
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+
+    let label = '' 
+    if (context[0]){
+        label = `<span class='input-group-addon'> ${finalResult} </span>`
+    }
+
     return `
-    <div class="${classList.join(' ')}">
+    <div class="${classList.join(' ')}" ${attr} >
     <input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>
+    ${label}
     </div>
-   `
+    `
 }

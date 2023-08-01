@@ -15,7 +15,7 @@
 
 import * as util from "../widgets-utilities/module.js"
 
-export function WidgetLabeledTextInput(context, args) {
+export function WidgetTextInput(context, args) {
 
     //Get cleaned up values from args
     let {
