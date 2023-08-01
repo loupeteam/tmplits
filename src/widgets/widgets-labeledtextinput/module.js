@@ -30,10 +30,16 @@ export function WidgetLabeledTextInput(context, args) {
     }
     const result = args.children.replace(/([A-Z])/g, " $1");
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+
+    let label = '' 
+    if(context[0]){
+        label = `<span class='input-group-addon'> ${finalResult} </span>`
+    }
+
     return `
     <div class="${classList.join(' ')}" ${attr} >
     <input class='form-control webhmi-text-value' ${attr}/>
-    <span class='input-group-addon'>${finalResult}</span>
+    ${label}
     </div>
    `
 }

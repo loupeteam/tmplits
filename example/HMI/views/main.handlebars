@@ -9,16 +9,19 @@
 {{widget 'CheckBox' data-var-name='widgetTest:widget.CheckBox'}}
 {{widget 'NumericInput' data-var-name='widgetTest:widget.NumericInput'}}
 {{widget 'NumericOutput' data-var-name='widgetTest:widget.NumericOutput'}}
+<div>EXAMPLE</div>
 {{widget 'LabeledNumericInput' 'Labeled Numeric Input' data-var-name='widgetTest:widget.LabeledNumericInput'}}
 {{widget 'LabeledNumericInput' data-var-name='widgetTest:widget.LabeledNumericInput'}}
+<div>END OF EXAMPLE</div>
 {{widget 'LabeledNumericOutput' 'Labeled Numeric Output' data-var-name='widgetTest:widget.LabeledNumericInput'}}
 {{widget 'LabeledNumericOutput' data-var-name='widgetTest:widget.LabeledNumericInput'}}
 {{widget 'LabeledTextInput' 'Labeled Text Input' data-var-name='widgetTest:widget.LabeledTextInput'}}
+{{widget 'LabeledTextInput' data-var-name='widgetTest:widget.LabeledTextInput'}}
 {{widget 'LabeledTextOutput' 'Labeled Text Output'data-var-name='widgetTest:widget.LabeledTextOutput'}}
 {{widget 'LabeledTextOutput' data-var-name='widgetTest:widget.LabeledTextOutput'}}
 {{widget 'TextOutput' data-var-name='widgetTest:widget.TextOutput'}}
 {{widget 'ValueUpDown'data-var-name='widgetTest:widget.ValueUpDown'}}
-{{#widget 'LabeledColumns' style="grid-column: span 3;" }}
+{{#widget 'LabeledColumns' 'Header' style="grid-column: span 3;" }}
     <div style="text-align:center">Column 1 Header</div>
     <div style="text-align:center">Column 2 Header</div>
     <div style="text-align:center">Column 3 Header</div>
@@ -29,7 +32,7 @@
     {{widget 'LabeledNumericOutput' 'Contents 5' data-var-name='widgetTest:widget.NumericOutput'}}
     {{widget 'LabeledNumericOutput' 'Contents 6' data-var-name='widgetTest:widget.NumericOutput'}}
 {{/widget}}
-{{#widget 'Columns' style="grid-column: span 3;" }}
+{{#widget 'LabeledColumns' style="grid-column: span 3;" }}
     <div style="text-align:center">Column 1 Header</div>
     <div style="text-align:center">Column 2 Header</div>
     <div style="text-align:center">Column 3 Header</div>
@@ -55,7 +58,7 @@
 
 <!-- console errors below - passing undefined to handerbars compiled file?? -->
 
-{{#widget 'Dropdown' data-var-name='widgetTest:widget.Dropdown'}}
+{{!-- {{#widget 'Dropdown' data-var-name='widgetTest:widget.Dropdown'}}
 <dropdown>
     <div>Not Option</div>
     <div class="option">Option 1</div>
@@ -64,7 +67,7 @@
     <div>Not Option</div>
     <div class="option">Option 3</div>
 </dropdown>
-{{/widget}}
+{{/widget}} --}}
 
 
 <!-- what is the difference between dropdown and dropdown table? -->

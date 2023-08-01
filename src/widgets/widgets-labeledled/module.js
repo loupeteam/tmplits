@@ -53,20 +53,16 @@ export function WidgetLabeledLed(context, args) {
         attr += `data-var-name='${buttonVarName}'`
     }
 
+    let label = '' 
     if (context[0]){
         classList = classList.concat(['input-group', 'form-control', 'label-led' ])
-        return `
-            <div class="${classList.join(' ')}" ${attr}>
-            <div class='led webhmi-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
-            <div class='led-label' style='${labelStyle}' >${finalResult}</div>
-            </div>
-        `
-    }
-    else{
-        return `
+        label = `<div class='led-label' style='${labelStyle}' >${finalResult}</div>`
+    } 
+
+    return `
         <div class="${classList.join(' ')}" ${attr}>
         <div class='led webhmi-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
+        ${label}
         </div>
-       `
-    }
+    `
 }

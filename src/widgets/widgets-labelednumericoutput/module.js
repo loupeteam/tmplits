@@ -34,20 +34,16 @@ export function WidgetLabeledNumericOutput(context, args) {
     }
     const result = args.children.replace(/([A-Z])/g, " $1");
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-    
+
+    let label = '' 
     if (context[0]){
-        return `
+        label = `<span class='input-group-addon'>${finalResult}</span>`
+    }
+    
+    return `
         <div class="${classList.join(' ')}" ${attr} >
-        <span class='input-group-addon'>${finalResult}</span>
+        ${label}
         <div class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>
         </div>
-    `
-    }
-    else{
-        return `
-        <div class="${classList.join(' ')}">
-        <div class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>
-        </div>
-       `
-    }
+        `
 }

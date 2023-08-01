@@ -30,19 +30,16 @@ export function WidgetLabeledTextOutput(context, args) {
     }
     const result = args.children.replace(/([A-Z])/g, " $1");
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-    if(context[0]){
-        return `
-        <div class="${classList.join(' ')}" ${attr} >
-        <span class='input-group-addon'>${finalResult}</span>
-        <div class='form-control webhmi-text-value' ${attr}></div>
-        </div>
-    `
+
+    let label = '' 
+    if (context[0]){
+        label = `<span class='input-group-addon'> ${finalResult} </span>`
     }
-   else{
-        return `
+
+    return `
         <div class="${classList.join(' ')}" ${attr} >
+        ${label}
         <div class='form-control webhmi-text-value' ${attr}></div>
         </div>
-    `
-   }
+        `
 }
