@@ -13,6 +13,8 @@
 //    return `Hello ${context[0]}!`
 //}
 
+
+
 export class multiOptionSelector{
     static selected(el, click) {
         let index = el.getAttribute('data-index')

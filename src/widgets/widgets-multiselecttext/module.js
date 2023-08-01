@@ -74,6 +74,6 @@ export function WidgetMultiSelectText(context, args) {
     args.children = options
     let inner = WidgetColumns( context, args)
     return `
-<div class="${classList.join(' ')}">${inner}</div>    
+    <div class="${classList.join(' ')}">${inner}</div>    
     ` 
 }

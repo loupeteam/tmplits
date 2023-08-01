@@ -28,10 +28,7 @@ export function WidgetLabeledColumns(context, args) {
     } = util.cleanArgs(_args)
 
     //Add our classes
-    classList = classList.concat(['lui-grid', 'lui-grid-labeled'])
-
-    //Get the header
-    let header = context?.[0] || ' '
+    classList = classList.concat(['lui-grid'])
 
     //Read the nodes and clean them up to figure out how many columns/rows
     let nodes = util.htmlToElements(args.children)
@@ -61,10 +58,22 @@ export function WidgetLabeledColumns(context, args) {
     //This ensures the size is the same but there is a small gap for the border
     // style += `padding: 2px; margin: -2px;`
 
-    return `
-    <div ${attr} class='${classList.join(' ')}' style="${style};">
-        <div class='lui-grid-heading' style="grid-column: span ${columns}; margin: auto;">${header}</div>
-        ${children}
-    </div>
-   `
+    if (context[0]){
+        //Get the header
+        let header = context?.[0] || ' '
+        classList = classList.concat(['lui-grid-labeled'])
+        return `
+        <div ${attr} class='${classList.join(' ')}' style="${style};">
+            <div class='lui-grid-heading' style="grid-column: span ${columns}; margin: auto;">${header}</div>
+            ${children}
+        </div>
+        `
+    }
+    else{
+        return `
+        <div ${attr} class='${classList.join(' ')}' style="${style}">
+            ${children}
+        </div>
+       `
+    }
 }
