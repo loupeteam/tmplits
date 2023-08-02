@@ -17,5 +17,6 @@ TYPE
 		SetButton : BOOL;
 		ToggleButton : BOOL;
 		MomentaryButton : BOOL;
+		TextInput : STRING[80];
 	END_STRUCT;
 END_TYPE
