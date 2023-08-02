@@ -76,12 +76,12 @@
 
 <!-- console errors below - passing undefined to handerbars compiled file?? -->
 
-{{#widget 'Dropdown' data-var-name='widgetTest:widget.Dropdown'}}
+{{!-- {{#widget 'Dropdown'}}
 <dropdown>
     <div class="option">Option 1</div>
     <div class="option">Option 2</div>
 </dropdown>
-{{/widget}}
+{{/widget}} --}}
 
 
 <!-- what is the difference between dropdown and dropdown table? -->
@@ -112,14 +112,14 @@ TODO: should be combined smartly
 Just writes the index of the dropdown as a string - is this intended?
 probably needs to retruen text string not index same as multiselecttext
  -->
-{{!-- {{#widget 'DropdownTableText' data-var-name='widgetTest:widget.DropdownTableText'}}
+{{#widget 'DropdownTableText' data-var-name-field='widgetTest:widget.DropdownTableText'}}
     <options>
         <div>Option many :1</div>
         <div>Option many :2</div>
         <div>Option many :3</div>
         <div>Option many :4</div>
     </options>
-{{/widget}} --}}
+{{/widget}}
 
 <!-- not sure how to demo this one
 don't worry about this one could be broken -->
