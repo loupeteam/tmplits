@@ -1,15 +1,10 @@
 
 TYPE
 	widget_typ : 	STRUCT 
-		LabeledLed : BOOL;
 		Led : BOOL;
 		CheckBox : BOOL;
 		NumericInput : REAL;
 		NumericOutput : REAL;
-		LabeledNumericInput : REAL;
-		LableledNumericInput : REAL;
-		LabeledTextInput : STRING[80];
-		LabeledTextOutput : STRING[80];
 		TextOutput : STRING[80];
 		ValueUpDown : UDINT;
 		Slider : REAL;

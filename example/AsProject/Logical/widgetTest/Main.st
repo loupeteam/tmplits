@@ -2,8 +2,6 @@
 PROGRAM _INIT
 	
 	// initialize output widgets
-	widget.LabeledLed := TRUE;
-	widget.LabeledTextOutput := 'test';
 	widget.Led := TRUE;
 	widget.NumericOutput := 123;
 	widget.TextOutput := 'test';
