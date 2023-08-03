@@ -20,6 +20,8 @@ export function WidgetValueUpDown(context, args) {
         style = '',
             ['data-var-name']: dataVarName,
             increment = 1,
+            min = 0,
+            max = 100,
             buttonStyle = '',
             inputStyle = '',
             ..._args
@@ -38,18 +40,19 @@ export function WidgetValueUpDown(context, args) {
     if (dataVarName) {
         innerClassList.push('webhmi-num-value')
     }
-    let inner;
+    let inner = '';
     if (args.children) {
-        inner = `<input class='${innerClassList.join(' ')}' value="${context}" style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''} />`
+        inner = `<input class='${innerClassList.join(' ')}' style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''}' />`
         inner += args.children
     } else {
-        inner = `<input class='${innerClassList.join(' ')}' value="${context}" style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''} />`
+        inner = `<input class='${innerClassList.join(' ')}' style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''}' />`
     }
+
     return `
     <div class="${classList.join(' ')}" style='${style}'>
-    <span class='glyphicon glyphicon-chevron-down lui-increment' increment=${-increment}  style="${buttonStyle}"></span>
+    <span class='glyphicon glyphicon-chevron-down lui-increment' increment=${-increment} min=${min} style="${buttonStyle}"></span>
     ${inner}
-    <span class='glyphicon glyphicon-chevron-up lui-increment' increment=${increment} style="${buttonStyle}"></span>
+    <span class='glyphicon glyphicon-chevron-up lui-increment' increment=${increment} max=${max} style="${buttonStyle}"></span>
     </div>
 `
 }

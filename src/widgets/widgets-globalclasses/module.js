@@ -517,7 +517,30 @@ export function luiIncrementValue(selected) {
         value = +target?.[0].value
     }
 
-    let increment = +selected.currentTarget.getAttribute('increment');
+    let increment;
+    let max = selected.currentTarget.getAttribute('max');
+    let min = selected.currentTarget.getAttribute('min');
+    
+    // down arrow pressed
+    if (max === null){
+        let minValue = Number(min);
+        if (value > minValue){
+            increment = +selected.currentTarget.getAttribute('increment');
+        } else {
+            increment = 0;
+        }
+    }
+
+    // up arrow pressed
+    if (min === null){
+        let maxValue = Number(max);
+        if (value < maxValue){
+            increment = +selected.currentTarget.getAttribute('increment');
+        } else {
+            increment = 0;
+        }
+    }
+
     target.forEach((e) => {
         e.value = value + increment
         let evt = new Event("change", {
