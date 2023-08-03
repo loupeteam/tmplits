@@ -1,44 +1,51 @@
-<!--{{> components}}-->
 <div>
     Button
-    {{widget 'Button' 'SetButton' 'set' data-var-name='widgetTest:widget.SetButton'}}
-    {{widget 'Button' 'ToggleButton' 'toggle' data-var-name='widgetTest:widget.ToggleButton'}}
-    {{widget 'Button' 'MomentaryButton' 'momentary' data-var-name='widgetTest:widget.MomentaryButton'}}
+    {{widget 'Button' 'SetButton' buttonType='set' data-var-name='widgetTest:widget.SetButton'}}
+    {{widget 'Button' 'ToggleButton' buttonType='toggle' data-var-name='widgetTest:widget.ToggleButton'}}
+    {{widget 'Button' 'MomentaryButton' buttonType='momentary'  data-var-name='widgetTest:widget.MomentaryButton'}}
 </div>
+
 <div>
     Led
     {{widget 'Led' 'label' data-var-name='widgetTest:widget.Led'}}
     {{widget 'Led' data-var-name='widgetTest:widget.Led'}}
 </div>
+
 <!-- style it different to differentiate from simple led -->
 <div>
     CheckBox
     {{widget 'CheckBox' data-var-name='widgetTest:widget.CheckBox'}}
 </div>
+
 <div>
     NumericInput
     {{widget 'NumericInput' 'label' data-var-name='widgetTest:widget.NumericInput'}}
     {{widget 'NumericInput' data-var-name='widgetTest:widget.NumericInput'}}
 </div>
+
 <div>
     NumericOutput
     {{widget 'NumericOutput' 'label' data-var-name='widgetTest:widget.NumericOutput'}}
     {{widget 'NumericOutput' data-var-name='widgetTest:widget.NumericOutput'}}
 </div>
+
 <div>
     TextInput
     {{widget 'TextInput' 'label' data-var-name='widgetTest:widget.TextInput'}}
     {{widget 'TextInput' data-var-name='widgetTest:widget.TextInput'}}
 </div>
+
 <div>
     TextOutput
     {{widget 'TextOutput' 'label' data-var-name='widgetTest:widget.TextOutput'}}
     {{widget 'TextOutput' data-var-name='widgetTest:widget.TextOutput'}}
 </div>
+
 <div>
     ValueUpDown
     {{widget 'ValueUpDown'data-var-name='widgetTest:widget.ValueUpDown'}}
 </div>
+
 <!-- columns aren't being counted correctly i.e. shouldn't have to specify column count here-->
 <div>
     Columns
@@ -59,6 +66,7 @@
         {{widget 'NumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
     {{/widget}}
 </div>
+
 <div>
     ColumnsBs
     {{#widget 'ColumnsBs' maxColumns=2}}
@@ -68,10 +76,11 @@
         {{widget 'Led' "Input4"}}
     {{/widget}}
 </div>
+
 <!-- needs to be a REAL var range: [-1,1] -->
 <div>
     Slider
-    {{widget 'Slider' data-var-name='widgetTest:widget.Slider'}}
+    {{widget 'Slider' data-var-name='widgetTest:widget.Slider' min=0 max=255}}
 </div>
 
 <!-- console errors below - passing undefined to handerbars compiled file?? -->
@@ -85,29 +94,9 @@
     {{/widget}}
 </div>
 
-<!-- what is the difference between dropdown and dropdown table? -->
-<!-- drop down uses the dropdown html element and table does not use that but essentially the same thing-->
-<div>
-    DropdownTable
-    {{#widget 'DropdownTable' data-var-name='widgetTest:widget.DropdownTable'}}
-        <options>
-            <div>Option many :1</div>
-            <div>Option many :2</div>
-            <div>Option many :3</div>
-            <div>Option many :4</div>
-        </options>
-    {{/widget}}
-</div>
-
-<!-- where is the text part?
-non-text returns number to plc and text returns string value
-TODO: should be combined smartly
-Just writes the index of the dropdown as a string - is this intended?
-probably needs to retruen text string not index same as multiselecttext
- -->
  <div>
-    DropdownTableText
-    {{#widget 'DropdownTableText' data-var-name-field='widgetTest:widget.DropdownTableText'}}
+    DropdownTable
+    {{#widget 'DropdownTable' data-var-name='widgetTest:widget.DropdownTable_INT' data-var-name-field='widgetTest:widget.DropdownTable_STRING'}}
         <options>
             <div>Option many :1</div>
             <div>Option many :2</div>
@@ -156,6 +145,7 @@ don't worry about this -->
         <div>list item 4</div>
     {{/widget}}
 </div>
+
 <!-- non selected pages don't exist on the dom -->
 {{widget 'PageSelect' 'Page 1' dom="container1" template="page1"}}
 {{widget 'PageSelect' 'Page 2' dom="container1" template="page2"}}
@@ -169,17 +159,22 @@ page2
 </script>
 <div id="container1">
 </div>
+
 <!-- service mode when refresh bool flipped? -->
 <div>
     DirectoryBrowser
     {{widget 'DirectoryBrowser' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-will-open='widgetTest:f.in.refresh'}}
 </div>
+
 <div style="width:100%;height:300px;">
     DirectoryBrowserWindow
     {{widget 'DirectoryBrowserWindow' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-will-open='widgetTest:f.in.refresh'}}
 </div>
+
 <div style="height:100px;">spacer</div>
+
 {{widget 'Button' 'MomentaryButton' 'momentary' data-var-name='widgetTest:f.in.refresh'}}
+
 <!-- ask katie or jack 
 {{widget 'NumGrid'}}-->
 

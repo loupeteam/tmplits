@@ -27,7 +27,6 @@ export function WidgetButton(context, args) {
         args.children = `${context[0]}`
     }
 
-    util.getButtonType(context[1], classList)
     util.getButtonType(buttonType, classList)
 
     return `<button type='button' class="${classList.join(" ")}"  ${attr}> ${args.children ? args.children : 'Label'} </button>`
