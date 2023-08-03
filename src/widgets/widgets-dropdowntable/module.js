@@ -13,37 +13,6 @@
 //    return `Hello ${context[0]}!`
 //}
 
-/*
-Create a dropdown and field
-The dropdown is a table where each row is defined by an 'option'
-Several options can be given at once with 'options' and each node will be considered an option
-
-Options:
-Set=false to disable setting the field to the selection
-
-<button><-----------------field---------->
-<table>
-    <tbody>
-        <tr><td>[Option]</td><tr/>
-        <tr><td>[Option]</td><tr/>
-        <tr><td>[Option]</td><tr/>    
-    <tbody>
-</table>
-
-Example drop down usage:
-    {{#widget 'dropdown' [set=false/true] }}
-    <field>
-        <input placeholder="Select Operation" class='webhmi-dropdown'/>        
-    </field>
-    <options>
-        {{#repeat 5}}
-        <div>Operation {{@index}}</div>
-        {{/repeat}}
-    </options>
-    <option>Extra Option</option>
-    {{/widget}}
-*/
-
 import * as util from "../widgets-utilities/module.js"
 
 export function WidgetDropdownTable(context, args) {
@@ -125,7 +94,7 @@ export function WidgetDropdownTable(context, args) {
         field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} lui-select-text${dataVarNameField ? ' webhmi-text-value' : ''}'>`
     }
     if( dataVarName ){
-        field += `<invisible-input class='webhmi-num-value lui-select-value' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
+        field += `<invisible-input class='webhmi-text-value lui-select-value' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
     }
 
     let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.()"` : ''
