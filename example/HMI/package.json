@@ -28,7 +28,6 @@
     "@loupeteam/widgets-slider": "file:../../src/widgets/widgets-slider/",
     "@loupeteam/widgets-dropdown": "file:../../src/widgets/widgets-dropdown/",
     "@loupeteam/widgets-dropdowntable": "file:../../src/widgets/widgets-dropdowntable/",
-    "@loupeteam/widgets-dropdowntabletext": "file:../../src/widgets/widgets-dropdowntabletext/",
     "@loupeteam/widgets-tableselect": "file:../../src/widgets/widgets-tableselect/",
     "@loupeteam/widgets-multiselect": "file:../../src/widgets/widgets-multiselect/",
     "@loupeteam/widgets-labeledlist": "file:../../src/widgets/widgets-labeledlist/",
