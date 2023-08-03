@@ -76,7 +76,6 @@ export function WidgetDropdownTableText(context, args) {
                         e = util.htmlToElement(`<tr><td> ${e.outerHTML} </td></tr>`)
                         e.setAttribute('onclick', click)
                         e.setAttribute('data-index', index++)
-                        console.log(e.cells[0].innerText)
                         e.classList.add('option')
                         options += e.outerHTML
                     }

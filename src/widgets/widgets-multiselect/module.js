@@ -19,6 +19,7 @@ export function WidgetMultiSelect(context, args) {
 
     let {        
         ['data-var-name']:dataVarName,
+        ['data-var-name-field']:dataVarNameField,
         style = '', ..._args
     } = args.hash
     //Get cleaned up values from args
@@ -69,11 +70,16 @@ export function WidgetMultiSelect(context, args) {
         }
     }
 
-    options += `<invisible-input class="lui-select-value webhmi-num-value" style="display:none" value="${context}" ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
-
+    if(dataVarName){
+        options += `<invisible-input class="lui-select-value webhmi-num-value" style="display:none" value="${context}" ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
+    }
+    if(dataVarNameField){
+         options += `<invisible-input class="lui-select-text webhmi-text-value" style="display:none" value="${context}" ${dataVarNameField?'data-var-name="' + dataVarNameField +'"':''} ></invisible-input>`
+    }
+    
     args.children = options
     let inner = WidgetColumns( context, args)
     return `
-<div class="${classList.join(' ')}">${inner}</div>    
+    <div class="${classList.join(' ')}">${inner}</div>    
     ` 
 }

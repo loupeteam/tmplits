@@ -75,36 +75,29 @@
 </div>
 
 <!-- console errors below - passing undefined to handerbars compiled file?? -->
-
-{{!-- {{#widget 'Dropdown'}}
-<dropdown>
-    <div class="option">Option 1</div>
-    <div class="option">Option 2</div>
-</dropdown>
-{{/widget}} --}}
-
+<div>
+    Dropdown
+    {{#widget 'Dropdown' data-var-name='widgetTest:widget.Dropdown'}}
+        <dropdown>
+            <div class="option">Option 1</div>
+            <div class="option">Option 2</div>
+        </dropdown>
+    {{/widget}}
+</div>
 
 <!-- what is the difference between dropdown and dropdown table? -->
 <!-- drop down uses the dropdown html element and table does not use that but essentially the same thing-->
-{{!-- {{#widget 'DropdownTable' data-var-name='widgetTest:widget.Dropdown'}}
-    <options>
-        <div>Option many :1</div>
-        <div>Option many :2</div>
-        <div>Option many :3</div>
-        <div>Option many :4</div>
-    </options>
-    <option>
-        <div>Individual Option 1</div>
-    </option>
-    <option>
-        <div>Individual Option 2</div>
-    </option>
-    <options>
-        {{#repeat 4}}
-        <div>Repeat {{@index}}</div>
-        {{/repeat}}
-    </options>
-{{/widget}} --}}
+<div>
+    DropdownTable
+    {{#widget 'DropdownTable' data-var-name='widgetTest:widget.DropdownTable'}}
+        <options>
+            <div>Option many :1</div>
+            <div>Option many :2</div>
+            <div>Option many :3</div>
+            <div>Option many :4</div>
+        </options>
+    {{/widget}}
+</div>
 
 <!-- where is the text part?
 non-text returns number to plc and text returns string value
@@ -112,76 +105,46 @@ TODO: should be combined smartly
 Just writes the index of the dropdown as a string - is this intended?
 probably needs to retruen text string not index same as multiselecttext
  -->
-{{#widget 'DropdownTableText' data-var-name-field='widgetTest:widget.DropdownTableText'}}
-    <options>
-        <div>Option many :1</div>
-        <div>Option many :2</div>
-        <div>Option many :3</div>
-        <div>Option many :4</div>
-    </options>
-{{/widget}}
+ <div>
+    DropdownTableText
+    {{#widget 'DropdownTableText' data-var-name-field='widgetTest:widget.DropdownTableText'}}
+        <options>
+            <div>Option many :1</div>
+            <div>Option many :2</div>
+            <div>Option many :3</div>
+            <div>Option many :4</div>
+        </options>
+    {{/widget}}
+ </div>
 
 <!-- not sure how to demo this one
 don't worry about this one could be broken -->
-{{!-- {{#widget 'TableSelect' data-var-name='widgetTest:widget.TableSelect'}}
-<dropdown>
-    <div>Not Option</div>
-    <div class="option">Option 1</div>
-    <div>Not Option</div>
-    <div class="option">Option 2</div>
-    <div>Not Option</div>
-    <div class="option">Option 3</div>
-</dropdown>
-<div>Hello</div>
-{{/widget}} --}}
+<div>
+    TableSelect
+    {{#widget 'TableSelect' data-var-name='widgetTest:widget.TableSelect'}}
+        <dropdown>
+            <div>Not Option</div>
+            <div class="option">Option 1</div>
+            <div>Not Option</div>
+            <div class="option">Option 2</div>
+            <div>Not Option</div>
+            <div class="option">Option 3</div>
+        </dropdown>
+    {{/widget}}
+</div>
 
-<!-- writes the index integer -->
-{{!-- {{#widget 'MultiSelect' maxColumns=10 data-var-name='widgetTest:widget.MultiSelect'}}
-<options>
-    <div>Option many :1</div>
-    <div>Option many :2</div>
-    <div>Option many :3</div>
-    <div>Option many :4</div>
-</options>
-<option>
-    <div>Individual Option 1</div>
-</option>
-<option>
-    <div>Individual Option 2</div>
-</option>
-<options>
-    {{#repeat 4}}
-    <div>Repeat {{@index}}</div>
-    {{/repeat}}
-</options>
-{{/widget}} --}}
+<div>
+    MultiSelect
+    {{#widget 'MultiSelect' maxColumns=10 data-var-name="widgetTest:widget.MultiSelect_INT" data-var-name-field="widgetTest:widget.MultiSelect_STRING"}}
+        <options>
+            <div>Option many :1</div>
+            <div>Option many :2</div>
+            <div>Option many :3</div>
+            <div>Option many :4</div>
+        </options>
+    {{/widget}}
+</div>
 
-
-<!-- how is this different from multiselect? 
-non-text returns number to plc and text returns string value
-TODO: should be combined smartly
-writes the index as an integer
-setting to negative or a high number shows no element selected
--->
-{{!-- {{#widget 'MultiSelectText' maxColumns=10 data-var-name="widgetTest:widget.MultiSelectText"}}
-<options>
-    <div>Option many :1</div>
-    <div>Option many :2</div>
-    <div>Option many :3</div>
-    <div>Option many :4</div>
-</options>
-<option>
-    <div>Individual Option 1</div>
-</option>
-<option>
-    <div>Individual Option 2</div>
-</option>
-<options>
-    {{#repeat 4}}
-    <div>Repeat {{@index}}</div>
-    {{/repeat}}
-</options>
-{{/widget}} --}}
 <!-- not sure what the labeled part is here 
 don't worry about this -->
 <div>

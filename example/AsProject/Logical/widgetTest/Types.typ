@@ -12,8 +12,8 @@ TYPE
 		DropdownTable : USINT;
 		DropdownTableText : STRING[80];
 		TableSelect : USINT;
-		MultiSelect : SINT;
-		MultiSelectText : STRING[80];
+		MultiSelect_INT : SINT;
+		MultiSelect_STRING : STRING[80];
 		SetButton : BOOL;
 		ToggleButton : BOOL;
 		MomentaryButton : BOOL;

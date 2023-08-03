@@ -31,7 +31,6 @@
     "@loupeteam/widgets-dropdowntabletext": "file:../../src/widgets/widgets-dropdowntabletext/",
     "@loupeteam/widgets-tableselect": "file:../../src/widgets/widgets-tableselect/",
     "@loupeteam/widgets-multiselect": "file:../../src/widgets/widgets-multiselect/",
-    "@loupeteam/widgets-multiselecttext": "file:../../src/widgets/widgets-multiselecttext/",
     "@loupeteam/widgets-labeledlist": "file:../../src/widgets/widgets-labeledlist/",
     "@loupeteam/widgets-pageselect": "file:../../src/widgets/widgets-pageselect/",
     "@loupeteam/widgets-page": "file:../../src/widgets/widgets-page/",
