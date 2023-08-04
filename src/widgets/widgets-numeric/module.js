@@ -15,10 +15,12 @@
 
 import * as util from "../widgets-utilities/module.js"
 
-export function WidgetNumericOutput(context, args) {
+export function WidgetNumeric(context, args) {
 
     let {
-        ['data-var-name']: dataVarName, ..._args
+        ['data-var-name']: dataVarName,
+        type= 'output',
+        ..._args
     } = args.hash
 
     //Get cleaned up values from args
@@ -32,18 +34,26 @@ export function WidgetNumericOutput(context, args) {
     if (args.children == "" && context[0]) {
         args.children = `${context[0]}`
     }
-    const result = args.children.replace(/([A-Z])/g, " $1");
+    const result = args.children.replace(/([a-z][A-Z])/g, " $1");
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
 
     let label = '' 
     if (context[0]){
-        label = `<span class='input-group-addon'>${finalResult}</span>`
+        label = `<span class='input-group-addon'> ${finalResult} </span>`
     }
-    
+
+    let field = '' 
+    if (type === 'output'){
+        field = `<div class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
+    } else if (type === 'input'){
+        field = `<input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } type='number' ${attr}/>`
+    }
+
     return `
-        <div class="${classList.join(' ')}" ${attr} >
-        ${label}
-        <div class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>
-        </div>
-        `
+    <div class="${classList.join(' ')}" ${attr} >
+    ${type === 'output' ? label : ''}
+    ${field}
+    ${type === 'input' ? label : ''}
+    </div>
+    `
 }

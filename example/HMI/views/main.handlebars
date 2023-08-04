@@ -18,27 +18,21 @@
 </div>
 
 <div>
-    NumericInput
-    {{widget 'NumericInput' 'label' data-var-name='widgetTest:widget.NumericInput'}}
-    {{widget 'NumericInput' data-var-name='widgetTest:widget.NumericInput'}}
+    Numeric (output)
+    {{widget 'Numeric' 'label' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'Numeric' data-var-name='widgetTest:widget.NumericOutput'}}
+    Numeric (input)
+    {{widget 'Numeric' 'label' type='input' data-var-name='widgetTest:widget.NumericInput'}}
+    {{widget 'Numeric' type='input' data-var-name='widgetTest:widget.NumericInput'}}
 </div>
 
 <div>
-    NumericOutput
-    {{widget 'NumericOutput' 'label' data-var-name='widgetTest:widget.NumericOutput'}}
-    {{widget 'NumericOutput' data-var-name='widgetTest:widget.NumericOutput'}}
-</div>
-
-<div>
-    TextInput
-    {{widget 'TextInput' 'label' data-var-name='widgetTest:widget.TextInput'}}
-    {{widget 'TextInput' data-var-name='widgetTest:widget.TextInput'}}
-</div>
-
-<div>
-    TextOutput
-    {{widget 'TextOutput' 'label' data-var-name='widgetTest:widget.TextOutput'}}
-    {{widget 'TextOutput' data-var-name='widgetTest:widget.TextOutput'}}
+    Text (output)
+    {{widget 'Text' 'label' data-var-name='widgetTest:widget.TextInput'}}
+    {{widget 'Text' data-var-name='widgetTest:widget.TextInput'}}
+    Text (input)
+    {{widget 'Text' 'label' type='input' data-var-name='widgetTest:widget.TextOutput'}}
+    {{widget 'Text' type='input' data-var-name='widgetTest:widget.TextOutput'}}
 </div>
 
 <div>
@@ -52,18 +46,18 @@
     {{#widget 'Columns' 'label' maxColumns=2}}
         <div style="text-align:center">Column 1 Header</div>
         <div style="text-align:center">Column 2 Header</div>
-        {{widget 'NumericOutput' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
-        {{widget 'NumericOutput' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
-        {{widget 'NumericOutput' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
-        {{widget 'NumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
     {{/widget}}
     {{#widget 'Columns' maxColumns=2}}
         <div style="text-align:center">Column 1 Header</div>
         <div style="text-align:center">Column 2 Header</div>
-        {{widget 'NumericOutput' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
-        {{widget 'NumericOutput' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
-        {{widget 'NumericOutput' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
-        {{widget 'NumericOutput' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
     {{/widget}}
 </div>
 

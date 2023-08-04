@@ -15,13 +15,19 @@
 
 import * as util from "../widgets-utilities/module.js"
 
-export function WidgetTextOutput(context, args) {
+export function WidgetText(context, args) {
+
+    let {
+        ['data-var-name']: dataVarName,
+        type= 'output',
+        ..._args 
+    } = args.hash
 
     //Get cleaned up values from args
     let {
         classList,
         attr
-    } = util.cleanArgs(args.hash)
+    } = util.cleanArgs(_args)
 
     classList = classList.concat(['input-group'])
 
@@ -32,14 +38,22 @@ export function WidgetTextOutput(context, args) {
     const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
 
     let label = '' 
-    if (context[0]){
+    if(context[0]){
         label = `<span class='input-group-addon'> ${finalResult} </span>`
     }
 
+    let field = ''
+    if (type === 'output'){
+        field = `<div class='form-control webhmi-text-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
+    } else if (type === 'input'){
+        field = `<input class='form-control webhmi-text-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>`
+    }
+
     return `
-        <div class="${classList.join(' ')}" ${attr} >
-        ${label}
-        <div class='form-control webhmi-text-value' ${attr}></div>
-        </div>
-        `
+    <div class="${classList.join(' ')}" ${attr} >
+    ${type === 'output' ? label : ''}
+    ${field}
+    ${type === 'input' ? label : ''}
+    </div>
+   `
 }
