@@ -42,7 +42,7 @@ export function WidgetNumericInput(context, args) {
 
     return `
     <div class="${classList.join(' ')}" ${attr} >
-    <input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>
+    <input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } type='number' ${attr}/>
     ${label}
     </div>
     `
