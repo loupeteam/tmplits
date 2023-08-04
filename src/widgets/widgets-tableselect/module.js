@@ -91,7 +91,7 @@ export function WidgetTableSelect(context, args) {
     <div style="overflow:auto;" class="list-view list-viewer-window">    
         ${dropdown}
     </div>
-        <div class="input-group size-fill-parent">
+        <div class="input-group" style="width:100%">
             ${field} 
             <button type="button" 
                 ${willOpenButton}
