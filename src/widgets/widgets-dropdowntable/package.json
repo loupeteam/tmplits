@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/widgets-dropdowntable",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@loupeteam/widgets-gizmo": "^0.0.11"
+    "@loupeteam/widgets-globalclasses" : "*",
+    "@loupeteam/widgets-utilities" : "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loupeteam/widgets.git"
   }
 }
