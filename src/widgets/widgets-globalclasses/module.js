@@ -521,8 +521,8 @@ export function luiIncrementValue(selected) {
     let max = selected.currentTarget.getAttribute('max');
     let min = selected.currentTarget.getAttribute('min');
     
-    // down arrow pressed
-    if (max === null){
+    // limit with min value
+    if ((max === null) && (min !== null)){
         let minValue = Number(min);
         if (value > minValue){
             increment = +selected.currentTarget.getAttribute('increment');
@@ -531,8 +531,8 @@ export function luiIncrementValue(selected) {
         }
     }
 
-    // up arrow pressed
-    if (min === null){
+    // limit with max value
+    if ((max !== null) && (min === null)){
         let maxValue = Number(max);
         if (value < maxValue){
             increment = +selected.currentTarget.getAttribute('increment');
