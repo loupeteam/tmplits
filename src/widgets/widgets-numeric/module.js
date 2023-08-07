@@ -46,7 +46,7 @@ export function WidgetNumeric(context, args) {
     if (type === 'output'){
         field = `<div class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
     } else if (type === 'input'){
-        field = `<input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } type='number' ${attr}/>`
+        field = `<input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>`
     }
 
     return `

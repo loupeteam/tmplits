@@ -42,20 +42,18 @@ export function WidgetValueUpDown(context, args) {
     }
     let inner = '';
     if (args.children) {
-        inner = `<input class='${innerClassList.join(' ')}' style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''}' type='number' min='${min}' max='${max}' />`
+        inner = `<input class='${innerClassList.join(' ')}' style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''}' min='${min}' max='${max}' />`
         inner += args.children
     } else {
-        inner = `<input class='${innerClassList.join(' ')}' style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''}' type='number' min='${min}' max='${max}' />`
+        inner = `<input class='${innerClassList.join(' ')}' style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''}' min='${min}' max='${max}' />`
     }
 
     return `
-    <form>
-        <div class="${classList.join(' ')}" style='${style}'>
-            <span class='glyphicon glyphicon-chevron-down lui-increment' increment=${-increment} min=${min} style="${buttonStyle}"></span>
-                ${inner}
-            <span class='glyphicon glyphicon-chevron-up lui-increment' increment=${increment} max=${max} style="${buttonStyle}"></span>
-        </div>
-    </form>
+    <div class="${classList.join(' ')}" style='${style}'>
+        <span class='glyphicon glyphicon-chevron-down lui-increment' increment=${-increment} min=${min} style="${buttonStyle}"></span>
+            ${inner}
+        <span class='glyphicon glyphicon-chevron-up lui-increment' increment=${increment} max=${max} style="${buttonStyle}"></span>
+    </div>
 
 `
 }
