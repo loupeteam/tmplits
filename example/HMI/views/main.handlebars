@@ -1,1 +1,162 @@
-{{> components}}
+<div>
+    Button
+    {{widget 'Button' 'SetButton' buttonType='set' data-var-name='widgetTest:widget.SetButton'}}
+    {{widget 'Button' 'ToggleButton' buttonType='toggle' data-var-name='widgetTest:widget.ToggleButton'}}
+    {{widget 'Button' 'MomentaryButton' buttonType='momentary' data-var-name='widgetTest:widget.MomentaryButton'}}
+</div>
+
+<div>
+    Led
+    {{widget 'Led' 'label' data-var-name='widgetTest:widget.Led'}}
+    {{widget 'Led' data-var-name='widgetTest:widget.Led'}}
+</div>
+
+<!-- style it different to differentiate from simple led -->
+<div>
+    CheckBox
+    {{widget 'CheckBox' 'Label' buttonType='toggle' data-var-name='widgetTest:widget.CheckBox'}}
+</div>
+
+<div>
+    Numeric (output)
+    {{widget 'Numeric' 'label' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{widget 'Numeric' data-var-name='widgetTest:widget.NumericOutput'}}
+    Numeric (input)
+    {{widget 'Numeric' 'label' type='input' data-var-name='widgetTest:widget.NumericInput'}}
+    {{widget 'Numeric' type='input' data-var-name='widgetTest:widget.NumericInput'}}
+</div>
+
+<div>
+    Text (output)
+    {{widget 'Text' 'label' data-var-name='widgetTest:widget.TextInput'}}
+    {{widget 'Text' data-var-name='widgetTest:widget.TextInput'}}
+    Text (input)
+    {{widget 'Text' 'label' type='input' data-var-name='widgetTest:widget.TextOutput'}}
+    {{widget 'Text' type='input' data-var-name='widgetTest:widget.TextOutput'}}
+</div>
+
+<div>
+    ValueUpDown
+    {{widget 'ValueUpDown' data-var-name='widgetTest:widget.ValueUpDown'}}
+</div>
+
+<!-- columns aren't being counted correctly i.e. shouldn't have to specify column count here-->
+<div>
+    Columns
+    {{#widget 'Columns' 'label' maxColumns=2}}
+        <div style="text-align:center">Column 1 Header</div>
+        <div style="text-align:center">Column 2 Header</div>
+        {{widget 'Numeric' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{/widget}}
+    {{#widget 'Columns' maxColumns=2}}
+        <div style="text-align:center">Column 1 Header</div>
+        <div style="text-align:center">Column 2 Header</div>
+        {{widget 'Numeric' 'Contents 1' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 2' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 3' data-var-name='widgetTest:widget.NumericOutput'}}
+        {{widget 'Numeric' 'Contents 4' data-var-name='widgetTest:widget.NumericOutput'}}
+    {{/widget}}
+</div>
+
+<div>
+    ColumnsBs
+    {{#widget 'ColumnsBs' maxColumns=2}}
+        {{widget 'Led' "Input1"}}
+        {{widget 'Led' "Input2"}}
+        {{widget 'Led' "Input3"}}
+        {{widget 'Led' "Input4"}}
+    {{/widget}}
+</div>
+
+<!-- needs to be a REAL var range: [-1,1] -->
+<div>
+    Slider
+    {{widget 'Slider' data-var-name='widgetTest:widget.Slider' min=0 max=255}}
+</div>
+
+<!-- console errors below - passing undefined to handerbars compiled file?? -->
+<div>
+    Dropdown
+    {{#widget 'Dropdown' data-var-name='widgetTest:widget.Dropdown'}}
+        <dropdown>
+            <div class="option">Option 1</div>
+            <div class="option">Option 2</div>
+        </dropdown>
+    {{/widget}}
+</div>
+
+ <div>
+    DropdownTable
+    {{#widget 'DropdownTable' data-var-name='widgetTest:widget.DropdownTable_INT' data-var-name-field='widgetTest:widget.DropdownTable_STRING'}}
+        <options>
+            <div>Option many :1</div>
+            <div>Option many :2</div>
+            <div>Option many :3</div>
+            <div>Option many :4</div>
+        </options>
+    {{/widget}}
+ </div>
+
+<!-- not sure how to demo this one
+don't worry about this one could be broken -->
+<div>
+    TableSelect
+    {{#widget 'TableSelect' data-var-name='widgetTest:widget.TableSelect'}}
+    {{/widget}}
+</div>
+
+<div>
+    MultiSelect
+    {{#widget 'MultiSelect' maxColumns=10 data-var-name="widgetTest:widget.MultiSelect_INT" data-var-name-field="widgetTest:widget.MultiSelect_STRING"}}
+        <options>
+            <div>Option many :1</div>
+            <div>Option many :2</div>
+            <div>Option many :3</div>
+            <div>Option many :4</div>
+        </options>
+    {{/widget}}
+</div>
+
+<!-- not sure what the labeled part is here 
+don't worry about this -->
+<div>
+    LabeledList
+    {{#widget 'LabeledList' 'Test'}}
+        <div>list item 1</div>
+        <div>list item 2</div>
+        <div>list item 3</div>
+        <div>list item 4</div>
+    {{/widget}}
+</div>
+
+<!-- non selected pages don't exist on the dom -->
+{{widget 'PageSelect' 'Page 1' dom="container1" template="page1"}}
+{{widget 'PageSelect' 'Page 2' dom="container1" template="page2"}}
+<script id="page1" type="text/x-handlebars-template">
+<!-- write your page 2 with normal html -->
+page1
+</script>
+<script id="page2" type="text/x-handlebars-template">
+<!-- write your page 2 with normal html -->
+page2
+</script>
+<div id="container1">
+</div>
+
+<!-- service mode when refresh bool flipped? -->
+<div>
+    DirectoryBrowser
+    {{widget 'DirectoryBrowser' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-willopen='widgetTest:f.in.refresh'}}
+</div>
+
+DirectoryBrowserWindow
+{{widget 'DirectoryBrowserWindow' data-var-name='widgetTest:f.in.cwd' data-var-name-files='widgetTest:Directory' data-var-name-willopen='widgetTest:f.in.refresh' style='height:300px'}}
+
+
+<!-- ask katie or jack 
+{{widget 'NumGrid'}}-->
+
+<!-- reach out to katie about building widgets -->

@@ -1,0 +1,22 @@
+{
+  "name": "asproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "lpmConfig": {
+    "deploymentConfigs": [
+      "Config1"
+    ],
+    "gitClient": "GitExtensions"
+  },
+  "dependencies": {
+    "@loupeteam/finder": "^0.0.1",
+    "@loupeteam/webhmiserverpkg": "^0.1.0"
+  }
+}

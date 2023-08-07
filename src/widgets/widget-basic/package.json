@@ -1,0 +1,35 @@
+{
+  "name": "@loupeteam/widget-basic",
+  "version": "0.0.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@loupeteam/widgets":                         "*",
+    "@loupeteam/widgets-button":                  "*",
+    "@loupeteam/widgets-led":                     "*",
+    "@loupeteam/widgets-checkbox":                "*",
+    "@loupeteam/widgets-numeric":                 "*",
+    "@loupeteam/widgets-text":                    "*",
+    "@loupeteam/widgets-valueupdown":             "*",
+    "@loupeteam/widgets-columns":                 "*",
+    "@loupeteam/widgets-slider":                  "*",
+    "@loupeteam/widgets-dropdowntable":           "*",
+    "@loupeteam/widgets-multiselect":             "*",
+    "@loupeteam/widgets-pageselect":              "*",
+    "@loupeteam/widgets-utilities":               "*",
+    "@loupeteam/widgets-globalclasses":           "*",
+    "@loupeteam/widgets-directorybrowser":        "*",
+    "@loupeteam/widgets-directorybrowserwindow":  "*",
+    "@loupeteam/widgets-tableselect":             "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loupeteam/widgets.git"
+  }
+}

@@ -1,0 +1,3 @@
+VAR
+	jsonWebSocketServer_0 : jsonWebSocketServer;
+END_VAR
