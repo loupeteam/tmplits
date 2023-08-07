@@ -26,6 +26,6 @@ export function WidgetDirectoryBrowser( context, args){
     args.hash.set = false
     args.children += `<invisible-input style='display:none' class='webhmi-text-value lui-directory-data' data-var-name='${dataVarNameFiles}'></invisible-input><dropdown>No Data</dropdown>`
     return `    
-    ${WidgetDropdown( context, args )}
+    ${WidgetDropdownTable( context, args )}
 `
 }

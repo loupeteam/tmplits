@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/widget-basic",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,8 @@
     "@loupeteam/widgets-utilities":               "*",
     "@loupeteam/widgets-globalclasses":           "*",
     "@loupeteam/widgets-directorybrowser":        "*",
-    "@loupeteam/widgets-directorybrowserwindow":  "*"
+    "@loupeteam/widgets-directorybrowserwindow":  "*",
+    "@loupeteam/widgets-tableselect":             "*"
   },
   "repository": {
     "type": "git",
