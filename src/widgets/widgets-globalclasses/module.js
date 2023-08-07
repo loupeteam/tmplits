@@ -103,9 +103,9 @@ export class multiOptionSelector{
                 e.dispatchEvent(evt);
             });
         }
-        if( page != '' ){
-            if(dom != ''){
-                widgets.loadPage(dom, page)
+        if( (page !== null) && (page != '') ){
+            if( (dom !== null) && (dom != '') ){
+                widgets.loadPage(dom, page, context)
             }            
             dom = scope.querySelectorAll('.lui-select-dom:not(.noset)')
             if (dom.length) {

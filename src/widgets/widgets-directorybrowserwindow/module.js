@@ -25,7 +25,9 @@ export function WidgetDirectoryBrowserWindow( context, args){
     delete args.hash['data-var-name']
     args.hash.set = false
     args.children += `<invisible-input style='display:none' class='webhmi-text-value lui-directory-data' data-var-name='${dataVarNameFiles}'></invisible-input><dropdown>No Data</dropdown>`
-    return `    
+    return `
+    <div style='width:100%;height:100%;'>
     ${WidgetTableSelect( context, args )}
+    </div>
 `
 }
