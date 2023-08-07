@@ -2,7 +2,11 @@ import * as util from "../widgets-utilities/module.js"
 
 export function WidgetCheckBox(context, args) {
     let {
-        ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', ..._args
+        ['data-var-name']: dataVarName,
+        side = 'middle',
+        buttonType = '', 
+        buttonVarName = '',
+        ..._args
     } = args.hash
     //Get cleaned up values from args
     let {
@@ -12,11 +16,23 @@ export function WidgetCheckBox(context, args) {
 
     classList = classList.concat(['label-led'])
 
+    // apply the label if there is one
+    let labelStyle = ''
+    let result;
+    let finalResult;
     if (args.children == "" && context[0]) {
         args.children = `<h3>${context[0]}</h3><h3/>`
+        result = args.children.replace(/([A-Z])/g, " $1");
+        finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+        switch (side.trim().toLowerCase()) {
+            case 'middle':
+                labelStyle += 'margin-right: auto; margin-left: auto;'
+                break;
+            case 'right':
+                labelStyle += 'margin-left: auto;'
+                break
+        }
     }
-    const result = args.children.replace(/([A-Z])/g, " $1");
-    const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
 
     if (util.getButtonType(buttonType, classList)) {
         if (buttonVarName == '') {
@@ -27,11 +43,19 @@ export function WidgetCheckBox(context, args) {
         }
         attr += `data-var-name='${buttonVarName}'`
     }
+
+    let label = '' 
+    if (context[0]){
+        classList = classList.concat(['input-group', 'form-control', 'label-led' ])
+        label = `<div class='led-label' style='${labelStyle}' >${finalResult}</div>`
+    }
+
     return `
     <div class="${classList.join(' ')}" ${attr}>
     <div class='' data-var-name='${dataVarName}' ${attr}></div>
     <span class="glyphicon glyphicon-check webhmi-show" data-var-name-hide='${dataVarName}' style='font-size:20px;'></span>
     <span class="glyphicon glyphicon-unchecked webhmi-hide" data-var-name-hide='${dataVarName}' style='font-size:20px;'></span>
+    ${label}
     </div>
    `
 }
