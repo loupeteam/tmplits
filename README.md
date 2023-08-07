@@ -1,3 +1,7 @@
+[![Publish Widgets](https://github.com/loupeteam/widgets/actions/workflows/publish-widgets.yml/badge.svg)](https://github.com/loupeteam/widgets/actions/workflows/publish-widgets.yml)
+
+[![Publish Widget](https://github.com/loupeteam/widgets/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/loupeteam/widgets/actions/workflows/npm-publish-github-packages.yml)
+
 Dynamic templating based on handlebars
 
 There are 3 (as of writing this) packages in this repo that are all managed and distributed separately
