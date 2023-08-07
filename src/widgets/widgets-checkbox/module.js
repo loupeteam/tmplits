@@ -29,7 +29,9 @@ export function WidgetCheckBox(context, args) {
     }
     return `
     <div class="${classList.join(' ')}" ${attr}>
-    <div class='led webhmi-led webhmi-btn-toggle' data-led-false='led-off' data-led-true='led-green' data-var-name='${dataVarName}' ${attr}></div>
+    <div class='' data-var-name='${dataVarName}' ${attr}></div>
+    <span class="glyphicon glyphicon-check webhmi-show" data-var-name-hide='${dataVarName}' style='font-size:20px;'></span>
+    <span class="glyphicon glyphicon-unchecked webhmi-hide" data-var-name-hide='${dataVarName}' style='font-size:20px;'></span>
     </div>
    `
 }
