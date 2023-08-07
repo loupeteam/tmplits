@@ -1,0 +1,20 @@
+{
+  "name": "@loupeteam/tmplits-columns",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@loupeteam/tmplits-globalclasses" : "*",
+    "@loupeteam/tmplits-utilities" : "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loupeteam/tmplits.git"
+  }
+}
