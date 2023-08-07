@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@loupeteam/widgets-gizmo": "^0.0.11",
     "@loupeteam/widgets-globalclasses" : "*",
     "@loupeteam/widgets-utilities" : "*"
   },
