@@ -1,0 +1,19 @@
+{
+  "name": "@loupeteam/tmplits",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loupeteam/tmplits.git"
+  },
+  "author": "jpolansky",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "handlebars": "*",
+    "jquery": "*"
+  }
+}
