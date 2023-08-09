@@ -1,0 +1,35 @@
+{
+  "name": "@loupeteam/tmplit-basic",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@loupeteam/tmplits":                         "*",
+    "@loupeteam/tmplits-button":                  "*",
+    "@loupeteam/tmplits-led":                     "*",
+    "@loupeteam/tmplits-checkbox":                "*",
+    "@loupeteam/tmplits-numeric":                 "*",
+    "@loupeteam/tmplits-text":                    "*",
+    "@loupeteam/tmplits-valueupdown":             "*",
+    "@loupeteam/tmplits-columns":                 "*",
+    "@loupeteam/tmplits-slider":                  "*",
+    "@loupeteam/tmplits-dropdowntable":           "*",
+    "@loupeteam/tmplits-multiselect":             "*",
+    "@loupeteam/tmplits-pageselect":              "*",
+    "@loupeteam/tmplits-utilities":               "*",
+    "@loupeteam/tmplits-globalclasses":           "*",
+    "@loupeteam/tmplits-directorybrowser":        "*",
+    "@loupeteam/tmplits-directorybrowserwindow":  "*",
+    "@loupeteam/tmplits-tableselect":             "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loupeteam/tmplits.git"
+  }
+}

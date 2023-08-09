@@ -1,8 +1,8 @@
-[![Publish Widget](https://github.com/loupeteam/widgets/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/loupeteam/widgets/actions/workflows/npm-publish-github-packages.yml)
+[![Publish Tmplit](https://github.com/loupeteam/tmplits/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/loupeteam/tmplits/actions/workflows/npm-publish-github-packages.yml)
 
 Dynamic templating based on handlebars
 
-This is the core library for the widget system
+This is the core library for the tmplit system
 
 ## Minimal HTML page:
 
@@ -19,17 +19,17 @@ This is the core library for the widget system
 
 <body>
 
-	<!-- Begin page content - This is a placeholder that widgets will load the page into after loading-->
+	<!-- Begin page content - This is a placeholder that tmplits will load the page into after loading-->
 	<div class="container" id="main">
 
 	</div>
 
-	<!-- we require manually loading  before the widget system handlebars -->
+	<!-- we require manually loading  before the tmplit system handlebars -->
 	<script src="handlebars/dist/handlebars.min.js" ></script>
 
-	<!--Default widget setup, you may need to copy this file 
+	<!--Default tmplit setup, you may need to copy this file 
 		into your app and modify it if you have a special case-->
-	<script src="@loupeteam/widgets/index.js" type="module"></script>
+	<script src="@loupeteam/tmplits/index.js" type="module"></script>
 
 </body>
 
@@ -37,40 +37,40 @@ This is the core library for the widget system
 
 ```
 
-## Installing Widgets 
-Widgets can be installed using 
+## Installing Tmplits 
+Tmplits can be installed using 
 ```
-lpm install widgets-[widgetname]
+lpm install tmplits-[tmplitname]
 ```
 
-## Using installed widgets
-Widget system will search for installed widgets in the order:
+## Using installed tmplits
+Tmplit system will search for installed tmplits in the order:
 
-1. widgets.json
+1. tmplits.json
 1. package.json
 1. package-lock.json
 
-The name of the widget when installed can be referenced using:
+The name of the tmplit when installed can be referenced using:
 
-@loupeteam/widgets-[NameToReference]
+@loupeteam/tmplits-[NameToReference]
 
-The widgets built are built using handlebars, so you can use them like any handlebars template
+The tmplits built are built using handlebars, so you can use them like any handlebars template
 
 If it is a template (Defined in a *.handlebars using html) use
 
 ```
-{{> widgetname}}
+{{> tmplitname}}
 ```
 
-If it is a widget (Defined in *.js using javascript) use
+If it is a tmplit (Defined in *.js using javascript) use
 
 ```
-{{w "CustomWidget"}}
+{{w "CustomTmplit"}}
 ```
 
 ## loading a page
 
-By default, after loading the widget system, the start page will be loaded into the start container. This is defined in the widgets.json
+By default, after loading the tmplit system, the start page will be loaded into the start container. This is defined in the tmplits.json
 
 ```JSON
 {
@@ -81,7 +81,7 @@ By default, after loading the widget system, the start page will be loaded into 
 }
 ```
 
-## Publishing a new widget release
+## Publishing a new tmplit release
 Pushing to main with an updated package.json version will publish automatically using github actions
 
 To manually publish:

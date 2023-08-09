@@ -1,5 +1,5 @@
 {
-  "name": "@loupeteam/widgets-gizmo",
+  "name": "@loupeteam/tmplits-gizmo",
   "version": "0.0.13",
   "description": "",
   "main": "index.js",
@@ -10,10 +10,10 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/loupeteam/widgets.git"
+    "url": "git+https://github.com/loupeteam/tmplits.git"
   },
   "dependencies": {
-    "@loupeteam/widgets": "*"
+    "@loupeteam/tmplits": "*"
   },
   "lpm":{
     "type" : "project"

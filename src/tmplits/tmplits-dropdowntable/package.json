@@ -1,0 +1,20 @@
+{
+  "name": "@loupeteam/tmplits-dropdowntable",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@loupeteam/tmplits-globalclasses" : "*",
+    "@loupeteam/tmplits-utilities" : "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loupeteam/tmplits.git"
+  }
+}

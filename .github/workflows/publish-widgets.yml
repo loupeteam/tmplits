@@ -1,35 +1,35 @@
-name: Publish Widgets
+name: Publish Tmplits
 
 on:
   push:
     branches: main
 
 jobs:
-  list-widgets:
+  list-tmplits:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: src/widgets
+        working-directory: src/tmplits
     steps:
       - uses: actions/checkout@v3
-      - name: List Widgets
+      - name: List Tmplits
         id: list_step
         run: |
-          widgets=$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | sed "s|.*|'&'|")
-          echo "widgets=[$(echo "$widgets" | paste -sd, -)]"
-          echo "widgets=[$(echo "$widgets" | paste -sd, -)]" >> $GITHUB_OUTPUT
+          tmplits=$(find . -maxdepth 1 -type d | awk 'NR>1' | sed 's|./||' | sed '/^\s*$/d' | sed "s|.*|'&'|")
+          echo "tmplits=[$(echo "$tmplits" | paste -sd, -)]"
+          echo "tmplits=[$(echo "$tmplits" | paste -sd, -)]" >> $GITHUB_OUTPUT
     outputs:
-      widgets: ${{ steps.list_step.outputs.widgets }}
+      tmplits: ${{ steps.list_step.outputs.tmplits }}
 
   publish-all:
-    needs: list-widgets
+    needs: list-tmplits
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        widget: ${{fromJson(needs.list-widgets.outputs.widgets)}}
+        tmplit: ${{fromJson(needs.list-tmplits.outputs.tmplits)}}
     defaults:
       run:
-        working-directory: src/widgets/${{ matrix.widget }}
+        working-directory: src/tmplits/${{ matrix.tmplit }}
     permissions:
       contents: read
       packages: write
@@ -44,6 +44,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           registry: "https://npm.pkg.github.com"
-          package: src/widgets/${{ matrix.widget }}
+          package: src/tmplits/${{ matrix.tmplit }}
       - if: ${{ steps.publish.outputs.type }}
         run: echo "Version changed!"

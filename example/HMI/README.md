@@ -3,9 +3,9 @@ Install your local application by adding to the package.json at this level:
     "app":"file:./"
 ```
 
-If this repo is for developing a widget also add:   
+If this repo is for developing a tmplit also add:   
 ```
-    "@loupeteam/widgets-[mywidget]":"file:../../src/hmi"
+    "@loupeteam/tmplits-[mytmplit]":"file:../../src/hmi"
 ```
 
 Your package json will be something like this:
@@ -24,7 +24,7 @@ Your package json will be something like this:
   },
   "dependencies": {
     "app":"file:./",
-    "@loupeteam/widgets-[mywidget]":"file:../../src/HMI"
+    "@loupeteam/tmplits-[mytmplit]":"file:../../src/HMI"
   },
 }
 ```
