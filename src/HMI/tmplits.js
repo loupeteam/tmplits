@@ -455,11 +455,12 @@ export class Tmplits {
                         //and the file is the library.handlebars
                         if( dep.replace('node_modules/@loupeteam/tmplits-', '').indexOf('/') == -1 ){                        
                             let name = dep.replace('node_modules/@loupeteam/tmplits-', '');
+                            let path = dep.replace('node_modules/', '');
                             scope.pages[name] = {
-                                name: name,
-                                file: dep.replace('node_modules/','') + scope.base + '/library.handlebars',
-                                script: dep.replace('node_modules/','') + '/loader.js',
-                                module: dep.replace('node_modules/','') + '/module.js',
+                                name: dep.replace('node_modules/@loupeteam/tmplits-', ''), 
+                                file:  scope.base + path + '/library.handlebars',
+                                script: scope.base + path + '/loader.js',
+                                module: scope.base + path + '/module.js',
                                 source: name
                             } 
                         }
