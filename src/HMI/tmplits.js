@@ -926,7 +926,7 @@ Handlebars.registerHelper('concat', function (...args){
     })
     return ret
 })
-Handlebars.registerHelper('tmplit', createTmplit)
+Handlebars.registerHelper('widget', createTmplit)
 Handlebars.registerHelper('W', createTmplit)
 Handlebars.registerHelper('tmplit', createTmplit)
 Handlebars.registerHelper('T', createTmplit)
