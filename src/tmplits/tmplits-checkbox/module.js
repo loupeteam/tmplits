@@ -4,7 +4,7 @@ export function TmplitCheckBox(context, args) {
     let {
         ['data-var-name']: dataVarName,
         side = 'middle',
-        buttonType = '', 
+        buttonType = 'toggle', 
         buttonVarName = '',
         ..._args
     } = args.hash
