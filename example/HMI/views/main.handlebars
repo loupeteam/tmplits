@@ -1,6 +1,6 @@
 <div>
     Button
-    {{tmplit 'Button' 'SetButton' buttonType='set' data-var-name='tmplitTest:tmplit.SetButton'}}
+    {{tmplit 'Button' 'SetButton' data-var-name='tmplitTest:tmplit.SetButton'}}
     {{tmplit 'Button' 'ToggleButton' buttonType='toggle' data-var-name='tmplitTest:tmplit.ToggleButton'}}
     {{tmplit 'Button' 'MomentaryButton' buttonType='momentary' data-var-name='tmplitTest:tmplit.MomentaryButton'}}
 </div>
@@ -14,7 +14,7 @@
 <!-- style it different to differentiate from simple led -->
 <div>
     CheckBox
-    {{tmplit 'CheckBox' 'Label' buttonType='toggle' class='webhmi-lock' data-var-name-lock='tmplitTest:Lock' data-var-name='tmplitTest:tmplit.CheckBox'}}
+    {{tmplit 'CheckBox' 'Label' class='webhmi-lock' data-var-name-lock='tmplitTest:Lock' data-var-name='tmplitTest:tmplit.CheckBox'}}
     {{tmplit 'CheckBox' data-var-name='tmplitTest:tmplit.CheckBox'}}
 </div>
 
@@ -93,7 +93,7 @@
 
  <div>
     DropdownTable
-    {{#tmplit 'DropdownTable' data-var-name='tmplitTest:tmplit.DropdownTable_INT' data-var-name-field='tmplitTest:tmplit.DropdownTable_STRING'}}
+    {{#tmplit 'DropdownTable' class='webhmi-lock' data-var-name-lock='tmplitTest:Lock' data-var-name='tmplitTest:tmplit.DropdownTable_INT' data-var-name-field='tmplitTest:tmplit.DropdownTable_STRING'}}
         <options>
             <div>Option many :1</div>
             <div>Option many :2</div>

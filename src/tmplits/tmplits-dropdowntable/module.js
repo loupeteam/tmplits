@@ -104,7 +104,7 @@ export function TmplitDropdownTable(context, args) {
         <div class="input-group-btn">
             <button type="button" 
             ${delegate}
-            class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            class="btn dropdown-toggle ${classList.join(' ')}" ${attr} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
             </button>
             <div class="dropdown-menu" >
