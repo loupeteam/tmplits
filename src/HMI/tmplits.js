@@ -31,6 +31,7 @@ export class Tmplits {
         .then(()=>{return this.getLibraries(this.libraries)})
         .then(()=>{return this.getPages(this.pages)})
         .then(()=>{return this.retries()})
+        .then(()=>{return this.addDomListeners()})
         .then(()=>{return Tmplits.moduleLoaded('tmplitsystem')})        
     }
     static modules = {}
@@ -357,6 +358,21 @@ export class Tmplits {
         return this.compiled[partial]
     }
 
+    //This function adds dom listeners to the page
+    addDomListeners( fileName ) {
+        let scope = this
+        let chain = new Promise((resolve, reject)=>{    
+            $(document).on('DOMNodeInserted', function (e) {
+                $('[dynamic-template]').not("[dom-added=true]").each((i, el) => {
+                    scope.refreshDynamicEl(el)
+                })
+            })
+            resolve();
+        })           
+        return chain
+    }
+
+
     //This function loads a json file defined by the user
     //and loads them into pages and libraries
     loadJson( fileName ) {
@@ -365,11 +381,6 @@ export class Tmplits {
             log('loading ' + fileName)
             $.get(fileName, function (raw) {
                 scope.native = raw
-                $(document).on('DOMNodeInserted', function (e) {
-                    $('[dynamic-template]').not("[dom-added=true]").each((i, el) => {
-                        scope.refreshDynamicEl(el)
-                    })
-                });
 
                 //Append the package pages to the pages
                 scope.pages = scope.pages ? scope.pages : [];
