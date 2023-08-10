@@ -12,7 +12,7 @@ END_PROGRAM
 
 PROGRAM _CYCLIC
 	
-	tmplit;
+	tmplit;Lock;
 	
 	// directoryBrowser, directoryBrowserWindow
 	finder(f,ADR(DirectoryBuf),SIZEOF(Directory));

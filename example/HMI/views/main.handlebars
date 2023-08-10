@@ -14,7 +14,7 @@
 <!-- style it different to differentiate from simple led -->
 <div>
     CheckBox
-    {{tmplit 'CheckBox' 'Label' buttonType='toggle' data-var-name='tmplitTest:tmplit.CheckBox'}}
+    {{tmplit 'CheckBox' 'Label' buttonType='toggle' class='webhmi-lock' data-var-name-lock='tmplitTest:Lock' data-var-name='tmplitTest:tmplit.CheckBox'}}
     {{tmplit 'CheckBox' data-var-name='tmplitTest:tmplit.CheckBox'}}
 </div>
 
@@ -27,12 +27,14 @@
     {{tmplit 'Numeric' type='input' data-var-name='tmplitTest:tmplit.NumericInput'}}
 </div>
 
+
 <div>
     Text (output)
     {{tmplit 'Text' 'label' data-var-name='tmplitTest:tmplit.TextInput'}}
     {{tmplit 'Text' data-var-name='tmplitTest:tmplit.TextInput'}}
     Text (input)
-    {{tmplit 'Text' 'label' type='input' data-var-name='tmplitTest:tmplit.TextOutput'}}
+    {{tmplit 'Text' 'label' type='input' class='webhmi-lock' data-var-name-lock='tmplitTest:Lock' data-var-name='tmplitTest:tmplit.TextOutput'}}
+    <input class='webhmi-lock' data-var-name-lock='tmplitTest:Lock' data-var-name='tmplitTest:tmplit.TextOutput'></input>
     {{tmplit 'Text' type='input' data-var-name='tmplitTest:tmplit.TextOutput'}}
 </div>
 

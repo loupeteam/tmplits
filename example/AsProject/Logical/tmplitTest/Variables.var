@@ -1,4 +1,5 @@
 VAR
+	Lock : BOOL;
 	f : finder_typ;
 	tmplit : tmplit_typ;
 	DirectoryBuf : ARRAY[0..99] OF STRING[80];
