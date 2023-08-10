@@ -44,9 +44,9 @@ export function TmplitText(context, args) {
 
     let field = ''
     if (type === 'output'){
-        field = `<div class='form-control webhmi-text-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
+        field = `<div class='form-control webhmi-text-value ${classList.join(' ')}' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
     } else if (type === 'input'){
-        field = `<input class='form-control webhmi-text-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>`
+        field = `<input class='form-control webhmi-text-value ${classList.join(' ')}' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>`
     }
 
     return `
