@@ -10,7 +10,7 @@ import * as util from "../tmplits-utilities/module.js"
 export function TmplitButton(context, args) {
 
     let {
-        buttonType = '', ..._args
+        buttonType = 'set', ..._args
     } = args.hash
 
     //Get cleaned up values from args
