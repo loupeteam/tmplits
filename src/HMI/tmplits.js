@@ -25,6 +25,7 @@ export class Tmplits {
         if(loadedCallback){
             Tmplits.loadedCallback.push(()=>{loadedCallback(this.native)})
         }        
+        Tmplits.loadedCallback.push(()=>{this.refreshDynamicDom()})
         this.loadPackageLockJson(this.base + '../package-lock.json')
         .then(()=>{return this.loadPackageJson(this.base + '../package.json')})
         .then(()=>{return this.loadJson(this.base + '../tmplits.json')})
@@ -50,6 +51,7 @@ export class Tmplits {
         var template = this.get(el.getAttribute('dynamic-template'));
         let context = eval(el.getAttribute('context'))
         context = context ? context : window[this.raw.context]
+        context = context ? context : window
         $(el).attr('dom-added', true)
         let generated = $(el).html(template(context))
         var post = el.getAttribute('dynamic-post');
@@ -521,7 +523,12 @@ export class Tmplits {
         }
         if( allLoaded ){
             Tmplits.loadedCallback.forEach(callback => {
-                callback()
+                try{
+                    callback()
+                }
+                catch(e){
+                    warn('Error in loadedCallback: ' + e)
+                }
             });
         }        
     }
