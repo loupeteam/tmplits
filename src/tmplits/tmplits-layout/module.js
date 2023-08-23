@@ -45,3 +45,47 @@ export function TmplitLayoutHeader(context, args) {
                 </div>
             </div>`
 }
+
+// export function TmplitLayoutBody(context, args) {
+
+//     return `<div></div>>`
+// }
+
+export function TmplitLayoutFooter(context, args) {
+    let {
+        footerColor='', columnNumber=1, ..._args
+    } = args.hash
+    //Get cleaned up values from args
+    let {
+        classList,
+        attr,
+    } = util.cleanArgs(_args)
+
+    let nodes = util.htmlToElements(args.children)
+    let children = 'hello world!'
+    let count = 0
+    let childrenString = ''
+    let rowWidth = 1;
+
+    if(columnNumber!= 0){
+        rowWidth = Math.floor(12/columnNumber)
+    }
+
+    for( let i in nodes){
+        let el = nodes[i]
+        switch (el.tagName) {
+            case undefined:
+                break
+            default:
+            children += el.outerHTML     
+            childrenString += '<div class="col-md-'+rowWidth+'"> ' + el.outerHTML + '</div>'   
+            count++;
+        }
+    }
+
+    return `<div class="${classList.join(' ')}" ${attr}" style="background-color:${footerColor}; position: fixed; bottom: 10px; left: 0px; width: 100%;">
+                            <div class="row ${classList.join(' ')}" ${attr}" >
+                                ${childrenString}
+                            </div>
+            </div>`
+}
