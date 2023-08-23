@@ -5,7 +5,7 @@ import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitLayoutHeader(context, args) {
     let {
-        headerType='', headerColor='', columnNumber=1, ..._args
+        headerType='', backgroundColor='', columnNumber=1, ..._args
     } = args.hash
     //Get cleaned up values from args
     let {
@@ -35,7 +35,7 @@ export function TmplitLayoutHeader(context, args) {
         }
     }
 
-    return `<div class="navbar ${classList.join(' ')}" ${attr}" style="background-color:${headerColor}; position: ${headerType}; top: 10px;>
+    return `<div class="navbar ${classList.join(' ')}" ${attr}" style="background-color:${backgroundColor}; position: ${headerType}; top: 10px;>
                 <div class="navbar-inner">
                     <div class="nav">
                             <div class="row">
@@ -53,7 +53,7 @@ export function TmplitLayoutHeader(context, args) {
 
 export function TmplitLayoutFooter(context, args) {
     let {
-        footerColor='', columnNumber=1, ..._args
+        backgroundColor='', columnNumber=1, ..._args
     } = args.hash
     //Get cleaned up values from args
     let {
@@ -83,7 +83,7 @@ export function TmplitLayoutFooter(context, args) {
         }
     }
 
-    return `<div class="${classList.join(' ')}" ${attr}" style="background-color:${footerColor}; position: fixed; bottom: 10px; left: 0px; width: 100%;">
+    return `<div class="${classList.join(' ')}" ${attr}" style="background-color:${backgroundColor}; position: fixed; bottom: 10px; left: 0px; width: 100%;">
                             <div class="row ${classList.join(' ')}" ${attr}" >
                                 ${childrenString}
                             </div>
