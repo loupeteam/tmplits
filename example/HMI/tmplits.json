@@ -1,7 +1,7 @@
 {
     "startPage" : {
         "container" : "main",
-        "name": "main"
+        "name": "layouts"
     },
     "pages": [
         {
@@ -11,6 +11,10 @@
         {
             "name": "components",
             "file": "../views/components.handlebars"
+        },
+        {
+            "name": "layouts",
+            "file": "../views/layouts.handlebars"
         }
     ],
     "libraries":[
