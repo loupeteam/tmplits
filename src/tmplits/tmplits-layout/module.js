@@ -46,10 +46,24 @@ export function TmplitLayoutHeader(context, args) {
             </div>`
 }
 
-// export function TmplitLayoutBody(context, args) {
+export function TmplitLayoutBody(context, args) {
 
-//     return `<div></div>>`
-// }
+    let nodes = util.htmlToElements(args.children)
+    let children = 'hello world!'
+    let count = 0
+
+    for( let i in nodes){
+        let el = nodes[i]
+        switch (el.tagName) {
+            case undefined:
+                break
+            default:
+            children += el.outerHTML     
+            count++;
+        }
+    }
+    return `<div>${children}</div>`
+}
 
 export function TmplitLayoutFooter(context, args) {
     let {
