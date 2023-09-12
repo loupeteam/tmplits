@@ -5,7 +5,7 @@ import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitLayoutHeader(context, args) {
     let {
-        headerType='', backgroundColor='', columnNumber=1, ..._args
+        headerType='static', backgroundColor='', columnNumber=1, ..._args
     } = args.hash
     //Get cleaned up values from args
     let {
