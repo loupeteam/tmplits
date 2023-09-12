@@ -1,3 +1,13 @@
+/*Example Checkbox usage
+{{tmplit 'CheckBox' <label> side= 'middle' buttonType= 'set' data-var-name='<var>'}}
+{{tmplit 'CheckBox' <label> side= 'right' buttonType= 'toggle' data-var-name='<var>'}}
+
+Options:
+buttonType='set', 'toggle' or 'momentary' Omitting this will make the checkbox non clickable will act like led.
+side = 'right', 'left' or 'middle'  optional argument which defaults to ‘middle’. Determines the alignment of the label.
+*/
+
+
 import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitCheckBox(context, args) {
