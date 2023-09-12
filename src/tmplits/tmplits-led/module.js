@@ -13,6 +13,16 @@
 //    return `Hello ${context[0]}!`
 //}
 
+/* Example Led Usage
+{{tmplit 'Led' '<label>' data-var-name='<var>'}}
+
+Options:
+error: true or false - Set the led red
+warning: true or false - Set the led orange
+If neither are used:
+    green or gray light for simple status output
+*/
+
 import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitLed(context, args) {
