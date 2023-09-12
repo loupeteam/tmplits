@@ -20,8 +20,7 @@ The user supplies the drop down and marks the option with an option class
 For a custom form you must have at least one item with class="selected-item-text" 
 or we will assume one for you..
 
-Options:
-Set=false to disable setting the field to the selection
+
 
 
 <button><-----------------field---------->
@@ -31,7 +30,7 @@ Set=false to disable setting the field to the selection
 </dropdown>
 
 Example drop down usage:
-    {{#tmplit 'dropdown' [set=false/true]}}
+{{#tmplit 'dropdown' [set=false/true]}}
     <field>
         <input placeholder="Select Operation" class='webhmi-dropdown'/>        
     </field>
@@ -41,7 +40,11 @@ Example drop down usage:
        <div></div>         
        <div class="option"></div>         
     <dropdown>
-    {{/tmplit}}
+{{/tmplit}}
+
+Options:
+Set=false to disable setting the field to the selection
+
 */
 
 import * as util from "../tmplits-utilities/module.js"

@@ -13,6 +13,22 @@
 //    return `Hello ${context[0]}!`
 //}
 
+/* Example Dropdown Table Usage
+{{#tmplit 'DropdownTable' data-var-name='<var>' data-var-name-field='<var>'}}
+    <options>
+        <div>Option 1</div>
+        <div>Option 2</div>
+        <div>Option 3</div>
+        <div>Option 4</div>
+    </options>
+{{/tmplit}}
+
+Options:
+data-var-name: INT index
+data-var-name-field: STRING text in dropdown element
+*/
+
+
 import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitDropdownTable(context, args) {
