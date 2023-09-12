@@ -13,6 +13,15 @@
 //    return `Hello ${context[0]}!`
 //}
 
+/* Example Directory Browser Window Usage
+{{tmplit 'DirectoryBrowserWindow' data-var-name='tmplitTest:f.in.cwd' data-var-name-files='tmplitTest:Directory' data-var-name-willopen='tmplitTest:f.in.refresh' style='height:300px'}}
+
+Options:
+data-var-name: finder function current working directory
+data-var-name-files: Json string output by the finder function
+data-var-name-willopen: refresh bool in finder function
+*/
+
 export function TmplitDirectoryBrowserWindow( context, args){
     let {        
         ['data-var-name']:dataVarName,
