@@ -1,6 +1,13 @@
 //Load the style sheet
-import sheet from './tmplits.css' assert { type: 'css' };
-document.adoptedStyleSheets = [sheet];
+// import sheet from './tmplits.css' assert { type: 'css' };
+// document.adoptedStyleSheets = [sheet];
+
+//Append the link to CSS to the head
+//This method is more supported that import style sheets
+let tmplcss = document.createElement('link')
+tmplcss.rel = 'stylesheet'
+tmplcss.href = '@loupeteam/tmplits/tmplits.css'
+document.head.append(tmplcss)
 
 //Load the tmplits system
 import Tmplits from './tmplits.js'
