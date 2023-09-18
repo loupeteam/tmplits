@@ -214,7 +214,7 @@ export class Tmplits {
             pages.forEach(element => {
                 fetch(element.file)
                 .then((data)=>{
-                    if(data.status != 200){
+                    if(data.status != 200 && data.status != 0){
                     }
                     else{
                         return data.text()                        
@@ -382,6 +382,11 @@ export class Tmplits {
         let chain = new Promise((resolve, reject)=>{    
             log('loading ' + fileName)
             $.get(fileName, function (raw) {
+
+                if(typeof raw == 'string'){
+                    raw = JSON.parse(raw)
+                }
+
                 scope.native = raw
 
                 //Append the package pages to the pages
@@ -418,6 +423,11 @@ export class Tmplits {
         let chain = new Promise((resolve, reject)=>{
             $.get( name, function (raw) {
                 log('loading ' + name)
+
+                if(typeof raw == 'string'){
+                    raw = JSON.parse(raw)
+                }
+
                 scope.package = raw
                 //Search through the package.json for @loupeteam/tmplits/*
                 //by going through iterating through each member of the dependency object
@@ -456,6 +466,11 @@ export class Tmplits {
         let chain = new Promise((resolve, reject)=>{
             log('loading ' + name)
             $.get(name, function (raw) {
+
+                if(typeof raw == 'string'){
+                    raw = JSON.parse(raw)
+                }
+
                 scope.packageLock = raw
                 //Search through the package.json for @loupeteam/tmplits/*
                 //by going through iterating through each member of the dependency object
@@ -497,7 +512,7 @@ export class Tmplits {
         //Just fetch the head to check because the script will need to reload the module anyway
         fetch(name,{ method: "HEAD" })
         .then((res) => {
-            if (res.ok) {
+            if (res.status == 200 || res.status == 0) {
                 let script = "" 
 //                    script += `console.log("Loading Module ${name}") ;`
                 script += `import * as module from '${name}';`
