@@ -13,6 +13,16 @@
 //    return `Hello ${context[0]}!`
 //}
 
+
+/* Example Slider Usage
+{{tmplit 'Slider' data-var-name='<var>'}}
+
+Options:
+data-var-name: REAL (undefined if not)
+min: optional argument defaults to -1
+max: optional argument defaults to 1
+*/
+
 import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitSlider(context, args) {

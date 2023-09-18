@@ -13,6 +13,16 @@
 //    return `Hello ${context[0]}!`
 //}
 
+
+/* Example Text Usage
+{{tmplit 'Text' '<label>' type='output' data-var-name='<var>'}}
+{{tmplit 'Text' '<label>' type='input' data-var-name='<var>'}}
+
+Options:
+data-var-name: STRING
+type: optional input defaults to ‘output’
+ */
+
 import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitText(context, args) {

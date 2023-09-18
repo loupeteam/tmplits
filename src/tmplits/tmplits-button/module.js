@@ -3,6 +3,11 @@
     My Button
 {{/tmplit}}
 {{tmplit 'button' class="led-on" style="color:blue" children="Thank you" }}
+
+Options:
+* set 
+* toggle
+* momentary
 */
 
 import * as util from "../tmplits-utilities/module.js"

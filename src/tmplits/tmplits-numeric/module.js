@@ -13,8 +13,16 @@
 //    return `Hello ${context[0]}!`
 //}
 
-import * as util from "../tmplits-utilities/module.js"
+/* Example Numeric Usage
+{{tmplit 'Numeric' '<label>' type='output' data-var-name='<var>'}}
+{{tmplit 'Numeric' '<label>' type='input' data-var-name='<var>'}}
 
+Options:
+type: optional input defaults to ‘output’
+’input’: limits user to enter only numbers and doesn’t use a soft keyboard
+*/
+
+import * as util from "../tmplits-utilities/module.js"
 export function TmplitNumeric(context, args) {
 
     let {

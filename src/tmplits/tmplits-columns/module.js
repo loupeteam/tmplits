@@ -13,6 +13,21 @@
 //    return `Hello ${context[0]}!`
 //}
 
+
+/* Example Column Usage
+    {{#tmplit 'Columns' 'label' maxColumns=2}}
+        <div style="text-align:center">Column 1 Header</div>
+        <div style="text-align:center">Column 2 Header</div>
+        {{tmplit 'NumericOutput' '<label>' data-var-name='<var>'}}
+        {{tmplit 'NumericOutput' '<label>' data-var-name='<var>'}}
+        {{tmplit 'NumericOutput' '<label>' data-var-name='<var>'}}
+        {{tmplit 'NumericOutput' '<label>' data-var-name='<var>'}}
+    {{/tmplit}}
+
+* This Tmplit will create the maxColumn amount of columns and add the children elements in order from left to right.
+* The Columns will be equally spaced by the "margin: auto" styling.
+*/
+
 import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitColumns(context, args) {

@@ -13,6 +13,18 @@
 //    return `Hello ${context[0]}!`
 //}
 
+/* Example Value Up Down Usage
+{{tmplit 'ValueUpDown' data-var-name='<var>' increment=2}}
+
+Options:
+    data-var-name: ANY_INT cannot roll over 
+    increment: optional argument that defaults to 1
+    buttonStyle: optional argument
+    inputStyle: optional argument
+    max: optional argument defaults to 100
+    min: optional argument defaults to 0
+*/
+
 import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitValueUpDown(context, args) {

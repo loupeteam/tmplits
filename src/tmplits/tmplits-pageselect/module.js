@@ -13,6 +13,24 @@
 //    return `Hello ${context[0]}!`
 //}
 
+/* Example Page Select Usage
+{{tmplit 'PageSelect' 'Page 1' dom="container1" template="page1"}}
+{{tmplit 'PageSelect' 'Page 2' dom="container1" template="page2"}}
+
+<script id="page1" type="text/x-handlebars-template">
+<!-- write your page 2 with normal html -->
+page1
+</script>
+
+<script id="page2" type="text/x-handlebars-template">
+<!-- write your page 2 with normal html -->
+page2
+</script>
+
+<div id="container1">
+</div>
+*/
+
 import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitPageSelect(context, args) {
