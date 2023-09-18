@@ -15,6 +15,7 @@
 
 /* Example Led Usage
 {{tmplit 'Led' '<label>' data-var-name='<var>'}}
+{{tmplit 'Led' '<label>' error='true' data-var-name='<var>'}}
 
 Options:
 error: true or false - Set the led red
