@@ -343,9 +343,6 @@ export class luiDirectory{
         table += '</table>'        
 
         let tableEl = htmlToElement(table)
-        document.addEventListener('keydown', ( e )=>{
-            luiDirectory.filter(tableEl, e.key)
-        })
         target.forEach(element => {
             element.replaceChildren(tableEl)
             updateSelectOptions(element)
@@ -421,12 +418,39 @@ export class luiDirectory{
             }
         } 
         if (e.nextSibling) {
-            e.nextSibling.innerHTML = filter
+            e.nextSibling.innerHTML = `filtering: ${filter}`
         } else {
-            let el = document.createElement('div')
-            el.innerHTML = filter
-            el.classList.add('form-control')
-            e.parentNode.appendChild(el);
+           let el = document.createElement('div')
+           el.innerHTML = `filtering: ${filter}`
+           el.classList.add('filter-text');
+           el.classList.add('form-control')        
+           e.parentNode.appendChild(el);
+        }
+    }
+    static filterKey(e){
+        e.preventDefault()
+        let key = e.key
+        let scope = e.target.closest('.select-scope')
+        let target = scope.querySelectorAll('.dropdown-menu,.list-view')
+        
+        //if the user presses enter, set the value of filter to the html of e
+        if( key == 'Enter'){
+            let evt = new Event("change", {
+                "bubbles": true,
+                "cancelable": true
+            });
+            e.target.dispatchEvent(evt);            
+            return
+        }
+
+        target.forEach((element)=>{
+            element.parentNode.classList.add('open')
+            luiDirectory.filter(element.children[0], key)
+        })    
+
+        let filter = scope.querySelector('[filter]')
+        if (filter) {
+            e.target.value = filter.getAttribute('filter')            
         }
     }
 }
@@ -478,6 +502,10 @@ $(document).on({
 $(document).on({
     "click": luiIncrementValue
 }, '.lui-increment');
+
+$(document).on({
+    "keydown": luiDirectory.filterKey
+}, '.select-scope input');
 
 //Handle setting active if a tab is clicked
 export function selectTab(selected) {
