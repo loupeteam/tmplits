@@ -354,6 +354,10 @@ export class Tmplits {
         if (this.compiled[partial]) {
             return this.compiled[partial];
         }
+        if( typeof this.cache[partial] == "undefined"){
+            warn('could not find partial ' + partial)
+            return Handlebars.compile(`<div class="error">${partial} not found</div>`) 
+        }
         // ,{compat:true}
         this.compiled[partial] = Handlebars.compile(this.cache[partial]);
 
