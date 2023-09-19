@@ -16,6 +16,7 @@ PROGRAM _CYCLIC
 	
 	// directoryBrowser, directoryBrowserWindow
 	finder(f,ADR(DirectoryBuf),SIZEOF(Directory));
+	f.in.refresh := FALSE;
 	IF f.out.done THEN
 		brsmemcpy(ADR(Directory),ADR(DirectoryBuf), SIZEOF(Directory));
 	END_IF
