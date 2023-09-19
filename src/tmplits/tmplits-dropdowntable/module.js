@@ -38,6 +38,7 @@ export function TmplitDropdownTable(context, args) {
         style = '', 
         ['data-var-name']:dataVarName,
         ['data-var-name-field'] : dataVarNameField,
+        ['data-var-name-willopen'] : willOpenPV,
         ..._args
     } = args.hash
     //Get cleaned up values from args
@@ -120,7 +121,7 @@ export function TmplitDropdownTable(context, args) {
         <div class="input-group-btn">
             <button type="button" 
             ${delegate}
-            class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            class="btn dropdown-toggle${willOpenPV ? " webhmi-btn-set" : ''}" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
             </button>
             <div class="dropdown-menu" >
