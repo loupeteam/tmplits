@@ -306,7 +306,7 @@ export class Tmplits {
     //context is the context to load the page with
     loadPage(containerId, pageName, context) {
         var template = this.get(pageName);
-        context = context ? context : window                    
+        context = context ? context : {}                    
         log(`Loading page: ${pageName}`)
         let dom = containerId
         try{
