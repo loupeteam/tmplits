@@ -14,5 +14,6 @@
         }
     ],
     "libraries":[
+        "../controls/custom-ui.handlebars"
     ]
 }
