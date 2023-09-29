@@ -1,0 +1,28 @@
+<!--These are wrappers for other templates                  -->
+<!--    The copy block will copy all the attributes from    -->
+<!--    outer template to this tmplit                       -->
+<!--This is useful if you want to pass arbitrary parameter  -->
+<!--    from the outer template to the children             -->
+<!--To use the copied attributes in a partial,              -->
+<!--    place the @attr  on the element that should receive -->
+<!--    the attributes-->
+
+<script id="button-label" type="text/x-handlebars-template">    
+    {{#copy . 'label'  }}
+        {{T "Button" label buttonType='set'}}
+    {{/copy}}
+</script>
+<script id="button-icon" type="text/x-handlebars-template">    
+    {{#copy . 'label' 'img' }}
+        {{T "Button" (Partial "custom-icon" img=img) buttonType='set'}}
+    {{/copy}}
+</script>
+<script id="icon" type="text/x-handlebars-template">    
+    {{#copy . 'label' 'img' }}
+        {{> custom-icon  buttonType='set'}}
+    {{/copy}}
+</script>
+
+<script id="custom-icon" type="text/x-handlebars-template">
+<img src='{{img}}' {{@attr}} width='40' height="40">
+</script>
