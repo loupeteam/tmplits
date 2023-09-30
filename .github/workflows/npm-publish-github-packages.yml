@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        packages: [src/HMI,src/template-gizmo,example/HMI]
+        packages: [src/HMI,src/template-gizmo,src/template-hmi]
     permissions:
       contents: read
       packages: write

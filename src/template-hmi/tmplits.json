@@ -1,0 +1,19 @@
+{
+    "startPage" : {
+        "container" : "main",
+        "name": "main"
+    },
+    "pages": [
+        {
+            "name": "main",
+            "file": "../views/main.handlebars"
+        },
+        {
+            "name": "components",
+            "file": "../views/components.handlebars"
+        }
+    ],
+    "libraries":[
+        "../controls/custom-ui.handlebars"
+    ]
+}
