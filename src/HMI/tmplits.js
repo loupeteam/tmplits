@@ -733,12 +733,12 @@ function createTmplit(tmplit, ...args) {
             }
         }
         catch{
-            var error = `<div class='error'>could not find tmplit ${tmplit}</div>`
+            var error = `<div class='error'>could not find Tmplit${tmplit}()</div>`
         }
     }
 
     if( typeof fn != 'function'){
-        var error = `<div class='error'>could not find tmplit ${tmplit}</div>`
+        var error = `<div class='error'>could not find Tmplit${tmplit}()</div>`
         fn = ()=>{ return error}
     }
     if( options.fn )
