@@ -38,6 +38,7 @@ export function TmplitPageSelect(context, args) {
         active,
         template,
         dom,
+        ctx,
         ..._args
     } = args.hash
     //Get cleaned values
@@ -48,6 +49,16 @@ export function TmplitPageSelect(context, args) {
     classList = classList.concat(['nav-tabs-item'])
     if (active) {
         classList = classList.concat(['active'])
+    }
+
+    if( typeof ctx == 'string'){
+        attr = attr.concat(`data-context='${ctx}'`)
+    }
+    else if( typeof ctx == 'object'){
+        attr = attr.concat(`data-context='${JSON.stringify(ctx)}'`)
+    }
+    else if( typeof ctx == 'number'){
+        attr = attr.concat(`data-context=${ctx}`)
     }
     return `
 <li class="${classList.join(' ')}" >
