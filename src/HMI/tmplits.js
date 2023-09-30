@@ -196,7 +196,8 @@ export class Tmplits {
                 scope.cache[element.name] = partial;
                 Handlebars.registerPartial(
                     element.name,
-                    `<!--⌄{> ${element.name}}-->${partial}<!--^{${element.name}}-->`
+                    (Tmplits.debug.comment ? `<!--⌄{> ${element.name}} (${element.file})-->${partial}<!--^{${element.name}}-->` : `${partial}` )
+                    
                 )
                 next()
             }
