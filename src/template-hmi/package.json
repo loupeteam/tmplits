@@ -1,0 +1,17 @@
+{
+  "name": "@loupeteam/tmplit-template",
+  "version": "0.1.0",
+  "description": "Template tmplit based project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loupeteam/tmplits.git"
+  },
+  "author": "Josh Polansky",
+  "license": "MIT",
+  "lpm": {
+    "type": "project"
+  }
+}
