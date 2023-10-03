@@ -35,7 +35,7 @@ export class Tmplits {
         .then(()=>{return Tmplits.moduleLoaded('tmplitsystem')})        
     }
     static debug = {
-        enabled: false,
+        enabled: true,
         comment: true,
         loglevel: 1
     }
