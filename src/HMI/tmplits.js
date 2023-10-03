@@ -1,4 +1,6 @@
 import "../../jquery/dist/jquery.js"
+import * as util from "../tmplits-utilities/module.js"
+
 //Check if jquery has already been loaded
 //If it hasn't then load it
 if( !window.$ ){
@@ -980,5 +982,16 @@ Handlebars.registerHelper("math", function (lvalue, operator, rvalue) {
         "%": lvalue % rvalue
     } [operator];
 });
+
+//This function is an if for two arguments equal
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
+//Go through the context and find the variable path
+Handlebars.registerHelper('VariablePath', function(context, args) {
+    return util.getVariablePath( context.data, '' );
+});
+
 window.Tmplits = Tmplits
 export default Tmplits
