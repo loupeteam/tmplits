@@ -235,3 +235,25 @@ export function getButtonType(type, classList) {
     }
     return false;
 }
+
+//Work up throught the template context to get the full path of a variable
+//  That has been expanded
+export function getVariablePath( context, key){
+    let path = key
+    if( context.key ){
+        path = context.key;
+        if(key != ''){
+            if(context._parent.key){
+                path +='.' + key;
+            }
+            else{
+                path +=':' + key;
+            }
+        }
+    }
+
+    if(context._parent){
+        path = getVariablePath( context._parent, path);
+    }
+    return path;
+}
