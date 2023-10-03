@@ -7,10 +7,9 @@ if( !window.$ ){
     window.$ = jQuery
     console.error('Loading JQuery in tmplits.js. To avoid this ensure that JQuery is loaded before tmplits.js')
 }
-let loglevel =1
-let log = function( t ){ if(loglevel == 0){ console.log(t) }};
-let warn = function( t ){ if(loglevel <= 1){ console.warn(t) }};
-let error = function( t ){ if(loglevel <= 2){ console.error(t) }};
+let log = function( t ){ if(Tmplits.debug.loglevel == 0){ console.log(t) }};
+let warn = function( t ){ if(Tmplits.debug.loglevel <= 1){ console.warn(t) }};
+let error = function( t ){ if(Tmplits.debug.loglevel <= 2){ console.error(t) }};
 
 export class Tmplits {
     constructor(node_module_directory, loadedCallback ) {
@@ -36,6 +35,11 @@ export class Tmplits {
         .then(()=>{return this.retries()})
         .then(()=>{return this.addDomListeners()})
         .then(()=>{return Tmplits.moduleLoaded('tmplitsystem')})        
+    }
+    static debug = {
+        enabled: true,
+        comment: true,
+        loglevel: 1
     }
     static modules = {}
     static loadedCallback = []
@@ -90,9 +94,10 @@ export class Tmplits {
         if (html) {
             $.each(html, function (i, el) {
                 if (el.type == "text/x-handlebars-template") {
+
                     Handlebars.registerPartial(
                         el.id,
-                        el.text
+                        (Tmplits.debug.comment ? `<!--⌄{> ${el.id}}-->${el.text}<!--^{>${el.id}}-->` : el.text )
                     )
                     scope.cache[el.id] = el.text;
                 }
@@ -193,7 +198,8 @@ export class Tmplits {
                 scope.cache[element.name] = partial;
                 Handlebars.registerPartial(
                     element.name,
-                    partial
+                    (Tmplits.debug.comment ? `<!--⌄{> ${element.name}} (${element.file})-->${partial}<!--^{${element.name}}-->` : `${partial}` )
+                    
                 )
                 next()
             }
@@ -394,7 +400,7 @@ export class Tmplits {
                 }
 
                 scope.native = raw
-
+                Tmplits.debug =Object.assign( {} ,Tmplits.debug, raw.debug)
                 //Append the package pages to the pages
                 scope.pages = scope.pages ? scope.pages : [];
                 raw.pages.forEach((e)=>{
@@ -716,7 +722,7 @@ function createTmplit(tmplit, ...args) {
     let options = Object.assign( {}, args[args.length-1])
     options.name = tmplit
     let context = args.slice(0,-1)
-    
+
     try{
         var fn = eval('Tmplit'+tmplit)
     }
@@ -729,12 +735,12 @@ function createTmplit(tmplit, ...args) {
             }
         }
         catch{
-            var error = `<div class='error'>could not find tmplit ${tmplit}</div>`
+            var error = `<div class='error'>could not find Tmplit${tmplit}()</div>`
         }
     }
 
     if( typeof fn != 'function'){
-        var error = `<div class='error'>could not find tmplit ${tmplit}</div>`
+        var error = `<div class='error'>could not find Tmplit${tmplit}()</div>`
         fn = ()=>{ return error}
     }
     if( options.fn )
@@ -744,7 +750,12 @@ function createTmplit(tmplit, ...args) {
             return `<div class='error'>${error}${options.children}</div>`
         }
         else{
-            return fn( context, options )
+            if(Tmplits.debug.comment){
+                return `<!--⌄{w ${tmplit}}-->${fn( context, options )}<!--^{w ${tmplit}}-->`
+            }
+            else{
+                return fn( context, options )
+            }
         }
     }
     else{
@@ -759,7 +770,12 @@ function createTmplit(tmplit, ...args) {
             return {
                 toHTML(){
                     options.children = ''
-                    return fn( context, options)
+                    if(Tmplits.debug.comment){
+                        return `<!--⌄{w ${tmplit}}-->${fn( context, options )}<!--^{w ${tmplit}}-->`
+                    }
+                    else{
+                        return fn( context, options )
+                    }
                 }
             }    
         }
