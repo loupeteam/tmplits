@@ -722,7 +722,7 @@ function createTmplit(tmplit, ...args) {
     let options = Object.assign( {}, args[args.length-1])
     options.name = tmplit
     let context = args.slice(0,-1)
-
+    options.hash = Object.assign( {}, options.hash, options.data.copy )
     try{
         var fn = eval('Tmplit'+tmplit)
     }
@@ -804,6 +804,72 @@ function createObject(json, options) {
         return obj
     }
 }
+
+function copyContext(context, ...args) {    
+    let _utils = Handlebars.Utils;
+    //Get the context and options from the arguments    
+    let options = args[args.length - 1]
+
+    //Combine the context with the hash, this is the main copy operation
+    let contextArray = Object.assign({}, context, args.slice(0, -1), options.hash)
+    
+    //Create a copy of the context without the hash
+    //  Remove any items that were blacklisted
+    //  These are things that should not be added as attributes
+    let copyArray = Object.assign({}, context)
+    let data = undefined
+    //go through args and delete anything specified in the hash
+    for (let i = 0; i < args.length - 1; i++) {
+        let arg = args[i]
+        if (typeof arg == 'string') {
+            delete copyArray[arg]
+        }
+    }
+
+    //Copy to the copyArrayClean to avoid class being removed by the cleanArgs function
+    let copyArrayClean = Object.assign({}, copyArray)
+    let {attr, classList} = cleanArgs(copyArrayClean)
+
+    if(classList.length > 0){
+        attr += ' class="' + classList.join(' ') + "\""
+    }
+    //Add the classlist to the context
+    // debugger
+    //Create a new frame with the data
+    //  This ensures we don't mess with the original data
+    if (options.data) {
+        data = _utils.createFrame(options.data);
+        //Add the copy to the data
+        //  Copy is to support tmplits copying to the hash
+        //  Attr is to support partials, which don't have a hash
+        //  ToHTML is to support partials, because otherwise it will get escaped
+        data = Object.assign(data, { copy: copyArray, attr: {toHTML(){ return attr } } })
+    }
+    
+    //Call the child with the parent context
+    options.children = options.fn(contextArray, { data: data })
+    return options.children
+}
+
+Handlebars.registerHelper('Partial', function (context, ...args) {
+
+    //Get the context and options from the arguments
+    let options = args[args.length-1]
+    let contextArray = args.slice(0,-1)
+    contextArray = Object.assign( {}, contextArray, options.hash )
+    //Get the tmplit name from the first option
+    let tmplit = tmplits.get(context)
+    if( typeof tmplit == 'undefined' ){
+        try{
+            tmplit =  Handlebars.compile(context);                
+        }
+        catch(e){
+            tmplit = Handlebars.compile(`<div class='error'>${e}</div>`)
+        }
+    }
+    //Create the tmplit
+    return tmplit(contextArray);
+})
 
 Handlebars.registerHelper('controllerType', function (context, options) {
 
@@ -982,6 +1048,7 @@ Handlebars.registerHelper('concat', function (...args){
     })
     return ret
 })
+Handlebars.registerHelper('copy', copyContext)
 Handlebars.registerHelper('widget', createTmplit)
 Handlebars.registerHelper('W', createTmplit)
 Handlebars.registerHelper('tmplit', createTmplit)

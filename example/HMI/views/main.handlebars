@@ -1,5 +1,29 @@
+{{!-- pass a partial into another partials parameters --}}
+Custom User Controls:
+<br/>
+{{> 'button-label' 
+    label=(Partial "custom-icon" img="app/assets/wireframe.png") 
+    data-var-name='tmplitTest:tmplit.SetButton' 
+    class='webhmi-hide'
+}}
+
+{{> 'button-icon' 
+    img="app/assets/wireframe.png" 
+    data-var-name='tmplitTest:tmplit.SetButton' 
+    class='webhmi-hide'
+}}
+
+{{> 'icon' 
+    img="app/assets/wireframe.png" 
+    data-var-name='tmplitTest:tmplit.SetButton' 
+    class='webhmi-btn-set webhmi-hide'
+}}
+
+
+
 <div>
     Button
+    <br/>
     {{tmplit 'Button' 'SetButton' buttonType='set' data-var-name='tmplitTest:tmplit.SetButton'}}
     {{tmplit 'Button' 'ToggleButton' buttonType='toggle' data-var-name='tmplitTest:tmplit.ToggleButton'}}
     {{tmplit 'Button' 'MomentaryButton' buttonType='momentary' data-var-name='tmplitTest:tmplit.MomentaryButton'}}
