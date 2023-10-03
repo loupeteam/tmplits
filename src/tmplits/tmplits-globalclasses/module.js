@@ -521,7 +521,33 @@ export function selectPage(selected) {
     let page = selected.attr('data-page')
     let dom = selected.attr('data-target-dom')
     if(dom && page){
-        tmplits.loadPage(dom, page)
+        //Check if the user has provided a context
+        let ctx = selected.attr('data-context')
+
+        //If the context is a string, try to parse it as json, then as javascript, then just pass it as a string
+        if(typeof ctx == 'string'){
+            try{
+                ctx = JSON.parse(ctx)
+            }catch{
+                try{
+                    ctx = eval(ctx)
+                }
+                catch{
+                }
+                if(ctx == null){
+                    console.warn('Context was not valid json or javascript')
+                    ctx = selected.attr('data-context')
+                }
+            }
+        }
+        //If the context is a number, pass it as a number
+        else if(typeof ctx == 'number'){
+            ctx = +ctx
+        }
+        else{
+            ctx = ' '
+        }
+        tmplits.loadPage(dom, page, ctx)
     }
 }
 

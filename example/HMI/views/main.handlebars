@@ -142,15 +142,21 @@ don't worry about this -->
 </div>
 
 <!-- non selected pages don't exist on the dom -->
-{{tmplit 'PageSelect' 'Page 1' dom="container1" template="page1"}}
-{{tmplit 'PageSelect' 'Page 2' dom="container1" template="page2"}}
+{{tmplit 'PageSelect' 'Page 1: json' ctx='{"msg":"hello"}' dom="container1" template="page1"}}
+{{tmplit 'PageSelect' 'Page 2: javascript' ctx='this.innerHTML' dom="container1" template="page2"}}
+{{tmplit 'PageSelect' 'Page 3: string' ctx='Hello' dom="container1" template="page2"}}
+{{tmplit 'PageSelect' 'Page 4: function' ctx='()=>{return "Answer: " + (3.0 +2.0) }' dom="container1" template="page2"}}
+{{tmplit 'PageSelect' 'Page 5: number' ctx=3 dom="container1" template="page2"}}
+{{tmplit 'PageSelect' 'Page 6: object' ctx=(obj '{"msg":"hello"}') dom="container1" template="page1"}}
+{{tmplit 'PageSelect' 'Page 7: none' dom="container1" template="page2"}}
+
 <script id="page1" type="text/x-handlebars-template">
 <!-- write your page 2 with normal html -->
-page1
+    {{msg}} world
 </script>
 <script id="page2" type="text/x-handlebars-template">
 <!-- write your page 2 with normal html -->
-page2
+    {{ . }}
 </script>
 <div id="container1">
 </div>
