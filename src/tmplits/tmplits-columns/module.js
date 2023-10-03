@@ -72,7 +72,7 @@ export function TmplitColumns(context, args) {
         style += `align-items:center;justify-items:center;`
     }
     //Setup columns and rows based on the flow direction
-    style = `${ columnFlow > 0 ? `grid-template: repeat(${rows},1fr) / repeat(${columns},1fr); grid-auto-flow : column;` : `grid-template-columns : repeat(${columns},1fr);`}` + userStyle
+    style = `${ columnFlow > 0 ? `grid-template: repeat(${rows},1fr) / repeat(${columns},1fr); grid-auto-flow : column;` : `grid-template-columns : repeat(${columns},1fr);`}` + style + userStyle
     //This ensures the size is the same but there is a small gap for the border
     // style += `padding: 2px; margin: -2px;`
 
