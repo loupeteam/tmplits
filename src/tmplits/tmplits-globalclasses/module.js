@@ -390,7 +390,21 @@ export class luiDirectory{
                 "cancelable": true
             });
             text.dispatchEvent(evt);
-        }    
+        } 
+        this.clearFilter(el)        
+    }
+    static clearFilter(el){
+        let scope = el.closest('.select-scope')
+        let filter = scope.querySelector('[filter]')
+        if(filter){
+            filter.setAttribute('filter', '')
+            for( let row of filter.rows){
+                row.style.display = ''
+            }        
+            let filterText = scope.querySelector('.filter-text')    
+            filterText.remove()    
+        }
+
     }
     static filter(e, key){
         let filter = e.getAttribute('filter') || ''
@@ -453,6 +467,15 @@ export class luiDirectory{
             e.target.value = filter.getAttribute('filter')            
         }
     }
+    static filterBlur(e){
+        //if the user presses enter, set the value of filter to the html of e
+        let evt = new Event("change", {
+            "bubbles": true,
+            "cancelable": true
+        });
+        e.target.dispatchEvent(evt);            
+        return
+    }
 }
 
 $(document).on({
@@ -504,8 +527,10 @@ $(document).on({
 }, '.lui-increment');
 
 $(document).on({
-    "keydown": luiDirectory.filterKey
+    "keydown": luiDirectory.filterKey,
+    "blur": luiDirectory.filterBlur
 }, '.select-scope input');
+
 
 //Handle setting active if a tab is clicked
 export function selectTab(selected) {
