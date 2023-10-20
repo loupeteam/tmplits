@@ -34,6 +34,7 @@
     "@loupeteam/tmplits-directorybrowser": "file:../../src/tmplits/tmplits-directorybrowser/",
     "@loupeteam/tmplits-directorybrowserwindow": "file:../../src/tmplits/tmplits-directorybrowserwindow/",
     "@loupeteam/tmplits-numgrid": "file:../../src/tmplits/tmplits-numgrid/",
+    "@loupeteam/tmplits-robotscene": "file:../../src/tmplits/tmplits-robotscene/",
     "@loupeteam/tmplits-utilities": "file:../../src/tmplits/tmplits-utilities/",
     "@loupeteam/tmplits-globalclasses": "file:../../src/tmplits/tmplits-globalclasses/",
     "app":"file:./",
