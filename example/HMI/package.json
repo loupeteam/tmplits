@@ -40,7 +40,8 @@
     "app":"file:./",
     "bootstrap": "^3.3.4",
     "handlebars": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "three": "^0.145.0"
   },
   "lpm": {
     "type": "project"
