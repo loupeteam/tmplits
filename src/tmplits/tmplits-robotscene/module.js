@@ -26,7 +26,7 @@ import { GLTFLoader } from './GLTFLoader.js'
 import { OrbitControls } from './OrbitControls.js'
 
 // Define global variables
-let scene, orbit, renderer, camera, canvasHeight, canvasWidth;
+let scene, orbit, renderer, camera, canvasHeight, canvasWidth, light;
 
 window.robotData = {
 	joints: {
@@ -37,7 +37,7 @@ window.robotData = {
 }
 
 // Initialize robot scene
-function init() {
+function init(lightColor, lightIntensity) {
 	scene = new THREE.Scene();
 
 	// Define canvas size based on the size of robot scene
@@ -48,6 +48,14 @@ function init() {
 	camera = new THREE.PerspectiveCamera(60, canvasWidth / canvasHeight, 0.1, 1000);
 	camera.position.set(0, 0, 8);
 	camera.up.set(0, 1, 0)
+
+	// Check if both color and intensity are provided, otherwise use defaults
+    lightColor = parseInt(lightColor, 16) || 0xFFFFFF;
+    lightIntensity = lightIntensity || 1;
+
+	// Set up light
+	light = new THREE.AmbientLight(lightColor, lightIntensity);
+	scene.add(light);
 
 	// Create and set up renderer
 	renderer = new THREE.WebGLRenderer({antialias: true});
@@ -60,11 +68,6 @@ function init() {
 	renderer.domElement.id = 'robotcanvas';
 	renderer.domElement.style.width = canvasWidth + 'px';
 	renderer.domElement.style.height = canvasHeight + 'px';
-
-	// Add light to the scene
-	var hemisphereLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
-	hemisphereLight.position.z = 10;
-	scene.add(hemisphereLight);
 
 	// Update camera and renderer settings if the window is resized
 	window.addEventListener('resize', onWindowResize, false);
@@ -141,6 +144,8 @@ function loadRobotModel(robotFile) {
 export function TmplitRobotScene(context, args) {
     let {
 		['robotFile']:robotFile,
+		['lightColor']:lightColor,
+		['lightIntensity']:lightIntensity,
         ..._args
     } = args.hash
     //Get cleaned up values from args
@@ -149,8 +154,8 @@ export function TmplitRobotScene(context, args) {
         attr
     } = util.cleanArgs(_args)
 
-    // Initialize the renderer, camera, and scene
-    init();
+    // Initialize the renderer, camera, lights, and scene
+    init(lightColor, lightIntensity);
 
 	// Load the robot model into the scene
 	loadRobotModel(robotFile);
