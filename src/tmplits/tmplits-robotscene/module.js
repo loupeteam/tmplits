@@ -14,10 +14,12 @@
 //}
 
 /* Example RobotScene Usage
-{{tmplit 'RobotScene' robotFile='./path/to/robot/file/robot.glb'}}
+{{tmplit 'RobotScene' robotFile='./path/to/robot/file/robot.glb' lightColor='0xCC6666' lightIntensity='1.5'}}
 
 Options:
 robotFile: gltf file to load into scene
+lightColor: Hexidecimal number as a string that represents the desired color (e.g. 0xCC6666)
+lightIntensity: an integer that represents the intensity of the light (1.0 is a good starting point)
 */
 
 import * as util from "../tmplits-utilities/module.js"
@@ -110,8 +112,10 @@ function render() {
 
 	if(el.is(":visible")){
 		if(el[0].children.length == 0){
+			// Add renderer element to robot div
 			el[0].appendChild(renderer.domElement);
 		}
+
 		renderer.render(scene, camera);
 	}
 
@@ -159,7 +163,7 @@ export function TmplitRobotScene(context, args) {
 
 	// Load the robot model into the scene
 	loadRobotModel(robotFile);
-
+	
     return `
         <div id="robot" class="" style="height:600px"></div>
     `
