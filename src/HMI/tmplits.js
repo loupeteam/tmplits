@@ -1,3 +1,12 @@
+/*
+ * File: tmplits.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 import "../../jquery/dist/jquery.js"
 import * as util from "../tmplits-utilities/module.js"
 

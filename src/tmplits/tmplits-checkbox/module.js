@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 /*Example Checkbox usage
 {{tmplit 'CheckBox' <label> side= 'middle' buttonType= 'set' data-var-name='<var>'}}
 {{tmplit 'CheckBox' <label> side= 'right' buttonType= 'toggle' data-var-name='<var>'}}
