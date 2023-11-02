@@ -72,3 +72,7 @@ function TmplitCustomTmplit( ... ){
 {{> gizmo}}
 {{W CustomTmplit}}
 ```
+
+## Licensing
+
+This project is licensed under the [MIT License]LICENSE.
