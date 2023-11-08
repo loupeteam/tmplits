@@ -1,9 +1,14 @@
-//DO NOT DELETE THIS FILE 
+//DO NOT DELETE THIS FILE
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
-//This file will get loaded as a javascript file (not a module), meaning you can't import other modules from here.
-
-//Define your tmplit functions here and they will be globally available
-//function TmplitHelloWorld(context, args){
-//    return `Hello ${context[0]}!`
-//}
+//Example RobotScene Usage
+function tmplit_test_UpdateScene(scene, userData) {
+    if (userData.init) {
+        userData.joint1.rotation.y += 0.1;
+    }
+    else {
+        userData.init = true;
+        userData.joint1 = scene.getObjectByName("Cube");
+        userData.joint1.rotation.x = 0.5;
+    }
+}

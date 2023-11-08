@@ -9,6 +9,14 @@
 
 	<!-- Make the entire app run from within the node modules folder -->
 	<base href="./node_modules/">
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "./three/build/three.module.js",
+				"three/addons/": "./three/examples/jsm/"
+			}
+		}
+	</script>
 
 	<link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 

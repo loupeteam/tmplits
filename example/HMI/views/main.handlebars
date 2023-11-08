@@ -195,11 +195,4 @@ DirectoryBrowserWindow
 {{tmplit 'DirectoryBrowserWindow' data-var-name='tmplitTest:f.in.cwd' data-var-name-files='tmplitTest:Directory' data-var-name-willopen='tmplitTest:f.in.refresh' style='height:300px'}}
 
 RobotScene
-{{!-- (a cube for the model, a redish light color, and a medium light intensity) --}}
-{{tmplit 'RobotScene' robotFile='./@loupeteam/tmplits-robotscene/Robot.glb' lightColor='0xCC6666' lightIntensity='1.5'}}
-<br>
-
-<!-- ask katie or jack 
-{{tmplit 'NumGrid'}}-->
-
-<!-- reach out to katie about building tmplits -->
+{{tmplit 'RobotScene' robotFile='./@loupeteam/tmplits-robotscene/Robot.glb' style="width:300px; height:300px" onrender="tmplit_test_UpdateScene" lightColor='0xCC6666' lightIntensity='1.5'}}

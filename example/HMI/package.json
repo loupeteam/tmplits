@@ -41,7 +41,7 @@
     "bootstrap": "^3.3.4",
     "handlebars": "*",
     "jquery": "*",
-    "three": "^0.145.0"
+    "three": "*"
   },
   "lpm": {
     "type": "project"

@@ -1,74 +1,59 @@
-This is a template gizmo
+# tmplits-robotscene
 
-Use this template by running:
-```
-lpm install tmplits-gizmo
-```
-then modify it for your needs.
+This template will instantiate a scene with the given glb file and allow you to manipulate the scene in the onrender callback.
 
-Settings up the template:
+## install
 
-This gizmo can be installed using NPM install and will get loaded by the tmplit system
-the important parts are a 
-- library.handlebars - this is your template
-- loader.js - js file that will run after loading the templates. This can do work to instantiate things or contain function tmplits
-- Package.json that includes a name with the prefix 
-    - @loupeteam/tmplit-[your tmplits name]
-    - Version number
-    - Link to repo the repo (the local one or tmplits, this is important because it is how the package gets it's access rights)    
-```json
-{
-    "name": "@loupeteam/tmplits-[TmplitName]",
-    "version": "x.x.x",
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/loupeteam/tmplits.git"
-    },
-}
+```bash
+npm install @loupeteam/tmplits-robotscene
 ```
 
-The entire page template will be loaded with the name [your tmplit name] and any tmplits inside scripts will also be available
+## usage
 
-Usage:
+### Add the an import map to your html file
 
+This is required because the template uses three.js and three.js addons which typically require a build step to be used in the browser. The import map allows you to use the modules directly in the browser by mapping the module name to the file path.
 
-```json
-//Application Package.json
-{
-{
-  "name": "@loupeteam/tmplit-template",
-  "version": "0.0.2",
+```html
+<head>
   ...
-  "dependencies": {
-    "@loupeteam/tmplits": "0.0.2",
-    "@loupeteam/tmplits-gizmo": "0.0.1",    
-  }
-}
-}
-``````
-
-```json
-//Gizmo Package.json
-{
-    "name": "@loupeteam/tmplits-gizmo",
-    "version": "0.0.1",
-}
-``````
-
-```handlebars
-<!--library.handlebars-->
-<div>Hello World<div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./three/build/three.module.js",
+        "three/addons/": "./three/examples/jsm/"
+      }
+    }
+  </script>
+  ...
+</head>
 ```
 
-```javascript
-//loader.js
-console.log("Loaded gizmo!")
-function TmplitCustomTmplit( ... ){
- ...
-}
-```
+### Use the template and use it in your html file
+
 ```handlebars
-<!--main.handlebars-->
-{{> gizmo}}
-{{W CustomTmplit}}
+{{tmplit
+  "RobotScene"
+  robotFile="./@loupeteam/tmplits-robotscene/Robot.glb"
+  style="width:300px;height:300px"
+  onrender="UpdateScene"
+  lightColor="0xCC6666"
+  lightIntensity="1.5"
+}}
+```
+
+### Define the onrender callback in your javascript file
+
+```Javascript
+//This function will be called every frame
+function UpdateScene(scene, userData) {
+    if (userData.init) {
+        userData.joint1.rotation.x += 0.1;
+    }
+    else {
+        //Cache the objects we want to manipulate
+        userData.init = true;
+        userData.joint1 = scene.getObjectByName("Cube");
+    }
+}
 ```
