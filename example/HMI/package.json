@@ -36,7 +36,7 @@
     "@loupeteam/tmplits-numgrid": "file:../../src/tmplits/tmplits-numgrid/",
     "@loupeteam/tmplits-utilities": "file:../../src/tmplits/tmplits-utilities/",
     "@loupeteam/tmplits-globalclasses": "file:../../src/tmplits/tmplits-globalclasses/",
-    "app":"file:./",
+    "app": "file:./app/",
     "bootstrap": "^3.3.4",
     "handlebars": "*",
     "jquery": "*"
