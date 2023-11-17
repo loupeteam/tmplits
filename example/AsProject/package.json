@@ -18,6 +18,7 @@
     "@loupeteam/errorlib": "^0.23.3",
     "@loupeteam/finder": "^0.0.1",
     "@loupeteam/omjson": "^1.4.0",
-    "@loupeteam/persist": "^0.0.7"
+    "@loupeteam/persist": "^0.0.7",
+    "@loupeteam/webhmiprog": "^0.1.0"
   }
 }

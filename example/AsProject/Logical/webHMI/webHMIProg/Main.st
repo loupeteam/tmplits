@@ -1,3 +1,11 @@
+(*
+* File: Main.st
+* Copyright (c) 2023 Loupe
+* https://loupe.team
+* 
+* This file is part of OMJSON, licensed under the MIT License.
+*)
+
 // This program serves variables to web applications via WebSockets and
 // a JSON interface
 
@@ -19,5 +27,16 @@ PROGRAM _CYCLIC
 
 	// Call jsonWebSocketServer cyclically to serve variables
 	jsonWebSocketServer_0();
+	
+	IF NOT gSimulation THEN
+		gWSTimeout := FALSE;
+		FOR i:=0 TO JSON_MAI_CLIENTS DO
+			// On any client disconnect
+			IF oldClientInfo[i].Connected AND NOT jsonWebSocketServer_0.ClientInfo[i].Connected THEN
+				gWSTimeout := TRUE;
+			END_IF
+		END_FOR
+		oldClientInfo := jsonWebSocketServer_0.ClientInfo;
+	END_IF
 
 END_PROGRAM
