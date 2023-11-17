@@ -1,3 +1,10 @@
+(*
+ * File: Finder.fun
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of Finder, licensed under the MIT License.
+ *)
 
 FUNCTION finder : USINT
 	VAR_INPUT
