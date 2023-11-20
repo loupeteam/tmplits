@@ -11,5 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@loupeteam/tmplits-gizmo": "^0.0.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loupeteam/tmplits.git"
   }
 }
