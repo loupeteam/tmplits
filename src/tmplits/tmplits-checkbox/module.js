@@ -57,7 +57,7 @@ export function TmplitCheckBox(context, args) {
         if (buttonVarName == '') {
             buttonVarName = dataVarName
             classList.splice(classList.findIndex((e) => {
-                return e == 'webhmi-led'
+                return e == 'lux-led'
             }),1)
         }
         attr += `data-var-name='${buttonVarName}'`
@@ -72,7 +72,7 @@ export function TmplitCheckBox(context, args) {
     return `
     <div class="${classList.join(' ')}" ${attr}>
     <div class='' data-var-name='${dataVarName}' ${attr}></div>
-    <span class="glyphicon webhmi-led" data-led-true='glyphicon-check' data-led-false='glyphicon-unchecked' data-var-name='${dataVarName}' style='font-size:20px;'></span>
+    <span class="glyphicon lux-led" data-led-true='glyphicon-check' data-led-false='glyphicon-unchecked' data-var-name='${dataVarName}' style='font-size:20px;'></span>
     ${label}
     </div>
    `

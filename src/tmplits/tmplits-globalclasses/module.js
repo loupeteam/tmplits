@@ -149,7 +149,7 @@ export class LuiSlider {
         let value;
         if (target?.[0].getAttribute('data-var-name')) {
             try{
-                value = WEBHMI.getValue($(target?.[0]))
+                value = LUX.getValue($(target?.[0]))
             }
             catch(e){
                 value = +target?.[0].value
@@ -575,7 +575,7 @@ export function luiIncrementValue(selected) {
     }
     let value;
     if (target?.[0].getAttribute('data-var-name')) {
-        value = WEBHMI.getValue($(target?.[0]))
+        value = LUX.getValue($(target?.[0]))
     } else {
         value = +target?.[0].value
     }

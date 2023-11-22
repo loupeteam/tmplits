@@ -55,7 +55,7 @@ export function TmplitSlider(context, args) {
     inputStyle = `position:relative;width:150%;top:0%;border-style:none;background:transparent;display:none` + inputStyle
     let innerClassList = ['lui-slider-value']
     if (dataVarName) {
-        innerClassList.push('webhmi-num-value')
+        innerClassList.push('lux-num-value')
     }
     let inner = '';
     if (args.children) {

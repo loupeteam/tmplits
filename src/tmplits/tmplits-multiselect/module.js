@@ -96,10 +96,10 @@ export function TmplitMultiSelect(context, args) {
     }
 
     if(dataVarName){
-        options += `<invisible-input class="lui-select-value webhmi-num-value" style="display:none" value="${context}" ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
+        options += `<invisible-input class="lui-select-value lux-num-value" style="display:none" value="${context}" ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
     }
     if(dataVarNameField){
-         options += `<invisible-input class="lui-select-text webhmi-text-value" style="display:none" value="${context}" ${dataVarNameField?'data-var-name="' + dataVarNameField +'"':''} ></invisible-input>`
+         options += `<invisible-input class="lui-select-text lux-text-value" style="display:none" value="${context}" ${dataVarNameField?'data-var-name="' + dataVarNameField +'"':''} ></invisible-input>`
     }
     
     args.children = options

@@ -59,7 +59,7 @@ export function TmplitValueUpDown(context, args) {
     inputStyle = `;padding: 1px;margin: -1px;text-align: center;width: 100px;font-size: 20px;font-weight: bold;border-width: 1px;` + inputStyle
     let innerClassList = ['lui-increment-value']
     if (dataVarName) {
-        innerClassList.push('webhmi-num-value')
+        innerClassList.push('lux-num-value')
     }
     let inner = '';
     if (args.children) {

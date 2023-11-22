@@ -42,7 +42,7 @@ export function TmplitDirectoryBrowserWindow( context, args){
     }
     delete args.hash['data-var-name']
     args.hash.set = false
-    args.children += `<invisible-input style='display:none' class='webhmi-text-value lui-directory-data' data-var-name='${dataVarNameFiles}'></invisible-input><dropdown>No Data</dropdown>`
+    args.children += `<invisible-input style='display:none' class='lux-text-value lui-directory-data' data-var-name='${dataVarNameFiles}'></invisible-input><dropdown>No Data</dropdown>`
     return `
     <div style='width:100%;height:100%;'>
     ${TmplitTableSelect( context, args )}
