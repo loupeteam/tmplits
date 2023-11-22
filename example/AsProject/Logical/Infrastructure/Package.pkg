@@ -4,5 +4,6 @@
     <Object Type="Program" Language="ANSIC">FirstInitProg</Object>
     <Object Type="File">Infrastructure.typ</Object>
     <Object Type="File">Infrastructure.var</Object>
+    <Object Type="Package">RevInfo</Object>
   </Objects>
 </Package>
