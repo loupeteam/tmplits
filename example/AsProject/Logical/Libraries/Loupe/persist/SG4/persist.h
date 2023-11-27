@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* persist 0.00.7 */
+/* Persist 0.00.7 */
 
 #ifndef _PERSIST_
 #define _PERSIST_
@@ -8,8 +8,8 @@
 extern "C" 
 {
 #endif
-#ifndef _persist_VERSION
-#define _persist_VERSION 0.00.7
+#ifndef _Persist_VERSION
+#define _Persist_VERSION 0.00.7
 #endif
 
 #include <bur/plctypes.h>

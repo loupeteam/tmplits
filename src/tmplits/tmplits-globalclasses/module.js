@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -140,7 +149,7 @@ export class LuiSlider {
         let value;
         if (target?.[0].getAttribute('data-var-name')) {
             try{
-                value = WEBHMI.getValue($(target?.[0]))
+                value = LUX.getValue($(target?.[0]))
             }
             catch(e){
                 value = +target?.[0].value
@@ -566,7 +575,7 @@ export function luiIncrementValue(selected) {
     }
     let value;
     if (target?.[0].getAttribute('data-var-name')) {
-        value = WEBHMI.getValue($(target?.[0]))
+        value = LUX.getValue($(target?.[0]))
     } else {
         value = +target?.[0].value
     }

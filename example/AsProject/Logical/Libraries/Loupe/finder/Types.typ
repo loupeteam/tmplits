@@ -1,3 +1,10 @@
+(*
+ * File: Types.typ
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of Finder, licensed under the MIT License.
+ *)
 
 TYPE
 	finder_typ : 	STRUCT 

@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -114,12 +123,12 @@ export function numGridPopulate() {
         let labelRows;
         let labelCols;
         dataVarName = $grid.attr('data-var-name-num-rows')
-        rows = WEBHMI.getValue($(`<div data-var-name='${dataVarName}'/>`));
+        rows = LUX.getValue($(`<div data-var-name='${dataVarName}'/>`));
         if (rows === undefined) {
             rows = 9;
         }
         dataVarName = $grid.attr('data-var-name-num-cols')
-        cols = WEBHMI.getValue($(`<div data-var-name='${dataVarName}'/>`));
+        cols = LUX.getValue($(`<div data-var-name='${dataVarName}'/>`));
         if (cols === undefined) {
             cols = 9;
         }
@@ -158,7 +167,7 @@ export function numGridPopulate() {
                 let $cell = $(cell)
                 $cell.attr('data-var-name', `${dataVarName}[${j*10 + i}]`)
                 let value;
-                value = WEBHMI.getValue($cell); //Math.floor(Math.random() * (-150)) // to get random number between -150 to 0
+                value = LUX.getValue($cell); //Math.floor(Math.random() * (-150)) // to get random number between -150 to 0
                 cell.innerHTML = value;
                 if (value >= -50) {
                     cell.classList.add("green");
@@ -213,19 +222,19 @@ export function getButtonType(type, classList) {
     if (type) {
         switch (type.trim().toLowerCase()) {
             case 'set':
-                classList.push('webhmi-btn-set')
+                classList.push('lux-btn-set')
                 classList.push('interaction')
                 return true
                 break;
             case 'toggle':
-                classList.push('webhmi-btn-toggle')
-                classList.push('webhmi-led')
+                classList.push('lux-btn-toggle')
+                classList.push('lux-led')
                 classList.push('interaction')
                 return true
                 break
             case 'momentary':
-                classList.push('webhmi-btn-momentary')
-                classList.push('webhmi-led')
+                classList.push('lux-btn-momentary')
+                classList.push('lux-led')
                 classList.push('interaction')
                 return true
                 break

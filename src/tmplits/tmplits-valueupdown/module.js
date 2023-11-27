@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -50,7 +59,7 @@ export function TmplitValueUpDown(context, args) {
     inputStyle = `;padding: 1px;margin: -1px;text-align: center;width: 100px;font-size: 20px;font-weight: bold;border-width: 1px;` + inputStyle
     let innerClassList = ['lui-increment-value']
     if (dataVarName) {
-        innerClassList.push('webhmi-num-value')
+        innerClassList.push('lux-num-value')
     }
     let inner = '';
     if (args.children) {

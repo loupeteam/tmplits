@@ -1,0 +1,13 @@
+(*
+* File: Diagnostics.var
+* Copyright (c) 2023 Loupe
+* https://loupe.team
+* 
+* This file is part of ErrorProg, licensed under the MIT License.
+*)
+
+VAR
+	gErrorCollector : ErrorCollector_typ := (0);
+	gErrorCollectorHMI : ErrorCollector_HMI_typ := (0);
+END_VAR
+

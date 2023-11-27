@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -52,9 +61,9 @@ export function TmplitNumeric(context, args) {
 
     let field = '' 
     if (type === 'output'){
-        field = `<div class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
+        field = `<div class='form-control lux-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
     } else if (type === 'input'){
-        field = `<input class='form-control webhmi-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>`
+        field = `<input class='form-control lux-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>`
     }
 
     return `

@@ -1,3 +1,11 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
 
 /* Example Column (BootStrap) Usage
     {{#tmplit 'ColumnsBs' 'label' maxColumns=2}}

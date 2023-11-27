@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -32,7 +41,7 @@ or we will assume one for you..
 Example drop down usage:
 {{#tmplit 'dropdown' [set=false/true]}}
     <field>
-        <input placeholder="Select Operation" class='webhmi-dropdown'/>        
+        <input placeholder="Select Operation" class='lux-dropdown'/>        
     </field>
     <dropdown>
        <div></div>         
@@ -104,10 +113,10 @@ export function TmplitDropdown(context, args) {
         }
     }
     if (field == '') {
-        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} lui-select-text${dataVarNameField ? ' webhmi-text-value' : ''}'>`
+        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} lui-select-text${dataVarNameField ? ' lux-text-value' : ''}'>`
     }
     if( dataVarName ){
-        field += `<invisible-input class='webhmi-num-value lui-select-value' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
+        field += `<invisible-input class='lux-num-value lui-select-value' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
     }
     let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.();"` : ''
 
@@ -125,7 +134,7 @@ export function TmplitDropdown(context, args) {
         <div class="input-group-btn">
             <button type="button" 
             ${willOpenButton}
-            class="btn dropdown-toggle${willOpenPV ? " webhmi-btn-set" : ''}" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            class="btn dropdown-toggle${willOpenPV ? " lux-btn-set" : ''}" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
             </button>
             <div class="dropdown-menu" >

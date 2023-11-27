@@ -1,3 +1,12 @@
+/*
+ * File: tmplits.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 import "../../jquery/dist/jquery.js"
 import * as util from "../tmplits-utilities/module.js"
 
@@ -326,10 +335,10 @@ export class Tmplits {
         catch(e){
             $(dom).html(`<div class="error">Error loading the page '${pageName}' ${e} </div>` )
         }
-        if( typeof WEBHMI !== 'undefined'){
+        if( typeof LUX !== 'undefined'){
             try {
-                WEBHMI.queryDom()
-                WEBHMI.updateHMI()                        
+                LUX.queryDom()
+                LUX.updateHMI()                        
             } catch (error) {
                 
             }
@@ -348,10 +357,10 @@ export class Tmplits {
         catch(e){
             $(container).html(`<div class="error">Error loading the template '${template}' ${e} </div>`)
         }
-        if( typeof WEBHMI !== 'undefined'){
+        if( typeof LUX !== 'undefined'){
             try {
-                WEBHMI.queryDom()
-                WEBHMI.updateHMI()                        
+                LUX.queryDom()
+                LUX.updateHMI()                        
             }catch{}
         }
     }
@@ -575,11 +584,11 @@ export class Tmplits {
 export class viewDelegate {
     constructor() {}
     //     static observer = new MutationObserver(function (mutations) {
-    // 		// Was a new webhmi element added to the DOM?
-    // 		// Use Array.some() instead of Array.forEach() for easy loop break when we find a webhmi element added or remove from DOM
+    // 		// Was a new lux element added to the DOM?
+    // 		// Use Array.some() instead of Array.forEach() for easy loop break when we find a lux element added or remove from DOM
     //         let nodes = new Array()
     // 		mutations.forEach(function (mutation) {
-    // 			// check added nodes for webhmi changes
+    // 			// check added nodes for lux changes
     // 			mutation.addedNodes.forEach(function (node) {
     // 				if (node.nodeType == node.ELEMENT_NODE) {
     // 					// check elem, check descendants
@@ -654,10 +663,10 @@ export class viewDelegate {
                 el.forEach((el) => {
                     let fn = e.fn()
                     el.innerHTML = fn
-                    if( typeof WEBHMI !== 'undefined'){
+                    if( typeof LUX !== 'undefined'){
                         try{
-                            WEBHMI.queryDom()
-                            WEBHMI.updateHMI()    
+                            LUX.queryDom()
+                            LUX.updateHMI()    
                         }
                         catch{}
                     }

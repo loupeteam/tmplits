@@ -1,0 +1,18 @@
+(*
+* File: RevInfo.var
+* Copyright (c) 2023 Loupe
+* https://loupe.team
+* 
+* This file is part of RevInfo, licensed under the MIT License.
+*)
+
+VAR
+	revision : STRING[80] := '';
+	revisionDate : STRING[80] := '';
+	revisionAuthor : STRING[80] := '';
+	branchName : STRING[80] := '';
+	uncommittedChanges : STRING[80] := '';
+	buildDate  : STRING[80] := '';
+	buildConfiguration : STRING[80] := '';
+	builder : STRING[80] := '';
+END_VAR

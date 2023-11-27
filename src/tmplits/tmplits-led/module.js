@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -58,7 +67,7 @@ export function TmplitLed(context, args) {
         if (buttonVarName == '') {
             buttonVarName = dataVarName
             classList.splice(classList.findIndex((e) => {
-                return e == 'webhmi-led'
+                return e == 'lux-led'
             }),1)
         }
         attr += `data-var-name='${buttonVarName}'`
@@ -72,7 +81,7 @@ export function TmplitLed(context, args) {
 
     return `
         <div class="${classList.join(' ')}" ${attr}>
-        <div class='led webhmi-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
+        <div class='led lux-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
         ${label}
         </div>
     `

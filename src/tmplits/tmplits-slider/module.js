@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -46,7 +55,7 @@ export function TmplitSlider(context, args) {
     inputStyle = `position:relative;width:150%;top:0%;border-style:none;background:transparent;display:none` + inputStyle
     let innerClassList = ['lui-slider-value']
     if (dataVarName) {
-        innerClassList.push('webhmi-num-value')
+        innerClassList.push('lux-num-value')
     }
     let inner = '';
     if (args.children) {

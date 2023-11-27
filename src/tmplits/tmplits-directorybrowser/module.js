@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -34,7 +43,7 @@ export function TmplitDirectoryBrowser( context, args){
     }
     delete args.hash['data-var-name']
     args.hash.set = false
-    args.children += `<invisible-input style='display:none' class='webhmi-text-value lui-directory-data' data-var-name='${dataVarNameFiles}'></invisible-input>`
+    args.children += `<invisible-input style='display:none' class='lux-text-value lui-directory-data' data-var-name='${dataVarNameFiles}'></invisible-input>`
     return `    
     ${TmplitDropdownTable( context, args )}
 `

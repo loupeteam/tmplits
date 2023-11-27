@@ -1,3 +1,11 @@
+(*
+ * File: Constants.var
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of Finder, licensed under the MIT License.
+ *)
+
 VAR CONSTANT
 
 END_VAR

@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -70,10 +79,10 @@ export function TmplitTableSelect(context, args) {
         }
     }
     if (field == '') {
-        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='${set ?"":' noset'} lui-select-text${dataVarNameField ? ' webhmi-text-value' : ''} list-viewer-selected-file-name'>`
+        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='${set ?"":' noset'} lui-select-text${dataVarNameField ? ' lux-text-value' : ''} list-viewer-selected-file-name'>`
     }
     if( dataVarName ){
-        field += `<invisible-input class='webhmi-num-value lui-select-value list-viewer-selected-file-name' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
+        field += `<invisible-input class='lux-num-value lui-select-value list-viewer-selected-file-name' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
     }
     let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.();"` : ''
 
@@ -95,7 +104,7 @@ export function TmplitTableSelect(context, args) {
             ${field} 
             <button type="button" 
                 ${willOpenButton}
-                class="input-group-addon dropdown-toggle${willOpenPV ? " webhmi-btn-set" : ''} list-viewer-refresh-button" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-hidden="true">
+                class="input-group-addon dropdown-toggle${willOpenPV ? " lux-btn-set" : ''} list-viewer-refresh-button" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-hidden="true">
                 <span class="glyphicon glyphicon-refresh"></span>
             </button>
         </div>

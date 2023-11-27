@@ -1,3 +1,12 @@
+/*
+ * File: module.js
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of tmplits, licensed under the MIT License.
+ * 
+ */
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -108,10 +117,10 @@ export function TmplitDropdownTable(context, args) {
     }
     
     if( field == '') {
-        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} lui-select-text${dataVarNameField ? ' webhmi-text-value' : ''}'>`
+        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='form-control${set ?"":' noset'} lui-select-text${dataVarNameField ? ' lux-text-value' : ''}'>`
     }
     if( dataVarName ){
-        field += `<invisible-input class='webhmi-text-value lui-select-value' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
+        field += `<invisible-input class='lux-text-value lui-select-value' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
     }
 
     let delegate = args.delegate ? `onclick="${args.delegate}?.willOpen?.()"` : ''
@@ -121,7 +130,7 @@ export function TmplitDropdownTable(context, args) {
         <div class="input-group-btn">
             <button type="button" 
             ${delegate}
-            class="btn dropdown-toggle${willOpenPV ? " webhmi-btn-set" : ''}" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            class="btn dropdown-toggle${willOpenPV ? " lux-btn-set" : ''}" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
             </button>
             <div class="dropdown-menu" >

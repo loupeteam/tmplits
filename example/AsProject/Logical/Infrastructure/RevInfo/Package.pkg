@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Package xmlns="http://br-automation.co.at/AS/Package">
+  <Objects>
+    <Object Type="File">getRevInfo.sh</Object>
+    <Object Type="Program" Language="IEC">RevInfo</Object>
+    <Object Type="File">RevInfo.var</Object>
+  </Objects>
+</Package>

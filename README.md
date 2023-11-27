@@ -1,3 +1,12 @@
+# Info
+Library is provided by Loupe  
+https://loupe.team  
+info@loupe.team  
+1-800-240-7042  
+
+# Description
+Tmplits is a framework for building HMI’s using the Handlebars template system. Tmplits manages loading assets and making them available as Partials to use throughout the HMI. This allows mixing standard HTML with a powerful template system, out of the box.
+
 [![Publish Tmplits](https://github.com/loupeteam/tmplits/actions/workflows/publish-tmplits.yml/badge.svg)](https://github.com/loupeteam/tmplits/actions/workflows/publish-tmplits.yml)
 
 [![Publish Tmplit](https://github.com/loupeteam/tmplits/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/loupeteam/tmplits/actions/workflows/npm-publish-github-packages.yml)
@@ -20,3 +29,13 @@ To manual publish:
 ```
 lpm publish
 ```
+
+For more documentation and examples, see https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs.html
+
+# Installation
+To install using the Loupe Package Manager (LPM), in the main HMI application directory run `lpm install tmplits`.
+If you want to install all tmplits components, in the main HMI application directory run `lpm install tmplit-basic` . For more information about LPM, see https://loupeteam.github.io/LoupeDocs/tools/lpm.html
+
+## Licensing
+
+This project is licensed under the [MIT License](LICENSE).

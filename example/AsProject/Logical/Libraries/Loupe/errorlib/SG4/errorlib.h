@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* errorlib 0.23.3 */
+/* ErrorLib 0.23.3 */
 
 #ifndef _ERRORLIB_
 #define _ERRORLIB_
@@ -8,8 +8,8 @@
 extern "C" 
 {
 #endif
-#ifndef _errorlib_VERSION
-#define _errorlib_VERSION 0.23.3
+#ifndef _ErrorLib_VERSION
+#define _ErrorLib_VERSION 0.23.3
 #endif
 
 #include <bur/plctypes.h>
@@ -18,28 +18,28 @@ extern "C"
 #define _BUR_PUBLIC
 #endif
 #ifdef _SG3
-		#include "AsBrStr.h"
 		#include "astime.h"
 		#include "sys_lib.h"
-		#include "HMITools.h"
-		#include "LogThat.h"
+		#include "AsBrStr.h"
+		#include "logthat.h"
 		#include "stringext.h"
+		#include "hmitools.h"
 #endif
 #ifdef _SG4
-		#include "AsBrStr.h"
 		#include "astime.h"
 		#include "sys_lib.h"
-		#include "HMITools.h"
-		#include "LogThat.h"
+		#include "AsBrStr.h"
+		#include "logthat.h"
 		#include "stringext.h"
+		#include "hmitools.h"
 #endif
 #ifdef _SGC
-		#include "AsBrStr.h"
 		#include "astime.h"
 		#include "sys_lib.h"
-		#include "HMITools.h"
-		#include "LogThat.h"
+		#include "AsBrStr.h"
+		#include "logthat.h"
 		#include "stringext.h"
+		#include "hmitools.h"
 #endif
 
 
@@ -220,7 +220,7 @@ _BUR_PUBLIC unsigned short errcolInternalRefreshHMIDisplay(struct ErrorCollector
 __asm__(".section \".plc\"");
 
 /* Additional IEC dependencies */
-__asm__(".ascii \"iecdep \\\"Logical/Libraries/Loupe/LogThat/Constants.var\\\" scope \\\"global\\\"\\n\"");
+__asm__(".ascii \"iecdep \\\"Logical/Libraries/Loupe/logthat/Constants.var\\\" scope \\\"global\\\"\\n\"");
 
 __asm__(".previous");
 

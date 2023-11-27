@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@loupeteam/webhmi": "*",
+    "@loupeteam/loupe-ux": "*",
     "@loupeteam/tmplits": "*",
     "@loupeteam/tmplit-basic": "*",
     "app":"file:./",

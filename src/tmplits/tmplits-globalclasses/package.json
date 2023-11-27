@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/tmplits-globalclasses",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
   },
   "repository": {
