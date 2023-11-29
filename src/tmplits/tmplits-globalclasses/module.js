@@ -7,6 +7,7 @@
  * 
  */
 
+
 //DO NOT DELETE THIS FILE 
 //- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
 
@@ -22,9 +23,10 @@
 //    return `Hello ${context[0]}!`
 //}
 
+import { evalContext } from "../tmplits-utilities/module.js"
 
 
-export class multiOptionSelector{
+export class multiOptionSelector {
     static selected(el, click) {
         let index = el.getAttribute('data-index')
         let value = el.getAttribute('data-value')
@@ -32,17 +34,17 @@ export class multiOptionSelector{
         scope.setAttribute('selectedIndex', index)
 
         let targets = scope.querySelectorAll('.lui-select-value')
-        targets.forEach((target)=>{
+        targets.forEach((target) => {
             target.value = value || +index;
         })
 
         let selection = el.textContent;
         let query = el.querySelector('.select-text')
-        if( query != null){
+        if (query != null) {
             selection = query.textContent;
         }
         selection = selection.trim()
-    
+
         let text = scope.querySelectorAll('.lui-select-text:not(.noset)')
         if (text.length) {
             text.forEach(e => {
@@ -55,7 +57,7 @@ export class multiOptionSelector{
                 e.dispatchEvent(evt);
             });
         }
-    
+
         if (click) {
             try {
                 evalInContext(click, el)
@@ -65,35 +67,41 @@ export class multiOptionSelector{
         }
         multiOptionSelector.updateSelection(scope, value || +index)
     }
-    static updateSelection(scope, value){
+    static updateSelection(scope, value) {
         let selection = '';
-        let page =''
+        let page = ''
         let dom = ''
+        let context = ''
         let options = scope.querySelectorAll('.option')
-        options.forEach((option)=>{
-            let dataValue =  option.getAttribute('data-value')
-            if( (dataValue == null && option.getAttribute('data-index') == Math.floor(value)) ||  dataValue == value )
-            {
+        options.forEach((option) => {
+            let dataValue = option.getAttribute('data-value')
+            if ((dataValue == null && option.getAttribute('data-index') == Math.floor(value)) || dataValue == value) {
                 option.classList.add('active')
                 selection = option.textContent;
                 let query = option.querySelector('.select-text')
-                if( query != null){
+                if (query != null) {
                     selection = query.textContent;
-                }   
+                }
                 page = option.getAttribute('data-page')
                 query = option.querySelector('[data-page]')
-                if( query != null){
+                if (query != null) {
                     page = query.getAttribute('data-page');
-                }                        
+                }
 
                 dom = option.getAttribute('data-target-dom')
                 query = option.querySelector('[data-target-dom]')
-                if( query != null){
+                if (query != null) {
                     dom = query.getAttribute('data-target-dom');
-                }                        
+                }
+
+                context = evalContext.call(option, option.getAttribute('data-context'))
+                query = option.querySelector('[data-context]')
+                if (query != null) {
+                    context = evalContext.call(query, query.getAttribute('data-context'))
+                }
 
             }
-            else{
+            else {
                 option.classList.remove('active')
             }
         })
@@ -112,16 +120,23 @@ export class multiOptionSelector{
                 e.dispatchEvent(evt);
             });
         }
-        if( (page !== null) && (page != '') ){
-            if( (dom !== null) && (dom != '') ){
+        if ((page !== null) && (page != '')) {
+            //If the user provided a dom, use that
+            if ((dom !== null) && (dom != '')) {
                 tmplits.loadPage(dom, page, context)
-            }            
+            }
+            //Query the dom for any lui-select-dom elements and load the page into them
             dom = scope.querySelectorAll('.lui-select-dom:not(.noset)')
             if (dom.length) {
                 dom.forEach(e => {
-                    tmplits.loadPage(e, page)
+                    //Check if the user has provided a context on the lui-select-dom element
+                    ctx = e.getAttribute('data-context')
+                    if (ctx != null) {
+                        context = evalContext.call(e, ctx);
+                    }
+                    tmplits.loadPage(e, page, context)
                 });
-            }    
+            }
         }
     }
     static setSelected(evt) {
@@ -130,7 +145,7 @@ export class multiOptionSelector{
         if (valueHolder != null) {
             multiOptionSelector.updateSelection(scope, valueHolder.getAttribute('value'))
         }
-    }    
+    }
 }
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
@@ -143,15 +158,15 @@ export class LuiSlider {
         scope.classList.add('lui-slider-active')
 
         let target = scope.querySelectorAll('.lui-slider-value')
-        target.forEach((input)=>{
+        target.forEach((input) => {
             input.classList.add('editing')
         })
         let value;
         if (target?.[0].getAttribute('data-var-name')) {
-            try{
+            try {
                 value = LUX.getValue($(target?.[0]))
             }
-            catch(e){
+            catch (e) {
                 value = +target?.[0].value
             }
         } else {
@@ -169,12 +184,12 @@ export class LuiSlider {
     static luiSlideEnd(selected) {
         let scope = document.querySelectorAll('.lui-slider-scope.lui-slider-active')
         scope.forEach((e) => {
-            let pop = e.getAttribute('pop-position')            
+            let pop = e.getAttribute('pop-position')
             let target = e.querySelectorAll('.lui-slider-value')
-            target.forEach((input)=>{
+            target.forEach((input) => {
                 //Pop is a bit buggy, seems like maybe a debounce issue
-                if(pop){
-                    input.value = pop                
+                if (pop) {
+                    input.value = pop
                 }
                 input.classList.remove('editing')
             })
@@ -213,11 +228,11 @@ export class LuiSlider {
         let max = +scope.getAttribute('lui-slider-max')
         let min = +scope.getAttribute('lui-slider-min')
         let total = max - min;
-        let screenStart = +(direction  ? scope.getAttribute('lui-slider-screen-x-start') : scope.getAttribute('lui-slider-screen-y-start'))
+        let screenStart = +(direction ? scope.getAttribute('lui-slider-screen-x-start') : scope.getAttribute('lui-slider-screen-y-start'))
         let screenNew = +(direction ? evt.screenX : evt.screenY)
-        let scrollDistance =-(direction ? -scope.clientWidth : scope.clientHeight)
-        let scrollBarPercent = (((screenNew - screenStart)/(scrollDistance*0.9)) * screenScale)
-        let value = startValue + scrollBarPercent*total
+        let scrollDistance = -(direction ? -scope.clientWidth : scope.clientHeight)
+        let scrollBarPercent = (((screenNew - screenStart) / (scrollDistance * 0.9)) * screenScale)
+        let value = startValue + scrollBarPercent * total
         value = clamp(value, min, max)
 
         target.forEach((e) => {
@@ -227,9 +242,9 @@ export class LuiSlider {
                 "bubbles": true,
                 "cancelable": true
             });
-            try{
+            try {
                 e.dispatchEvent(evt);
-            }catch{
+            } catch {
 
             }
         })
@@ -238,14 +253,14 @@ export class LuiSlider {
     static luiSlideMouse(evt) {
 
         let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
-        if( scope == null){
+        if (scope == null) {
             return
         }
         evt.preventDefault()
         scope.classList.add('lui-slider-active')
         if (scope.length == 0) {
             return;
-        } 
+        }
 
         let target = scope.querySelectorAll('.lui-slider-value')
         if (target.length == 0) {
@@ -261,8 +276,8 @@ export class LuiSlider {
         let max = +scope.getAttribute('lui-slider-max')
         let min = +scope.getAttribute('lui-slider-min')
         let direction = scope.getAttribute('direction') > 0
-        let scrollDistance =(direction ? scope.clientWidth : scope.clientHeight)*10
-        let value = startValue + evt.deltaY/scrollDistance
+        let scrollDistance = (direction ? scope.clientWidth : scope.clientHeight) * 10
+        let value = startValue + evt.deltaY / scrollDistance
         value = clamp(value, min, max)
 
         target.forEach((e) => {
@@ -273,20 +288,20 @@ export class LuiSlider {
                 "bubbles": true,
                 "cancelable": true
             });
-            try{
+            try {
                 e.dispatchEvent(evt);
-            }catch{
+            } catch {
 
             }
         })
         let oldTimeout = scope.getAttribute('timeout')
-        if(oldTimeout!=null){
+        if (oldTimeout != null) {
             clearTimeout(oldTimeout)
         }
-        let timeout = setTimeout(()=>{
+        let timeout = setTimeout(() => {
             target.forEach((e) => {
                 e.classList.remove('editing')
-            })    
+            })
             scope.classList.remove('lui-slider-active')
             scope.removeAttribute('timeout')
         }, 500)
@@ -308,10 +323,10 @@ export class LuiSlider {
         let percent = ((max - value) / total) * 90 //90 keeps the bar from going past the bottom
 
         sliderBar.forEach((e) => {
-            if(direction){
+            if (direction) {
                 e.style.left = (100 - percent) + '%';
             }
-            else{
+            else {
                 e.style.top = (percent) + '%';
             }
         })
@@ -320,36 +335,36 @@ export class LuiSlider {
 
 }
 
-export class luiDirectory{
-    static updateDirectory(evt){
-        try{
-            var data = JSON.parse( evt.currentTarget.value )
+export class luiDirectory {
+    static updateDirectory(evt) {
+        try {
+            var data = JSON.parse(evt.currentTarget.value)
         }
-        catch{
+        catch {
             return
         }
-        if( typeof data.files == 'undefined'){
+        if (typeof data.files == 'undefined') {
             return
         }
 
         let scope = evt.currentTarget.closest('.select-scope')
         let target = scope.querySelectorAll('.dropdown-menu,.list-view')
-        
+
         let table = ''
         table += '<table class="table filter-table">'
         table += '<tbody>'
- 
-        let folders = data.files.filter( e => e.name.slice(-1) == '/' )
-        let files = data.files.filter( e => e.name.slice(-1) != '/' )
- 
-        folders.forEach((file)=>{
+
+        let folders = data.files.filter(e => e.name.slice(-1) == '/')
+        let files = data.files.filter(e => e.name.slice(-1) != '/')
+
+        folders.forEach((file) => {
             table += `<tr class='option' onclick="luiDirectory.fileSelect(this)"><td class='select-text'>${file.name}</td><td>${file.date}</td><td>${file.size}</td></tr>`
         })
-        files.forEach((file)=>{
+        files.forEach((file) => {
             table += `<tr class='option' onclick="luiDirectory.fileSelect(this)"><td class='select-text'>${file.name}</td><td>${file.date}</td><td>${file.size}</td></tr>`
         })
         table += '</tbody>'
-        table += '</table>'        
+        table += '</table>'
 
         let tableEl = htmlToElement(table)
         target.forEach(element => {
@@ -358,11 +373,11 @@ export class luiDirectory{
         });
 
     }
-    static fileSelect(el){
+    static fileSelect(el) {
         let item = el.closest('.select-scope')
         let selection = el.textContent;
         let query = el.querySelector('.select-text')
-        if( query != null){
+        if (query != null) {
             selection = query.textContent;
         }
         selection = selection.trim()
@@ -370,96 +385,96 @@ export class luiDirectory{
         if (text != null) {
             let cleanPath = []
             let path = text.value.split("/")
-            path = path.filter((e, i,arr)=>{return ((e != '') || (i == (arr.length-1)))})
+            path = path.filter((e, i, arr) => { return ((e != '') || (i == (arr.length - 1))) })
             path.pop()
-            path = path.concat( selection.split("/") )
-            path.forEach((el, i)=>{
-                if( (el == '.' || el == ' ' )){
-                    if( i == 0 ){
+            path = path.concat(selection.split("/"))
+            path.forEach((el, i) => {
+                if ((el == '.' || el == ' ')) {
+                    if (i == 0) {
                         cleanPath.push('.')
                     }
                 }
-                else if( el == '..'){
+                else if (el == '..') {
                     cleanPath.pop()
                 }
-                else{
-                    if(cleanPath.length==0){
+                else {
+                    if (cleanPath.length == 0) {
                         cleanPath.push('.')
                     }
                     cleanPath.push(el)
                 }
             })
-            if(cleanPath.length == 1){
+            if (cleanPath.length == 1) {
                 cleanPath.push('')
             }
-            text.innerHTML = cleanPath.join("/")            
-            text.value = cleanPath.join("/")            
+            text.innerHTML = cleanPath.join("/")
+            text.value = cleanPath.join("/")
             let evt = new Event("change", {
                 "bubbles": true,
                 "cancelable": true
             });
             text.dispatchEvent(evt);
-        }    
+        }
     }
-    static filter(e, key){
+    static filter(e, key) {
         let filter = e.getAttribute('filter') || ''
 
-        switch(key.toLowerCase()){
+        switch (key.toLowerCase()) {
             case 'backspace':
                 filter = filter.slice(0, -1);
-            break;
+                break;
             case 'escape':
                 filter = ''
-            break;
+                break;
             default:
-                if(key.length == 1){
-                    filter += key                    
+                if (key.length == 1) {
+                    filter += key
                 }
-            break
+                break
         }
         e.setAttribute('filter', filter)
-        for( let row of e.rows){
-            if( row.textContent.toLowerCase().includes(filter) ){
+        for (let row of e.rows) {
+            if (row.textContent.toLowerCase().includes(filter)) {
                 row.style.display = ''
             }
-            else{
+            else {
                 row.style.display = 'none'
             }
-        } 
+        }
         if (e.nextSibling) {
             e.nextSibling.innerHTML = `filtering: ${filter}`
         } else {
-           let el = document.createElement('div')
-           el.innerHTML = `filtering: ${filter}`
-           el.classList.add('filter-text');
-           el.classList.add('form-control')        
-           e.parentNode.appendChild(el);
+            let el = document.createElement('div')
+            el.innerHTML = `filtering: ${filter}`
+            el.classList.add('filter-text');
+            el.classList.add('form-control')
+            e.parentNode.appendChild(el);
         }
     }
-    static filterKey(e){
+    static filterKey(e) {
         e.preventDefault()
         let key = e.key
         let scope = e.target.closest('.select-scope')
         let target = scope.querySelectorAll('.dropdown-menu,.list-view')
-        
+
         //if the user presses enter, set the value of filter to the html of e
-        if( key == 'Enter'){
+        if (key == 'Enter') {
             let evt = new Event("change", {
                 "bubbles": true,
                 "cancelable": true
             });
-            e.target.dispatchEvent(evt);            
+            e.target.dispatchEvent(evt);
             return
         }
 
-        target.forEach((element)=>{
+        target.forEach((element) => {
             element.parentNode.classList.add('open')
             luiDirectory.filter(element.children[0], key)
-        })    
+        })
 
         let filter = scope.querySelector('[filter]')
         if (filter) {
-            e.target.value = filter.getAttribute('filter')            
+            e.target.value = filter.getAttribute('filter')
         }
     }
 }
@@ -498,7 +513,7 @@ $(document).on({
 $(document).on({
     "touchmove": LuiSlider.luiSlideChange
 });
-window.addEventListener("wheel", LuiSlider.luiSlideMouse, { passive:false })
+window.addEventListener("wheel", LuiSlider.luiSlideMouse, { passive: false })
 
 $(document).on({
     "mouseup": LuiSlider.luiSlideEnd
@@ -529,33 +544,9 @@ export function selectPage(selected) {
     selected = $(selected.currentTarget)
     let page = selected.attr('data-page')
     let dom = selected.attr('data-target-dom')
-    if(dom && page){
+    if (dom && page) {
         //Check if the user has provided a context
-        let ctx = selected.attr('data-context')
-
-        //If the context is a string, try to parse it as json, then as javascript, then just pass it as a string
-        if(typeof ctx == 'string'){
-            try{
-                ctx = JSON.parse(ctx)
-            }catch{
-                try{
-                    ctx = eval(ctx)
-                }
-                catch{
-                }
-                if(ctx == null){
-                    console.warn('Context was not valid json or javascript')
-                    ctx = selected.attr('data-context')
-                }
-            }
-        }
-        //If the context is a number, pass it as a number
-        else if(typeof ctx == 'number'){
-            ctx = +ctx
-        }
-        else{
-            ctx = ' '
-        }
+        let ctx = evalContext.call(this, selected.attr('data-context'))
         tmplits.loadPage(dom, page, ctx)
     }
 }
@@ -583,11 +574,11 @@ export function luiIncrementValue(selected) {
     let increment;
     let max = selected.currentTarget.getAttribute('max');
     let min = selected.currentTarget.getAttribute('min');
-    
+
     // limit with min value
-    if ((max === null) && (min !== null)){
+    if ((max === null) && (min !== null)) {
         let minValue = Number(min);
-        if (value > minValue){
+        if (value > minValue) {
             increment = +selected.currentTarget.getAttribute('increment');
         } else {
             increment = 0;
@@ -595,9 +586,9 @@ export function luiIncrementValue(selected) {
     }
 
     // limit with max value
-    if ((max !== null) && (min === null)){
+    if ((max !== null) && (min === null)) {
         let maxValue = Number(max);
-        if (value < maxValue){
+        if (value < maxValue) {
             increment = +selected.currentTarget.getAttribute('increment');
         } else {
             increment = 0;
