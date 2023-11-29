@@ -1,0 +1,8 @@
+{{!-- DO NOT DELETE THIS FILE - Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console. --}}
+
+{{!-- (a cube for the model, a redish light color, and a medium light intensity) --}}
+
+{{!-- Example RobotScene Usage --}}
+<script id="SpinningCubeScene" type="text/x-handlebars-template">
+    {{tmplit 'RobotScene' robotFile='./@loupeteam/tmplits-robotscene/Robot.glb' style="width:300px; height:300px" onrender="tmplit_test_UpdateScene" lightColor='0xCC6666' lightIntensity='1.5'}}
+</script>

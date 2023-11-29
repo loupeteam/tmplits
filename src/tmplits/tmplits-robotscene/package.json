@@ -1,0 +1,19 @@
+{
+  "name": "@loupeteam/tmplits-robotscene",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loupeteam/tmplits.git"
+  },
+  "dependencies": {
+    "@loupeteam/tmplits-globalclasses" : "*",
+    "@loupeteam/tmplits-utilities" : "*"
+  }
+}
