@@ -1,29 +1,29 @@
 {{!-- pass a partial into another partials parameters --}}
 Custom User Controls:
-<br/>
-{{> 'button-label' 
-    label=(Partial "custom-icon" img="app/assets/wireframe.png") 
-    data-var-name='tmplitTest:tmplit.SetButton' 
-    class='lux-hide'
+<br />
+{{> 'button-label'
+label=(Partial "custom-icon" img="app/assets/wireframe.png")
+data-var-name='tmplitTest:tmplit.SetButton'
+class='lux-hide'
 }}
 
-{{> 'button-icon' 
-    img="app/assets/wireframe.png" 
-    data-var-name='tmplitTest:tmplit.SetButton' 
-    class='lux-hide'
+{{> 'button-icon'
+img="app/assets/wireframe.png"
+data-var-name='tmplitTest:tmplit.SetButton'
+class='lux-hide'
 }}
 
-{{> 'icon' 
-    img="app/assets/wireframe.png" 
-    data-var-name='tmplitTest:tmplit.SetButton' 
-    class='lux-btn-set lux-hide'
+{{> 'icon'
+img="app/assets/wireframe.png"
+data-var-name='tmplitTest:tmplit.SetButton'
+class='lux-btn-set lux-hide'
 }}
 
 
 
 <div>
     Button
-    <br/>
+    <br />
     {{tmplit 'Button' 'SetButton' buttonType='set' data-var-name='tmplitTest:tmplit.SetButton'}}
     {{tmplit 'Button' 'ToggleButton' buttonType='toggle' data-var-name='tmplitTest:tmplit.ToggleButton'}}
     {{tmplit 'Button' 'MomentaryButton' buttonType='momentary' data-var-name='tmplitTest:tmplit.MomentaryButton'}}
@@ -69,30 +69,30 @@ Custom User Controls:
 <div>
     Columns
     {{#tmplit 'Columns' 'label' maxColumns=2}}
-        <div style="text-align:center">Column 1 Header</div>
-        <div style="text-align:center">Column 2 Header</div>
-        {{tmplit 'Numeric' 'Contents 1' data-var-name='tmplitTest:tmplit.NumericOutput'}}
-        {{tmplit 'Numeric' 'Contents 2' data-var-name='tmplitTest:tmplit.NumericOutput'}}
-        {{tmplit 'Numeric' 'Contents 3' data-var-name='tmplitTest:tmplit.NumericOutput'}}
-        {{tmplit 'Numeric' 'Contents 4' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    <div style="text-align:center">Column 1 Header</div>
+    <div style="text-align:center">Column 2 Header</div>
+    {{tmplit 'Numeric' 'Contents 1' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{tmplit 'Numeric' 'Contents 2' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{tmplit 'Numeric' 'Contents 3' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{tmplit 'Numeric' 'Contents 4' data-var-name='tmplitTest:tmplit.NumericOutput'}}
     {{/tmplit}}
     {{#tmplit 'Columns' maxColumns=2}}
-        <div style="text-align:center">Column 1 Header</div>
-        <div style="text-align:center">Column 2 Header</div>
-        {{tmplit 'Numeric' 'Contents 1' data-var-name='tmplitTest:tmplit.NumericOutput'}}
-        {{tmplit 'Numeric' 'Contents 2' data-var-name='tmplitTest:tmplit.NumericOutput'}}
-        {{tmplit 'Numeric' 'Contents 3' data-var-name='tmplitTest:tmplit.NumericOutput'}}
-        {{tmplit 'Numeric' 'Contents 4' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    <div style="text-align:center">Column 1 Header</div>
+    <div style="text-align:center">Column 2 Header</div>
+    {{tmplit 'Numeric' 'Contents 1' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{tmplit 'Numeric' 'Contents 2' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{tmplit 'Numeric' 'Contents 3' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{tmplit 'Numeric' 'Contents 4' data-var-name='tmplitTest:tmplit.NumericOutput'}}
     {{/tmplit}}
 </div>
 
 <div>
     ColumnsBs
     {{#tmplit 'ColumnsBs' maxColumns=2}}
-        {{tmplit 'Led' "Input1"}}
-        {{tmplit 'Led' "Input2"}}
-        {{tmplit 'Led' "Input3"}}
-        {{tmplit 'Led' "Input4"}}
+    {{tmplit 'Led' "Input1"}}
+    {{tmplit 'Led' "Input2"}}
+    {{tmplit 'Led' "Input3"}}
+    {{tmplit 'Led' "Input4"}}
     {{/tmplit}}
 </div>
 
@@ -106,24 +106,24 @@ Custom User Controls:
 <div>
     Dropdown
     {{#tmplit 'Dropdown' data-var-name='tmplitTest:tmplit.Dropdown'}}
-        <dropdown>
-            <div class="option">Option 1</div>
-            <div class="option">Option 2</div>
-        </dropdown>
+    <dropdown>
+        <div class="option">Option 1</div>
+        <div class="option">Option 2</div>
+    </dropdown>
     {{/tmplit}}
 </div>
 
- <div>
+<div>
     DropdownTable
     {{#tmplit 'DropdownTable' data-var-name='tmplitTest:tmplit.DropdownTable_INT' data-var-name-field='tmplitTest:tmplit.DropdownTable_STRING'}}
-        <options>
-            <div>Option many :1</div>
-            <div>Option many :2</div>
-            <div>Option many :3</div>
-            <div>Option many :4</div>
-        </options>
+    <options>
+        <div>Option many :1</div>
+        <div>Option many :2</div>
+        <div>Option many :3</div>
+        <div>Option many :4</div>
+    </options>
     {{/tmplit}}
- </div>
+</div>
 
 <!-- not sure how to demo this one
 don't worry about this one could be broken -->
@@ -144,12 +144,27 @@ don't worry about this one could be broken -->
 <div>
     MultiSelect
     {{#tmplit 'MultiSelect' maxColumns=10 data-var-name="tmplitTest:tmplit.MultiSelect_INT" data-var-name-field="tmplitTest:tmplit.MultiSelect_STRING"}}
-        <options>
-            <div>Option many :1</div>
-            <div>Option many :2</div>
-            <div>Option many :3</div>
-            <div>Option many :4</div>
-        </options>
+    <options>
+        <div>Option many :1</div>
+        <div>Option many :2</div>
+        <div>Option many :3</div>
+        <div>Option many :4</div>
+    </options>
+    {{/tmplit}}
+</div>
+
+<div>
+    Multi Page Select
+    {{#tmplit 'MultiSelect' maxColumns=10 data-var-name="tmplitTest:tmplit.MultiSelect_INT" data-var-name-field="tmplitTest:tmplit.MultiSelect_STRING"}}
+    <options>
+        {{tmplit 'PageSelect' 'Page 1: json' ctx='{"msg":"hello"}' dom="container1" template="page1"}}
+        {{tmplit 'PageSelect' 'Page 2: javascript' ctx='this.innerHTML' dom="container1" template="page2"}}
+        {{tmplit 'PageSelect' 'Page 3: string' ctx='Hello' dom="container1" template="page2"}}
+        {{tmplit 'PageSelect' 'Page 4: function' ctx='()=>{return "Answer: " + (3.0 +2.0) }' dom="container1" template="page2"}}
+        {{tmplit 'PageSelect' 'Page 5: number' ctx=3 dom="container1" template="page2"}}
+        {{tmplit 'PageSelect' 'Page 6: object' ctx=(obj '{"msg":"hello"}') dom="container1" template="page1"}}
+        {{tmplit 'PageSelect' 'Page 7: none' dom="container1" template="page2"}}
+    </options>
     {{/tmplit}}
 </div>
 
@@ -158,10 +173,10 @@ don't worry about this -->
 <div>
     LabeledList
     {{#tmplit 'LabeledList' 'Test'}}
-        <div>list item 1</div>
-        <div>list item 2</div>
-        <div>list item 3</div>
-        <div>list item 4</div>
+    <div>list item 1</div>
+    <div>list item 2</div>
+    <div>list item 3</div>
+    <div>list item 4</div>
     {{/tmplit}}
 </div>
 
