@@ -1,19 +1,19 @@
 {
-    "startPage" : {
-        "container" : "main",
+    "startPage": {
+        "container": "main",
         "name": "main"
     },
     "pages": [
         {
             "name": "main",
-            "file": "../views/main.handlebars"
+            "file": "app/views/main.handlebars"
         },
         {
             "name": "components",
-            "file": "../views/components.handlebars"
+            "file": "app/views/components.handlebars"
         }
     ],
-    "libraries":[
-        "../controls/custom-ui.handlebars"
+    "libraries": [
+        "app/controls/custom-ui.handlebars"
     ]
 }

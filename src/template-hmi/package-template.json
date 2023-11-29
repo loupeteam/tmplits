@@ -10,7 +10,7 @@
     "@loupeteam/loupe-ux": "*",
     "@loupeteam/tmplits": "*",
     "@loupeteam/tmplit-basic": "*",
-    "app":"file:./",
+    "app": "file:./app/",
     "bootstrap": "^3.3.4",
     "handlebars": "*",
     "jquery": "*"
