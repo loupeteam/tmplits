@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/tmplits-dropdown",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@loupeteam/tmplits-globalclasses" : "*",
     "@loupeteam/tmplits-utilities" : "*"

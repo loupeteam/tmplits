@@ -19,3 +19,7 @@ npm install
 ## Usage
 
 Open the `index.html` file in your browser to view the template.
+
+## Licensing
+
+This project is licensed under the [MIT License]LICENSE.

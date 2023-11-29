@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* omjson 1.03.8 */
+/* OMJSON 1.04.0 */
 
 #ifndef _OMJSON_
 #define _OMJSON_
@@ -8,8 +8,8 @@
 extern "C" 
 {
 #endif
-#ifndef _omjson_VERSION
-#define _omjson_VERSION 1.03.8
+#ifndef _OMJSON_VERSION
+#define _OMJSON_VERSION 1.04.0
 #endif
 
 #include <bur/plctypes.h>
@@ -19,42 +19,39 @@ extern "C"
 #endif
 #ifdef _SG3
 		#include "AsBrStr.h"
-		#include "AsGuard.h"
 		#include "AsHttp.h"
 		#include "runtime.h"
 		#include "standard.h"
 		#include "sys_lib.h"
 		#include "vartools.h"
-		#include "stringext.h"
 		#include "databuffer.h"
+		#include "websocket.h"
 		#include "tcpcomm.h"
-		#include "bodyguard.h"
+		#include "stringext.h"
 #endif
 #ifdef _SG4
 		#include "AsBrStr.h"
-		#include "AsGuard.h"
 		#include "AsHttp.h"
 		#include "runtime.h"
 		#include "standard.h"
 		#include "sys_lib.h"
 		#include "vartools.h"
-		#include "stringext.h"
 		#include "databuffer.h"
+		#include "websocket.h"
 		#include "tcpcomm.h"
-		#include "bodyguard.h"
+		#include "stringext.h"
 #endif
 #ifdef _SGC
 		#include "AsBrStr.h"
-		#include "AsGuard.h"
 		#include "AsHttp.h"
 		#include "runtime.h"
 		#include "standard.h"
 		#include "sys_lib.h"
 		#include "vartools.h"
-		#include "stringext.h"
 		#include "databuffer.h"
+		#include "websocket.h"
 		#include "tcpcomm.h"
-		#include "bodyguard.h"
+		#include "stringext.h"
 #endif
 
 
@@ -103,15 +100,6 @@ extern "C"
 
 
 /* Datatypes and datatypes of function blocks */
-typedef enum JSON_WS_OPCODE_enum
-{	JSON_WS_OPCODE_CONTINUATION = 0,
-	JSON_WS_OPCODE_TEXT = 1,
-	JSON_WS_OPCODE_BINARY = 2,
-	JSON_WS_OPCODE_CLOSE = 8,
-	JSON_WS_OPCODE_PING = 9,
-	JSON_WS_OPCODE_PONG = 10
-} JSON_WS_OPCODE_enum;
-
 typedef enum JSON_ERR_enum
 {	JSON_ERR_INVALIDINPUT = 50000,
 	JSON_ERR_MEMALLOC,
@@ -166,59 +154,6 @@ typedef struct jsonWSS_client_debug_typ
 	signed long doubleDataCount;
 	plcbit oldDataReceived;
 } jsonWSS_client_debug_typ;
-
-typedef struct jsonWSConnect_Internal_typ
-{	struct httpEncodeBase64 encodeBase64;
-} jsonWSConnect_Internal_typ;
-
-typedef struct jsonWSConnect
-{
-	/* VAR_INPUT (analog) */
-	unsigned long pInputMessage;
-	unsigned long pOutputMessage;
-	unsigned long MaxOutputMessageLength;
-	/* VAR_OUTPUT (analog) */
-	unsigned short Status;
-	unsigned long OutputMessageLength;
-	/* VAR (analog) */
-	struct jsonWSConnect_Internal_typ internal;
-} jsonWSConnect_typ;
-
-typedef struct jsonWSDecode
-{
-	/* VAR_INPUT (analog) */
-	unsigned long pFrame;
-	/* VAR_OUTPUT (analog) */
-	unsigned short Status;
-	unsigned char RSV;
-	unsigned char OpCode;
-	unsigned char MaskingKey[4];
-	unsigned long pPayloadData;
-	unsigned long HeaderLength;
-	unsigned long PayloadLength;
-	unsigned long FrameLength;
-	/* VAR_OUTPUT (digital) */
-	plcbit FIN;
-	plcbit MASK;
-} jsonWSDecode_typ;
-
-typedef struct jsonWSEncode
-{
-	/* VAR_INPUT (analog) */
-	unsigned long pFrame;
-	unsigned long MaxFrameLength;
-	unsigned char RSV;
-	unsigned char OpCode;
-	unsigned long PayloadLength;
-	unsigned char MaskingKey[4];
-	unsigned long pPayloadData;
-	/* VAR_OUTPUT (analog) */
-	unsigned short Status;
-	unsigned long FrameLength;
-	/* VAR_INPUT (digital) */
-	plcbit FIN;
-	plcbit MASK;
-} jsonWSEncode_typ;
 
 typedef struct jsonStructLevel_typ
 {	struct varVariable_typ variable;
@@ -309,25 +244,21 @@ typedef struct jsonReadVariableList
 } jsonReadVariableList_typ;
 
 typedef struct jsonWSServer_int_client_typ
-{	struct TCPStream_typ tcpStream;
+{	struct WSStream_typ wsStream;
 	unsigned long pReceiveData;
 	unsigned long pSendData;
 	struct datbufBuffer_typ messageBuffer;
-	struct jsonWSConnect wsConnect;
 	plcbit wsConnected;
-	struct jsonWSDecode wsDecode;
-	struct jsonWSEncode wsEncode;
 	struct jsonWriteVariable writeVariable;
 	struct jsonReadVariableList readVariableList;
 	struct jsonWSS_client_debug_typ debug;
-	signed long excessDataLength;
 	struct TON_10ms requestTimer;
 	struct jsonCache_typ* pCache;
 } jsonWSServer_int_client_typ;
 
 typedef struct jsonWSServer_Internal_typ
 {	plcbit initialized;
-	struct TCPConnectionMgr_typ tcpServer;
+	struct WSConnectionManager_typ wsServer;
 	struct jsonWSServer_int_client_typ client[5];
 	struct TON_10ms requestTimer;
 	unsigned short iClient;
@@ -363,6 +294,10 @@ typedef struct jsonHTTPServer_Internal_typ
 	struct jsonHTTPServer_Int_Write_typ write;
 	struct jsonHTTPServer_Int_Debug_typ debug;
 } jsonHTTPServer_Internal_typ;
+
+typedef struct jsonWSConnect_Internal_typ
+{	struct httpEncodeBase64 encodeBase64;
+} jsonWSConnect_Internal_typ;
 
 typedef struct jsonCacheVariable_typ
 {	plcstring name[121];
@@ -448,9 +383,6 @@ typedef struct jsonReadVariableNoCache
 
 /* Prototyping of functions and function blocks */
 _BUR_PUBLIC void jsonWebSocketServer(struct jsonWebSocketServer* inst);
-_BUR_PUBLIC void jsonWSConnect(struct jsonWSConnect* inst);
-_BUR_PUBLIC void jsonWSDecode(struct jsonWSDecode* inst);
-_BUR_PUBLIC void jsonWSEncode(struct jsonWSEncode* inst);
 _BUR_PUBLIC void jsonHTTPServer(struct jsonHTTPServer* inst);
 _BUR_PUBLIC void jsonWriteVariable(struct jsonWriteVariable* inst);
 _BUR_PUBLIC void jsonReadVariableList(struct jsonReadVariableList* inst);
