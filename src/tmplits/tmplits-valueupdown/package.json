@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/tmplits-valueupdown",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@loupeteam/tmplits-globalclasses" : "*",
-    "@loupeteam/tmplits-utilities" : "*"
+    "@loupeteam/tmplits-globalclasses": "*",
+    "@loupeteam/tmplits-utilities": "*"
   },
   "repository": {
     "type": "git",

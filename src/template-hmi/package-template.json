@@ -1,15 +1,15 @@
 {
   "name": "CustomHMI",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Template tmplit based project",
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@loupeteam/webhmi": "*",
-    "@loupeteam/tmplits": "*",
-    "@loupeteam/tmplit-basic": "*",
+    "@loupeteam/webhmi": "<2.0.0",
+    "@loupeteam/tmplits": "<0.1.0",
+    "@loupeteam/tmplit-basic": "<0.1.0",
     "app": "file:./app/",
     "bootstrap": "^3.3.4",
     "handlebars": "*",
