@@ -22,6 +22,7 @@
 //    return `Hello ${context[0]}!`
 //}
 
+import { evalContext } from "../tmplits-utilities/module.js"
 
 
 export class multiOptionSelector{
@@ -69,6 +70,7 @@ export class multiOptionSelector{
         let selection = '';
         let page =''
         let dom = ''
+        let context = ''
         let options = scope.querySelectorAll('.option')
         options.forEach((option)=>{
             let dataValue =  option.getAttribute('data-value')
@@ -92,6 +94,12 @@ export class multiOptionSelector{
                     dom = query.getAttribute('data-target-dom');
                 }                        
 
+                context = evalContext.call(option, option.getAttribute('data-context'))
+                query = option.querySelector('[data-context]')
+                if (query != null) {
+                    context = evalContext.call(query, query.getAttribute('data-context'))
+                }
+
             }
             else{
                 option.classList.remove('active')
@@ -112,14 +120,21 @@ export class multiOptionSelector{
                 e.dispatchEvent(evt);
             });
         }
-        if( (page !== null) && (page != '') ){
-            if( (dom !== null) && (dom != '') ){
+        if ((page !== null) && (page != '')) {
+            //If the user provided a dom, use that
+            if ((dom !== null) && (dom != '')) {
                 tmplits.loadPage(dom, page, context)
-            }            
+            }
+            //Query the dom for any lui-select-dom elements and load the page into them
             dom = scope.querySelectorAll('.lui-select-dom:not(.noset)')
             if (dom.length) {
                 dom.forEach(e => {
-                    tmplits.loadPage(e, page)
+                    //Check if the user has provided a context on the lui-select-dom element
+                    ctx = e.getAttribute('data-context')
+                    if (ctx != null) {
+                        context = evalContext.call(e, ctx);
+                    }
+                    tmplits.loadPage(e, page, context)
                 });
             }    
         }
@@ -529,33 +544,9 @@ export function selectPage(selected) {
     selected = $(selected.currentTarget)
     let page = selected.attr('data-page')
     let dom = selected.attr('data-target-dom')
-    if(dom && page){
+    if (dom && page) {
         //Check if the user has provided a context
-        let ctx = selected.attr('data-context')
-
-        //If the context is a string, try to parse it as json, then as javascript, then just pass it as a string
-        if(typeof ctx == 'string'){
-            try{
-                ctx = JSON.parse(ctx)
-            }catch{
-                try{
-                    ctx = eval(ctx)
-                }
-                catch{
-                }
-                if(ctx == null){
-                    console.warn('Context was not valid json or javascript')
-                    ctx = selected.attr('data-context')
-                }
-            }
-        }
-        //If the context is a number, pass it as a number
-        else if(typeof ctx == 'number'){
-            ctx = +ctx
-        }
-        else{
-            ctx = ' '
-        }
+        let ctx = evalContext.call(this, selected.attr('data-context'))
         tmplits.loadPage(dom, page, ctx)
     }
 }
