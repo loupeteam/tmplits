@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@loupeteam/loupe-ux": "*",
-    "@loupeteam/tmplits": "*",
-    "@loupeteam/tmplit-basic": "*",
+    "@loupeteam/loupe-ux": "~2.0.0",
+    "@loupeteam/tmplits": "~0.1.0",
+    "@loupeteam/tmplit-basic": "~0.1.0",
     "app": "file:./app/",
     "bootstrap": "^3.3.4",
     "handlebars": "*",

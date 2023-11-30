@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/tmplits-gizmo",
-  "version": "0.0.13",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/loupeteam/tmplits.git"
   },
-  "dependencies": {
-    "@loupeteam/tmplits": "*"
-  },
-  "lpm":{
-    "type" : "project"
-  }  
+  "dependencies": {},
+  "lpm": {
+    "type": "project"
+  }
 }
