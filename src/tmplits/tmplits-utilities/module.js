@@ -6,29 +6,13 @@
  * This file is part of tmplits, licensed under the MIT License.
  * 
  */
-
-//DO NOT DELETE THIS FILE 
-//- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
-
-//This file will get loaded as a javascript module, meaning you can import other modules from here.
-//You can also export functions from here, which will be available to the client side.
-
-//import * from "./module2.js"//Import relative to this file inside node_modules/this-module-name/
-//import * from "../tmplits-some-other/module.js"//Import relative to this file inside node_modules/tmplits-some-other/
-//import * from "/somewhere.js"//Import from the root of the project
-
-//Define your tmplit functions here and export them to make them globally available
-//export function TmplitHelloWorld(context, args){
-//    return `Hello ${context[0]}!`
-//}
-
 'use strict';
 
 let scope = this
 
 export function evalInContext(js, context) {
     //# Return the results of the in-line anonymous function we .call with the passed context
-    return function() { return eval(js); }.call(context);
+    return function () { return eval(js); }.call(context);
 }
 
 export function htmlToElements(html) {
@@ -48,7 +32,7 @@ export function dropDownSelected(el, click) {
     let item = el.closest('.dropdown-scope')
     let selection = el.textContent;
     let query = el.querySelector('.select-text')
-    if( query != null){
+    if (query != null) {
         selection = query.textContent;
     }
     selection = selection.trim()
@@ -95,7 +79,7 @@ export function dropDownSelected(el, click) {
 
 export function updateSelectOptions(el, index) {
     el.querySelectorAll('.option').forEach((e) => {
-        let click = `multiOptionSelector.selected(this, '${e.getAttribute('onclick') }');`
+        let click = `multiOptionSelector.selected(this, '${e.getAttribute('onclick')}');`
         e.setAttribute('onclick', click)
         e.setAttribute('data-index', index++)
     })
@@ -103,15 +87,15 @@ export function updateSelectOptions(el, index) {
 
 //Functionality for number grid
 export function numGridPopulate() {
-    
+
     // get all grids
     const grids = document.querySelectorAll(".grid");
 
     // iterate over each grid
-    grids.forEach( function (grid) {
+    grids.forEach(function (grid) {
 
         // only update if grid is visible
-        if (grid.offsetWidth == 0 && grid.offsetHeight == 0 && grid.getClientRects().length == 0 ) {
+        if (grid.offsetWidth == 0 && grid.offsetHeight == 0 && grid.getClientRects().length == 0) {
             return
         }
 
@@ -165,7 +149,7 @@ export function numGridPopulate() {
             for (let j = cols; j >= 0; j--) {
                 const cell = document.createElement("td");
                 let $cell = $(cell)
-                $cell.attr('data-var-name', `${dataVarName}[${j*10 + i}]`)
+                $cell.attr('data-var-name', `${dataVarName}[${j * 10 + i}]`)
                 let value;
                 value = WEBHMI.getValue($cell); //Math.floor(Math.random() * (-150)) // to get random number between -150 to 0
                 cell.innerHTML = value;
@@ -192,7 +176,7 @@ export function numGrid() {
     if (numGridIntervalID) {
         clearInterval(numGridIntervalID);
     }
-    
+
     // numGridPopulate takes ~3ms to render on a 4x4 grid
     // I think this is fine for the moment
     numGridIntervalID = setInterval(numGridPopulate, 100);
@@ -247,22 +231,64 @@ export function getButtonType(type, classList) {
 
 //Work up throught the template context to get the full path of a variable
 //  That has been expanded
-export function getVariablePath( context, key){
+export function getVariablePath(context, key) {
     let path = key
-    if( context.key ){
+    if (context.key) {
         path = context.key;
-        if(key != ''){
-            if(context._parent.key){
-                path +='.' + key;
+        if (key != '') {
+            if (context._parent.key) {
+                path += '.' + key;
             }
-            else{
-                path +=':' + key;
+            else {
+                path += ':' + key;
             }
         }
     }
 
-    if(context._parent){
-        path = getVariablePath( context._parent, path);
+    if (context._parent) {
+        path = getVariablePath(context._parent, path);
     }
     return path;
+}
+
+//Convert a context to an attribute string
+export function appendContextToAttr(attr, ctx) {
+    if (typeof ctx == 'string') {
+        attr = attr.concat(`data-context='${ctx}'`)
+    }
+    else if (typeof ctx == 'object') {
+        attr = attr.concat(`data-context='${JSON.stringify(ctx)}'`)
+    }
+    else if (typeof ctx == 'number') {
+        attr = attr.concat(`data-context=${ctx}`)
+    }
+    return attr
+}
+
+export function evalContext(ctx) {
+    let tmp = ctx
+    //If the context is a string, try to parse it as json, then as javascript, then just pass it as a string
+    if (typeof ctx == 'string') {
+        try {
+            ctx = JSON.parse(ctx)
+        } catch {
+            try {
+                ctx = eval(ctx)
+            }
+            catch {
+            }
+            if (ctx == null) {
+                console.warn('Context was not valid json or javascript')
+                ctx = tmp
+            }
+        }
+    }
+    //If the context is a number, pass it as a number
+    else if (typeof ctx == 'number') {
+        ctx = +ctx
+    }
+    else {
+        ctx = ' '
+    }
+    return ctx
 }
