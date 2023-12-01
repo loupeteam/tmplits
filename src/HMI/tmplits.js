@@ -11,14 +11,20 @@ import "../../jquery/dist/jquery.js"
 import * as util from "../tmplits-utilities/module.js"
 
 //Check if jquery has already been loaded
-//If it hasn't then load it
-if( !window.$ ){
-    window.$ = jQuery
+//If it hasn't then save it to the window for others to use
+if (!window.$) {
+    window.$ = jQueryImport
     console.error('Loading JQuery in tmplits.js. To avoid this ensure that JQuery is loaded before tmplits.js')
 }
-let log = function( t ){ if(Tmplits.debug.loglevel == 0){ console.log(t) }};
-let warn = function( t ){ if(Tmplits.debug.loglevel <= 1){ console.warn(t) }};
-let error = function( t ){ if(Tmplits.debug.loglevel <= 2){ console.error(t) }};
+else {
+    //Use deep no conflict to avoid conflicts with other loading JQuery.
+    // We actually don't care what version of jquery, but we do care if it is loaded
+    // and import requires loading it unconditionally. So we load it here and then
+    // use noConflict to avoid conflicts with other versions of jquery
+    debugger
+    $.noConflict(true);
+}
+
 
 export class Tmplits {
     constructor(node_module_directory, loadedCallback ) {
