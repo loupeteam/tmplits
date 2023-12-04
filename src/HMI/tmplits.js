@@ -23,6 +23,10 @@ else {
     window.$ = window.jQuery = jqueryImport;
 }
 
+let log = function (t) { if (Tmplits.debug.loglevel == 0) { console.log(t) } };
+let warn = function (t) { if (Tmplits.debug.loglevel <= 1) { console.warn(t) } };
+let error = function (t) { if (Tmplits.debug.loglevel <= 2) { console.error(t) } };
+
 
 export class Tmplits {
     constructor(node_module_directory, loadedCallback) {
