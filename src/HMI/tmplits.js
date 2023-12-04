@@ -10,15 +10,19 @@
 import "../../jquery/dist/jquery.js"
 import * as util from "../tmplits-utilities/module.js"
 
-//Check if jquery has already been loaded
-//If it hasn't then load it
-if( !window.$ ){
-    window.$ = jQuery
-    console.error('Loading JQuery in tmplits.js. To avoid this ensure that JQuery is loaded before tmplits.js')
+//There is no way to load jquery as a module, so it will always be loaded as a global
+//If jquery was loaded it means that we are in a browser, or it was already loaded
+//  fall back to any previous version that was loaded. If we are the first version, that is fine too..
+if (window.$) {
+    $.noConflict(true);
 }
-let log = function( t ){ if(Tmplits.debug.loglevel == 0){ console.log(t) }};
-let warn = function( t ){ if(Tmplits.debug.loglevel <= 1){ console.warn(t) }};
-let error = function( t ){ if(Tmplits.debug.loglevel <= 2){ console.error(t) }};
+//If jquery was not loaded then we are in electron, lets require it
+else {
+    //We don't need no conflict because we already know that jquery is not loaded previously
+    let jqueryImport = require("jquery");
+    window.$ = window.jQuery = jqueryImport;
+}
+
 
 export class Tmplits {
     constructor(node_module_directory, loadedCallback ) {
