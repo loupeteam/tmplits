@@ -26,37 +26,38 @@ import { evalContext } from "../tmplits-utilities/module.js"
 
 
 export class multiOptionSelector{
+
+    // Handle the user clicking on an option
     static selected(el, click) {
-        let index = el.getAttribute('data-index')
-        let value = el.getAttribute('data-value')
+                
+        //selected() is called when the user clicks on an option
+        //  it writes the index or value of the option to the lui-select-value element
+        //  and raises the change event on the lui-select-value element
+        //This does not change the lui-select-text element; that is handled by the render() 
+        //  function since those elements need to be updated when the source changes as well as when the selection changes
+
+        //Find the scope of the select element
         let scope = el.closest('.select-scope')
+
+        //Figure out what the value should be
+        let value = el.getAttribute('data-value')
+        let index = el.getAttribute('data-index')
         scope.setAttribute('selectedIndex', index)
 
+        let setValue = value || +index;
+
+        // Go through all the value elements and set their value to the data-index or data-value
+        // This will trigger the change event on the lui-select-value element
         let targets = scope.querySelectorAll('.lui-select-value')
-        targets.forEach((target)=>{
-            target.value = value || +index;
+        targets.forEach((target) => {
+            target.value = setValue;
+            target.dispatchEvent(new Event("change", {
+                "bubbles": true,
+                "cancelable": true
+            }));
         })
 
-        let selection = el.textContent;
-        let query = el.querySelector('.select-text')
-        if( query != null){
-            selection = query.textContent;
-        }
-        selection = selection.trim()
-    
-        let text = scope.querySelectorAll('.lui-select-text:not(.noset)')
-        if (text.length) {
-            text.forEach(e => {
-                e.innerHTML = selection
-                e.value = selection
-                let evt = new Event("change", {
-                    "bubbles": true,
-                    "cancelable": true
-                });
-                e.dispatchEvent(evt);
-            });
-        }
-    
+        // If the user provided a click, run it
         if (click) {
             try {
                 evalInContext(click, el)
@@ -64,13 +65,31 @@ export class multiOptionSelector{
                 throw `error from user event: '${click}' ` + e
             }
         }
-        multiOptionSelector.updateSelection(scope, value || +index)
+
+        // Do whatever we should do any time the selection changes
+        multiOptionSelector.updateSelectOptions(scope, setValue)
     }
-    static updateSelection(scope, value){
+
+    //Re-render the element when the underlying data changes
+    static render(evt) {
+        //When render is called, value element has already been updated. We just need to "redraw"
+        // This does not raise the change event on the lui-select-value element, since that would cause an infinite loop
+        let scope = evt.target.classList.contains('select-scope') ? evt.target : evt.target.closest('.select-scope')
+        let valueHolder = scope.querySelector('.lui-select-value') // evt.target should be this value; for some reason, using evt.target sometimes doesn't work here.
+        if (valueHolder != null) {
+            multiOptionSelector.updateSelectOptions(scope, valueHolder.getAttribute('value'))
+        }
+    }
+
+    //Called any time the selection changes
+    static updateSelectOptions(scope, value){
+        
+        //To update the select options, we need to:
+        //  1. Find the option that is selected
+        //  2. Update the lui-select-text element and raise an event on it, so it can be written to the source
+        //  3. Load the page if the user provided a page. 
+
         let selection = '';
-        let page =''
-        let dom = ''
-        let context = ''
         let options = scope.querySelectorAll('.option')
         options.forEach((option)=>{
             let dataValue =  option.getAttribute('data-value')
@@ -82,24 +101,12 @@ export class multiOptionSelector{
                 if( query != null){
                     selection = query.textContent;
                 }   
-                page = option.getAttribute('data-page')
-                query = option.querySelector('[data-page]')
-                if( query != null){
-                    page = query.getAttribute('data-page');
-                }                        
 
-                dom = option.getAttribute('data-target-dom')
-                query = option.querySelector('[data-target-dom]')
-                if( query != null){
-                    dom = query.getAttribute('data-target-dom');
-                }                        
-
-                context = evalContext.call(option, option.getAttribute('data-context'))
-                query = option.querySelector('[data-context]')
-                if (query != null) {
-                    context = evalContext.call(query, query.getAttribute('data-context'))
-                }
-
+                //This would ideally be done by triggering a click. 
+                //  This would cause it to do whatever the user has 
+                //  set up for the on click event,
+                //  But that could cause a recursive loop                
+                selectPage({currentTarget:option})                
             }
             else{
                 option.classList.remove('active')
@@ -120,32 +127,7 @@ export class multiOptionSelector{
                 e.dispatchEvent(evt);
             });
         }
-        if ((page !== null) && (page != '')) {
-            //If the user provided a dom, use that
-            if ((dom !== null) && (dom != '')) {
-                tmplits.loadPage(dom, page, context)
-            }
-            //Query the dom for any lui-select-dom elements and load the page into them
-            dom = scope.querySelectorAll('.lui-select-dom:not(.noset)')
-            if (dom.length) {
-                dom.forEach(e => {
-                    //Check if the user has provided a context on the lui-select-dom element
-                    ctx = e.getAttribute('data-context')
-                    if (ctx != null) {
-                        context = evalContext.call(e, ctx);
-                    }
-                    tmplits.loadPage(e, page, context)
-                });
-            }    
-        }
-    }
-    static setSelected(evt) {
-        let scope = evt.target.classList.contains('select-scope') ? evt.target : evt.target.closest('.select-scope')
-        let valueHolder = scope.querySelector('.lui-select-value') // evt.target should be this value; for some reason, using evt.target sometimes doesn't work here.
-        if (valueHolder != null) {
-            multiOptionSelector.updateSelection(scope, valueHolder.getAttribute('value'))
-        }
-    }    
+    }        
 }
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
@@ -480,7 +462,7 @@ export class luiDirectory{
 }
 
 $(document).on({
-    "change": multiOptionSelector.setSelected,
+    "render": multiOptionSelector.render,
 }, '.lui-select-value');
 
 $(document).on({
@@ -491,7 +473,7 @@ $(document).on({
 }, '.lui-slider-scope');
 
 $(document).on({
-    "change": LuiSlider.luiSliderSet,
+    "render": LuiSlider.luiSliderSet,
 }, '.lui-slider-value');
 
 $(document).on({
@@ -503,7 +485,7 @@ $(document).on({
 }, '[data-page]');
 
 $(document).on({
-    "change": luiDirectory.updateDirectory,
+    "render": luiDirectory.updateDirectory,
 }, '.lui-directory-data');
 
 $(document).on({
@@ -540,14 +522,31 @@ export function selectTab(selected) {
 }
 
 //Handle changing the page if a tab is clicked
-export function selectPage(selected) {
-    selected = $(selected.currentTarget)
-    let page = selected.attr('data-page')
-    let dom = selected.attr('data-target-dom')
+export function selectPage(selected) {    
+    selected = selected.currentTarget
+    let query;
+
+    let page = selected.getAttribute('data-page')
+    query = selected.querySelector('[data-page]')
+    if( query != null){
+        page = query.getAttribute('data-page');
+    }                        
+
+    let dom = selected.getAttribute('data-target-dom')
+    query = selected.querySelector('[data-target-dom]')
+    if( query != null){
+        dom = query.getAttribute('data-target-dom');
+    }                        
+
+    let context = evalContext.call(selected, selected.getAttribute('data-context'))
+    query = selected.querySelector('[data-context]')
+    if (query != null) {
+        context = evalContext.call(query, query.getAttribute('data-context'))
+    }
+    
     if (dom && page) {
         //Check if the user has provided a context
-        let ctx = evalContext.call(this, selected.attr('data-context'))
-        tmplits.loadPage(dom, page, ctx)
+        tmplits.loadPage(dom, page, context)
     }
 }
 
