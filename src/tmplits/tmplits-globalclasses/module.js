@@ -130,6 +130,10 @@ export class multiOptionSelector{
     }        
 }
 
+$(document).on({
+    "render": multiOptionSelector.render,
+}, '.lui-select-value');
+
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 export class LuiSlider {
@@ -317,6 +321,35 @@ export class LuiSlider {
 
 }
 
+$(document).on({
+    "mousedown": LuiSlider.luiSlideStart
+}, '.lui-slider-scope');
+$(document).on({
+    "touchstart": LuiSlider.luiSlideStart
+}, '.lui-slider-scope');
+
+$(document).on({
+    "render": LuiSlider.luiSliderSet,
+}, '.lui-slider-value');
+
+$(document).on({
+    "mousemove": LuiSlider.luiSlideChange
+});
+
+$(document).on({
+    "touchmove": LuiSlider.luiSlideChange
+});
+
+$(document).on({
+    "mouseup": LuiSlider.luiSlideEnd
+});
+
+$(document).on({
+    "touchend": LuiSlider.luiSlideEnd
+});
+
+window.addEventListener("wheel", LuiSlider.luiSlideMouse, { passive:false })
+
 export class luiDirectory{
     static updateDirectory(evt){
         try{
@@ -462,56 +495,13 @@ export class luiDirectory{
 }
 
 $(document).on({
-    "render": multiOptionSelector.render,
-}, '.lui-select-value');
-
-$(document).on({
-    "mousedown": LuiSlider.luiSlideStart
-}, '.lui-slider-scope');
-$(document).on({
-    "touchstart": LuiSlider.luiSlideStart
-}, '.lui-slider-scope');
-
-$(document).on({
-    "render": LuiSlider.luiSliderSet,
-}, '.lui-slider-value');
-
-$(document).on({
-    "click": selectTab
-}, '.nav-tabs-item');
-
-$(document).on({
-    "click": selectPage
-}, '[data-page]');
-
-$(document).on({
     "render": luiDirectory.updateDirectory,
 }, '.lui-directory-data');
 
 $(document).on({
-    "mousemove": LuiSlider.luiSlideChange
-});
-
-$(document).on({
-    "touchmove": LuiSlider.luiSlideChange
-});
-window.addEventListener("wheel", LuiSlider.luiSlideMouse, { passive:false })
-
-$(document).on({
-    "mouseup": LuiSlider.luiSlideEnd
-});
-
-$(document).on({
-    "touchend": LuiSlider.luiSlideEnd
-});
-
-$(document).on({
-    "click": luiIncrementValue
-}, '.lui-increment');
-
-$(document).on({
     "keydown": luiDirectory.filterKey
 }, '.select-scope input');
+
 
 //Handle setting active if a tab is clicked
 export function selectTab(selected) {
@@ -520,6 +510,10 @@ export function selectTab(selected) {
     tabs.removeClass('active')
     selected.addClass('active')
 }
+
+$(document).on({
+    "click": selectTab
+}, '.nav-tabs-item');
 
 //Handle changing the page if a tab is clicked
 export function selectPage(selected) {    
@@ -550,7 +544,11 @@ export function selectPage(selected) {
     }
 }
 
-//Handle changing the page if a tab is clicked
+$(document).on({
+    "click": selectPage
+}, '[data-page]');
+
+//Handle Incrementing a variable if a button is clicked
 export function luiIncrementValue(selected) {
 
     let scope = selected.target.closest('.lui-increment-scope')
@@ -603,3 +601,7 @@ export function luiIncrementValue(selected) {
         e.dispatchEvent(evt);
     })
 }
+
+$(document).on({
+    "click": luiIncrementValue
+}, '.lui-increment');
