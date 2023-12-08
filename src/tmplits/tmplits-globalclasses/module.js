@@ -137,8 +137,8 @@ $(document).on({
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 export class LuiSlider {
-    //Handle changing the page if a tab is clicked
-    static luiSlideStart(evt) {
+    //On Slider Start we need to set the start value and the start screen position
+    static Start(evt) {
 
         let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
         scope.classList.add('lui-slider-active')
@@ -166,8 +166,8 @@ export class LuiSlider {
         scope.setAttribute('lui-slider-screen-x-start', evt.screenX)
         scope.setAttribute('lui-slider-screen-y-start', evt.screenY)
     }
-    //Handle changing the page if a tab is clicked
-    static luiSlideEnd(selected) {
+    //On Slider End we need to remove the active class
+    static End(selected) {
         let scope = document.querySelectorAll('.lui-slider-scope.lui-slider-active')
         scope.forEach((e) => {
             let pop = e.getAttribute('pop-position')            
@@ -182,23 +182,37 @@ export class LuiSlider {
             e.classList.remove('lui-slider-active')
         })
     }
-    //Handle changing the page if a tab is clicked
-    static luiSlideChange(evt) {
+    //Handle the slider changing if the mouse is moved
+    static Move(evt) {
 
         evt.preventDefault()
+        //We get all the active sliders
+        //  This is because with this slider, it is OK if the user goes OFF the slider
+        //  This is a FEATURE, not a bug
         let scope = document.querySelectorAll('.lui-slider-scope.lui-slider-active')
 
-        // let scope = evt.target.classList.contains('lui-slider-scope')? evt.target : evt.target.closest('.lui-slider-scope')
+        //If there are no active sliders, we don't need to do anything
         if (scope.length == 0) {
             return;
         } else if (scope.length > 1) {
+            //If there are multiple active sliders, we need to remove the active class from all of them and stop the function            
             scope.forEach((e) => {
                 e.classList.remove('lui-slider-active')
+                let target = scope.querySelectorAll('.lui-slider-value')
+                target.forEach((input)=>{
+                    input.classList.remove('editing')
+                })
             })
+            return;
         } else {
+            //If there is only one active slider, we can continue
             scope = scope[0]
         }
+
+        //We get all the value elements
         let target = scope.querySelectorAll('.lui-slider-value')
+
+        //If there are no value elements, we just raise a change on our scope and stop the function
         if (target.length == 0) {
             let evt = new Event("change", {
                 "bubbles": true,
@@ -208,11 +222,14 @@ export class LuiSlider {
             return
         }
 
+        //We get all the values we need to calculate the new value
         let screenScale = +scope.getAttribute('lui-slider-scale')
         let startValue = +scope.getAttribute('lui-slider-start')
         let direction = scope.getAttribute('direction') > 0
         let max = +scope.getAttribute('lui-slider-max')
         let min = +scope.getAttribute('lui-slider-min')
+
+        //We calculate the new value
         let total = max - min;
         let screenStart = +(direction  ? scope.getAttribute('lui-slider-screen-x-start') : scope.getAttribute('lui-slider-screen-y-start'))
         let screenNew = +(direction ? evt.screenX : evt.screenY)
@@ -221,6 +238,12 @@ export class LuiSlider {
         let value = startValue + scrollBarPercent*total
         value = clamp(value, min, max)
 
+        //We update the slider here instead of from the render because we don't want to use the value from the render
+        //  The render value is the value from the source, which may not be the same as the value from the slider
+        //  So there is some visual bouncing if we use the render value
+        LuiSlider.Render(scope, value)
+
+        //We update the value elements and dispatch the change event
         target.forEach((e) => {
             e.value = value
             e.setAttribute('value', value)
@@ -235,20 +258,27 @@ export class LuiSlider {
             }
         })
     }
-    //Handle changing the page if a tab is clicked
-    static luiSlideMouse(evt) {
+    //Handle the slider changing if the wheel is moved
+    static Wheel(evt) {
 
+        //Get the scope of the slider from the event
         let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
         if( scope == null){
             return
         }
+        //Prevent the default behavior of the wheel, otherwise the page will scroll
         evt.preventDefault()
-        scope.classList.add('lui-slider-active')
+
+        //Remove active so that the mouse move doesn't interact with the slider
+        scope.classList.remove('lui-slider-active')
         if (scope.length == 0) {
             return;
         } 
 
+        //Get the value elements
         let target = scope.querySelectorAll('.lui-slider-value')
+
+        //If there are no value elements, we just raise a change on our scope and stop the function
         if (target.length == 0) {
             let evt = new Event("change", {
                 "bubbles": true,
@@ -258,14 +288,21 @@ export class LuiSlider {
             return
         }
 
+        //Get all the values we need to calculate the new value
         let startValue = +target[0].getAttribute('value')
         let max = +scope.getAttribute('lui-slider-max')
         let min = +scope.getAttribute('lui-slider-min')
         let direction = scope.getAttribute('direction') > 0
+
+        //Calculate the new value
         let scrollDistance =(direction ? scope.clientWidth : scope.clientHeight)*10
         let value = startValue + evt.deltaY/scrollDistance
         value = clamp(value, min, max)
 
+        //Update the slider visually
+        LuiSlider.Render(scope, value)
+
+        //Update the value elements and dispatch the change event
         target.forEach((e) => {
             e.value = value
             e.classList.add('editing')
@@ -280,34 +317,58 @@ export class LuiSlider {
 
             }
         })
+
+        //Use a timer to remove the editing class after a short delay
+        //  This is to prevent debounce issues, since there isn't a good way to debounce the wheel event
         let oldTimeout = scope.getAttribute('timeout')
         if(oldTimeout!=null){
             clearTimeout(oldTimeout)
         }
+
         let timeout = setTimeout(()=>{
+            //If we don't get a new event, we remove the editing class 
             target.forEach((e) => {
                 e.classList.remove('editing')
             })    
-            scope.classList.remove('lui-slider-active')
             scope.removeAttribute('timeout')
         }, 500)
+
+        //Set the timeout attribute so we can clear it later
         scope.setAttribute('timeout', timeout)
     }
 
-    static luiSliderSet(evt) {
+    //Handle rendering the slider if the value changes with an event
+    static RenderEvt(evt) {
+        //Get the scope of the slider from the event
         let scope = evt.target.classList.contains('lui-slider-scope') ? evt.target : evt.target.closest('.lui-slider-scope')
-        LuiSlider.luiSliderUpdateSlider(scope, +evt.target.getAttribute('value'))
-    }
-    static luiSliderUpdateSlider(scope, value) {
+        if(scope == null) return;        
 
+        //Get the value elements
+        let target = scope.querySelectorAll('.lui-slider-value')
+        if (target.length == 0) return;
+
+        //We don't want to render from the event if we are still editing the value
+        if( target[0].classList.contains('editing') ) return;
+
+        //Render the slider
+        LuiSlider.Render(scope, +evt.target.getAttribute('value'))
+    }
+
+    //Do the actual rendering of the slider with a specific value
+    static Render(scope, value) {
+
+        //Get the attributes we need to render the slider
         let direction = scope.getAttribute('direction') > 0
         let sliderBar = scope.querySelectorAll('.slider-bar')
         let max = +scope.getAttribute('lui-slider-max')
         let min = +scope.getAttribute('lui-slider-min')
+
+        //Calculate the percent of the slider that should be filled
         value = clamp(value, min, max)
         let total = max - min;
         let percent = ((max - value) / total) * 90 //90 keeps the bar from going past the bottom
 
+        //Update the slider visually
         sliderBar.forEach((e) => {
             if(direction){
                 e.style.left = (100 - percent) + '%';
@@ -322,33 +383,33 @@ export class LuiSlider {
 }
 
 $(document).on({
-    "mousedown": LuiSlider.luiSlideStart
+    "mousedown": LuiSlider.Start
 }, '.lui-slider-scope');
 $(document).on({
-    "touchstart": LuiSlider.luiSlideStart
+    "touchstart": LuiSlider.Start
 }, '.lui-slider-scope');
 
 $(document).on({
-    "render": LuiSlider.luiSliderSet,
+    "render": LuiSlider.RenderEvt,
 }, '.lui-slider-value');
 
 $(document).on({
-    "mousemove": LuiSlider.luiSlideChange
+    "mousemove": LuiSlider.Move
 });
 
 $(document).on({
-    "touchmove": LuiSlider.luiSlideChange
+    "touchmove": LuiSlider.Move
 });
 
 $(document).on({
-    "mouseup": LuiSlider.luiSlideEnd
+    "mouseup": LuiSlider.End
 });
 
 $(document).on({
-    "touchend": LuiSlider.luiSlideEnd
+    "touchend": LuiSlider.End
 });
 
-window.addEventListener("wheel", LuiSlider.luiSlideMouse, { passive:false })
+window.addEventListener("wheel", LuiSlider.Wheel, { passive:false })
 
 export class luiDirectory{
     static updateDirectory(evt){
