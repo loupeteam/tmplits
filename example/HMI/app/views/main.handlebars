@@ -1,6 +1,11 @@
 {{!-- pass a partial into another partials parameters --}}
 Custom User Controls:
 <br />
+
+{{> 'button-label'
+label=(Partial "custom-icon" img="app/assets/wireframe.png")
+}}
+
 {{> 'button-label'
 label=(Partial "custom-icon" img="app/assets/wireframe.png")
 data-var-name='tmplitTest:tmplit.SetButton'
@@ -10,13 +15,13 @@ class='webhmi-hide'
 {{> 'button-icon'
 img="app/assets/wireframe.png"
 data-var-name='tmplitTest:tmplit.SetButton'
-class='webhmi-hide'
+class='webhmi-show'
 }}
 
 {{> 'icon'
 img="app/assets/wireframe.png"
 data-var-name='tmplitTest:tmplit.SetButton'
-    class='webhmi-btn-set webhmi-hide'
+class='webhmi-btn-set webhmi-hide'
 }}
 
 
@@ -24,50 +29,75 @@ data-var-name='tmplitTest:tmplit.SetButton'
 <div>
     Button
     <br />
+    {{#tmplit "Columns" maxColumns=4}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.SetButton' style='height:40px; margin:auto'}}
     {{tmplit 'Button' 'SetButton' buttonType='set' data-var-name='tmplitTest:tmplit.SetButton'}}
-    {{tmplit 'Button' 'ToggleButton' buttonType='toggle' data-var-name='tmplitTest:tmplit.ToggleButton'}}
-    {{tmplit 'Button' 'MomentaryButton' buttonType='momentary' data-var-name='tmplitTest:tmplit.MomentaryButton'}}
+    {{tmplit 'Button' 'ToggleButton' buttonType='toggle' data-var-name='tmplitTest:tmplit.SetButton'}}
+    {{tmplit 'Button' 'MomentaryButton' buttonType='momentary' data-var-name='tmplitTest:tmplit.SetButton'}}
+    {{/tmplit}}
 </div>
 
 <div>
     Led
+    {{#tmplit "Columns" minColumns=4}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.Led' style='height:40px; margin:auto'}}
     {{tmplit 'Led' 'label' data-var-name='tmplitTest:tmplit.Led'}}
     {{tmplit 'Led' data-var-name='tmplitTest:tmplit.Led'}}
+    {{/tmplit}}
 </div>
 
 <!-- style it different to differentiate from simple led -->
 <div>
     CheckBox
+    {{#tmplit "Columns" minColumns=4}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.CheckBox' style='height:40px; margin:auto'}}
     {{tmplit 'CheckBox' 'Label' buttonType='toggle' data-var-name='tmplitTest:tmplit.CheckBox'}}
     {{tmplit 'CheckBox' data-var-name='tmplitTest:tmplit.CheckBox'}}
+    {{/tmplit}}
 </div>
 
 <div>
     Numeric (output)
+    {{#tmplit "Columns" minColumns=4}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
     {{tmplit 'Numeric' 'label' data-var-name='tmplitTest:tmplit.NumericOutput'}}
     {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{/tmplit}}
     Numeric (input)
+    {{#tmplit "Columns" minColumns=4}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericInput'}}
     {{tmplit 'Numeric' 'label' type='input' data-var-name='tmplitTest:tmplit.NumericInput'}}
     {{tmplit 'Numeric' type='input' data-var-name='tmplitTest:tmplit.NumericInput'}}
+    {{/tmplit}}
 </div>
 
 <div>
     Text (output)
+    {{#tmplit "Columns" minColumns=4}}
+    {{tmplit 'Text' 'Test' type='input' data-var-name='tmplitTest:tmplit.TextInput'}}
     {{tmplit 'Text' 'label' data-var-name='tmplitTest:tmplit.TextInput'}}
     {{tmplit 'Text' data-var-name='tmplitTest:tmplit.TextInput'}}
+    {{/tmplit}}
     Text (input)
+    {{#tmplit "Columns" minColumns=4}}
+    {{tmplit 'Text' 'Test' type='input' data-var-name='tmplitTest:tmplit.TextOutput'}}
     {{tmplit 'Text' 'label' type='input' data-var-name='tmplitTest:tmplit.TextOutput'}}
     {{tmplit 'Text' type='input' data-var-name='tmplitTest:tmplit.TextOutput'}}
+    {{/tmplit}}
 </div>
 
 <div>
     ValueUpDown
+    {{#tmplit "Columns" minColumns=4}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.ValueUpDown' style='height:40px; margin:auto'}}
     {{tmplit 'ValueUpDown' data-var-name='tmplitTest:tmplit.ValueUpDown'}}
+    {{/tmplit}}
 </div>
 
 <!-- columns aren't being counted correctly i.e. shouldn't have to specify column count here-->
 <div>
     Columns
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericOutput' style="width:100px"}}
     {{#tmplit 'Columns' 'label' maxColumns=2}}
     <div style="text-align:center">Column 1 Header</div>
     <div style="text-align:center">Column 2 Header</div>
@@ -99,22 +129,34 @@ data-var-name='tmplitTest:tmplit.SetButton'
 <!-- needs to be a REAL var range: [-1,1] -->
 <div>
     Slider
+    {{#tmplit 'Columns' maxColumns=3}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.Slider' style='height:40px; margin:auto' }}
     {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.Slider' min=0 max=255}}
+    {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.Slider' min=0 max=255}}
+    {{/tmplit}}
 </div>
 
 <!-- console errors below - passing undefined to handerbars compiled file?? -->
 <div>
     Dropdown
+    {{#tmplit 'Columns' maxColumns=3}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.Dropdown' style='height:40px; margin:auto' }}
     {{#tmplit 'Dropdown' data-var-name='tmplitTest:tmplit.Dropdown'}}
     <dropdown>
         <div class="option">Option 1</div>
         <div class="option">Option 2</div>
     </dropdown>
     {{/tmplit}}
+    {{/tmplit}}
 </div>
 
 <div>
     DropdownTable
+    {{#tmplit 'Columns' maxColumns=3}}
+    {{#tmplit 'Columns' maxColumns=1}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.DropdownTable_INT' style='height:40px; margin:auto' }}
+    {{tmplit 'Text' 'Test' type='input' data-var-name='tmplitTest:tmplit.DropdownTable_STRING' style='height:40px; margin:auto' }}
+    {{/tmplit}}
     {{#tmplit 'DropdownTable' data-var-name='tmplitTest:tmplit.DropdownTable_INT' data-var-name-field='tmplitTest:tmplit.DropdownTable_STRING'}}
     <options>
         <div>Option many :1</div>
@@ -123,12 +165,15 @@ data-var-name='tmplitTest:tmplit.SetButton'
         <div>Option many :4</div>
     </options>
     {{/tmplit}}
+    {{/tmplit}}
 </div>
 
 <!-- not sure how to demo this one
 don't worry about this one could be broken -->
 <div>
     TableSelect
+    {{#tmplit 'Columns' maxColumns=2}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.TableSelect' style='height:40px; margin:auto' }}
     {{#tmplit 'TableSelect' data-var-name='tmplitTest:tmplit.TableSelect' style='height:300px'}}
     <dropdown>
         <div>Not Option</div>
@@ -139,10 +184,16 @@ don't worry about this one could be broken -->
         <div class="option">Option 3</div>
     </dropdown>
     {{/tmplit}}
+    {{/tmplit}}
 </div>
 
 <div>
     MultiSelect
+    {{#tmplit 'Columns' maxColumns=2}}
+    {{#tmplit 'Columns' maxColumns=1}}
+    {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.MultiSelect_INT' style='height:40px; margin:auto' }}
+    {{tmplit 'Text' 'Test' type='input' data-var-name='tmplitTest:tmplit.MultiSelect_STRING' style='height:40px; margin:auto' }}
+    {{/tmplit}}
     {{#tmplit 'MultiSelect' maxColumns=10 data-var-name="tmplitTest:tmplit.MultiSelect_INT" data-var-name-field="tmplitTest:tmplit.MultiSelect_STRING"}}
     <options>
         <div>Option many :1</div>
@@ -151,11 +202,12 @@ don't worry about this one could be broken -->
         <div>Option many :4</div>
     </options>
     {{/tmplit}}
+    {{/tmplit}}
 </div>
 
 <div>
     Multi Page Select
-    {{#tmplit 'MultiSelect' maxColumns=10 data-var-name="tmplitTest:tmplit.MultiSelect_INT" data-var-name-field="tmplitTest:tmplit.MultiSelect_STRING"}}
+    {{#tmplit 'MultiSelect' maxColumns=10 data-var-name="tmplitTest:tmplit.MultiSelect_INT"}}
     <options>
         {{tmplit 'PageSelect' 'Page 1: json' ctx='{"msg":"hello"}' dom="container1" template="page1"}}
         {{tmplit 'PageSelect' 'Page 2: javascript' ctx='this.innerHTML' dom="container1" template="page2"}}
@@ -209,8 +261,3 @@ don't worry about this -->
 DirectoryBrowserWindow
 {{tmplit 'DirectoryBrowserWindow' data-var-name='tmplitTest:f.in.cwd' data-var-name-files='tmplitTest:Directory' data-var-name-willopen='tmplitTest:f.in.refresh' style='height:300px'}}
 
-
-<!-- ask katie or jack 
-{{tmplit 'NumGrid'}}-->
-
-<!-- reach out to katie about building tmplits -->
