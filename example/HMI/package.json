@@ -13,7 +13,7 @@
   "author": "Josh Polansky",
   "license": "ISC",
   "dependencies": {
-    "@loupeteam/loupe-ux": "*",
+    "@loupeteam/loupe-ux": "^2.0.1",
     "@loupeteam/tmplits": "file:../../src/HMI/",
     "@loupeteam/tmplits-button": "file:../../src/tmplits/tmplits-button/",
     "@loupeteam/tmplits-led": "file:../../src/tmplits/tmplits-led/",
