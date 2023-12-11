@@ -5,7 +5,9 @@ name: Publish Tmplit
 
 on:
   push:
-    branches: prelux/main
+    branches: 
+      - main
+      - prelux/main
 
 jobs:
   publish-all:
