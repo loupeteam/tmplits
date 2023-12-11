@@ -5,14 +5,16 @@ name: Publish Tmplit
 
 on:
   push:
-    branches: main
+    branches: 
+      - main
+      - prelux/main
 
 jobs:
   publish-all:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        packages: [src/HMI,src/template-gizmo,src/template-hmi]
+        packages: [src/HMI, src/template-gizmo, src/template-hmi]
     permissions:
       contents: read
       packages: write
