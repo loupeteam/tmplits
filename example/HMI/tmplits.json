@@ -9,6 +9,10 @@
             "file": "app/views/main.handlebars"
         },
         {
+            "name": "content",
+            "file": "app/views/content.handlebars"
+        },
+        {
             "name": "components",
             "file": "app/views/components.handlebars"
         }

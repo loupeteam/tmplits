@@ -17,6 +17,7 @@
     "@loupeteam/tmplits": "file:../../src/HMI/",
     "@loupeteam/tmplits-button": "file:../../src/tmplits/tmplits-button/",
     "@loupeteam/tmplits-led": "file:../../src/tmplits/tmplits-led/",
+    "@loupeteam/tmplits-basiclayout": "file:../../src/tmplits/tmplits-basiclayout",
     "@loupeteam/tmplits-checkbox": "file:../../src/tmplits/tmplits-checkbox/",
     "@loupeteam/tmplits-numeric": "file:../../src/tmplits/tmplits-numeric/",
     "@loupeteam/tmplits-text": "file:../../src/tmplits/tmplits-text/",
