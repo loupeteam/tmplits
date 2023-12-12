@@ -1,2 +1,79 @@
-{{!-- DO NOT DELETE THIS FILE - Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console. --}}
-<h1>Hello World!</h1>
+<script id="tmplit-basic-layout" type="text/x-handlebars-template">
+    <style>
+        /* Parent grid */
+        .tmplit-layout-grid{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 5%;
+            height: 100%; 
+            width: 100%;
+            background-color: rgb(214, 213, 213);
+        }
+        /* Nested Grid under tmplit-layout-grid */
+        .tmplit-main-grid{
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 1;
+            display: grid;
+            grid-template-columns: 20% 1fr;
+            grid-template-rows: 1fr;
+        }
+        .tmplit-navBar-container{
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 1;
+            background-color: rgb(231, 197, 133);
+            text-align: center;
+            place-content: center;
+            place-items: center;
+            list-style: none;   
+        } 
+        .tmplit-navBar-container a{
+            text-decoration: none;
+        }
+
+        .tmplit-screen-container{
+            grid-column: 2 / span 1;
+            grid-row: 1 / span 1;
+            background-color: rgb(117, 214, 117);
+            text-align: center;
+            place-content: center;
+            place-items: center;
+        }
+        /* Footer belong to tmplit-layout-grid*/
+        .tmplit-footer-container{
+            grid-column: 1 / span 1;
+            grid-row: 2 / span 1;
+            padding: 0 5px;
+        }
+        .tmplit-footer-content{
+            position: relative;
+            top: 50%;
+            transform:translateY(-50%);
+            opacity: 50%;     
+        }
+    </style>
+    
+    {{!-- HMI Layout Wrapper - CSS Grid --}}
+    <div class="tmplit-layout-grid">
+        {{!-- Content wrapper - CSS Grid --}}
+        <div class="tmplit-main-grid">
+            {{!-- Nav Bar --}}
+            <div class="tmplit-navBar-container">
+                {{#each actions}} 
+                    {{tmplit 'PageSelectDiv' label dom='tmplit-screen-content' template=template}}
+                {{/each}}
+            </div>
+            {{!-- Main Content --}}
+            <div id="tmplit-screen-content" class="tmplit-screen-container"> 
+                {{>(lookup . 'testVar')}} 
+            </div>
+        </div>
+        {{!-- Footer --}}
+        <div class="tmplit-footer-container">
+            <div class="tmplit-footer-content">&copy; Loupe</div>
+        </div>
+    </div>
+
+</script>
