@@ -1,0 +1,90 @@
+<!-- 
+
+This is a basic layout for a page. 
+It has a side bar with a title and a list of actions.
+
+{{#> tmplit_basic_layout 
+    title=[the title of the page] 
+    dom=[the id of the dom element to render to] 
+    actions=[an array of objects with label and template]
+    }}
+//Put your starting content here
+{{/tmplit_basic_layout}}
+
+Example:
+
+{{#> tmplit_basic_layout 
+title="Demo" 
+dom='container' 
+actions=(obj '[
+    {label:"Main", template:"content"},
+    {label:"Demo 1", template:"components"},
+    {label:"Demo 2", template:"content"},
+    {label:"Demo 3", template:"components"},
+    {label:"Demo 4", template:"content"}
+    ]')
+}}
+{{> content}}
+{{/tmplit_basic_layout}}
+-->
+<script id="tmplit_basic_layout" type="text/x-handlebars-template">
+    <style>
+        .tmplit-basic-layout {
+            display: flex;
+            {{#if width}}
+            width: {{width}};
+            {{else}}
+            width: 100%;
+            {{/if}}
+            {{#if height}}
+            height: {{height}};
+            {{else}}
+            height: calc( 100vh - 30px);
+            {{/if}}
+            vertical-align: top;
+        }
+        .tmplit-basic-layout__side_bar {
+            box-sizing: border-box;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            height: 100%;
+        }
+        .tmplit-basic-layout__header {
+        }
+        .tmplit-basic-layout__header__title {
+        }
+        a.tmplit-basic-layout__header__actions {
+            color:#fff;
+        }
+        .tmplit-basic-layout__content {
+            padding: 10px;
+            box-sizing: border-box;
+            flex-grow: 1;
+            vertical-align: top;
+            height: 100%;
+            overflow-y: scroll;
+            background-color: #EEE;
+        }      
+    </style>
+    <div class="tmplit-basic-layout" >
+        <div class="tmplit-basic-layout__side_bar" >
+            <div class="tmplit-basic-layout__header__title">
+                {{#if title}}
+                    <h1>{{title}}</h1>
+                {{/if}}
+            </div>
+            <div class="tmplit-basic-layout__header__actions">
+                <ul class='nav'>
+                {{#each actions}}                
+                    {{tmplit "PageSelect" label dom=../dom template=template}}
+                {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div id="{{dom}}" class="tmplit-basic-layout__content">
+            {{> @partial-block }}
+        </div>
+    </div>
+</script>
