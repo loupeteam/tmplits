@@ -1,7 +1,7 @@
 {
     "startPage": {
-        "container": "main",
-        "name": "main"
+        "container": "mainContainer",
+        "name": "testMain"
     },
     "pages": [
         {
