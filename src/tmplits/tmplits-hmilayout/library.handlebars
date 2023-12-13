@@ -16,17 +16,14 @@
             width: 100%;
             background-color: rgb(214, 213, 213);
         }
-        /* Nested Grid under tmplit-layout-grid */
-        .tmplit-main-grid{
+        .tmplit-main-wrapper{
             grid-column: 1 / span 1;
             grid-row: 1 / span 1;
-            display: grid;
-            grid-template-columns: 20% 1fr;
-            grid-template-rows: 1fr;
+            display: flex;
+            flex-direction: row;
         }
         .tmplit-navBar-container{
-            grid-column: 1 / span 1;
-            grid-row: 1 / span 1;
+            width: 20%;
             background-color: rgb(231, 197, 133);
             /* TODO - Make sure these work for text, image and whatever else */
             text-align: center;
@@ -39,10 +36,9 @@
         .tmplit-navBar-container a{
             text-decoration: none;
         }
-
         .tmplit-screen-container{
-            grid-column: 2 / span 1;
-            grid-row: 1 / span 1;
+            width: 100%;
+
             background-color: rgb(117, 214, 117);
             /* TODO - Make sure these work for text, image and whatever else */
             text-align: center;
@@ -66,7 +62,7 @@
     {{!-- HMI Layout Wrapper - CSS Grid --}}
     <div class="tmplit-layout-grid">
         {{!-- Content wrapper - CSS Grid --}}
-        <div class="tmplit-main-grid">
+        <div class="tmplit-main-wrapper">
             {{!-- Nav Bar --}}
             <div class="tmplit-navBar-container">
                 {{#each actions}} 
@@ -75,7 +71,7 @@
             </div>
             {{!-- Main Content --}}
             <div id="tmplit-screen-content" class="tmplit-screen-container"> 
-                {{>(lookup . 'defaultPage')}} 
+                {{>(lookup . 'defaultMainScreen')}} 
             </div>
         </div>
         {{!-- Footer --}}
