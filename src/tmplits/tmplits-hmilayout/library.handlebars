@@ -72,7 +72,11 @@
         </div>
         {{!-- Footer --}}
         <div class="tmplit-footer-container">
-            <div class="tmplit-footer-content">&copy; Loupe</div>
+            {{#if footerContent}}
+                <div class="tmplit-footer-content">{{footerContent}}</div>
+            {{else}}
+                <div class="tmplit-footer-content">&copy; Loupe</div>
+            {{/if}}
         </div>
     </div>
 
