@@ -11,6 +11,42 @@
         {
             "name": "components",
             "file": "app/views/components.handlebars"
+        },
+        {
+            "name": "testMain",
+            "file": "app/views/testMain.handlebars"
+        },
+        {
+            "name": "footerContainer",
+            "file": "app/views/test/footerContainer.handlebars"
+        },
+        {
+            "name": "screenContainer",
+            "file": "app/views/test/screenContainer.handlebars"
+        },
+        {
+            "name": "navBarContainer",
+            "file": "app/views/test/navBarContainer.handlebars"
+        },
+        {
+            "name": "screen1",
+            "file": "app/views/test/screens/screen1.handlebars"
+        },
+        {
+            "name": "screen2",
+            "file": "app/views/test/screens/screen2.handlebars"
+        },
+        {
+            "name": "screen3",
+            "file": "app/views/test/screens/screen3.handlebars"
+        },
+        {
+            "name": "screen4",
+            "file": "app/views/test/screens/screen4.handlebars"
+        },
+        {
+            "name": "screen5",
+            "file": "app/views/test/screens/screen5.handlebars"
         }
     ],
     "libraries": [
