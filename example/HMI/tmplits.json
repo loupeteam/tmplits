@@ -21,12 +21,8 @@
             "file": "app/views/test/footerContainer.handlebars"
         },
         {
-            "name": "screenContainer",
-            "file": "app/views/test/screenContainer.handlebars"
-        },
-        {
-            "name": "navBarContainer",
-            "file": "app/views/test/navBarContainer.handlebars"
+            "name": "mainScreen",
+            "file": "app/views/test/mainScreen.handlebars"
         },
         {
             "name": "screen1",
