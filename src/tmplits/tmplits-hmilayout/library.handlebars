@@ -20,7 +20,8 @@
             grid-column: 1 / span 1;
             grid-row: 1 / span 1;
             display: flex;
-            flex-direction: row;
+            flex-direction: row;   
+            overflow: auto;
         }
         .tmplit-navBar-container{
             flex-grow: 1;
@@ -35,19 +36,21 @@
                 max-width: 20%;
             {{/if}}
             background-color: rgb(231, 197, 133);
+            text-wrap: nowrap;  
             /* TODO - Make sure these work for text, image and whatever else */
             text-align: center;
             place-content: center;
             place-items: center;
             /* TODO - Remove this if use PageSelectDiv */
-            list-style: none;
-            text-wrap: nowrap;  
+            list-style: none;          
         } 
         /* TODO - Remove this if use PageSelectDiv */
         .tmplit-navBar-container a{
-            text-decoration: none;           
+            text-decoration: none;     
         }
         .tmplit-screen-container{
+            display: flex;
+            overflow: auto;
             width: 100%;
             background-color: rgb(117, 214, 117);
             /* TODO - Make sure these work for text, image and whatever else */
