@@ -23,9 +23,17 @@
             flex-direction: row;
         }
         .tmplit-navBar-container{
-            flex: 1;
-            min-width: 10%;
-            max-width: 20%;
+            flex-grow: 1;
+            {{#if navBarMinWidth}}
+                min-width: {{navBarMinWidth}};
+            {{else}}
+                min-width: 10%;
+            {{/if}}
+            {{#if navBarMaxWidth}}
+                max-width: {{navBarMaxWidth}};
+            {{else}}
+                max-width: 20%;
+            {{/if}}
             background-color: rgb(231, 197, 133);
             /* TODO - Make sure these work for text, image and whatever else */
             text-align: center;
@@ -37,12 +45,10 @@
         } 
         /* TODO - Remove this if use PageSelectDiv */
         .tmplit-navBar-container a{
-            
             text-decoration: none;           
         }
         .tmplit-screen-container{
             width: 100%;
-
             background-color: rgb(117, 214, 117);
             /* TODO - Make sure these work for text, image and whatever else */
             text-align: center;
