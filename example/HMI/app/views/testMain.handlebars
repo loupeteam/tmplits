@@ -1,8 +1,8 @@
-{{!-- Josh --}}
 {{#> tmplit-basic-layout
-    defaultPage='screenContainer'
+    defaultMainScreen='screenContainer'
     footerHeight='5%'
-
+    navBarMinWidth='10%'
+    navBarMaxWidth='15%'
     actions=(obj '[
         {label:"Main", template:"screenContainer"},
         {label:"Screen 1", template:"screen1"},
@@ -12,5 +12,4 @@
         {label:"Screen 5", template:"screen5"}
         ]')
 }}
-{{!-- {{> content}} --}}
 {{/tmplit-basic-layout}}
