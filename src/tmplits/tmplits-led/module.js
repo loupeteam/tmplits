@@ -7,21 +7,6 @@
  * 
  */
 
-//DO NOT DELETE THIS FILE 
-//- Doing so will cause 404 errors on the client side which will not break anything, but will throw errors in the console.
-
-//This file will get loaded as a javascript module, meaning you can import other modules from here.
-//You can also export functions from here, which will be available to the client side.
-
-//import * from "./module2.js"//Import relative to this file inside node_modules/this-module-name/
-//import * from "../tmplits-some-other/module.js"//Import relative to this file inside node_modules/tmplits-some-other/
-//import * from "/somewhere.js"//Import from the root of the project
-
-//Define your tmplit functions here and export them to make them globally available
-//export function TmplitHelloWorld(context, args){
-//    return `Hello ${context[0]}!`
-//}
-
 /* Example Led Usage
 {{tmplit 'Led' '<label>' data-var-name='<var>'}}
 {{tmplit 'Led' '<label>' error='true' data-var-name='<var>'}}
@@ -37,12 +22,20 @@ import * as util from "../tmplits-utilities/module.js"
 
 export function TmplitLed(context, args) {
     let {
-        side = 'middle', ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', error=false, warning=false, ..._args
+        side = 'middle', ['data-var-name']: dataVarName, buttonType = '', buttonVarName = '', error=false, warning=false, ..._args1
     } = args.hash
+    let {
+        ['data-led-true']: dataLedTrue = error ? 'led-red': (warning ? 'led-yellow':'led-green'), 
+        ['data-led-false']: dataLedFalse = 'led-off',         
+        ..._args
+    } = _args1
+
     //Get cleaned up values from args
     let {
         classList,
-        attr
+        attr,
+        luiClasses,
+        luiAttr,
     } = util.cleanArgs(_args)
 
     // apply the Led label if there is one
@@ -79,9 +72,12 @@ export function TmplitLed(context, args) {
         label = `<div class='led-label' style='${labelStyle}' >${finalResult}</div>`
     } 
 
+    // add the led class to the class list
+    let ledClassList = ['lux-led', 'led', ...luiClasses];
+
     return `
         <div class="${classList.join(' ')}" ${attr}>
-        <div class='led lux-led' data-led-false='led-off' data-led-true='${error ? 'led-red': (warning ? 'led-yellow':'led-green') }' data-var-name='${dataVarName}' ${attr}></div>
+        <div class="${ledClassList.join(' ')}" data-led-false=${dataLedFalse} data-led-true='${dataLedTrue}' data-var-name='${dataVarName}' ${attr} ${luiAttr} ></div>
         ${label}
         </div>
     `
