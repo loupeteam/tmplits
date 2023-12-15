@@ -1,5 +1,6 @@
 <script id="tmplit-basic-layout" type="text/x-handlebars-template">
     <style>
+        /*body { --backgroundcolor :rgb(117, 214, 0)}*/
         /* Parent grid */
         .tmplit-layout-grid{
             position: absolute;
@@ -38,12 +39,10 @@
             {{/if}}
             background-color: rgb(231, 197, 133);
             text-wrap: nowrap;  
-            /* TODO - Make sure these work for text, image and whatever else */
             text-align: center;
-            place-content: center;
-            place-items: center;
             /* TODO - Remove this if use PageSelectDiv */
             list-style: none;          
+            
         } 
         /* TODO - Remove this if use PageSelectDiv */
         .tmplit-navBar-container a{
@@ -52,11 +51,8 @@
         .tmplit-screen-container{
             overflow: auto;
             width: 100%;
-            background-color: rgb(117, 214, 117);
-            /* TODO - Make sure these work for text, image and whatever else */
+            background-color: var(--backgroundcolor, rgb(117, 214, 117)); 
             text-align: center;
-            place-content: center;
-            place-items: center;
         }
         /* Footer belong to tmplit-layout-grid*/
         .tmplit-footer-container{
@@ -81,6 +77,7 @@
                 {{#each actions}} 
                     {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template}}
                 {{/each}}
+                
             </div>
             {{!-- Main Content --}}
             <div id="tmplit-screen-content" class="tmplit-screen-container"> 
