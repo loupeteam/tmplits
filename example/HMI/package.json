@@ -41,6 +41,8 @@
     "bootstrap": "^3.3.4",
     "handlebars": "*",
     "jquery": "*",
+    "openbridge-css": "^0.2.4",
+    "openbridge-web-components": "^0.2.2",
     "three": "*"
   },
   "lpm": {

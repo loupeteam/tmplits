@@ -9,8 +9,20 @@
             "file": "app/views/main.handlebars"
         },
         {
+            "name": "nav",
+            "file": "app/views/nav.handlebars"
+        },
+        {
             "name": "components",
             "file": "app/views/components.handlebars"
+        },
+        {
+            "name": "testComponents",
+            "file": "app/views/testComponents.handlebars"
+        },
+        {
+            "name": "OpenBridge",
+            "file": "app/views/OpenBridge.handlebars"
         }
     ],
     "libraries": [
