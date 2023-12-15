@@ -4,12 +4,12 @@
     {{#tmplit "Columns" "Set"}}
         {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.Slider' min=-10 max=10}}
         {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.NumericInput' min=0 max=100}}
-        {{tmplit 'Slider' machine="localData" data-var-name='targetAngle' min=0 max=100}}
+        {{tmplit 'Slider' data-var-name='targetAngle' data-machine-name="localData" min=0 max=100}}
     {{/tmplit}}
     {{#tmplit "Columns" "Actual"}}
         {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.Slider' min=-10 max=10}}
         {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.NumericInput' min=0 max=100}}
-        {{tmplit 'Slider' machine="localData" data-var-name='SetAngle' min=0 max=100}}
+        {{tmplit 'Slider' data-var-name='SetAngle' data-machine-name="localData" min=0 max=100}}
     {{/tmplit}}
 {{/tmplit}}
 <div style="width:100%;aspect-ratio:1/1;">
