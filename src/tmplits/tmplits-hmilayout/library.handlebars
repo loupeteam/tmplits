@@ -1,6 +1,5 @@
 <script id="tmplit-basic-layout" type="text/x-handlebars-template">
     <style>
-        /*body { --backgroundcolor :rgb(117, 214, 0)}*/
         /* Parent grid */
         .tmplit-layout-grid{
             position: absolute;
@@ -15,7 +14,7 @@
             {{/if}}
             height: 100%; 
             width: 100%;
-            background-color: rgb(214, 213, 213);
+            
         }
         .tmplit-main-wrapper{
             grid-column: 1 / span 1;
@@ -37,21 +36,21 @@
             {{else}}
                 max-width: 20%;
             {{/if}}
-            background-color: rgb(231, 197, 133);
+            background-color: var(--navBar-background-color, rgb(231, 197, 133));
             text-wrap: nowrap;  
             text-align: center;
             /* TODO - Remove this if use PageSelectDiv */
-            list-style: none;          
-            
+            list-style: none;   
         } 
         /* TODO - Remove this if use PageSelectDiv */
         .tmplit-navBar-container a{
-            text-decoration: none;     
+            text-decoration: none;
+                 
         }
         .tmplit-screen-container{
             overflow: auto;
             width: 100%;
-            background-color: var(--backgroundcolor, rgb(117, 214, 117)); 
+            background-color: var(--screen-background-color, rgb(117, 214, 117)); 
             text-align: center;
         }
         /* Footer belong to tmplit-layout-grid*/
@@ -59,6 +58,7 @@
             grid-column: 1 / span 1;
             grid-row: 2 / span 1;
             padding: 0 5px;
+            background-color: var( --footer-background-color,rgb(214, 213, 213));
         }
         .tmplit-footer-content{
             position: relative;
