@@ -5,7 +5,7 @@
         {{!-- Content wrapper - Flex --}}
         <div class="tmplit-main-wrapper">
             {{!-- Nav Bar --}}
-            <div class="tmplit-navBar-container">
+            <div class="tmplit-navBar-container tmplit-navBar-position">
                 {{#each actions}} 
                     {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template class=class}}
                 {{/each}}
@@ -26,17 +26,18 @@
     </div>
 </script>
 
-<script id="tmplit-basic-layout" type="text/x-handlebars-template">
+<script id="tmplit-basic-layout-left-nav" type="text/x-handlebars-template">
 
-    <link href="@loupeteam/tmplits-hmilayout/css/baseLayout.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/leftNav.css" rel="stylesheet">
     
     {{> tmplit-basic-layout-base}}
 </script>
 
-<script id="tmplit-basic-layout-left-nav" type="text/x-handlebars-template">
+<script id="tmplit-basic-layout-right-nav" type="text/x-handlebars-template">
 
-    <link href="@loupeteam/tmplits-hmilayout/css/baseLayout.css" rel="stylesheet">
-    <link href="@loupeteam/tmplits-hmilayout/css/left.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/rightNav.css" rel="stylesheet">
     
     {{> tmplit-basic-layout-base}}
 </script>

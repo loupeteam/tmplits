@@ -27,7 +27,7 @@
     /* Update this portion if use PageSelectDiv */
     list-style: none;
     /* ---------------------------------------- */
-} 
+}
 /* Update this portion if use PageSelectDiv */
 .tmplit-navBar-container li{
     padding: var(--navBar-item-padding, 0 0 0 0);
