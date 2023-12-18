@@ -1,6 +1,6 @@
 {
   "name": "@loupeteam/tmplits",
-  "version": "0.0.12",
+  "version": "0.0.13-rc",
   "description": "",
   "main": "index.js",
   "scripts": {

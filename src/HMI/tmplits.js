@@ -44,7 +44,8 @@ export class Tmplits {
             Tmplits.loadedCallback.push(() => { loadedCallback(this.native) })
         }
         Tmplits.loadedCallback.push(() => { this.refreshDynamicDom() })
-        this.loadPackageLockJson(this.base + '../package-lock.json')
+        this.loadPackageLockJson(this.base + './.package-lock.json')
+            .then(() => { return this.loadPackageLockJson(this.base + '../package.json') })
             .then(() => { return this.loadPackageJson(this.base + '../package.json') })
             .then(() => { return this.loadJson(this.base + '../tmplits.json') })
             .then(() => { return this.getLibraries(this.libraries) })
