@@ -2,7 +2,9 @@ name: Publish Tmplits
 
 on:
   push:
-    branches: main
+    branches:
+      - main
+      - prelux/main
 
 jobs:
   list-tmplits:

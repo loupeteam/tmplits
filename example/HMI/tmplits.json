@@ -9,6 +9,10 @@
             "file": "app/views/main.handlebars"
         },
         {
+            "name": "nav",
+            "file": "app/views/nav.handlebars"
+        },
+        {
             "name": "components",
             "file": "app/views/components.handlebars"
         },
@@ -43,6 +47,14 @@
         {
             "name": "screen5",
             "file": "app/views/test/screens/screen5.handlebars"
+        },
+        {
+            "name": "testComponents",
+            "file": "app/views/testComponents.handlebars"
+        },
+        {
+            "name": "OpenBridge",
+            "file": "app/views/OpenBridge.handlebars"
         }
     ],
     "libraries": [

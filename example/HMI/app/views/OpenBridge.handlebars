@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://unpkg.com/openbridge-css@0.2.1/dist/css/openbridge.css">
+
+{{#tmplit "Columns" "Simulate"}}
+    {{#tmplit "Columns" "Set"}}
+        {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.Slider' min=-10 max=10}}
+        {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.NumericInput' min=0 max=100}}
+        {{tmplit 'Slider' data-var-name='targetAngle' data-machine-name="localData" min=0 max=100}}
+    {{/tmplit}}
+    {{#tmplit "Columns" "Actual"}}
+        {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.Slider' min=-10 max=10}}
+        {{tmplit 'Slider' data-var-name='tmplitTest:tmplit.NumericInput' min=0 max=100}}
+        {{tmplit 'Slider' data-var-name='SetAngle' data-machine-name="localData" min=0 max=100}}
+    {{/tmplit}}
+{{/tmplit}}
+<div style="width:100%;aspect-ratio:1/1;">
+<h3>
+These components come from <a href="https://www.openbridge.no/" target="_blank" rel="noopener noreferrer">OpenBridge</a>
+</h3>
+
+{{#tmplit "Columns" "Gauges" }}
+    <ob-rudder-medium clipAngle="60"  data-map="{
+        'rudderAngle':'tmplitTest:tmplit.Slider',
+        'rudderSetPointAngle':'tmplitTest:tmplit.NumericInput'
+        }" ></ob-rudder-medium>
+
+    <ob-speedometer-medium data-map="{
+        'value':'tmplitTest:tmplit.Slider',
+        'setpoint':'tmplitTest:tmplit.NumericInput'
+        }" ></ob-speedometer-medium/>        
+    <ob-azimuth-large data-map="{
+        'angle':{ 'data-var-name':'SetAngle', 'machine':'localData'},
+        'targetAngle':{'data-var-name':'targetAngle', 'machine':'localData'},
+        'target':'tmplitTest:tmplit.NumericInput',
+        'value':'tmplitTest:tmplit.NumericInput'
+        }"></ob-azimuth-large>          
+{{/tmplit}}
+</div>
+

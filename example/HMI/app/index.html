@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" theme="day">
 
 <head>
 
@@ -13,11 +13,13 @@
 		{
 			"imports": {
 				"three": "./three/build/three.module.js",
-				"three/addons/": "./three/examples/jsm/"
+				"three/addons/": "./three/examples/jsm/",
+				"openbridge-web-components": "./openbridge-web-components/dist/main.mjs"				
 			}
 		}
 	</script>
 
+	<link href="app/css/main.css" rel="stylesheet">
 	<link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<title>Test Components</title>
@@ -53,6 +55,7 @@
 
 	<!-- app -->
 	<script src="app/src/app.js"></script>
+	<script src="app/src/componentBinding.js" type="module"></script>
 
 </body>
 
