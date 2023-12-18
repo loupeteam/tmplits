@@ -1,6 +1,20 @@
 :root{
-    --navBar-background-color: red;
-    --screen-background-color: pink;
-    
-}
+    /* Nav Bar */
+    /* --navBar-minwidth: 10%; */
+    /* --navBar-maxwidth: 20%; */
+    /* --navBar-background-color: rgb(231, 197, 133); */
+    /* --navBar-item-padding: 0 0 0 0; */
+    /* --navBar-item-margin: 0 0 0 0; */
+    /* --navBar-item-color: red; */
 
+    /* Main Content */
+    /* --screen-background-color: rgb(117, 214, 117); */
+    /* --screen-item-color: blue; */
+
+    /* Footer */
+    /* --footer-height: 5%; */
+    /* --footer-background-color: rgb(214, 213, 213); */
+    /* --footer-content-float: right; */
+    /* --footer-content-margin: 0 0 0 0; */
+    /* --footer-content-padding: 0 0 0 15px; */
+}

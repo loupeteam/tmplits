@@ -4,17 +4,12 @@
         .tmplit-layout-grid{
             position: absolute;
             width: 100%;
-            height: 100%;
             display: grid;
             grid-template-columns: 1fr;
-            {{#if footerHeight}}
-                grid-template-rows: 1fr {{footerHeight}};
-            {{else}}
-                grid-template-rows: 1fr 5%;
-            {{/if}}
+            grid-template-rows: 1fr var(--footer-height, 5%);
+            background-color: transparent;
             height: 100%; 
             width: 100%;
-            
         }
         .tmplit-main-wrapper{
             grid-column: 1 / span 1;
@@ -26,58 +21,58 @@
         .tmplit-navBar-container{
             flex-grow: 1;
             overflow: auto;
-            {{#if navBarMinWidth}}
-                min-width: {{navBarMinWidth}};
-            {{else}}
-                min-width: 10%;
-            {{/if}}
-            {{#if navBarMaxWidth}}
-                max-width: {{navBarMaxWidth}};
-            {{else}}
-                max-width: 20%;
-            {{/if}}
+            min-width: var(--navBar-minwidth, 10%);
+            max-width: var(--navBar-maxwidth, 20%);
             background-color: var(--navBar-background-color, rgb(231, 197, 133));
             text-wrap: nowrap;  
             text-align: center;
-            /* TODO - Remove this if use PageSelectDiv */
-            list-style: none;   
+            /* Update this portion if use PageSelectDiv */
+            list-style: none;
+            /* ---------------------------------------- */
         } 
-        /* TODO - Remove this if use PageSelectDiv */
+        /* Update this portion if use PageSelectDiv */
+        .tmplit-navBar-container li{
+            padding: var(--navBar-item-padding, 0 0 0 0);
+            margin: var(--navBar-item-margin, 10% 0 10% 0);
+        }
         .tmplit-navBar-container a{
             text-decoration: none;
-                 
+            color: var(--navBar-item-color,red);
         }
+        /* ---------------------------------------- */
         .tmplit-screen-container{
             overflow: auto;
             width: 100%;
             background-color: var(--screen-background-color, rgb(117, 214, 117)); 
             text-align: center;
+            color: var(--screen-item-color, blue);
         }
         /* Footer belong to tmplit-layout-grid*/
         .tmplit-footer-container{
             grid-column: 1 / span 1;
             grid-row: 2 / span 1;
-            padding: 0 5px;
-            background-color: var( --footer-background-color,rgb(214, 213, 213));
+            background-color: var(--footer-background-color, rgb(214, 213, 213));
         }
         .tmplit-footer-content{
             position: relative;
+            float: var(--footer-content-float, left);
             top: 50%;
             transform:translateY(-50%);
-            opacity: 50%;     
+            opacity: 50%;
+            margin: var(--footer-content-margin, 0 0 0 0);     
+            padding: var(--footer-content-padding, 0 15px 0 15px);    
         }
     </style>
     
     {{!-- HMI Layout Wrapper - CSS Grid --}}
     <div class="tmplit-layout-grid">
-        {{!-- Content wrapper - CSS Grid --}}
+        {{!-- Content wrapper - Flex --}}
         <div class="tmplit-main-wrapper">
             {{!-- Nav Bar --}}
             <div class="tmplit-navBar-container">
                 {{#each actions}} 
-                    {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template}}
+                    {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template class=class}}
                 {{/each}}
-                
             </div>
             {{!-- Main Content --}}
             <div id="tmplit-screen-content" class="tmplit-screen-container"> 
@@ -93,5 +88,4 @@
             {{/if}}
         </div>
     </div>
-
 </script>
