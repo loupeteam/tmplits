@@ -21,10 +21,6 @@
             "file": "app/views/testMain.handlebars"
         },
         {
-            "name": "footerContainer",
-            "file": "app/views/test/footerContainer.handlebars"
-        },
-        {
             "name": "mainScreen",
             "file": "app/views/test/mainScreen.handlebars"
         },
