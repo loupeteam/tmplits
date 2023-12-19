@@ -1,78 +1,59 @@
-This is a template gizmo
+## Information
 
-Use this template by running:
-```
-lpm install tmplits-gizmo
-```
-then modify it for your needs.
+The actions object uses tmplits-pageselect.  See https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs/tmplitcomponents/pagelayout.html for more information.  
 
-Settings up the template:
+label, template, actions, class, footerContent, defaultMainScreen are the attributes from user.
 
-This gizmo can be installed using NPM install and will get loaded by the tmplit system
-the important parts are a 
-- library.handlebars - this is your template
-- loader.js - js file that will run after loading the templates. This can do work to instantiate things or contain function tmplits
-- Package.json that includes a name with the prefix 
-    - @loupeteam/tmplit-[your tmplits name]
-    - Version number
-    - Link to repo the repo (the local one or tmplits, this is important because it is how the package gets it's access rights)    
-```json
-{
-    "name": "@loupeteam/tmplits-[TmplitName]",
-    "version": "x.x.x",
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/loupeteam/tmplits.git"
-    },
-}
-```
+There are 4 layouts with 4 different navigation bar locations:
+1. tmplit-basic-layout-left-nav
+2. tmplit-basic-layout-right-nav
+3. tmplit-basic-layout-top-nav
+4. tmplit-basic-layout-bot-nav
 
-The entire page template will be loaded with the name [your tmplit name] and any tmplits inside scripts will also be available
-
-Usage:
-
-
-```json
-//Application Package.json
-{
-{
-  "name": "@loupeteam/tmplit-template",
-  "version": "0.0.2",
-  ...
-  "dependencies": {
-    "@loupeteam/tmplits": "0.0.2",
-    "@loupeteam/tmplits-gizmo": "0.0.1",    
-  }
-}
-}
-``````
-
-```json
-//Gizmo Package.json
-{
-    "name": "@loupeteam/tmplits-gizmo",
-    "version": "0.0.1",
-}
-``````
-
+## Example: 
 ```handlebars
-<!--library.handlebars-->
-<div>Hello World<div>
+{{#> tmplit-basic-layout-top-nav
+    defaultMainScreen='testComponents'
+    actions=(obj '[
+        {label:"<img src=\"app/assets/logo.png\" />", template:"testComponents"},
+        {label:"Components Test", template:"testComponents"},
+        {label:"OpenBridge Demo", template:"OpenBridge"}
+        ]')
+}}
+{{/tmplit-basic-layout-top-nav}}
 ```
 
-```javascript
-//loader.js
-console.log("Loaded gizmo!")
-function TmplitCustomTmplit( ... ){
- ...
-}
-```
-```handlebars
-<!--main.handlebars-->
-{{> gizmo}}
-{{W CustomTmplit}}
-```
 
+```css
+    /* Nav Bar */
+    /* Left/ Right Nav Bar */
+    --navBar-minwidth: 10%;
+    --navBar-maxwidth: 20%;
+
+    /* Top/ Bottom Nav Bar */
+    --navBar-minheight: 10%;
+    --navBar-maxheight: 20%;
+
+    --navBar-item-padding: 0 0 0 0;
+    --navBar-item-margin: 0 0 0 0;
+    --navBar-item-color: none;
+    --navBar-text-align: center;
+    --navBar-img-width: 70%;
+    --navBar-background-color: rgb(230, 230, 230);
+
+    /* Main Content */
+    --screen-item-color: none;
+    --screen-text-align: left;
+    --screen-background-color: rgb(230, 230, 230);
+
+    /* Footer */
+    --footer-height: 5%;
+    --footer-content-float: left;
+    --footer-content-margin: 0 0 0 0;
+    --footer-content-padding: 0 0 0 15px;
+    --footer-opacity: 70%;
+    --footer-background-color: rgb(153, 150, 150);
+```
 ## Licensing
 
 This project is licensed under the [MIT License]LICENSE.
