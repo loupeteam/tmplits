@@ -17,10 +17,11 @@
 }
 .tmplit-navBar-container{
     flex-grow: 1;
+    flex-shrink: 1;
     overflow: auto;
     background-color: var(--navBar-background-color, rgb(231, 197, 133));
     text-wrap: nowrap;  
-    text-align: var(--navBar-text-align,center);
+    text-align: var(--navBar-text-align, center);
     /* Update this portion if use PageSelectDiv */
     list-style: none;
     /* ---------------------------------------- */
@@ -33,6 +34,9 @@
 .tmplit-navBar-container a{
     text-decoration: none;
     color: var(--navBar-item-color,red);
+}
+.tmplit-navBar-container img{
+    width: var(--navBar-img-width, none);
 }
 /* ---------------------------------------- */
 .tmplit-screen-container{

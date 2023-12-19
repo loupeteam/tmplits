@@ -1,4 +1,5 @@
 :root{
+    /* Nav Bar */
     /* Left/ Right Nav Bar */
     --navBar-minwidth: 10%;
     --navBar-maxwidth: 20%;
@@ -7,18 +8,17 @@
     --navBar-minheight: 10%;
     --navBar-maxheight: 20%;
 
-    /* Nav Bar */
-    
     --navBar-item-padding: 0 0 0 0;
-    --navBar-item-margin: 0 0 0 0;
+    --navBar-item-margin: 10% 0 0 0;
     --navBar-item-color: none;
-    --navBar-text-align: left;
-    --navBar-background-color: rgb(187, 185, 185);
+    --navBar-text-align: center;
+    --navBar-img-width: 100%;
+    --navBar-background-color: rgb(230, 230, 230);
 
     /* Main Content */
     --screen-item-color: none;
     --screen-text-align: left;
-    --screen-background-color: rgb(127, 167, 127);
+    --screen-background-color: rgb(230, 230, 230);
 
     /* Footer */
     --footer-height: 5%;
