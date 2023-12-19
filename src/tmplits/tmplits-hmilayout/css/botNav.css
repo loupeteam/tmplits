@@ -1,0 +1,17 @@
+.tmplit-wrapper-direction{
+    flex-direction: column;
+}
+
+.tmplit-navBar-position {
+    order: 1;
+}
+
+/* Update this portion if use PageSelectDiv */
+.tmplit-navBar-direction li{
+    display: inline-block;
+}
+
+.tmplit-navBar-container-size{
+    min-height: var(--navBar-minheight, 10%);
+    max-height: var(--navBar-maxheight, 20%);
+}

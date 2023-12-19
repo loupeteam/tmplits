@@ -3,9 +3,9 @@
     {{!-- HMI Layout Wrapper - CSS Grid --}}
     <div class="tmplit-layout-grid">
         {{!-- Content wrapper - Flex --}}
-        <div class="tmplit-main-wrapper">
+        <div class="tmplit-main-wrapper tmplit-wrapper-direction">
             {{!-- Nav Bar --}}
-            <div class="tmplit-navBar-container tmplit-navBar-position">
+            <div class="tmplit-navBar-container tmplit-navBar-container-size tmplit-navBar-position tmplit-navBar-direction">
                 {{#each actions}} 
                     {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template class=class}}
                 {{/each}}
@@ -38,6 +38,22 @@
 
     <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
     <link href="@loupeteam/tmplits-hmilayout/css/rightNav.css" rel="stylesheet">
+    
+    {{> tmplit-basic-layout-base}}
+</script>
+
+<script id="tmplit-basic-layout-top-nav" type="text/x-handlebars-template">
+
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/topNav.css" rel="stylesheet">
+    
+    {{> tmplit-basic-layout-base}}
+</script>
+
+<script id="tmplit-basic-layout-bot-nav" type="text/x-handlebars-template">
+
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/botNav.css" rel="stylesheet">
     
     {{> tmplit-basic-layout-base}}
 </script>
