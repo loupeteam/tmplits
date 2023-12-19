@@ -1,6 +1,10 @@
-<div class="page-container">
-    {{> nav}}
-    <div id="PageContent">
-        {{> testComponents}}
-    </div>
-</div>
+{{#> tmplit-basic-layout-left-nav
+    defaultMainScreen='testComponents'
+    actions=(obj '[
+        {label:"<img src=\"app/assets/logo.png\" />", template:"testComponents"},
+        {label:"Components Test", template:"testComponents"},
+        {label:"OpenBridge Demo", template:"OpenBridge"}
+        ]')
+}}
+{{/tmplit-basic-layout-left-nav}}
+
