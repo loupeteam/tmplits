@@ -25,6 +25,9 @@ There are 4 layouts with 4 different navigation bar locations:
 
 
 ```css
+    /* Main Wrapper */
+    --main-wrapper-overflow: auto;
+
     /* Nav Bar */
     /* Left/ Right Nav Bar */
     --navBar-minwidth: 10%;
@@ -39,11 +42,13 @@ There are 4 layouts with 4 different navigation bar locations:
     --navBar-item-color: none;
     --navBar-text-align: center;
     --navBar-img-width: 70%;
+    --navBar-overflow: auto;
     --navBar-background-color: rgb(230, 230, 230);
 
     /* Main Content */
     --screen-item-color: none;
     --screen-text-align: left;
+    --screen-overflow: auto;
     --screen-background-color: rgb(230, 230, 230);
 
     /* Footer */
