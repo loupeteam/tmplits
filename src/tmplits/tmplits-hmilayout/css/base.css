@@ -20,7 +20,7 @@
     overflow: auto;
     background-color: var(--navBar-background-color, rgb(231, 197, 133));
     text-wrap: nowrap;  
-    text-align: center;
+    text-align: var(--navBar-text-align,center);
     /* Update this portion if use PageSelectDiv */
     list-style: none;
     /* ---------------------------------------- */
@@ -40,7 +40,7 @@
     width: 100%;
     height: 100%;
     background-color: var(--screen-background-color, rgb(117, 214, 117)); 
-    text-align: center;
+    text-align: var(--screen-text-align,center);
     color: var(--screen-item-color, blue);
 }
 /* Footer belong to tmplit-layout-grid*/
@@ -54,7 +54,7 @@
     float: var(--footer-content-float, left);
     top: 50%;
     transform:translateY(-50%);
-    opacity: 50%;
+    opacity: var(--footer-opacity, 50%);
     margin: var(--footer-content-margin, 0 0 0 0);     
     padding: var(--footer-content-padding, 0 15px 0 15px);    
 }

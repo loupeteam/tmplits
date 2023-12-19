@@ -1,3 +1,34 @@
+:root{
+    /* Left/ Right Nav Bar */
+    --navBar-minwidth: 10%;
+    --navBar-maxwidth: 20%;
+
+    /* Top/ Bottom Nav Bar */
+    --navBar-minheight: 10%;
+    --navBar-maxheight: 20%;
+
+    /* Nav Bar */
+    
+    --navBar-item-padding: 0 0 0 0;
+    --navBar-item-margin: 0 0 0 0;
+    --navBar-item-color: none;
+    --navBar-text-align: left;
+    --navBar-background-color: rgb(187, 185, 185);
+
+    /* Main Content */
+    --screen-item-color: none;
+    --screen-text-align: left;
+    --screen-background-color: rgb(127, 167, 127);
+
+    /* Footer */
+    --footer-height: 5%;
+    --footer-content-float: left;
+    --footer-content-margin: 0 0 0 0;
+    --footer-content-padding: 0 0 0 15px;
+    --footer-opacity: 70%;
+    --footer-background-color: rgb(153, 150, 150);
+}
+
 body{
     height: 100vw;
     overflow: hidden;
