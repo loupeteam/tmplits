@@ -40,6 +40,19 @@ if( baseEl ){
 //Load the tmplits
 var tmplits = new Tmplits(base, (data) => {
 
+
+  //Get the container
+  let container = document.querySelector(`#${data.startPage.container}`)
+  if( container ){
+
+    //See if there is a start page attribute
+    let startPage = container.getAttribute('start-page')
+
+    //If there is a start page attribute, override the start page in the tmplits.json
+    if( startPage ){
+      data.startPage.name = startPage
+    }
+  }
   //Start the tmplits
   tmplits.loadPage(data.startPage.container, data.startPage.name)
 

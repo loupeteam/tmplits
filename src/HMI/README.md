@@ -81,6 +81,28 @@ By default, after loading the tmplit system, the start page will be loaded into 
 }
 ```
 
+Additionally, pages can be loaded by adding a start-page attribute to startPage container
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+
+...
+<body>
+
+	<!-- Begin page content - This is a placeholder that tmplits will load the page into after loading-->
+	<!-- Here we are supplying the start-page to override what is in the tmplits.json file -->
+	<div class="container" id="main" start-page='myStartPage'>
+
+	</div>
+	...
+</body>
+
+</html>
+
+```
+
+```HTML
+
 ## Publishing a new tmplit release
 Pushing to main with an updated package.json version will publish automatically using github actions
 
