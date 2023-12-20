@@ -182,6 +182,13 @@ export function numGrid() {
     numGridIntervalID = setInterval(numGridPopulate, 100);
 }
 
+export function attributeString(args) {
+    let attr = Object.keys(args).map((v) => {
+        return `${v}="${args[v]}"`
+    })
+    return attr.join(' ');
+}
+
 export function cleanArgs(args) {
     let _args = args
     let classList = []
@@ -190,13 +197,14 @@ export function cleanArgs(args) {
         delete _args.class
     }
 
-    let attr = Object.keys(_args).map((v) => {
-        return `${v}="${_args[v]}"`
-    })
-    attr = attr.join(' ');
+    let attr = attributeString(_args);
+
+    let {['attr']:luiAttr, ['classList']:luiClasses} = getLuxAttributes(args)
     return {
         classList,
-        attr
+        attr,
+        luiAttr,
+        luiClasses
     }
 }
 
@@ -291,4 +299,53 @@ export function evalContext(ctx) {
         ctx = ' '
     }
     return ctx
+}
+
+const luiAttributes = [
+    'min-user-level-show',
+    'min-user-level-unlock',
+    'data-machine-name',
+    'data-var-name',        
+    'data-var-name-hide',
+    'data-var-name-lock',
+    'data-led-true',
+    'data-led-false',
+    'data-set-value',
+    'data-hide-true',
+    'data-lock-true',
+    'data-range',
+    'data-read-group',
+    'data-reset-value',
+    'data-hide-set',
+    'data-lock-set',
+    'data-unit-factor',
+    'data-unit-offset',
+    'data-source-units',
+    'data-display-units',
+    'data-fixed',
+    'data-precision',
+    'data-exponent',
+    'data-pad',
+    'data-unit-text',
+    'data-machine-value-text',
+    'data-machine-value-text-option',
+    'data-machine-value-dropdown',
+    'data-prevent-drag',
+    'data-include',
+]
+
+//This function will get all the lux attribuites so they can be applied to the proper elements
+export function getLuxAttributes(args){
+    
+    let {
+        ['class']:classList = '',
+    } = args
+    
+    //Make a combined list of all the attributes
+    let attr = Object.keys(args).filter((value)=>{return luiAttributes.includes(value)}).map((v) => { return `${v}="${args[v]}"`}).join(' ')
+
+    //Pull out the lux classes
+    classList = classList.split(' ').filter((v) => {return v.toLowerCase().startsWith('lux')})
+
+    return {attr, classList};
 }
