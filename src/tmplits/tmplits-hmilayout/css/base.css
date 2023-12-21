@@ -9,25 +9,29 @@
     height: 100%; 
     width: 100%;
 }
+
 .tmplit-main-container{
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
     display: flex;
-    overflow: var(--main-wrapper-overflow, auto);
+    overflow: var(--main-container-overflow, auto);
 }
+
 /* Nav Bar */
 .tmplit-navBar-container{
     flex-grow: 1;
     display: flex;
-    overflow: var(--navBar-overflow, auto);
+    overflow: var(--navBar-container-overflow, auto);
     background-color: var(--navBar-background-color, rgb(231, 197, 133));
     /* Update this portion if use PageSelectDiv */
     list-style: none;
     /* ---------------------------------------- */
 } 
+
 .tmplit-navBar-logo-wrapper{
     text-align: var(--navBar-logo-text-align, center);
 }
+
 .tmplit-navBar-logo-wrapper img{
     padding: var(--navBar-logo-padding, 0 0 0 0);
     margin: var(--navBar-logo-margin, 0 0 0 0);
@@ -42,22 +46,25 @@
     height: 100%;
     text-wrap: nowrap;  
     text-align: var(--navBar-buttons-text-align, center);
-    
 }
+
 .tmplit-navBar-buttons-container div{
     position: relative;
     top: 50%;
     transform:translateY(-50%);
 }
+
 /* Update this portion if use PageSelectDiv */
 .tmplit-navBar-buttons-container li{
     padding: var(--navBar-buttons-padding, 0 0 0 0);
     margin: var(--navBar-buttons-margin, 0 0 0 0);
 }
+
 .tmplit-navBar-buttons-container a{
     text-decoration: none;
     color: var(--navBar-buttons-color,red);
 }
+
 .tmplit-navBar-buttons-container img{
     width: var(--navBar-buttons-img-width, none);
 }
@@ -72,12 +79,14 @@
     text-align: var(--screen-text-align,center);
     color: var(--screen-item-color, blue);
 }
+
 /* Footer belong to tmplit-layout-grid*/
-.tmplit-footer-container{
+.tmplit-footer-wrapper{
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
     background-color: var(--footer-background-color, rgb(214, 213, 213));
 }
+
 .tmplit-footer-content{
     position: relative;
     float: var(--footer-content-float, left);

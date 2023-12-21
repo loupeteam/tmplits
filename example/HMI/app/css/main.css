@@ -1,6 +1,6 @@
 :root{
-    /* Main Wrapper */
-    --main-wrapper-overflow: auto;
+    /* Main container */
+    --main-container-overflow: auto;
 
     /* Nav Bar */
     /* Left/ Right Nav Bar */
@@ -20,7 +20,7 @@
     --navBar-buttons-color: none;
     --navBar-buttons-text-align: center;
     --navBar-buttons-img-width: none;
-    --navBar-overflow: auto;
+    --navBar-container-overflow: auto;
     --navBar-background-color: rgb(230, 230, 230);
 
     /* Main Content */
