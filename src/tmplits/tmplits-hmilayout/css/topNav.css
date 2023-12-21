@@ -1,4 +1,4 @@
-.tmplit-container-direction{
+.tmplit-main-container-direction{
     flex-direction: column;
 }
 
@@ -6,12 +6,16 @@
     order: 0;
 }
 
-/* Update this portion if use PageSelectDiv */
-.tmplit-navBar-direction div{
-    display: inline-block;
+.tmplit-navBar-container-direction{
+    flex-direction: row;
 }
 
 .tmplit-navBar-container-size{
     min-height: var(--navBar-minheight, 10%);
     max-height: var(--navBar-maxheight, 20%);
+}
+
+/* Update this portion if use PageSelectDiv */
+.tmplit-navBar-container-direction div{
+    display: inline-block;
 }

@@ -1,9 +1,13 @@
-.tmplit-container-direction{
+.tmplit-main-container-direction{
     flex-direction: column;
 }
 
 .tmplit-navBar-position {
     order: 1;
+}
+
+.tmplit-navBar-container-direction{
+    flex-direction: row;
 }
 
 .tmplit-navBar-container-size{
@@ -12,7 +16,6 @@
 }
 
 /* Update this portion if use PageSelectDiv */
-.tmplit-navBar-direction div{
+.tmplit-navBar-container-direction div{
     display: inline-block;
 }
-

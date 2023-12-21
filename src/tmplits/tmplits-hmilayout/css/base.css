@@ -25,6 +25,9 @@
     list-style: none;
     /* ---------------------------------------- */
 } 
+.tmplit-navBar-logo-wrapper{
+    text-align: var(--navBar-logo-text-align, center);
+}
 .tmplit-navBar-logo-wrapper img{
     padding: var(--navBar-logo-padding, 0 0 0 0);
     margin: var(--navBar-logo-margin, 0 0 0 0);
@@ -36,6 +39,7 @@
 
 .tmplit-navBar-buttons-container{
     width: 100%;
+    height: 100%;
     text-wrap: nowrap;  
     text-align: var(--navBar-buttons-text-align, center);
     

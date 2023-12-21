@@ -1,9 +1,13 @@
-.tmplit-container-direction{
+.tmplit-main-container-direction{
     flex-direction: row;
 }
 
 .tmplit-navBar-position {
     order: 0;
+}
+
+.tmplit-navBar-container-direction{
+    flex-direction: column;
 }
 
 .tmplit-navBar-container-size{
