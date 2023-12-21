@@ -10,9 +10,9 @@
             <div class="tmplit-navBar-container tmplit-navBar-container-size tmplit-navBar-position tmplit-navBar-container-direction">
 
                 {{!-- Logo --}}
-                {{#if logo}}
+                {{#if logoSource}}
                 <div class="tmplit-navBar-logo-wrapper tmplit-navBar-logo-location">
-                    <img src="app/assets/logo.png" />
+                    <img src={{logoSource}} />
                 </div>
                 {{/if}}
 
@@ -68,8 +68,8 @@
 
     <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
     <link href="@loupeteam/tmplits-hmilayout/css/leftNav.css" rel="stylesheet">
-    {{#if logoLoc}}
-    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLoc}}.css" rel="stylesheet">
+    {{#if logoLocation}}
+    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
     {{/if}}
     {{> tmplit-basic-layout-base}}
 </script>
@@ -78,8 +78,8 @@
 
     <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
     <link href="@loupeteam/tmplits-hmilayout/css/rightNav.css" rel="stylesheet">
-    {{#if logoLoc}}
-    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLoc}}.css" rel="stylesheet">
+    {{#if logoLocation}}
+    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
     {{/if}}
     {{> tmplit-basic-layout-base}}
 </script>
@@ -88,8 +88,8 @@
 
     <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
     <link href="@loupeteam/tmplits-hmilayout/css/topNav.css" rel="stylesheet">
-    {{#if logoLoc}}
-    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLoc}}.css" rel="stylesheet">
+    {{#if logoLocation}}
+    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
     {{/if}}
     {{> tmplit-basic-layout-base}}
 </script>
@@ -98,8 +98,8 @@
 
     <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
     <link href="@loupeteam/tmplits-hmilayout/css/botNav.css" rel="stylesheet">
-    {{#if logoLoc}}
-    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLoc}}.css" rel="stylesheet">
+    {{#if logoLocation}}
+    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
     {{/if}}
     {{> tmplit-basic-layout-base}}
 </script>
