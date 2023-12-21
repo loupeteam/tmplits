@@ -15,29 +15,51 @@
     display: flex;
     overflow: var(--main-wrapper-overflow, auto);
 }
+/* Nav Bar */
 .tmplit-navBar-container{
     flex-grow: 1;
+    display: flex;
     overflow: var(--navBar-overflow, auto);
     background-color: var(--navBar-background-color, rgb(231, 197, 133));
-    text-wrap: nowrap;  
-    text-align: var(--navBar-text-align, center);
     /* Update this portion if use PageSelectDiv */
     list-style: none;
     /* ---------------------------------------- */
+} 
+.tmplit-navBar-logo-wrapper img{
+    padding: var(--navBar-logo-padding, 0 0 0 0);
+    margin: var(--navBar-logo-margin, 0 0 0 0);
+    width: var(--navBar-logo-img-width, none);
+    position: relative;
+    top: 50%;
+    transform:translateY(-50%);
+}
+
+.tmplit-navBar-buttons-container{
+    width: 100%;
+    text-wrap: nowrap;  
+    text-align: var(--navBar-buttons-text-align, center);
+    
+}
+.tmplit-navBar-buttons-container div{
+    position: relative;
+    top: 50%;
+    transform:translateY(-50%);
 }
 /* Update this portion if use PageSelectDiv */
-.tmplit-navBar-container li{
-    padding: var(--navBar-item-padding, 0 0 0 0);
-    margin: var(--navBar-item-margin, 0 0 0 0);
+.tmplit-navBar-buttons-container li{
+    padding: var(--navBar-buttons-padding, 0 0 0 0);
+    margin: var(--navBar-buttons-margin, 0 0 0 0);
 }
-.tmplit-navBar-container a{
+.tmplit-navBar-buttons-container a{
     text-decoration: none;
-    color: var(--navBar-item-color,red);
+    color: var(--navBar-buttons-color,red);
 }
-.tmplit-navBar-container img{
-    width: var(--navBar-img-width, none);
+.tmplit-navBar-buttons-container img{
+    width: var(--navBar-buttons-img-width, none);
 }
 /* ---------------------------------------- */
+
+/* Screen Content */
 .tmplit-screen-container{
     overflow: var(--screen-overflow, auto);
     width: 100%;

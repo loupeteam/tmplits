@@ -7,7 +7,7 @@
 }
 
 /* Update this portion if use PageSelectDiv */
-.tmplit-navBar-direction li{
+.tmplit-navBar-direction div{
     display: inline-block;
 }
 

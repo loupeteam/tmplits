@@ -8,9 +8,20 @@
 
             {{!-- Nav Bar --}}
             <div class="tmplit-navBar-container tmplit-navBar-container-size tmplit-navBar-position tmplit-navBar-direction">
-                {{#each actions}} 
-                    {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template class=class}}
-                {{/each}}
+
+                {{!-- Logo --}}
+                <div class="tmplit-navBar-logo-wrapper">
+                    <img src="app/assets/logo.png" />
+                </div>
+
+                {{!-- Nav Buttons --}}
+                <div class="tmplit-navBar-buttons-container">
+                    {{#each actions}}
+                        <div> 
+                            {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template class=class}}
+                        </div>
+                    {{/each}}
+                </div>
             </div>
 
             {{!-- Main Content --}}

@@ -8,14 +8,17 @@
     --navBar-maxwidth: 20%;
 
     /* Top/ Bottom Nav Bar */
-    --navBar-minheight: 10%;
+    --navBar-minheight: 15%;
     --navBar-maxheight: 20%;
 
-    --navBar-item-padding: 0 0 0 0;
-    --navBar-item-margin: 0 0 0 0;
-    --navBar-item-color: none;
-    --navBar-text-align: center;
-    --navBar-img-width: 70%;
+    --navBar-logo-padding: 0 0 0 0;
+    --navBar-logo-margin: 0 0 0 0;
+    --navBar-logo-img-width: none;
+    --navBar-buttons-padding: 0 0 0 0;
+    --navBar-buttons-margin: 0 0 0 0;
+    --navBar-buttons-color: none;
+    --navBar-buttons-text-align: center;
+    --navBar-buttons-img-width: none;
     --navBar-overflow: auto;
     --navBar-background-color: rgb(230, 230, 230);
 
