@@ -1,22 +1,26 @@
 <script id="tmplit-basic-layout-base" type="text/x-handlebars-template">
     
-    {{!-- HMI Layout Wrapper - CSS Grid --}}
+    {{!-- HMI Layout Container - CSS Grid --}}
     <div class="tmplit-layout-grid">
-        {{!-- Content wrapper - Flex --}}
-        <div class="tmplit-main-wrapper tmplit-wrapper-direction">
+
+        {{!-- Content Container - Flex --}}
+        <div class="tmplit-main-container tmplit-container-direction">
+
             {{!-- Nav Bar --}}
             <div class="tmplit-navBar-container tmplit-navBar-container-size tmplit-navBar-position tmplit-navBar-direction">
                 {{#each actions}} 
                     {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template class=class}}
                 {{/each}}
             </div>
+
             {{!-- Main Content --}}
             <div id="tmplit-screen-content" class="tmplit-screen-container"> 
                 {{>(lookup . 'defaultMainScreen')}} 
             </div>
         </div>
+        
         {{!-- Footer --}}
-        <div class="tmplit-footer-container">
+        <div class="tmplit-footer-wrapper">
             {{#if footerContent}}
                 <div class="tmplit-footer-content">{{footerContent}}</div>
             {{else}}

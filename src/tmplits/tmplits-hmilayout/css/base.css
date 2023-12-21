@@ -9,7 +9,7 @@
     height: 100%; 
     width: 100%;
 }
-.tmplit-main-wrapper{
+.tmplit-main-container{
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
     display: flex;
