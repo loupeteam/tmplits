@@ -19,7 +19,7 @@
                 {{!-- Nav Buttons --}}
                 <div class="tmplit-navBar-buttons-container">
                     {{#each actions}}
-                        <div> 
+                        <div class="tmplit-navBar-buttons"> 
                             {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template class=class}}
                         </div>
                     {{/each}}
@@ -41,6 +41,27 @@
             {{/if}}
         </div>
     </div>
+
+    {{!-- Active Button Indicator --}}
+    <script type="text/javascript">
+        $(function () {
+
+            // register click handler that marks the active navigation button
+            // get navigation buttons
+            let navButtons = $('.tmplit-navBar-buttons');
+            let navButtonsClickZone = $('.tmplit-navBar-buttons > li > a');
+
+            // add active class to clicked button on-click
+            navButtonsClickZone.click(function () {
+
+            // remove active class from all navigation buttons
+            navButtons.removeClass('selected');
+
+            // add active class to clicked button
+            $(this).parents('.tmplit-navBar-buttons').addClass('selected');
+            });
+        })
+    </script>
 </script>
 
 <script id="tmplit-basic-layout-left-nav" type="text/x-handlebars-template">
@@ -82,4 +103,6 @@
     {{/if}}
     {{> tmplit-basic-layout-base}}
 </script>
+
+
 

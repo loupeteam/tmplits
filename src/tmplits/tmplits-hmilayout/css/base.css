@@ -48,24 +48,28 @@
     text-align: var(--navBar-buttons-text-align, center);
 }
 
-.tmplit-navBar-buttons-container div{
+.tmplit-navBar-buttons{
     position: relative;
     top: 50%;
     transform:translateY(-50%);
 }
 
+.tmplit-navBar-buttons.selected{
+    background-color: var(--navBar-buttons-indicator-background-color, rgb(182, 182, 182));
+}
+
 /* Update this portion if use PageSelectDiv */
-.tmplit-navBar-buttons-container li{
+.tmplit-navBar-buttons li{
     padding: var(--navBar-buttons-padding, 0 0 0 0);
     margin: var(--navBar-buttons-margin, 0 0 0 0);
 }
 
-.tmplit-navBar-buttons-container a{
+.tmplit-navBar-buttons a{
     text-decoration: none;
     color: var(--navBar-buttons-color,red);
 }
 
-.tmplit-navBar-buttons-container img{
+.tmplit-navBar-buttons img{
     width: var(--navBar-buttons-img-width, none);
 }
 /* ---------------------------------------- */
