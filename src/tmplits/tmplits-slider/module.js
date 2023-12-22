@@ -49,20 +49,23 @@ export function TmplitSlider(context, args) {
     //Get cleaned values
     let {
         classList,
-        attr
+        attr,
+        luiClasses,
+        luiAttr,
     } = util.cleanArgs(_args)
     classList = classList.concat(['lui-slider-scope', 'slider'])
     inputStyle = `position:relative;width:150%;top:0%;border-style:none;background:transparent;display:none` + inputStyle
     let innerClassList = ['lui-slider-value']
+    innerClassList.push(...luiClasses)
     if (dataVarName) {
         innerClassList.push('lux-num-value')
     }
     let inner = '';
     if (args.children) {
         inner += 
-        inner += `<invisible-input class='${innerClassList.join(' ')}' value="${context}" style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
+        inner += `<invisible-input class='${innerClassList.join(' ')}' value="${context}" style='display:none' ${dataVarName?'data-var-name="' + dataVarName +'"':''} ${luiAttr}></invisible-input>`
     } else {
-        inner = `<invisible-input type='number' min='${min}' max='${max}' class='${innerClassList.join(' ')}' value="${context}" style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':''} ></invisible-input>`
+        inner = `<invisible-input type='number' min='${min}' max='${max}' class='${innerClassList.join(' ')}' value="${context}" style='${inputStyle}' ${dataVarName?'data-var-name="' + dataVarName +'"':'' } ${luiAttr}></invisible-input>`
     }
 
     let bar = document.createElement("div");
