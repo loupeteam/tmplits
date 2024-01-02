@@ -44,23 +44,25 @@
 
     {{!-- Active Button Indicator --}}
     <script type="text/javascript">
-        $(function () {
+                
+            // Register click handler that marks the active navigation button
+            // Get navigation buttons
+            let navButtons = document.querySelectorAll('.tmplit-navBar-buttons');
+            let navButtonsClickZone = document.querySelectorAll('.tmplit-navBar-buttons > li > a');
 
-            // register click handler that marks the active navigation button
-            // get navigation buttons
-            let navButtons = $('.tmplit-navBar-buttons');
-            let navButtonsClickZone = $('.tmplit-navBar-buttons > li > a');
+            // Add active class to clicked button on-click
+            navButtonsClickZone.forEach(function (clickZone) {
+                clickZone.addEventListener('click', function () {
+                    // Remove active class from all navigation buttons
+                    navButtons.forEach(function (button) {
+                        button.classList.remove('selected');
+                    });
 
-            // add active class to clicked button on-click
-            navButtonsClickZone.click(function () {
-
-            // remove active class from all navigation buttons
-            navButtons.removeClass('selected');
-
-            // add active class to clicked button
-            $(this).parents('.tmplit-navBar-buttons').addClass('selected');
+                    // Add active class to clicked button
+                    clickZone.closest('.tmplit-navBar-buttons').classList.add('selected');
+                });
             });
-        })
+
     </script>
 </script>
 
