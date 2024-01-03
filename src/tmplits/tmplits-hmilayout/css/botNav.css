@@ -11,7 +11,7 @@
 }
 
 .tmplit-navBar-container-size{
-    min-height: var(--navBar-minheight, 10%);
+    min-height: var(--navBar-minheight, 15%);
     max-height: var(--navBar-maxheight, 20%);
 }
 
