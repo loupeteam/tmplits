@@ -37,6 +37,8 @@
     "@loupeteam/tmplits-robotscene": "file:../../src/tmplits/tmplits-robotscene/",
     "@loupeteam/tmplits-utilities": "file:../../src/tmplits/tmplits-utilities/",
     "@loupeteam/tmplits-globalclasses": "file:../../src/tmplits/tmplits-globalclasses/",
+    "@loupeteam/tmplits-table": "file:../../src/tmplits/tmplits-table/",
+    "@loupeteam/tmplits-tablerow": "file:../../src/tmplits/tmplits-tablerow/",
     "app": "file:./app/",
     "bootstrap": "^3.3.4",
     "handlebars": "*",
