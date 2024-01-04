@@ -1,3 +1,111 @@
+<style>
+    .led.lux-led{
+        display: block;
+    }
+</style>
+
+{{#tmplit 'Columns' maxColumns=2}}
+    {{#tmplit 'Table' 'Inputs'}}
+        {{#tmplit 'TableRow'}}
+            <span>Channel</span>
+            <span>Description</span>
+            <span>Status</span>
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 0</span>
+            <span>This is an example of a digital input</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 1</span>
+            <span>This is an example of a analog input</span>
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 2</span>
+            <span>Description</span>
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 3</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 4</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 5</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 6</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 7</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+    {{/tmplit}}
+    {{#tmplit 'Table' 'Outputs'}}
+        {{#tmplit 'TableRow'}}
+            <span>Channel</span>
+            <span>Description</span>
+            <span>Status</span>
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 0</span>
+            <span>This is an example of digital output</span>
+            {{tmplit 'Led' error='true' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 1</span>
+            <span>This is an example of and analog output</span>
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 2</span>
+            <span>Description</span>
+            {{tmplit 'Led' error='true' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 3</span>
+            <span>Description</span>
+            {{tmplit 'Led' error='true' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+                {{#tmplit 'TableRow'}}
+            <span>Ch 4</span>
+            <span>Description</span>
+            {{tmplit 'Led' error='true' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 5</span>
+            <span>Description</span>
+            {{tmplit 'Led' error='true' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 6</span>
+            <span>Description</span>
+            {{tmplit 'Led' error='true' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 7</span>
+            <span>Description</span>
+            {{tmplit 'Led' error='true' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+    {{/tmplit}}
+{{/tmplit}}
+
+<br/>
+<br/>
+<br/>
+<br/>
+
 {{!-- pass a partial into another partials parameters --}}
 Custom User Controls:
 <br />
