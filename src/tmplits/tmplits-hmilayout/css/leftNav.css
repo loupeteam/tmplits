@@ -10,7 +10,27 @@
     flex-direction: column;
 }
 
-.tmplit-navBar-container-size{
-    min-width: var(--navBar-minwidth, 10%);
-    max-width: var(--navBar-maxwidth, 20%);
+/* Small Screen Size */
+@media (max-width: 992px){
+    .tmplit-navBar-container-size{
+        min-width: var(--navBar-minwidth, 10%);
+        max-width: var(--navBar-maxwidth, 15%);
+    }
+}
+
+/* Medium Screen Size */
+@media (min-width: 992px) and (max-width: 1200px){
+    .tmplit-navBar-container-size{
+        min-width: var(--navBar-minwidth, 15%);
+        max-width: var(--navBar-maxwidth, 20%);
+    }
+}
+
+
+/* Large Screen Size */
+@media (min-width: 1200px){
+    .tmplit-navBar-container-size{
+        min-width: var(--navBar-minwidth, 20%);
+        max-width: var(--navBar-maxwidth, 25%);
+    }
 }
