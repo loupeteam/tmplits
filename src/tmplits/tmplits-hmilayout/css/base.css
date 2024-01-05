@@ -9,6 +9,9 @@
     height: 100%; 
     width: 100%;
 }
+.footer-disabled{
+    grid-template-rows: 1fr;
+}
 
 .tmplit-main-container{
     grid-column: 1 / span 1;

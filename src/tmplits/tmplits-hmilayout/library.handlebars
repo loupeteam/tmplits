@@ -1,8 +1,7 @@
 <script id="tmplit-basic-layout-base" type="text/x-handlebars-template">
     
     {{!-- HMI Layout Container - CSS Grid --}}
-    <div class="tmplit-layout-grid">
-
+        <div class="tmplit-layout-grid {{#if footerDisabled}} footer-disabled {{/if}}">
         {{!-- Content Container - Flex --}}
         <div class="tmplit-main-container tmplit-main-container-direction">
 
@@ -31,15 +30,17 @@
                 {{>(lookup . 'defaultMainScreen')}} 
             </div>
         </div>
-        
+
         {{!-- Footer --}}
-        <div class="tmplit-footer-wrapper">
-            {{#if footerContent}}
-                <div class="tmplit-footer-content">{{footerContent}}</div>
-            {{else}}
-                <div class="tmplit-footer-content">&copy; Loupe</div>
-            {{/if}}
-        </div>
+        {{#unless footerDisabled}}
+            <div class="tmplit-footer-wrapper">
+                {{#if footerContent}}
+                    <div class="tmplit-footer-content">{{footerContent}}</div>
+                {{else}}
+                    <div class="tmplit-footer-content">&copy; Loupe</div>
+                {{/if}}
+            </div>
+        {{/unless}}
     </div>
 
     {{!-- Active Button Indicator --}}
