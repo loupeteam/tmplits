@@ -1,0 +1,47 @@
+<script id="TabSample" type="text/x-handlebars-template">
+    <lui-tab-control value="1">
+        <template title="Page1">
+            <h1>Page 1</h1>
+            {{#tmplit 'Columns' }}
+                {{tmplit "Numeric" 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+                {{tmplit 'Numeric' 'label' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+                {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{/tmplit}}
+        </template>
+        <template title="Page2">
+            <h1>Page 2</h1>
+            {{#tmplit 'Columns' }}
+                {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+                {{tmplit 'Numeric' 'label' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+                {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{/tmplit}}
+        </template>
+    </lui-tab-control>
+
+    {{#tmplit 'Tabs' id="tabs4" value='2'}}
+        <template title="Page1">
+            <h1>Page 1</h1>
+            {{> page1 msg="hello"}}
+        </template>
+        <template title="Page2">
+            <h1>Page 2</h1>
+            {{> page2 "hello world 2"}}
+        </template>
+        <template>
+            <h1>Page 3</h1>
+            {{#tmplit 'Columns' }}
+            {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{tmplit 'Numeric' 'label' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{/tmplit}}
+        </template>
+        <template>
+            <h1>Page 4</h1>
+            {{#tmplit 'Columns' }}
+            {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{tmplit 'Numeric' 'label' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{/tmplit}}
+        </template>
+    {{/tmplit}}
+</script>
