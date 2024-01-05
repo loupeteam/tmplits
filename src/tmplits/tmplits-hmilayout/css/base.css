@@ -32,13 +32,13 @@
 } 
 
 .tmplit-navBar-logo-wrapper{
-    text-align: var(--navBar-logo-text-align, center);
+    text-align: var(--navBar-logo-text-align, left);
 }
 
 .tmplit-navBar-logo-wrapper img{
     padding: var(--navBar-logo-padding, 0 0 0 0);
     margin: var(--navBar-logo-margin, 0 0 0 0);
-    width: var(--navBar-logo-img-width, 100%);
+    width: var(--navBar-logo-img-width, auto);
 }
 
 .tmplit-navBar-buttons-container{
