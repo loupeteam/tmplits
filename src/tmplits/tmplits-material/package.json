@@ -9,6 +9,10 @@
   },
   "author": "Loupeteam",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loupeteam/tmplits.git"
+  },
   "devDependencies": {
     "@material/web": "^1.1.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
