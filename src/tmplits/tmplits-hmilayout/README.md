@@ -4,41 +4,43 @@ This tmplit is used to create a basic HMI layout.  Below are the variables that 
 1. defaultMainScreen - initial screen to be loaded.
 2. logoSource - directory path to logo image when applicable.
 3. logoLocation - logo's location on navigation bar. 0 is for Left/ Top and 1 is for Right / Bottom.
-4. actions - arguments for tmplits-pageselect.  
+4. footerDisabled - Footer is enabled by default.  Setting footerDisabled to true (as BOOL, not String) will disable Footer.
+footerContent - Content to be displayed in footer.  
+5. actions - arguments for tmplits-pageselect.  
 See https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs/tmplitcomponents/pagelayout.html for more information. 
-5. label - label for navigation button.  label can either be text or image.  
+6. label - label for navigation button.  label can either be text or image.  
 This is an argument for tmplits-pageselect. See https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs/tmplitcomponents/pagelayout.html for more information. 
-6. template - handlebars file to be loaded.  
+7. template - handlebars file to be loaded.  
 This is an argument for tmplits-pageselect. See https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs/tmplitcomponents/pagelayout.html for more information.
-7. class - additional css classes for navigation buttons.  
+8. class - additional css classes for navigation buttons.  
 This is an argument for tmplits-pageselect. See https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs/tmplitcomponents/pagelayout.html for more information.
-8. footerContent - content for footer.  Default as Loupe
+9. footerContent - content for footer.  Default as Loupe
 
 ## Available HMI Layouts
 There are 8 availbale layouts with different navigation bar locations and logo locations:
-1. tmplit-basic-layout-left-nav with logo on top
-<img src="asset/leftNav0.jpg" />
+1. tmplit-basic-layout-left-nav with logo on top  
+<img src="asset/leftNav0.jpg" />  
 
-2. tmplit-basic-layout-left-nav with logo at the bottom
-<img src="asset/leftNav1.jpg" />
+2. tmplit-basic-layout-left-nav with logo at the bottom  
+<img src="asset/leftNav1.jpg" />  
 
-3. tmplit-basic-layout-right-nav with logo on top
-<img src="asset/rightNav0.jpg" />
+3. tmplit-basic-layout-right-nav with logo on top  
+<img src="asset/rightNav0.jpg" />  
 
-4. tmplit-basic-layout-right-nav with logo at the bottom
-<img src="asset/rightNav1.jpg" />
+4. tmplit-basic-layout-right-nav with logo at the bottom  
+<img src="asset/rightNav1.jpg" />  
 
-5. tmplit-basic-layout-top-nav with logo on top
-<img src="asset/topNav0.jpg" />
+5. tmplit-basic-layout-top-nav with logo on top  
+<img src="asset/topNav0.jpg" />  
 
-6. tmplit-basic-layout-top-nav with logo at the bottom
-<img src="asset/topNav1.jpg" />
+6. tmplit-basic-layout-top-nav with logo at the bottom  
+<img src="asset/topNav1.jpg" />  
 
-7. tmplit-basic-layout-bot-nav with logo on top
-<img src="asset/botNav0.jpg" />
+7. tmplit-basic-layout-bot-nav with logo on top  
+<img src="asset/botNav0.jpg" />  
 
-8. tmplit-basic-layout-bot-nav with logo at the bottom
-<img src="asset/botNav1.jpg" />
+8. tmplit-basic-layout-bot-nav with logo at the bottom  
+<img src="asset/botNav1.jpg" />  
 
 ## Example: 
 ```handlebars
@@ -53,7 +55,7 @@ There are 8 availbale layouts with different navigation bar locations and logo l
 }}
 {{/tmplit-basic-layout-top-nav}}
 
-<!-- If label for navigation button is an image instead of text, use <img src=\"app/assets/logo.png\" /> -->asdsad
+<!-- If label for navigation button is an image instead of text, use <img src=\"app/assets/logo.png\" /> -->
 
 {{#> tmplit-basic-layout-top-nav
     defaultMainScreen='testComponents'
@@ -65,6 +67,7 @@ There are 8 availbale layouts with different navigation bar locations and logo l
         ]')
 }}
 {{/tmplit-basic-layout-top-nav}}
+
 ```
 
 ## CSS Variables:

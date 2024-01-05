@@ -1,20 +1,20 @@
 :root{
     /* Main container */
-    --main-container-overflow: auto;
+    /* --main-container-overflow: auto; */
 
     /* Nav Bar */
     /* Left/ Right Nav Bar */
-    --navBar-minwidth: 10%;
-    --navBar-maxwidth: 20%;
+    /* --navBar-minwidth: 10%;
+    --navBar-maxwidth: 20%; */
 
     /* Top/ Bottom Nav Bar */
-    --navBar-minheight: 15%;
+    /* --navBar-minheight: 15%;
     --navBar-maxheight: 20%;
 
     --navBar-logo-padding: 0 0 0 0;
     --navBar-logo-margin: 0 0 0 0;
     --navBar-logo-text-align: center;
-    --navBar-logo-img-width: 100%;
+    --navBar-logo-img-width: auto;
     --navBar-buttons-padding: 0 0 0 0;
     --navBar-buttons-margin: 0 0 0 0;
     --navBar-buttons-color: none;
@@ -22,21 +22,22 @@
     --navBar-buttons-img-width: none;
     --navBar-buttons-indicator-background-color: rgb(182, 182, 182);
     --navBar-container-overflow: auto;
-    --navBar-background-color: rgb(230, 230, 230);
+    --navBar-background-color: rgb(230, 230, 230); */
 
     /* Main Content */
-    --screen-item-color: none;
+    /* --screen-item-color: none;
     --screen-text-align: left;
     --screen-overflow: auto;
-    --screen-background-color: rgb(230, 230, 230);
+    --screen-background-color: rgb(230, 230, 230); */
 
     /* Footer */
-    --footer-height: 5%;
+    /* --footer-height: 5%;
     --footer-content-float: left;
     --footer-content-margin: 0 0 0 0;
     --footer-content-padding: 0 0 0 15px;
     --footer-opacity: 70%;
-    --footer-background-color: rgb(153, 150, 150);
+    --footer-background-color: rgb(153, 150, 150); */
+
 }
 
 body{
