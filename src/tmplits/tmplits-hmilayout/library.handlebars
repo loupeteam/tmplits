@@ -1,7 +1,7 @@
 <script id="tmplit-basic-layout-base" type="text/x-handlebars-template">
     
     {{!-- HMI Layout Container - CSS Grid --}}
-        <div class="tmplit-layout-grid {{#if footerDisabled}} footer-disabled {{/if}}">
+        <div class="tmplit-layout-grid">
         {{!-- Content Container - Flex --}}
         <div class="tmplit-main-container tmplit-main-container-direction">
 
@@ -32,7 +32,9 @@
         </div>
 
         {{!-- Footer --}}
-        {{#unless footerDisabled}}
+        {{#ifEquals footerDisabled true}}
+            {{!-- Return nothing for Footer--}}
+        {{else}}
             <div class="tmplit-footer-wrapper">
                 {{#if footerContent}}
                     <div class="tmplit-footer-content">{{footerContent}}</div>
@@ -40,7 +42,7 @@
                     <div class="tmplit-footer-content">&copy; Loupe</div>
                 {{/if}}
             </div>
-        {{/unless}}
+        {{/ifEquals}}
     </div>
 
     {{!-- Active Button Indicator --}}
