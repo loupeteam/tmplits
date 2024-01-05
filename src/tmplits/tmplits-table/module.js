@@ -31,13 +31,13 @@ export function TmplitTable(context, args) {
 
     let title = ''
     if (context[0]){
-        title = `<h4><b>${context[0]}</b></h4>`
+        title = `<div class="tmplit-table-header">${context[0]}</div>`
     }
 
     return `
     <div>
         ${title}
-        <div class="${classList.join(" ")}"  ${attr}>
+        <div class="${classList.join(" ")}" ${attr}>
         ${args.children}
         </div>
     </div>
