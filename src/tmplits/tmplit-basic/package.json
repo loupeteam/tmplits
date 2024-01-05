@@ -26,7 +26,8 @@
     "@loupeteam/tmplits-globalclasses": "^0.1.0",
     "@loupeteam/tmplits-directorybrowser": "^0.1.0",
     "@loupeteam/tmplits-directorybrowserwindow": "^0.1.0",
-    "@loupeteam/tmplits-tableselect": "^0.1.0"
+    "@loupeteam/tmplits-tableselect": "^0.1.0",
+    "@loupeteam/tmplits-tabs": "^0.1.0"
   },
   "repository": {
     "type": "git",
