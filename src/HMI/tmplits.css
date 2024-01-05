@@ -137,13 +137,22 @@ input::-webkit-inner-spin-button {
 .tmplit-table {
     width: 100%;
     display: grid;
-    padding: 5px;
+    padding: 0px 20px 20px 20px;
     overflow: auto;
-    grid-template-columns: 1fr 4fr 1fr;
-    text-align: left;
-    grid-template-rows: repeat(auto-fill, 40px);
-    height: 370px;
-    grid-auto-flow: column;
+    grid-template-columns: var(--table-grid-template-columns, 1fr 4fr 1fr);
+    text-align: var(--table-text-align, left);
+    grid-template-rows: var(--table-grid-template-rows, repeat(auto-fill, 50px));
+    height: var(--table-height, 470px);
+    background-color: var(--tmplit-table-background-color, var(--md-sys-color-surface-container, #FFFFFF));
+}
+
+.tmplit-table-header {
+    font-size: var(--tmplit-table-header-font-size, 24px);
+    font-weight: var(--tmplit-table-header-font-weight, 700);
+    padding: var(--tmplit-table-header-padding, 20px 20px 10px 20px);
+    text-align: var(--tmplit-table-header-text-align, center);
+    color: var(--tmplit-table-header-color, var(--md-sys-color-on-surface, black));
+    background-color: var(--tmplit-table-header-background-color, var(--md-sys-color-surface-container, #FFFFFF));
 }
 
 .tmplit-table-row {
@@ -151,8 +160,27 @@ input::-webkit-inner-spin-button {
     grid-column: 1 /10;
     grid-template-columns: subgrid;
     padding: 1px;
-    border-style: none none solid none; 
-    border-width: 1px;
-    border-color: black;
     align-items: center;
+    border-style: var(--tmplit-table-row-border-style, none none solid none); 
+    border-width: var(--tmplit-table-row-border-width, 1px);
+    font-size: var(--tmplit-table-row-font-size, 18px);
+    border-color: var(--tmplit-table-row-border-color, var(--md-sys-color-outline-variant, gray));
+    color: var(--tmplit-table-row-color, var(--md-sys-color-on-surface, black));
+}
+
+.tmplit-table-row .led{
+    display: block;
+    height: var(--tmplit-table-row-led-height, 25px);
+    width: var(--tmplit-table-row-led-width, 25px);
+    box-shadow: var(--tmplit-table-row-led-box-shadow, none);
+    outline: var(--tmplit-table-row-led-outline, 2px);
+    outline-style: var(--tmplit-table-row-led-outline-style, solid);
+    outline-color: var(--tmplit-table-row-led-outline-color, var(--md-sys-color-outline, gray));
+}
+
+.tmplit-table-row .tmplit-numeric {
+    font-size: var(--tmplit-table-row-font-size, 18px);
+    background-color: var(--tmplit-table-row-numeric-background-color, var(--md-sys-color-primary-container, white));
+    color: var(--tmplit-table-row-numeric-color, var(--md-sys-color-on-primary-container, black));
+    border-color: var(--tmplit-table-row-numeric-border-color, var(--md-sys-color-outline, gray))
 }
