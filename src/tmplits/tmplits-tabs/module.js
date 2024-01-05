@@ -1,12 +1,23 @@
 import * as util from "../tmplits-utilities/module.js"
+
+//Define the style template
+
+
 const styleTemplate = document.createElement('template');
 styleTemplate.innerHTML = 
 `
 <style>
 .tmplit-tab-control{
-    background-color: var(--tmplit-com-tab-color, var( --md-sys-color-surface-container, ));
-    padding: var(--tmplit-com-tab-padding, 10px);
-    margin: var(--tmplit-com-tab-margin, 10px);
+    background-color: var(--tmplit-tab-color, var( --md-sys-color-surface-container, ));
+    padding: var(--tmplit-tab-padding, 10px);
+    margin: var(--tmplit-tab-margin, 10px);
+}
+.tmplit-frame{
+    border: var(--tmplit-tab-frame-border, 1px solid black);
+    border-radius: var(--tmplit-tab-frame-radius, 10px);
+    padding: var(--tmplit-tab-frame-padding, 10px);
+    color : var(--tmplit-tab-frame-text-color, var( --md-sys-color-on-secondary-container,  #385E72));
+    background-color: var(--tmplit-tab-frame-color, var( --md-sys-color-secondary-container, #D9E4EC));
 }
 .tmplit-nav-tabs{
     position: relative;
@@ -15,35 +26,28 @@ styleTemplate.innerHTML =
 	display: flex;
 	align-items: center;
 	justify-content: center;    
-	background-color: var(--tmplit-com-tab-color, var( --md-sys-color-primary-container, #D9E4EC));
-    color: var(--tmplit-com-tab-color, var( --md-sys-color-on-primary-container,  #385E72));
-    border-radius: var(--tmplit-com-tab-radius, 30px);
-    padding: var(--tmplit-com-tab-padding, 5px 0px);
+	background-color: var(--tmplit-tab-color, var( --md-sys-color-primary-container, #D9E4EC));
+    color: var(--tmplit-tab-color, var( --md-sys-color-on-primary-container,  #385E72));
+    border-radius: var(--tmplit-tab-radius, 30px);
+    padding: var(--tmplit-tab-padding, 5px 0px);
 }
 .tmplit-nav-tabs * {
 	z-index: 2;
 }
-.lui-tab{
+.tmplit-nav-tab{
     cursor: pointer;
-    padding: var(--tmplit-com-tab-padding, 5px 50px);
+    padding: var(--tmplit-tab-padding, 5px 50px);
 }
-.lui-tab.active{
-    color: var(--tmplit-com-tab-active-color, var( --md-sys-color-on-primary,  #385E72));
+.tmplit-nav-tab.active{
+    color: var(--tmplit-tab-active-color, var( --md-sys-color-on-primary,  #385E72));
 }
-.glider {
+.tmplit-nav-glider {
 	position: absolute;
 	height: 100%;
 	z-index: 1;
 	border-radius: inherit;
-	background-color: var(--tmplit-com-tab-glider-color, var( --md-sys-color-primary, #B7CFDC));
-	transition: var(--tmplit-com-tab-glider-transition, all 0.3s ease-in-out);
-}
-.tmplit-frame{
-    border: var(--tmplit-com-tab-frame-border, 1px solid black);
-    border-radius: var(--tmplit-com-tab-frame-radius, 10px);
-    padding: var(--tmplit-com-tab-frame-padding, 10px);
-    color : var(--tmplit-com-tab-frame-text-color, var( --md-sys-color-on-secondary-container,  #385E72));
-    background-color: var(--tmplit-com-tab-frame-color, var( --md-sys-color-secondary-container, #D9E4EC));
+	background-color: var(--tmplit-tab-glider-color, var( --md-sys-color-primary, #B7CFDC));
+	transition: var(--tmplit-tab-glider-transition, all 0.1s ease-in-out);
 }
 </style>
 `;
@@ -86,7 +90,7 @@ class tabControl extends HTMLElement {
 
         for(let i in pages){
             let tab = document.createElement(`div`);
-            tab.classList.add('lui-tab')
+            tab.classList.add('tmplit-nav-tab')
             tab.innerHTML = pages[i] ? pages[i] : +i + 1
             tab.addEventListener('click', ()=>{this.setAttribute('value',i)})
             this.tabs.push(tab);
@@ -95,7 +99,7 @@ class tabControl extends HTMLElement {
         let tab = document.createElement(`div`);
         this.glider = tab
 
-        tab.classList.add('glider')
+        tab.classList.add('tmplit-nav-glider')
         navbar.appendChild( tab )
 
         //On resize, update the glider
