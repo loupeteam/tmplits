@@ -1,0 +1,17 @@
+{
+  "name": "@loupeteam/tmplits-material",
+  "version": "0.1.0",
+  "description": "A prebuilt material design library for tmplits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install & npx rollup -p @rollup/plugin-node-resolve index.js -o module.js"
+  },
+  "author": "Loupeteam",
+  "license": "MIT",
+  "devDependencies": {
+    "@material/web": "^1.1.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "rollup": "^4.9.3"
+  }
+}
