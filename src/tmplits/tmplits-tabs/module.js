@@ -56,7 +56,7 @@ styleTemplate.innerHTML =
 class tabControl extends HTMLElement {
     tabs = []
     glider = null
-
+    noChange=false;
 	constructor() {
 		super()
         //Find the template tags and move them to the shadow dom
@@ -117,6 +117,13 @@ class tabControl extends HTMLElement {
             case 'value':
                 this.selectPage(newValue)
                 this.updateGlider()
+                //Raise an event
+                if(!this.noChange){
+                    this.dispatchEvent(new Event("change", {
+                        "bubbles": true,
+                        "cancelable": true
+                    }));    
+                }
                 break;
             default:
                 break;
@@ -146,6 +153,14 @@ class tabControl extends HTMLElement {
         else{
             this.innerHTML = "Not Found"            
         }
+    }
+    get value(){
+        return this.getAttribute('value');
+    }
+    set value(val){
+        this.noChange = true;
+        this.setAttribute('value', val)
+        this.noChange = false;
     }
 }
 //Register the webcomponent

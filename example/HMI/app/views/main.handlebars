@@ -1,3 +1,21 @@
+<lui-tab-control class='lux-num-value' data-var-name='tmplitTest:tmplit.MultiSelect_INT' >
+    <template title="Page1">
+        <h1>Page 1</h1>
+        {{#tmplit 'Columns' }}
+            {{tmplit "Numeric" 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{tmplit 'Numeric' 'label' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+        {{/tmplit}}
+    </template>
+    <template title="Page2">
+        <h1>Page 2</h1>
+        {{#tmplit 'Columns' }}
+            {{tmplit 'Numeric' 'Test' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{tmplit 'Numeric' 'label' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+        {{/tmplit}}
+    </template>
+</lui-tab-control>
 
 {{> TabSample}}
 
