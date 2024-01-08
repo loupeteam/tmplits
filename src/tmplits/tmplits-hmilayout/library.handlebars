@@ -1,16 +1,54 @@
-<script id="tmplit-basic-layout-base" type="text/x-handlebars-template">
+<script id="tmplit-basic-layout" type="text/x-handlebars-template">
+
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
     
     {{!-- HMI Layout Container - CSS Grid --}}
         <div class="tmplit-layout-grid">
         {{!-- Content Container - Flex --}}
-        <div class="tmplit-main-container tmplit-main-container-direction">
+        <div class="tmplit-main-container
+            {{#unless navBarLocation}}
+                tmplit-main-container-direction-row
+            {{/unless}} 
+            {{#ifEquals navBarLocation 'left'}}
+                tmplit-main-container-direction-row
+            {{/ifEquals}}
+            {{#ifEquals navBarLocation 'right'}}
+                tmplit-main-container-direction-row
+            {{/ifEquals}}
+            {{#ifEquals navBarLocation 'top'}}
+                tmplit-main-container-direction-col
+            {{/ifEquals}}
+            {{#ifEquals navBarLocation 'bottom'}}
+                tmplit-main-container-direction-col
+            {{/ifEquals}}">  
+            
 
             {{!-- Nav Bar --}}
-            <div class="tmplit-navBar-container tmplit-navBar-container-size tmplit-navBar-position tmplit-navBar-container-direction">
-
+            <div class="tmplit-navBar-container 
+                {{#unless navBarLocation}}
+                    tmplit-navBar-container-width-size tmplit-navBar-container-direction-left
+                {{/unless}}
+                {{#ifEquals navBarLocation 'left'}}
+                    tmplit-navBar-container-width-size tmplit-navBar-container-direction-left
+                {{/ifEquals}}
+                {{#ifEquals navBarLocation 'right'}}
+                    tmplit-navBar-container-width-size tmplit-navBar-container-direction-right
+                {{/ifEquals}}
+                {{#ifEquals navBarLocation 'top'}}
+                    tmplit-navBar-container-height-size tmplit-navBar-container-direction-top
+                {{/ifEquals}}
+                {{#ifEquals navBarLocation 'bottom'}}
+                    tmplit-navBar-container-height-size tmplit-navBar-container-direction-bottom
+                {{/ifEquals}}">
+                
                 {{!-- Logo --}}
                 {{#if logoSource}}
-                <div class="tmplit-navBar-logo-wrapper tmplit-navBar-logo-location">
+                <div class="tmplit-navBar-logo-wrapper 
+                    {{#ifEquals logoLocation '1'}}
+                        tmplit-navBar-logo-location-1
+                    {{else}}
+                        tmplit-navBar-logo-location-0
+                    {{/ifEquals}}">
                     <img src={{logoSource}} />
                 </div>
                 {{/if}}
