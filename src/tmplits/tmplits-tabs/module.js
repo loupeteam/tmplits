@@ -76,7 +76,8 @@ class tabControl extends HTMLElement {
             }
         }
         this.attachShadow({mode: 'open'});
-        this.shadowRoot.innerHTML = `<div class="tmplit-tab-control">
+        this.shadowRoot.innerHTML = `
+            <div class="tmplit-tab-control">
                 <div class="tmplit-nav-tabs"> 
                 </div>
                 <div class="tmplit-frame">
@@ -139,11 +140,17 @@ class tabControl extends HTMLElement {
     updateGlider(){
         this.tabs.forEach((tab, i)=>{
             tab.classList.remove('active')
-        })
+        })        
         let tab = this.tabs[this.getAttribute('value')]
-        tab.classList.add('active')
-        this.glider.style.left = tab.offsetLeft + 'px'
-        this.glider.style.width = tab.scrollWidth + 'px'
+        if(!tab){
+            this.glider.style.display = 'none'            
+        }
+        else{
+            tab.classList.add('active')
+            this.glider.style.display = ''           
+            this.glider.style.left = tab.offsetLeft + 'px'
+            this.glider.style.width = tab.scrollWidth + 'px'    
+        }
     }
     selectPage(pageIndex){
         let pages = this.shadowRoot.querySelectorAll('template')
