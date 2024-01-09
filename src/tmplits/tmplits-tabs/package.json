@@ -1,0 +1,12 @@
+{
+  "name": "@loupeteam/tmplits-tabs",
+  "version": "0.1.0",
+  "description": "A tmplit to manage tabs as pages",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loupeteam/tmplits.git"
+  },
+  "keywords": [],
+  "author": "LoupeTeam",
+  "license": "MIT"
+}

@@ -27,6 +27,7 @@
     "@loupeteam/tmplits-dropdown": "file:../../src/tmplits/tmplits-dropdown/",
     "@loupeteam/tmplits-dropdowntable": "file:../../src/tmplits/tmplits-dropdowntable/",
     "@loupeteam/tmplits-tableselect": "file:../../src/tmplits/tmplits-tableselect/",
+    "@loupeteam/tmplits-tabs": "file:../../src/tmplits/tmplits-tabs/",
     "@loupeteam/tmplits-multiselect": "file:../../src/tmplits/tmplits-multiselect/",
     "@loupeteam/tmplits-labeledlist": "file:../../src/tmplits/tmplits-labeledlist/",
     "@loupeteam/tmplits-pageselect": "file:../../src/tmplits/tmplits-pageselect/",
