@@ -47,7 +47,7 @@ styleTemplate.innerHTML =
 	z-index: 1;
 	border-radius: inherit;
 	background-color: var(--tmplit-tab-glider-color, var( --md-sys-color-primary, #B7CFDC));
-	transition: var(--tmplit-tab-glider-transition, all 0.1s ease-in-out);
+	transition: var(--tmplit-tab-glider-transition, all 0.2s ease-in-out);
 }
 </style>
 `;
@@ -187,5 +187,21 @@ export function TmplitTabs(context, args) {
     } = util.cleanArgs(_args)
     return `
     <lui-tab-control ${attr} class='${classList.join(' ')}'>${args.children}</lui-tab-control>
+    `
+}
+
+export function TmplitTabItem(context, args) {
+    //Pull out any attributes we need
+    let {
+        ..._args
+    } = args.hash
+
+    //Get cleaned values
+    let {
+        classList,
+        attr
+    } = util.cleanArgs(_args)
+    return `
+    <template ${attr} class='${classList.join(' ')}'>${args.children}</template>
     `
 }
