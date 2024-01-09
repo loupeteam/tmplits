@@ -134,7 +134,7 @@ class tabControl extends HTMLElement {
         this.updateGlider()
     }
 	disconnectedCallback() {
-        window.removeEventListener('resize', this.updateGlider.bind(this))
+        window.removeEventListener('resize', this.updateGlider)
 
 	}
     updateGlider(){
