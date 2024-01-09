@@ -1,0 +1,151 @@
+<script id="tmplit-basic-layout" type="text/x-handlebars-template">
+
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    
+    {{!-- HMI Layout Container - CSS Grid --}}
+        <div class="tmplit-layout-grid">
+        {{!-- Content Container - Flex --}}
+        <div class="tmplit-main-container
+            {{#unless navBarLocation}}
+                tmplit-main-container-direction-row
+            {{/unless}} 
+            {{#ifEquals navBarLocation 'left'}}
+                tmplit-main-container-direction-row
+            {{/ifEquals}}
+            {{#ifEquals navBarLocation 'right'}}
+                tmplit-main-container-direction-row
+            {{/ifEquals}}
+            {{#ifEquals navBarLocation 'top'}}
+                tmplit-main-container-direction-col
+            {{/ifEquals}}
+            {{#ifEquals navBarLocation 'bottom'}}
+                tmplit-main-container-direction-col
+            {{/ifEquals}}">  
+            
+
+            {{!-- Nav Bar --}}
+            <div class="tmplit-navBar-container 
+                {{#unless navBarLocation}}
+                    tmplit-navBar-container-width-size tmplit-navBar-container-direction-left
+                {{/unless}}
+                {{#ifEquals navBarLocation 'left'}}
+                    tmplit-navBar-container-width-size tmplit-navBar-container-direction-left
+                {{/ifEquals}}
+                {{#ifEquals navBarLocation 'right'}}
+                    tmplit-navBar-container-width-size tmplit-navBar-container-direction-right
+                {{/ifEquals}}
+                {{#ifEquals navBarLocation 'top'}}
+                    tmplit-navBar-container-height-size tmplit-navBar-container-direction-top
+                {{/ifEquals}}
+                {{#ifEquals navBarLocation 'bottom'}}
+                    tmplit-navBar-container-height-size tmplit-navBar-container-direction-bottom
+                {{/ifEquals}}">
+                
+                {{!-- Logo --}}
+                {{#if logoSource}}
+                <div class="tmplit-navBar-logo-wrapper 
+                    {{#ifEquals logoLocation '1'}}
+                        tmplit-navBar-logo-location-1
+                    {{else}}
+                        tmplit-navBar-logo-location-0
+                    {{/ifEquals}}">
+                    <img src={{logoSource}} />
+                </div>
+                {{/if}}
+
+                {{!-- Nav Buttons --}}
+                <div class="tmplit-navBar-buttons-container">
+                    {{#each actions}}
+                        <div class="tmplit-navBar-buttons"> 
+                            {{tmplit 'PageSelect' label dom='tmplit-screen-content' template=template class=class}}
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            {{!-- Main Content --}}
+            <div id="tmplit-screen-content" class="tmplit-screen-container"> 
+                {{>(lookup . 'defaultMainScreen')}} 
+            </div>
+        </div>
+
+        {{!-- Footer --}}
+        {{#ifEquals footerDisabled true}}
+            {{!-- Return nothing for Footer--}}
+        {{else}}
+            <div class="tmplit-footer-wrapper">
+                {{#if footerContent}}
+                    <div class="tmplit-footer-content">{{footerContent}}</div>
+                {{else}}
+                    <div class="tmplit-footer-content">&copy; Loupe</div>
+                {{/if}}
+            </div>
+        {{/ifEquals}}
+    </div>
+
+    {{!-- Active Button Indicator --}}
+    <script type="text/javascript">
+                
+            // Register click handler that marks the active navigation button
+            // Get navigation buttons
+            let navButtons = document.querySelectorAll('.tmplit-navBar-buttons');
+            let navButtonsClickZone = document.querySelectorAll('.tmplit-navBar-buttons > li > a');
+
+            // Add active class to clicked button on-click
+            navButtonsClickZone.forEach(function (clickZone) {
+                clickZone.addEventListener('click', function () {
+                    // Remove active class from all navigation buttons
+                    navButtons.forEach(function (button) {
+                        button.classList.remove('selected');
+                    });
+
+                    // Add active class to clicked button
+                    clickZone.closest('.tmplit-navBar-buttons').classList.add('selected');
+                });
+            });
+
+    </script>
+</script>
+
+<script id="tmplit-basic-layout-left-nav" type="text/x-handlebars-template">
+
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/leftNav.css" rel="stylesheet">
+    {{#if logoLocation}}
+    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
+    {{/if}}
+    {{> tmplit-basic-layout-base}}
+</script>
+
+<script id="tmplit-basic-layout-right-nav" type="text/x-handlebars-template">
+
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/rightNav.css" rel="stylesheet">
+    {{#if logoLocation}}
+    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
+    {{/if}}
+    {{> tmplit-basic-layout-base}}
+</script>
+
+<script id="tmplit-basic-layout-top-nav" type="text/x-handlebars-template">
+
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/topNav.css" rel="stylesheet">
+    {{#if logoLocation}}
+    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
+    {{/if}}
+    {{> tmplit-basic-layout-base}}
+</script>
+
+<script id="tmplit-basic-layout-bot-nav" type="text/x-handlebars-template">
+
+    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
+    <link href="@loupeteam/tmplits-hmilayout/css/botNav.css" rel="stylesheet">
+    {{#if logoLocation}}
+    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
+    {{/if}}
+    {{> tmplit-basic-layout-base}}
+</script>
+
+
+

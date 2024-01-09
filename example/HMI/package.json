@@ -38,10 +38,13 @@
     "@loupeteam/tmplits-robotscene": "file:../../src/tmplits/tmplits-robotscene/",
     "@loupeteam/tmplits-utilities": "file:../../src/tmplits/tmplits-utilities/",
     "@loupeteam/tmplits-globalclasses": "file:../../src/tmplits/tmplits-globalclasses/",
+    "@loupeteam/tmplits-hmilayout": "file:../../src/tmplits/tmplits-hmilayout/",
     "app": "file:./app/",
     "bootstrap": "^3.3.4",
     "handlebars": "*",
     "jquery": "*",
+    "openbridge-css": "^0.2.4",
+    "openbridge-web-components": "^0.2.2",
     "three": "*"
   },
   "lpm": {

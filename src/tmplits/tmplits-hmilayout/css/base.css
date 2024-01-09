@@ -1,0 +1,167 @@
+/* Parent grid */
+.tmplit-layout-grid{
+    position: absolute;
+    width: 100%;
+    display: grid;
+    background-color: transparent;
+    height: 100%; 
+    width: 100%;
+}
+
+/* Main Wrapper */
+.tmplit-main-container{
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    display: flex;
+    overflow: var(--main-container-overflow, auto);
+}
+
+/* Left/ Right */
+.tmplit-main-container-direction-row{
+    flex-direction: row;
+}
+
+/* Top/ Bottom */
+.tmplit-main-container-direction-col{
+    flex-direction: column;
+}
+
+/* Nav Bar */
+.tmplit-navBar-container{
+    flex-grow: 1;
+    display: flex;
+    overflow: var(--navBar-container-overflow, auto);
+    background-color: var(--navBar-background-color, rgb(230, 230, 230));
+    /* Update this portion if use PageSelectDiv */
+    list-style: none;
+    /* ---------------------------------------- */
+} 
+.tmplit-navBar-container-direction-left{
+    flex-direction: column;
+    order: 0;
+}
+.tmplit-navBar-container-direction-right{
+    flex-direction: column;
+    order: 1;
+}
+
+/* Small Screen Size */
+@media (max-width: 992px){
+    .tmplit-navBar-container-width-size{
+        min-width: var(--navBar-minwidth, 10%);
+        max-width: var(--navBar-maxwidth, 15%);
+    }
+}
+
+/* Medium Screen Size */
+@media (min-width: 992px) and (max-width: 1200px){
+    .tmplit-navBar-container-width-size{
+        min-width: var(--navBar-minwidth, 15%);
+        max-width: var(--navBar-maxwidth, 20%);
+    }
+}
+
+/* Large Screen Size */
+@media (min-width: 1200px){
+    .tmplit-navBar-container-width-size{
+        min-width: var(--navBar-minwidth, 20%);
+        max-width: var(--navBar-maxwidth, 25%);
+    }
+}
+
+.tmplit-navBar-container-direction-top{
+    flex-direction: row;
+    order: 0;
+}
+
+.tmplit-navBar-container-direction-top div{
+    display: inline-block;
+}
+
+.tmplit-navBar-container-direction-bottom{
+    flex-direction: row;
+    order: 1;
+}
+
+.tmplit-navBar-container-direction-bottom div{
+    display: inline-block;
+}
+
+.tmplit-navBar-container-height-size{
+    min-height: var(--navBar-minheight, 15%);
+    max-height: var(--navBar-maxheight, 20%);
+}
+
+.tmplit-navBar-logo-wrapper{
+    text-align: var(--navBar-logo-text-align, left);
+}
+
+/* Left/ Top */
+.tmplit-navBar-logo-location-0{
+    order: 0;
+}
+
+/* Right/ Bottom */
+.tmplit-navBar-logo-location-1{
+    order: 1;
+}
+
+.tmplit-navBar-logo-wrapper img{
+    padding: var(--navBar-logo-padding, 0 0 0 0);
+    margin: var(--navBar-logo-margin, 0 0 0 0);
+    width: var(--navBar-logo-img-width, auto);
+}
+
+.tmplit-navBar-buttons-container{
+    width: 100%;
+    height: 100%;
+    text-wrap: nowrap;  
+    text-align: var(--navBar-buttons-text-align, left);
+}
+
+.tmplit-navBar-buttons.selected{
+    background-color: var(--navBar-buttons-indicator-background-color, rgb(182, 182, 182));
+}
+
+/* Update this portion if use PageSelectDiv */
+.tmplit-navBar-buttons li{
+    padding: var(--navBar-buttons-padding, 0 0 0 0);
+    margin: var(--navBar-buttons-margin, 0 0 0 0);
+}
+
+.tmplit-navBar-buttons a{
+    text-decoration: none;
+    color: var(--navBar-buttons-color, none);
+    font-size: var(--navBar-buttons-text-size, Large);
+}
+
+.tmplit-navBar-buttons img{
+    width: var(--navBar-buttons-img-width, none);
+}
+/* ---------------------------------------- */
+
+/* Screen Content */
+.tmplit-screen-container{
+    overflow: var(--screen-overflow, auto);
+    width: 100%;
+    height: 100%;
+    background-color: var(--screen-background-color,  rgb(230, 230, 230)); 
+    text-align: var(--screen-text-align, left);
+    color: var(--screen-item-color, none);
+}
+
+/* Footer belong to tmplit-layout-grid*/
+.tmplit-footer-wrapper{
+    background-color: var(--footer-background-color, rgb(150, 150, 150));
+    height: var(--footer-height, 50px);
+}
+
+.tmplit-footer-content{
+    position: relative;
+    float: var(--footer-content-float, left);
+    top: 50%;
+    transform:translateY(-50%);
+    opacity: var(--footer-opacity, 70%);
+    margin: var(--footer-content-margin, 0 0 0 0);     
+    padding: var(--footer-content-padding, 0 0 0 15px);    
+}

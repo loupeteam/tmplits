@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" theme="day">
 
 <head>
 
@@ -13,11 +13,13 @@
 		{
 			"imports": {
 				"three": "./three/build/three.module.js",
-				"three/addons/": "./three/examples/jsm/"
+				"three/addons/": "./three/examples/jsm/",
+				"openbridge-web-components": "./openbridge-web-components/dist/main.mjs"				
 			}
 		}
 	</script>
 
+	<link href="app/css/main.css" rel="stylesheet">
 	<link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<title>Test Components</title>
@@ -26,15 +28,15 @@
 <body>
 
 	<!-- Begin page content - This is a placeholder that tmplits will load the page into after loading-->
-	<div class="container" id="main">
+	<div id="mainContainer">
 
 	</div>
 
-	<footer class="footer">
+	<!-- <footer class="footer">
 		<div class="inline-left">
 			<p class="text-muted">&copy; Loupe</p>
 		</div>
-	</footer>
+	</footer> -->
 
 	<script src="jquery/dist/jquery.min.js" onload="if('undefined' != typeof module) window.$ = window.jQuery = module.exports;"></script>
 	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
@@ -53,6 +55,7 @@
 
 	<!-- app -->
 	<script src="app/src/app.js"></script>
+	<script src="app/src/componentBinding.js" type="module"></script>
 
 </body>
 
