@@ -60,24 +60,34 @@ This is a container tmplit for TmplitTableRows. It can be given a title as the f
 
 Below are the css vars used for styling. These are read into the css properties and are empty by default. If they are null the html uses static default values. See the example on how to populate these variable in an application:
 
-root {
-  --tmplit-table-header-font-size
-}
-
 ### Table Header
-tmplit-table-header-font-size <br>
-tmplit-table-header-font-weight <br>
-tmplit-table-header-padding <br>
-tmplit-table-header-text-align <br>
-tmplit-table-header-color; md-sys-color-on-surface <br>
-tmplit-table-header-background-color; md-sys-color-surface-container
+| Property | Comment |
+| -------- | ------- |
+| tmplit-table-header-font-size ||
+| tmplit-table-header-font-weight ||
+| tmplit-table-header-padding ||
+| tmplit-table-header-text-align ||
+| tmplit-table-header-color<br>md-sys-color-on-surface ||
+| tmplit-table-header-background-color<br>md-sys-color-surface-container ||
 
 ### Table
-tmplit-table-grid-template-columns <br>
-tmplit-table-text-align <br>
-tmplit-table-grid-template-rows <br>
-tmplit-table-height <br>
-tmplit-table-background-color; md-sys-color-surface-container <br>
+| Property | Comment |
+| -------- | ------- |
+| tmplit-table-grid-template-columns | sets the relative spacing of the columns (i.e. 3 columns = 1fr 4fr 1fr ). To increase the column count above 10, change the TmplitTableRow's grid-column propery (defaults to 1 /10 i.e. 10 columns)|
+| tmplit-table-text-align ||
+| tmplit-table-grid-template-rows | sets the height of each row (overall height may need to be increased as well) |
+| tmplit-table-height | height of the table needs to exceed rowHeight*numberOfRows or there will be scrollbars |
+| tmplit-table-background-color<br>md-sys-color-surface-container ||
+
+```
+<style>
+    :root {
+        --tmplit-table-header-font-size: 70px;
+    }
+</style>
+```
+
+The "md-sys-color-..." vars are intended to be used with material design themes. However the theme can be overriden if assigned to the tmplit-table-background-color for example.
 
 ## Licensing
 
