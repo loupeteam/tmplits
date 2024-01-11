@@ -3,7 +3,7 @@
     <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
     
     {{!-- HMI Layout Container - CSS Grid --}}
-        <div class="tmplit-layout-grid">
+    <div class="tmplit-layout-grid">
         {{!-- Content Container - Flex --}}
         <div class="tmplit-main-container
             {{#unless navBarLocation}}
@@ -105,46 +105,6 @@
             });
 
     </script>
-</script>
-
-<script id="tmplit-basic-layout-left-nav" type="text/x-handlebars-template">
-
-    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
-    <link href="@loupeteam/tmplits-hmilayout/css/leftNav.css" rel="stylesheet">
-    {{#if logoLocation}}
-    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
-    {{/if}}
-    {{> tmplit-basic-layout-base}}
-</script>
-
-<script id="tmplit-basic-layout-right-nav" type="text/x-handlebars-template">
-
-    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
-    <link href="@loupeteam/tmplits-hmilayout/css/rightNav.css" rel="stylesheet">
-    {{#if logoLocation}}
-    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
-    {{/if}}
-    {{> tmplit-basic-layout-base}}
-</script>
-
-<script id="tmplit-basic-layout-top-nav" type="text/x-handlebars-template">
-
-    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
-    <link href="@loupeteam/tmplits-hmilayout/css/topNav.css" rel="stylesheet">
-    {{#if logoLocation}}
-    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
-    {{/if}}
-    {{> tmplit-basic-layout-base}}
-</script>
-
-<script id="tmplit-basic-layout-bot-nav" type="text/x-handlebars-template">
-
-    <link href="@loupeteam/tmplits-hmilayout/css/base.css" rel="stylesheet">
-    <link href="@loupeteam/tmplits-hmilayout/css/botNav.css" rel="stylesheet">
-    {{#if logoLocation}}
-    <link href="@loupeteam/tmplits-hmilayout/css/logoLoc{{logoLocation}}.css" rel="stylesheet">
-    {{/if}}
-    {{> tmplit-basic-layout-base}}
 </script>
 
 
