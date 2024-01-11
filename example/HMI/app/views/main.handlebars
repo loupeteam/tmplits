@@ -1,3 +1,7 @@
+<lui-basic-layout red='false'>
+
+
+
 <lui-tab-control class='lux-value' value="0" data-var-name='tmplitTest:tmplit.MultiSelect_INT' >
     <template title="Station 1">
         {{#tmplit 'Columns' }}
@@ -156,7 +160,7 @@ class='lux-btn-set lux-hide'
     {{/tmplit}}
 </div>
 
-<div>
+{{!-- <div>
     ColumnsBs
     {{#tmplit 'ColumnsBs' maxColumns=2}}
     {{tmplit 'Led' "Input1"}}
@@ -164,7 +168,7 @@ class='lux-btn-set lux-hide'
     {{tmplit 'Led' "Input3"}}
     {{tmplit 'Led' "Input4"}}
     {{/tmplit}}
-</div>
+</div> --}}
 
 <!-- needs to be a REAL var range: [-1,1] -->
 <div>
@@ -262,7 +266,7 @@ don't worry about this one could be broken -->
 
 <!-- not sure what the labeled part is here 
 don't worry about this -->
-<div>
+{{!-- <div>
     LabeledList
     {{#tmplit 'LabeledList' 'Test'}}
     <div>list item 1</div>
@@ -270,7 +274,7 @@ don't worry about this -->
     <div>list item 3</div>
     <div>list item 4</div>
     {{/tmplit}}
-</div>
+</div> --}}
 
 <!-- non selected pages don't exist on the dom -->
 {{tmplit 'PageSelect' 'Page 1: json' ctx='{"msg":"hello"}' dom="container1" template="page1"}}
@@ -303,3 +307,5 @@ DirectoryBrowserWindow
 
 RobotScene
 {{tmplit 'RobotScene' robotFile='./@loupeteam/tmplits-robotscene/Robot.glb' style="width:300px; height:300px" onrender="tmplit_test_UpdateScene" lightColor='0xCC6666' lightIntensity='1.5'}}
+
+</lui-basic-layout>
