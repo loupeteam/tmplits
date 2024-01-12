@@ -149,3 +149,11 @@ input::-webkit-inner-spin-button {
     border-radius: var(--tmplit-button-boarder-radius, 4px);
     user-select: var(--tmplit-button-user-select, none);
 }
+
+.tmplit-led {
+    
+}
+
+body {
+    font-family: Helvetica, sans-serif, Verdana, Arial; 
+}
