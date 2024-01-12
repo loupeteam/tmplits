@@ -133,3 +133,19 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.tmplit-button {
+    background-color: var(--tmplit-button-background-color, var(--md-sys-color-secondary-container, #F0F0F0));
+    display: var(--tmplit-button-display, inline-block);
+    font-weight: var(--tmplit-button-font-weight, 400);
+    white-space: var(--tmplit-button-white-space, nowrap);
+    vertical-align: var(--tmplit-button-vertical-align, middle);
+    touch-action: var(--tmplit-button-touch-action, manipulation);
+    cursor: var(--tmplit-button-cursor, pointer);
+    border: var(--tmplit-button-border, 1px solid transparent);
+    padding: var(--tmplit-button-padding, 6px 12px);
+    font-size: var(--tmplit-button-font-size, 18px);
+    line-height: var(--tmplit-button-line-height, 1.42857143);
+    border-radius: var(--tmplit-button-boarder-radius, 4px);
+    user-select: var(--tmplit-button-user-select, none);
+}
