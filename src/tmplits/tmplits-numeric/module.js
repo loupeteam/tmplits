@@ -46,7 +46,7 @@ export function TmplitNumeric(context, args) {
         attr
     } = util.cleanArgs(_args)
 
-    classList = classList.concat(['input-group'])
+    classList = classList.concat(['tmplit-numeric-container'])
 
     if (args.children == "" && context[0]) {
         args.children = `${context[0]}`
@@ -56,14 +56,14 @@ export function TmplitNumeric(context, args) {
 
     let label = '' 
     if (context[0]){
-        label = `<span class='input-group-addon'> ${finalResult} </span>`
+        label = `<span class='tmplit-numeric-label'> ${finalResult} </span>`
     }
 
     let field = '' 
     if (type === 'output'){
-        field = `<div class='form-control lux-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
+        field = `<div class='tmplit-numeric-field lux-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}></div>`
     } else if (type === 'input'){
-        field = `<input class='form-control lux-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>`
+        field = `<input class='tmplit-numeric-field lux-num-value' ${dataVarName ? 'data-var-name="' + dataVarName + '"' : '' } ${attr}/>`
     }
 
     return `
