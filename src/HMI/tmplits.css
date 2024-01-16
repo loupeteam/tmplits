@@ -176,6 +176,29 @@ input::-webkit-inner-spin-button {
     border: var(--tmplit-led-label-border, 1px solid #ccc);
     border-radius: var(--tmplit-led-label-border-radius, 4px);
 }
+
+.tmplit-checkbox {
+    box-sizing: var(--tmplit-checkbox-box-sizing, border-box);
+    color: var(--tmplit-checkbox-color, inherit);
+    border: var(--tmplit-checkbox-border, separate);
+}
+
+.tmplit-checkbox-label {
+    display: var(--tmplit-checkbox-label-display, inline-flex);
+    align-items: var(--tmplit-checkbox-label-align-itmes, center);
+    font-family: var(--tmplit-checkbox-label-family, sans-serif);
+    font-size: var(--tmplit-checkbox-label-font-size, 22px);
+    font-weight: var(--tmplit-checkbox-label-font-weight, 500);
+    color: var(--tmplit-checkbox-color, inherit);
+    position: var(--tmplit-checkbox-label-position, relative);
+    border-collapse: var(--tmplit-checkbox-label-border-collapse, separate);
+    width: var(--tmplit-checkbox-label-width, 100%);
+    height: var(--tmplit-checkbox-label-height, 34px);
+    padding: var(--tmplit-checkbox-padding, 6px 12px);
+    line-height: var(--tmplit-checkbox-label-line-height, 1.42857143);
+    background-color: var(--tmplit-checkbox-label-background-color, var(--md-sys-color-surface-container-low, #FFFFFF));
+    border: var(--tmplit-checkbox-label-border, 1px solid #ccc);
+    border-radius: var(--tmplit-checkbox-label-border-radius, 4px);
 }
 
 body {
