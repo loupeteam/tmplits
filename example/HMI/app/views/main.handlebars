@@ -1,17 +1,25 @@
-
-<md-filled-button>Theme</md-filled-button>
-
 BEGINNING OF MD TESTING
-<md-filled-tonal-button>Theme</md-filled-tonal-button>
+<br><br>
 {{tmplit 'Button' 'Title' data-var-name='tmplitTest:tmplit.Led'}}
+<br><br>
 {{tmplit 'Led' 'Title' data-var-name='tmplitTest:tmplit.Led'}}
+<br><br>
 {{tmplit 'CheckBox' 'Title' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
-{{tmplit 'Numeric' 'Title' data-var-name='tmplitTest:tmplit.Led'}}
-{{tmplit 'Text' 'Title' data-var-name='tmplitTest:tmplit.Led'}}
-{{tmplit 'ValueUpDown' 'Title' data-var-name='tmplitTest:tmplit.Led'}}
-{{tmplit 'Slider' 'Title' data-var-name='tmplitTest:tmplit.Led'}}
-
+<br><br>
+{{tmplit 'Numeric' 'Title' type='output' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+<br><br>
+{{tmplit 'Numeric' 'Title' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+<br><br>
+{{tmplit 'Text' 'Title' type='output' data-var-name='tmplitTest:tmplit.TextOutput'}}
+<br><br>
+{{tmplit 'Text' 'Title' type='input' data-var-name='tmplitTest:tmplit.TextOutput'}}
+<br><br>
+{{tmplit 'ValueUpDown' 'Title' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+<br><br>
+{{tmplit 'Slider' 'Title' data-var-name='tmplitTest:tmplit.Slider'}}
+<br><br>
 END OF MD TESTING
+<br><br>
 
 <lui-tab-control class='lux-value' value="0" data-var-name='tmplitTest:tmplit.MultiSelect_INT' >
     <template title="Station 1">
@@ -24,7 +32,8 @@ END OF MD TESTING
                 {{tmplit "Led" 'Input 4' data-var-name='tmplitTest:tmplit.PosLimit'}}
             {{/tmplit}}
             {{#tmplit 'Columns' 'Outputs' maxColumns=1}}
-                {{#tmplit 'Columns' maxColumns=2}}
+                {{#tmplit 'Columns' maxColumns=3}}
+                    <div>label:</div>
                     {{tmplit "Led" 'Home' buttonType='set' data-var-name='tmplitTest:tmplit.AtHome'}}
                     {{tmplit "Led" 'Home' buttonType='set' data-set-value="false" data-reset-value="true" data-var-name='tmplitTest:tmplit.AtHome'}}
                 {{/tmplit}}
