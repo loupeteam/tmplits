@@ -43,7 +43,7 @@ export function TmplitLed(context, args) {
     let result;
     let finalResult;
     if (args.children == "" && context[0]) {
-        args.children = `<h3>${context[0]}</h3><h3/>`
+        args.children = `<div>${context[0]}</div>`
         result = args.children.replace(/([A-Z])/g, " $1");
         finalResult = result.charAt(0).toUpperCase() + result.slice(1);
         switch (side.trim().toLowerCase()) {
@@ -68,12 +68,12 @@ export function TmplitLed(context, args) {
 
     let label = '' 
     if (context[0]){
-        classList = classList.concat(['input-group', 'form-control', 'label-led', 'tmplit-led-label' ])
-        label = `<div class='led-label' style='${labelStyle}' >${finalResult}</div>`
+        classList = classList.concat(['tmplit-led-label' ])
+        label = `<div class='' style='${labelStyle}' >${finalResult}</div>`
     } 
 
     // add the led class to the class list
-    let ledClassList = ['lux-led', 'led', 'tmplit-led', ...luiClasses];
+    let ledClassList = ['lux-led', 'tmplit-led', ...luiClasses];
 
     return `
         <div class="${classList.join(' ')}" ${attr}>
