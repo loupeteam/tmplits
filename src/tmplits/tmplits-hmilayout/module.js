@@ -105,8 +105,9 @@ class basicLayout extends HTMLElement {
             button.addEventListener('click', ()=>{this.setAttribute('value',i)})
             navbar.appendChild( button )
         }
-        if(!this.hasAttribute('value')){
+        if(!this.hasAttribute('value')){           
             this.setAttribute('value', 0)
+            this.selectPage(this.getAttribute('value'))
         }
     }
     
