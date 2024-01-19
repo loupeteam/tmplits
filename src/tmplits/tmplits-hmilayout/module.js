@@ -54,26 +54,27 @@ styleTemplate.innerHTML =
 
 //Web Component Functionality
 class basicLayout extends HTMLElement {
-    buttonList = []
+
     noChange = false;
     constructor() {
         super() 
         //Find the template tags and move them to the shadow dom
         let nodes = this.querySelectorAll('template')
-        let buttonLabels = []
+        let labels = []
+
         for (let i in nodes) {
             let el = nodes[i]
             switch (el.tagName) {
                 case undefined:
                     break;
                 case 'TEMPLATE':
-                    buttonLabels.push(el.getAttribute("title"))
+                    labels.push(el.getAttribute("title"))
                     break;
                 default:
-                    buttonLabels.push(el.getAttribute("title"))
                     break;
             }
         }
+
         this.attachShadow({mode: 'open'})
         this.shadowRoot.innerHTML = `
         <div class="tmplit-layout-grid">
@@ -84,37 +85,37 @@ class basicLayout extends HTMLElement {
                 <div class="tmplit-main-content">
                     <slot>
                     </slot>
-                </div>              
+                </div>             
             </div>
 
             <div class="tmplit-footer-wrapper">
-                FOOTER
+                <slot name="footer">
+                    DEFAULT FOOTER
+                </slot>
             </div>
         </div>`
         // Append styleTemplate to shadowRoot to activate css styling
         this.shadowRoot.appendChild(styleTemplate.content.cloneNode(true));
-        //Apply light DOM to shadow DOM
         this.shadowRoot.innerHTML += this.innerHTML;
         let navbar = this.shadowRoot.querySelector(".tmplit-navBar-container");
-
-        for(let i in buttonLabels){
+        for(let i in labels){
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
-            button.innerHTML = buttonLabels[i] ? buttonLabels[i] : +i + 1;
+            button.innerHTML = labels[i] ? labels[i] : +i + 1;
             button.addEventListener('click', ()=>{this.setAttribute('value',i)})
-            this.buttonList.push(button);
             navbar.appendChild( button )
         }
-
         if(!this.hasAttribute('value')){
             this.setAttribute('value', 0)
         }
     }
     
+    //Tell the DOM to observe 'value' attribute for changes
     static get observedAttributes() {
         return ['value']
     }
 
+    //If 'value' attribute changes, execute these
     attributeChangedCallback(name, oldValue, newValue) {
         switch (name) {
             case 'value':
@@ -132,21 +133,15 @@ class basicLayout extends HTMLElement {
         }
     }
 
-    connectedCallback() {
-
-    }
-    disconnectedCallback() {
-
-
-    }
-
-    selectPage(buttonLabelsIndex){
-        let buttonLabels = this.shadowRoot.querySelectorAll('template')
-        if(+buttonLabelsIndex < buttonLabels.length){
-            this.innerHTML = buttonLabels[buttonLabelsIndex].innerHTML
+    selectPage(templatesIndex){
+        let templates = this.shadowRoot.querySelectorAll('template')
+        let mainContent = this.shadowRoot.querySelector('.tmplit-main-content')
+        if(+templatesIndex < templates.length){
+            console.log(mainContent)
+            mainContent.innerHTML = templates[templatesIndex].innerHTML
         }
         else{
-            this.innerHTML = "Not Found"            
+            mainContent.innerHTML = "Not Found"            
         }
     }
     get value(){
@@ -159,5 +154,5 @@ class basicLayout extends HTMLElement {
     }
 }
 
-//Register Element (Web Component)
+//Register Custom Element as 'lui-basic-layout' from basicLayout class 
 customElements.define('lui-basic-layout', basicLayout)
