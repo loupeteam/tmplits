@@ -19,12 +19,17 @@ styleTemplate.innerHTML =
     grid-row: 1 / span 1;
     display: flex;
     overflow: var(--main-container-overflow, auto);
-    height:100%
+    height:100%;
 }
 
 /* Nav Bar*/
 .tmplit-navBar-container{
-    background-color:grey;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    order: 0;
+    max-width: 100px;
+    background-color: var(--navBar-background-color, rgb(230, 230, 230));
     width:100px;
 }
 
