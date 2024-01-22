@@ -11,6 +11,7 @@ styleTemplate.innerHTML =
     grid-template-rows: 1fr;
     height: 100vh; 
     width: 100vw;
+
 }
 
 /* Main Wrapper */
@@ -22,22 +23,51 @@ styleTemplate.innerHTML =
     height:100%;
 }
 
+.tmplit-main-container-left-right{
+    flex-direction: row;
+}
+
+.tmplit-main-container-top-bottom{
+    flex-direction: column;
+}
+
 /* Nav Bar*/
 .tmplit-navBar-container{
     flex-grow: 1;
     display: flex;
+    background-color: var(--navBar-background-color,  rgb(230, 230, 230));
+    overflow: var(--navBar-container-overflow, auto);
+}
+
+
+.tmplit-navBar-container-left{
     flex-direction: column;
     order: 0;
-    max-width: 100px;
-    background-color: var(--navBar-background-color, rgb(230, 230, 230));
-    width:100px;
+}
+
+.tmplit-navBar-container-right{
+    flex-direction: column;
+    order: 1;
+}
+
+.tmplit-navBar-container-top{
+    flex-direction: row;
+    order: 0;
+}
+
+.tmplit-navBar-container-bottom{
+    flex-direction: row;
+    order: 1;
 }
 
 .tmplit-navBar-button{
     width: 100%;
-    background-color: yellow;
     text-wrap: nowrap;  
     text-align: var(--navBar-buttons-text-align, left);
+    padding: var(--navBar-buttons-padding, 0 0 0 0);
+    margin: var(--navBar-buttons-margin, 0 0 0 0);
+    color: var(--navBar-buttons-color, none);
+    font-size: var(--navBar-buttons-text-size, Large);
 }
 
 /* Main Content */
@@ -52,8 +82,33 @@ styleTemplate.innerHTML =
     height: var(--footer-height, 50px);
 }
 
+@media (max-width: 992px){
+    .tmplit-navBar-container-width-size{
+        min-width: var(--navBar-minwidth, 10%);
+        max-width: var(--navBar-maxwidth, 15%);
+    }
+}
 
+/* Medium Screen Size */
+@media (min-width: 992px) and (max-width: 1200px){
+    .tmplit-navBar-container-width-size{
+        min-width: var(--navBar-minwidth, 15%);
+        max-width: var(--navBar-maxwidth, 20%);
+    }
+}
 
+/* Large Screen Size */
+@media (min-width: 1200px){
+    .tmplit-navBar-container-width-size{
+        min-width: var(--navBar-minwidth, 20%);
+        max-width: var(--navBar-maxwidth, 25%);
+    }
+}
+
+.tmplit-navBar-container-height-size{
+    min-height: var(--navBar-minheight, 5%);
+    max-height: var(--navBar-maxheight, 10%);
+}
 </style>
 `;
 
@@ -80,11 +135,19 @@ class basicLayout extends HTMLElement {
             }
         }
 
+        let navBarLoc = this.getAttribute('navBar')
         this.attachShadow({mode: 'open'})
         this.shadowRoot.innerHTML = `
         <div class="tmplit-layout-grid">
-            <div class="tmplit-main-container">
-                <div class="tmplit-navBar-container">
+            <div class="tmplit-main-container
+                        ${navBarLoc ==='left' || navBarLoc ==='right' ? 'tmplit-main-container-left-right' : 
+                        navBarLoc ==='top' || navBarLoc ==='bottom' ? 'tmplit-main-container-top-bottom' :'mplit-main-container-left-right'}">
+                <div class="tmplit-navBar-container
+                            ${navBarLoc ==='left' ? 'tmplit-navBar-container-left tmplit-navBar-container-width-size' :
+                            navBarLoc ==='right' ? 'tmplit-navBar-container-right tmplit-navBar-container-width-size' :
+                            navBarLoc ==='top' ? 'tmplit-navBar-container-top tmplit-navBar-container-height-size' :
+                            navBarLoc ==='bottom' ? 'tmplit-navBar-container-bottom tmplit-navBar-container-height-size' : 
+                            'tmplit-navBar-container-left tmplit-navBar-container-width-size'}">
                 </div>
 
                 <div class="tmplit-main-content">
