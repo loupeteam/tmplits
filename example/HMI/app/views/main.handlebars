@@ -95,6 +95,48 @@
     {{/tmplit}}
 {{/tmplit}}
 
+<md-filled-button>Theme</md-filled-button>
+
+<lui-tab-control class='lux-value' value="0" data-var-name='tmplitTest:tmplit.MultiSelect_INT' >
+    <template title="Station 1">
+        {{#tmplit 'Columns' }}
+            {{#tmplit 'Columns' 'Inputs' maxColumns=1}}
+                {{#tmplit 'Columns' maxColumns=2}}
+                    {{tmplit "Led" 'Input 1' data-var-name='tmplitTest:tmplit.AtHome'}}
+                {{/tmplit}}
+                {{tmplit "Led" 'Input 3' data-var-name='tmplitTest:tmplit.NegLimit'}}
+                {{tmplit "Led" 'Input 4' data-var-name='tmplitTest:tmplit.PosLimit'}}
+            {{/tmplit}}
+            {{#tmplit 'Columns' 'Outputs' maxColumns=1}}
+                {{#tmplit 'Columns' maxColumns=2}}
+                    {{tmplit "Led" 'Home' buttonType='set' data-var-name='tmplitTest:tmplit.AtHome'}}
+                    {{tmplit "Led" 'Home' buttonType='set' data-set-value="false" data-reset-value="true" data-var-name='tmplitTest:tmplit.AtHome'}}
+                {{/tmplit}}
+                {{tmplit "Led" 'At Neg Limit' buttonType='toggle' data-var-name='tmplitTest:tmplit.NegLimit'}}
+                {{tmplit "Led" 'At Pos Limit' buttonType='momentary' data-var-name='tmplitTest:tmplit.PosLimit'}}
+            {{/tmplit}}
+        {{/tmplit}}
+    </template>
+    <template title="Outputs">
+        {{#tmplit 'Columns' }}
+            {{#tmplit 'Columns' 'Station 1' maxColumns=1}}
+                {{tmplit "Led" 'At Home' buttonType='momentary' data-var-name='tmplitTest:tmplit.Output1'}}
+                {{tmplit "Led" 'At Home' buttonType='momentary' data-var-name='tmplitTest:tmplit.Output1'}}
+                {{tmplit "Led" 'At Home' buttonType='momentary' data-var-name='tmplitTest:tmplit.Output1'}}
+                {{tmplit "Led" 'At Home' buttonType='momentary' data-var-name='tmplitTest:tmplit.Output1'}}
+            {{/tmplit}}
+            {{#tmplit 'Columns' 'Station 2' maxColumns=1}}
+                {{tmplit "Led" 'At Home' buttonType='momentary' data-var-name='tmplitTest:tmplit.Output1'}}
+                {{tmplit "Led" 'At Home' buttonType='momentary' data-var-name='tmplitTest:tmplit.Output1'}}
+                {{tmplit "Led" 'At Home' buttonType='momentary' data-var-name='tmplitTest:tmplit.Output1'}}
+                {{tmplit "Led" 'At Home' buttonType='momentary' data-var-name='tmplitTest:tmplit.Output1'}}
+            {{/tmplit}}
+        {{/tmplit}}
+    </template>
+</lui-tab-control>
+
+{{> TabSample}}
+
 {{!-- pass a partial into another partials parameters --}}
 Custom User Controls:
 <br />
