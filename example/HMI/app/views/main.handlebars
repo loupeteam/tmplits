@@ -1,29 +1,23 @@
-<lui-basic-layout>
-
+<lui-basic-layout navBar="left">
+<div id="contentArea">
     <template title="Button 1">
-        <div>
-            {{!-- {{>OpenBridge }} --}}
-            <h1>Content  1</h1>
-        </div>
+        {{>OpenBridge }}
+        {{!-- <h1>Content  1</h1> --}}
     </template>
     
-
     <template title="Button 2">
-        <div>
-        {{!-- {{>testComponents }} --}}
-        <h1>Content  2</h1>
-        </div>
+        {{>testComponents }}
+        {{!-- <h1>Content  2</h1> --}}
     </template>   
 
     <template title="Button 3">
-        <div>
-        {{!-- {{>nav}} --}}
-        <h1>Content  3</h1>
-        </div>
+        {{>nav}}
+        {{!-- <h1>Cosntent  3</h1> --}}
     </template>
-
-    <div slot="footer">
-        Copyright        
-    </div>
+</div>
+    
+<div slot="footer">
+    Copyright        
+</div>
 
 </lui-basic-layout>

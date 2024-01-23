@@ -152,6 +152,7 @@ class basicLayout extends HTMLElement {
 
                 <div class="tmplit-main-content">
                     <slot>
+                        DEFAULT SLOT
                     </slot>
                 </div>             
             </div>
@@ -204,13 +205,18 @@ class basicLayout extends HTMLElement {
 
     selectPage(templatesIndex){
         let templates = this.shadowRoot.querySelectorAll('template')
-        let mainContent = this.shadowRoot.querySelector('.tmplit-main-content')
-        if(+templatesIndex < templates.length){
-            console.log(mainContent)
-            mainContent.innerHTML = templates[templatesIndex].innerHTML
+        let content = this.shadowRoot.querySelector('slot:not([name])')
+        // let footer = this.querySelector('[slot="footer"]')
+        
+        if(+templatesIndex < templates.length){            
+            let contentArea = this.querySelector('#contentArea')
+            contentArea.innerHTML = templates[templatesIndex].innerHTML
+            // content.innerHTML = templates[templatesIndex].innerHTML
+            // this.innerHTML = content.innerHTML
+            // this.append(footer)
         }
         else{
-            mainContent.innerHTML = "Not Found"            
+            this.innerHTML = "Not Found"         
         }
     }
     get value(){
