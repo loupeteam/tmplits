@@ -136,6 +136,7 @@ class basicLayout extends HTMLElement {
         }
 
         let navBarLoc = this.getAttribute('navBar')
+        let footer = this.getAttribute('footer')
         this.attachShadow({mode: 'open'})
         this.shadowRoot.innerHTML = `
         <div class="tmplit-layout-grid">
@@ -157,12 +158,12 @@ class basicLayout extends HTMLElement {
                 </div>             
             </div>
 
-            <div class="tmplit-footer-wrapper">
+            ${footer !== 'disable' ? 
+            `<div class="tmplit-footer-wrapper">
                 <slot name="footer">
                     DEFAULT FOOTER
                 </slot>
-            </div>
-        </div>`
+            </div>`: ''}`
         // Append styleTemplate to shadowRoot to activate css styling
         this.shadowRoot.appendChild(styleTemplate.content.cloneNode(true));
         this.shadowRoot.innerHTML += this.innerHTML;
