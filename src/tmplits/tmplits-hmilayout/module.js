@@ -206,15 +206,16 @@ class basicLayout extends HTMLElement {
 
     selectPage(templatesIndex){
         let templates = this.shadowRoot.querySelectorAll('template')
-        let content = this.shadowRoot.querySelector('slot:not([name])')
-        // let footer = this.querySelector('[slot="footer"]')
+        // let content = this.shadowRoot.querySelector('slot:not([name])')
+        let footer = this.querySelector('[slot="footer"]')
         
         if(+templatesIndex < templates.length){            
             let contentArea = this.querySelector('#contentArea')
             contentArea.innerHTML = templates[templatesIndex].innerHTML
+
             // content.innerHTML = templates[templatesIndex].innerHTML
             // this.innerHTML = content.innerHTML
-            // this.append(footer)
+            this.append(footer)
         }
         else{
             this.innerHTML = "Not Found"         
