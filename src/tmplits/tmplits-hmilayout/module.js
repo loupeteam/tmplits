@@ -136,23 +136,23 @@ class basicLayout extends HTMLElement {
         }
 
         let navBarLoc = this.getAttribute('navBar')
-        this.attachShadow({mode: 'open'})
+        this.attachShadow({ mode: 'open' })
         this.shadowRoot.innerHTML = `
         <div class="tmplit-layout-grid">
             <div class="tmplit-main-container
-                        ${navBarLoc ==='left' || navBarLoc ==='right' ? 'tmplit-main-container-left-right' : 
-                        navBarLoc ==='top' || navBarLoc ==='bottom' ? 'tmplit-main-container-top-bottom' :'mplit-main-container-left-right'}">
+                        ${navBarLoc === 'left' || navBarLoc === 'right' ? 'tmplit-main-container-left-right' :
+                navBarLoc === 'top' || navBarLoc === 'bottom' ? 'tmplit-main-container-top-bottom' : 'mplit-main-container-left-right'}">
                 <div class="tmplit-navBar-container
-                            ${navBarLoc ==='left' ? 'tmplit-navBar-container-left tmplit-navBar-container-width-size' :
-                            navBarLoc ==='right' ? 'tmplit-navBar-container-right tmplit-navBar-container-width-size' :
-                            navBarLoc ==='top' ? 'tmplit-navBar-container-top tmplit-navBar-container-height-size' :
-                            navBarLoc ==='bottom' ? 'tmplit-navBar-container-bottom tmplit-navBar-container-height-size' : 
+                            ${navBarLoc === 'left' ? 'tmplit-navBar-container-left tmplit-navBar-container-width-size' :
+                navBarLoc === 'right' ? 'tmplit-navBar-container-right tmplit-navBar-container-width-size' :
+                    navBarLoc === 'top' ? 'tmplit-navBar-container-top tmplit-navBar-container-height-size' :
+                        navBarLoc === 'bottom' ? 'tmplit-navBar-container-bottom tmplit-navBar-container-height-size' :
                             'tmplit-navBar-container-left tmplit-navBar-container-width-size'}">
                 </div>
 
                 <div class="tmplit-main-content">
-                    <slot>
-                        DEFAULT SLOT
+                    <slot name="content">
+                        DEFAULT CONTENT
                     </slot>
                 </div>             
             </div>
