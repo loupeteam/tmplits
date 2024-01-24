@@ -2,8 +2,8 @@ import * as util from "../tmplits-utilities/module.js"
 
 //Style Template
 const styleTemplate = document.createElement('template');
-styleTemplate.innerHTML = 
-`
+styleTemplate.innerHTML =
+    `
 <style>
 /* Parent grid */
 .tmplit-layout-grid{
@@ -117,9 +117,9 @@ class basicLayout extends HTMLElement {
 
     noChange = false;
     constructor() {
-        super() 
-        //Find the template tags and move them to the shadow dom
-        let nodes = this.querySelectorAll('template')
+        super()
+        //Find the div list tags
+        let nodes = this.querySelectorAll('div[slot=list]')
         let labels = []
 
         for (let i in nodes) {
@@ -127,7 +127,7 @@ class basicLayout extends HTMLElement {
             switch (el.tagName) {
                 case undefined:
                     break;
-                case 'TEMPLATE':
+                case 'DIV':
                     labels.push(el.getAttribute("title"))
                     break;
                 default:
@@ -167,19 +167,20 @@ class basicLayout extends HTMLElement {
         this.shadowRoot.appendChild(styleTemplate.content.cloneNode(true));
         this.shadowRoot.innerHTML += this.innerHTML;
         let navbar = this.shadowRoot.querySelector(".tmplit-navBar-container");
-        for(let i in labels){
+        for (let i in labels) {
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
             button.innerHTML = labels[i] ? labels[i] : +i + 1;
-            button.addEventListener('click', ()=>{this.setAttribute('value',i)})
-            navbar.appendChild( button )
+            button.addEventListener('click', () => { this.setAttribute('value', i) })
+            navbar.appendChild(button)
         }
-        if(!this.hasAttribute('value')){           
+        if (!this.hasAttribute('value')) {
             this.setAttribute('value', 0)
             this.selectPage(this.getAttribute('value'))
         }
+
     }
-    
+
     //Tell the DOM to observe 'value' attribute for changes
     static get observedAttributes() {
         return ['value']
@@ -191,11 +192,11 @@ class basicLayout extends HTMLElement {
             case 'value':
                 this.selectPage(newValue)
                 //Raise an event
-                if(!this.noChange){
+                if (!this.noChange) {
                     this.dispatchEvent(new Event("change", {
                         "bubbles": true,
                         "cancelable": true
-                    }));    
+                    }));
                 }
                 break;
             default:
@@ -203,26 +204,25 @@ class basicLayout extends HTMLElement {
         }
     }
 
-    selectPage(templatesIndex){
-        let templates = this.shadowRoot.querySelectorAll('template')
-        let content = this.shadowRoot.querySelector('slot:not([name])')
-        // let footer = this.querySelector('[slot="footer"]')
-        
-        if(+templatesIndex < templates.length){            
-            let contentArea = this.querySelector('#contentArea')
-            contentArea.innerHTML = templates[templatesIndex].innerHTML
-            // content.innerHTML = templates[templatesIndex].innerHTML
-            // this.innerHTML = content.innerHTML
-            // this.append(footer)
+    selectPage(templatesIndex) {
+        let divs = this.querySelectorAll('div[slot]')
+        divs.forEach(div => {
+            // set every other slot div back to list slot
+            div.setAttribute('slot', 'list')
+            // TODO could do this more elegantly
+        });
+
+        if (+templatesIndex < divs.length) {
+            divs[templatesIndex].setAttribute('slot', 'content')
         }
-        else{
-            this.innerHTML = "Not Found"         
+        else {
+            this.innerHTML = "Not Found"
         }
     }
-    get value(){
+    get value() {
         return this.getAttribute('value');
     }
-    set value(val){
+    set value(val) {
         this.noChange = true;
         this.setAttribute('value', val)
         this.noChange = false;
