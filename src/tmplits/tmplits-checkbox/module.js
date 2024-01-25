@@ -65,13 +65,13 @@ export function TmplitCheckBox(context, args) {
 
     let label = '' 
     if (context[0]){
-        classList = classList.concat(['tmplit-checkbox-label' ])
-        label = `<div class='' style='${labelStyle}' >${finalResult}</div>`
+        classList = classList.concat(['tmplit-checkbox-container' ])
+        label = `<div class='tmplit-checkbox-label' style='${labelStyle}' >${finalResult}</div>`
     }
-
     return `
     <div class="${classList.join(' ')}" ${attr}>
-    <span class="glyphicon lux-led" data-led-true='glyphicon-check' data-led-false='glyphicon-unchecked' data-var-name='${dataVarName}' style='font-size:20px;'></span>
+    <span class="lux-show material-symbols-outlined tmplit-checkbox-checked" data-var-name-hide='${dataVarName}'>check_box</span>
+    <span class="lux-hide material-symbols-outlined tmplit-checkbox-unchecked" data-var-name-hide='${dataVarName}'>check_box_outline_blank</span>
     ${label}
     </div>
    `
