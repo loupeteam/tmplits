@@ -34,7 +34,7 @@ export function TmplitButton(context, args) {
     } = util.cleanArgs(_args)
 
     //Add class items from this component
-    classList = classList.concat(['btn'],['tmplit-button'])
+    classList = classList.concat(['tmplit-button'])
 
     //If there are no children, the first item in the context is the label
     if (args.children == "" && context[0]) {
