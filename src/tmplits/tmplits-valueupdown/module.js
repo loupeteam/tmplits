@@ -68,9 +68,9 @@ export function TmplitValueUpDown(context, args) {
 
     return `
     <div class="${classList.join(' ')}" style='${style}'>
-        <span class='glyphicon glyphicon-chevron-down lui-increment tmplit-valueupdown-button' increment=${-increment} min=${min} style="${buttonStyle}"></span>
+        <span class="material-symbols-outlined lui-increment tmplit-valueupdown-button" increment=${-increment} min=${min} style="${buttonStyle}">remove</span>    
             ${inner}
-        <span class='glyphicon glyphicon-chevron-up lui-increment tmplit-valueupdown-button' increment=${increment} max=${max} style="${buttonStyle}"></span>
+        <span class="material-symbols-outlined lui-increment tmplit-valueupdown-button" increment=${+increment} max=${max} style="${buttonStyle}">add</span>
     </div>
 
 `
