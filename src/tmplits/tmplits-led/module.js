@@ -68,17 +68,17 @@ export function TmplitLed(context, args) {
 
     let label = '' 
     if (context[0]){
-        classList = classList.concat(['tmplit-led-label' ])
-        label = `<div class='' style='${labelStyle}' >${finalResult}</div>`
+        classList = classList.concat(['tmplit-led-container' ])
+        label = `<div class='tmplit-led-label' style='${labelStyle}' >${finalResult}</div>`
     } 
 
     // add the led class to the class list
-    let ledClassList = ['lux-led', 'tmplit-led', ...luiClasses];
+    let ledClassList = ['lux-led', 'tmplit-led-icon', ...luiClasses];
 
     return `
         <div class="${classList.join(' ')}" ${attr}>
-        <div class="${ledClassList.join(' ')}" data-led-false=${dataLedFalse} data-led-true='${dataLedTrue}' data-var-name='${dataVarName}' ${attr} ${luiAttr} ></div>
-        ${label}
+            <div class="${ledClassList.join(' ')}" data-led-false=${dataLedFalse} data-led-true='${dataLedTrue}' data-var-name='${dataVarName}' ${attr} ${luiAttr} ></div>
+            ${label}
         </div>
     `
 }
