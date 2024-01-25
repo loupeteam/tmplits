@@ -18,5 +18,7 @@ TYPE
 		SetButton : BOOL;
 		ToggleButton : BOOL;
 		MomentaryButton : BOOL;
+		ddint : USINT;
+		ddstring : STRING[80];
 	END_STRUCT;
 END_TYPE
