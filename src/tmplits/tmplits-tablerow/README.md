@@ -61,34 +61,34 @@ This is a element tmplit that is used within TmplitTable. Any tmplit can be inse
 Below are the css vars used for styling. These are read into the css properties and are empty by default. If they are null the html uses static default values. See the example on how to populate these variable in an application:
 
 ### Table Row
-| Property | Comment |
-| -------- | ------- |
-| tmplit-table-row-grid-column | Set the max number of columns (All do not need to be used) |
-| tmplit-table-row-border-style ||
-| tmplit-table-row-border-width ||
-| tmplit-table-row-font-size ||
-| tmplit-table-row-border-color<br>md-sys-color-outline-variant ||
-| tmplit-table-row-color<br>md-sys-color-on-surface ||
+| Tmplit Token | Material Design Token | Default | Comment |
+| ------------ | --------------------- | ------- | ------- |
+| --tmplit-table-row-grid-column || 1 /10 | Set the max number of columns (All do not need to be used) |
+| --tmplit-table-row-border-style || none none solid none ||
+| --tmplit-table-row-border-width || 1px ||
+| --tmplit-table-row-font-size || 18px ||
+| --tmplit-table-row-border-color | --md-sys-color-outline-variant | gray |
+| --tmplit-table-row-color | --md-sys-color-on-surface | black |
 
 ### Table Row LED
 Styling for any LED tmplits inside of a TableRow (i.e. by default they now are larger and have no shadow)
-| Property | Comment |
-| -------- | ------- |
-| tmplit-table-row-led-height ||
-| tmplit-table-row-led-width ||
-| tmplit-table-row-led-box-shadow ||
-| tmplit-table-row-led-outline ||
-| tmplit-table-row-led-outline-style ||
-| tmplit-table-row-led-outline-color<br>md-sys-color-outline ||
+| Tmplit Token | Material Design Token | Default | Comment |
+| ------------ | --------------------- | ------- | ------- |
+| --tmplit-table-row-led-height || 25px ||
+| --tmplit-table-row-led-width || 25px ||
+| --tmplit-table-row-led-box-shadow || none ||
+| --tmplit-table-row-led-outline || 2px ||
+| --tmplit-table-row-led-outline-style || solid ||
+| --tmplit-table-row-led-outline-color | --md-sys-color-outline | black ||
 
 ### Table Row Numeric
 Styling for any numeric tmplits inside of a TableRow (i.e. by default they now are larger and have larger font)
-| Property | Comment |
-| -------- | ------- |
-| tmplit-table-row-font-size ||
-| tmplit-table-row-numeric-background-color<br>md-sys-color-primary-container ||
-| tmplit-table-row-numeric-color<br>md-sys-color-on-primary-container ||
-| tmplit-table-row-numeric-border-color<br>md-sys-color-outline ||
+| Tmplit Token | Material Design Token | Default | Comment |
+| ------------ | --------------------- | ------- | ------- |
+| --tmplit-table-row-font-size || 18px ||
+| --tmplit-table-row-numeric-background-color | --md-sys-color-primary-container | white ||
+| --tmplit-table-row-numeric-color | --md-sys-color-on-primary-container | black ||
+| --tmplit-table-row-numeric-border-color | --md-sys-color-outline | gray ||
 
 ```
 <style>
