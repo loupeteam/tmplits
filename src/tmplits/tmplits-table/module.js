@@ -27,7 +27,7 @@ export function TmplitTable(context, args) {
         attr
     } = util.cleanArgs(_args)
 
-    classList.push('tmplit-table');
+    classList.push('tmplit-table')
 
     let title = ''
     if (context[0]){
