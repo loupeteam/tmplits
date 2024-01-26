@@ -68,9 +68,11 @@ export function TmplitLed(context, args) {
 
     let label = '' 
     if (context[0]){
-        classList = classList.concat(['input-group', 'form-control', 'label-led' ])
+        classList.push(['input-group', 'form-control', 'label-led' ])
         label = `<div class='led-label' style='${labelStyle}' >${finalResult}</div>`
-    } 
+    } else {
+        classList.push(['tmplit-led-unlabled-container'])
+    }
 
     // add the led class to the class list
     let ledClassList = ['lux-led', 'led', ...luiClasses];

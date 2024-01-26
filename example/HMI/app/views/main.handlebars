@@ -1,3 +1,99 @@
+{{#tmplit 'Columns'}}
+    {{#tmplit 'Table' 'Inputs'}}
+        {{#tmplit 'TableRow'}}
+            <span>Channel</span>
+            <span>Description</span>
+            <span>Status</span>
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 0</span>
+            <span>This is an example of digital input</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 1</span>
+            <span>This is an example of an analog input</span>
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 2</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 3</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+                {{#tmplit 'TableRow'}}
+            <span>Ch 4</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 5</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 6</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 7</span>
+            <span>Description</span>
+            {{tmplit 'Led' data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+    {{/tmplit}}
+    {{#tmplit 'Table' 'Outputs'}}
+        {{#tmplit 'TableRow'}}
+            <span>Channel</span>
+            <span>Description</span>
+            <span>Status</span>
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 0</span>
+            <span>This is an example of digital output</span>
+            {{tmplit 'Led'  data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 1</span>
+            <span>This is an example of and analog output</span>
+            {{tmplit 'Numeric' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 2</span>
+            <span>Description</span>
+            {{tmplit 'Led'  data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 3</span>
+            <span>Description</span>
+            {{tmplit 'Led'  data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+                {{#tmplit 'TableRow'}}
+            <span>Ch 4</span>
+            <span>Description</span>
+            {{tmplit 'Led'  data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 5</span>
+            <span>Description</span>
+            {{tmplit 'Led'  data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 6</span>
+            <span>Description</span>
+            {{tmplit 'Led'  data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+        {{#tmplit 'TableRow'}}
+            <span>Ch 7</span>
+            <span>Description</span>
+            {{tmplit 'Led'  data-var-name='tmplitTest:tmplit.SetButton'}}
+        {{/tmplit}}
+    {{/tmplit}}
+{{/tmplit}}
 
 <md-filled-button>Theme</md-filled-button>
 
@@ -66,8 +162,6 @@ img="app/assets/wireframe.png"
 data-var-name='tmplitTest:tmplit.SetButton'
 class='lux-btn-set lux-hide'
 }}
-
-
 
 <div>
     Button
@@ -303,6 +397,7 @@ don't worry about this -->
 
 DirectoryBrowserWindow
 {{tmplit 'DirectoryBrowserWindow' data-var-name='tmplitTest:f.in.cwd' data-var-name-files='tmplitTest:Directory' data-var-name-willopen='tmplitTest:f.in.refresh' style='height:300px'}}
+
 
 RobotScene
 {{tmplit 'RobotScene' robotFile='./@loupeteam/tmplits-robotscene/Robot.glb' style="width:300px; height:300px" onrender="tmplit_test_UpdateScene" lightColor='0xCC6666' lightIntensity='1.5'}}
