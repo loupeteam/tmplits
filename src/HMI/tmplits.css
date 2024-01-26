@@ -137,7 +137,7 @@ input::-webkit-inner-spin-button {
 .tmplit-table {
     width: 100%;
     display: grid;
-    padding: 0px 20px 20px 20px;
+    padding: var(--tmplit-table-padding, 0px 20px 20px 20px);
     overflow: auto;
     grid-template-columns: var(--tmplit-table-grid-template-columns, 1fr 4fr 1fr);
     text-align: var(--tmplit-table-text-align, left);
@@ -147,8 +147,9 @@ input::-webkit-inner-spin-button {
 }
 
 .tmplit-table-header {
-    font-size: var(--tmplit-table-header-font-size, 24px);
+    font-size: var(--tmplit-table-header-font-size, var(--md-sys-typescale-title-large-font-size, 22px));
     font-weight: var(--tmplit-table-header-font-weight, 700);
+    font-family: var(--tmplit-table-header-font-family, var(--md-sys-typescale-body-large-font-family-name, Helvetica));
     padding: var(--tmplit-table-header-padding, 20px 20px 10px 20px);
     text-align: var(--tmplit-table-header-text-align, center);
     color: var(--tmplit-table-header-color, var(--md-sys-color-on-surface, black));
@@ -159,11 +160,12 @@ input::-webkit-inner-spin-button {
     display: grid;
     grid-column: var(--tmplit-table-row-grid-column, 1 /10);
     grid-template-columns: subgrid;
-    padding: 1px;
+    padding: var(--tmplit-table-row-padding, 1px);
     align-items: center;
     border-style: var(--tmplit-table-row-border-style, none none solid none); 
     border-width: var(--tmplit-table-row-border-width, 1px);
-    font-size: var(--tmplit-table-row-font-size, 18px);
+    font-size: var(--tmplit-table-row-font-size, var(--md-sys-typescale-body-large-font-size, 16px));
+    font-family: var(--tmplit-table-row-font-family, var(--md-sys-typescale-body-large-font-family-name, Helvetica));
     border-color: var(--tmplit-table-row-border-color, var(--md-sys-color-outline-variant, gray));
     color: var(--tmplit-table-row-color, var(--md-sys-color-on-surface, black));
 }
@@ -187,8 +189,10 @@ input::-webkit-inner-spin-button {
 }
 
 .tmplit-table-row .tmplit-numeric {
-    font-size: var(--tmplit-table-row-font-size, 18px);
+    font-size: var(--tmplit-table-row-numeric-font-size, var(--md-sys-typescale-body-large-font-size, 16px));
+    font-family: var(--tmplit-table-numeric-font-family, var(--md-sys-typescale-body-large-font-family-name, Helvetica));
     background-color: var(--tmplit-table-row-numeric-background-color, var(--md-sys-color-primary-container, white));
     color: var(--tmplit-table-row-numeric-color, var(--md-sys-color-on-primary-container, black));
     border-color: var(--tmplit-table-row-numeric-border-color, var(--md-sys-color-outline, gray))
 }
+
