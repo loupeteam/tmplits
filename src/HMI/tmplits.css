@@ -168,10 +168,18 @@ input::-webkit-inner-spin-button {
     color: var(--tmplit-table-row-color, var(--md-sys-color-on-surface, black));
 }
 
+.tmplit-table-row .tmplit-led-unlabled-container {
+    height: var(--tmplit-table-row-led-unlabled-container-height, 100%);
+    width: var(--tmplit-table-row-led-unlabled-container-width, 100%);
+    display: var(--tmplit-table-row-led-unlabled-container-display, contents);
+}
+
 .tmplit-table-row .led{
     display: block;
-    height: var(--tmplit-table-row-led-height, 25px);
-    width: var(--tmplit-table-row-led-width, 25px);
+    height: var(--tmplit-table-row-led-height, 50%);
+    width: auto;
+    aspect-ratio: 1/1;
+    margin: auto;
     box-shadow: var(--tmplit-table-row-led-box-shadow, none);
     outline: var(--tmplit-table-row-led-outline, 2px);
     outline-style: var(--tmplit-table-row-led-outline-style, solid);
