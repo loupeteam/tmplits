@@ -61,34 +61,44 @@ This is a element tmplit that is used within TmplitTable. Any tmplit can be inse
 Below are the css vars used for styling. These are read into the css properties and are empty by default. If they are null the html uses static default values. See the example on how to populate these variable in an application:
 
 ### Table Row
-| Tmplit Token | Material Design Token | Default | Comment |
-| ------------ | --------------------- | ------- | ------- |
-| --tmplit-table-row-grid-column || 1 /10 | Set the max number of columns (All do not need to be used) |
-| --tmplit-table-row-border-style || none none solid none ||
-| --tmplit-table-row-border-width || 1px ||
-| --tmplit-table-row-font-size || 18px ||
-| --tmplit-table-row-border-color | --md-sys-color-outline-variant | gray |
-| --tmplit-table-row-color | --md-sys-color-on-surface | black |
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-table-row-grid-column || Set the max number of columns (All do not need to be used) |
+| --tmplit-table-row-padding |||
+| --tmplit-table-row-border-style |||
+| --tmplit-table-row-border-width |||
+| --tmplit-table-row-font-size | --md-sys-typescale-body-large-font-size ||
+| --tmplit-table-row-font-family | --md-sys-typescale-body-large-font-family-name ||
+| --tmplit-table-row-border-color | --md-sys-color-outline-variant ||
+| --tmplit-table-row-color | --md-sys-color-on-surface ||
 
 ### Table Row LED
 Styling for any LED tmplits inside of a TableRow (i.e. by default they now are larger and have no shadow)
-| Tmplit Token | Material Design Token | Default | Comment |
-| ------------ | --------------------- | ------- | ------- |
-| --tmplit-table-row-led-height || 25px ||
-| --tmplit-table-row-led-width || 25px ||
-| --tmplit-table-row-led-box-shadow || none ||
-| --tmplit-table-row-led-outline || 2px ||
-| --tmplit-table-row-led-outline-style || solid ||
-| --tmplit-table-row-led-outline-color | --md-sys-color-outline | black ||
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-table-row-led-height || Controls the size of an LED relative to the cell height |
+| --tmplit-table-row-led-box-shadow |||
+| --tmplit-table-row-led-outline |||
+| --tmplit-table-row-led-outline-style || |
+| --tmplit-table-row-led-outline-color | --md-sys-color-outline ||
+
+### Table Row Unlabeled LED Container
+Styling for any numeric tmplits inside of a TableRow (i.e. by default they now are larger and have larger font)
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-table-row-unlabeled-led-container-height |||
+| --tmplit-table-row-unlabeled-led-container-width |||
+| --tmplit-table-row-unlabeled-led-container-display |||
 
 ### Table Row Numeric
 Styling for any numeric tmplits inside of a TableRow (i.e. by default they now are larger and have larger font)
-| Tmplit Token | Material Design Token | Default | Comment |
-| ------------ | --------------------- | ------- | ------- |
-| --tmplit-table-row-font-size || 18px ||
-| --tmplit-table-row-numeric-background-color | --md-sys-color-primary-container | white ||
-| --tmplit-table-row-numeric-color | --md-sys-color-on-primary-container | black ||
-| --tmplit-table-row-numeric-border-color | --md-sys-color-outline | gray ||
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-table-row-numeric-font-size | --md-sys-typescale-body-large-font-size ||
+| --tmplit-table-row-numeric-font-family | --md-sys-typescale-body-large-font-family-name ||
+| --tmplit-table-row-numeric-background-color | --md-sys-color-primary-container ||
+| --tmplit-table-row-numeric-color | --md-sys-color-on-primary-container ||
+| --tmplit-table-row-numeric-border-color | --md-sys-color-outline ||
 
 ```
 <style>
