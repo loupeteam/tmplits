@@ -27,7 +27,7 @@ export function TmplitTableRow(context, args) {
         attr
     } = util.cleanArgs(_args)
 
-    classList.push('tmplit-table-row');
+    classList.push('tmplit-table-row')
 
     return `
     <div ${attr} class='${classList.join(' ')}'>
