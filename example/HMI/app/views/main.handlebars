@@ -1,26 +1,4 @@
-<lui-basic-layout navBar="left" value="0" footer="">
-<div id="contentArea">
-    <template title="Nested">
-        <lui-basic-layout navBar="top" value="0" footer="disable">
-            <div id="contentArea">
-                <template title="Button 1">
-                    {{!-- {{>OpenBridge }} --}}
-                    <h1>Content  1</h1>
-                </template>
-                
-                <template title="Button 2">
-                    {{>testComponents }}
-                    {{!-- <h1>Content  2</h1> --}}
-                </template>   
-
-                <template title="Button 3">
-                    {{>nav}}
-                    {{!-- <h1>Cosntent  3</h1> --}}
-                </template>
-            </div>
-        </lui-basic-layout>
-    </template> 
-    
+<lui-basic-layout navBar="left" value="0">
     <template title="Button 1">
         {{>OpenBridge }}
         {{!-- <h1>Content  1</h1> --}}
@@ -35,11 +13,8 @@
         {{>nav}}
         {{!-- <h1>Cosntent  3</h1> --}}
     </template>
-</div>
-    
-<div slot="footer">
-    Copyright        
-</div>
 
-
+    <div slot="footer">
+        Copyright        
+    </div>
 </lui-basic-layout>
