@@ -13,6 +13,13 @@ styleTemplate.innerHTML =
     width: 100vw;
 
 }
+.tmplit-nested-layout-grid{
+    display: grid;
+    grid-template-rows: 1fr;
+    height: 100%; 
+    width: 100%;
+
+}
 
 /* Main Wrapper */
 .tmplit-main-container{
@@ -33,7 +40,7 @@ styleTemplate.innerHTML =
 
 /* Nav Bar*/
 .tmplit-navBar-container{
-    flex-grow: 1;
+    flex-shrink: 1;
     display: flex;
     background-color: var(--navBar-background-color,  rgb(230, 230, 230));
     overflow: var(--navBar-container-overflow, auto);
@@ -134,12 +141,12 @@ class basicLayout extends HTMLElement {
                     break;
             }
         }
-
+        let nested = this.getAttribute('nested')
         let navBarLoc = this.getAttribute('navBar')
         let footer = this.getAttribute('footer')
         this.attachShadow({mode: 'open'})
         this.shadowRoot.innerHTML = `
-        <div class="tmplit-layout-grid">
+        <div class=" ${nested === 'NESTED' ? 'tmplit-nested-layout-grid' : 'tmplit-layout-grid'}">
             <div class="tmplit-main-container
                         ${navBarLoc ==='left' || navBarLoc ==='right' ? 'tmplit-main-container-left-right' : 
                         navBarLoc ==='top' || navBarLoc ==='bottom' ? 'tmplit-main-container-top-bottom' :'mplit-main-container-left-right'}">
@@ -209,15 +216,26 @@ class basicLayout extends HTMLElement {
         // let mainSlot = this.shadowRoot.querySelector('slot[name="mainSlot"]')
         let mainSlot = this.shadowRoot.querySelector('slot:not([name])')
         let mainContent = mainSlot.assignedNodes()[0]
+        // console.log(mainContent.innerHTML)
+        // let footer = this.getAttribute('footer')
+        let footer = this.querySelector('[slot="footer"]')
+        // console.log(footer)
 
-        let footerLiDOM = this.querySelector('[slot="footer"]')
-        let footerShDOM = this.shadowRoot.querySelector('slot[name="footer"]')
-        let footerContent = footerShDOM.assignedNodes()[0]
-        footerContent.innerHTML = footerLiDOM.innerHTML
+        // if (footer !== "disable") {
+            // let footerLiDOM = this.querySelector('[slot="footer"]')
+            // let footerShDOM = this.shadowRoot.querySelector('slot[name="footer"]')
+            // console.log(footerShDOM.assignedNodes()[0])
+            // let footerContent = footerShDOM.assignedNodes()[0]
+            // footerContent.innerHTML = footerLiDOM.innerHTML
+        // }
+        
            
         if(+templatesIndex < templates.length){            
             this.innerHTML = templates[templatesIndex].innerHTML
-            this.append(footerContent)
+            // if (footer !== "disable") {
+                // this.append(footerContent.innerHTML)
+            // }
+            this.append(footer)
         }
         else{
             this.innerHTML = "Not Found"         
