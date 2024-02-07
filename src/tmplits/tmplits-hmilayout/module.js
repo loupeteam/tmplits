@@ -46,6 +46,13 @@ styleTemplate.innerHTML =
     overflow: var(--navBar-container-overflow, auto);
 }
 
+.tmplit-nested-navBar-container{
+    flex-shrink: 1;
+    display: flex;
+    background-color: var(--navBar-background-color,  rgb(0, 230, 230));
+    overflow: var(--navBar-container-overflow, auto);
+}
+
 
 .tmplit-navBar-container-left{
     flex-direction: column;
@@ -150,7 +157,7 @@ class basicLayout extends HTMLElement {
             <div class="tmplit-main-container
                         ${navBarLoc ==='left' || navBarLoc ==='right' ? 'tmplit-main-container-left-right' : 
                         navBarLoc ==='top' || navBarLoc ==='bottom' ? 'tmplit-main-container-top-bottom' :'mplit-main-container-left-right'}">
-                <div class="tmplit-navBar-container
+                <div class=" ${nested === 'NESTED' ? 'tmplit-nested-navBar-container' : 'tmplit-navBar-container'}
                             ${navBarLoc ==='left' ? 'tmplit-navBar-container-left tmplit-navBar-container-width-size' :
                             navBarLoc ==='right' ? 'tmplit-navBar-container-right tmplit-navBar-container-width-size' :
                             navBarLoc ==='top' ? 'tmplit-navBar-container-top tmplit-navBar-container-height-size' :
@@ -174,7 +181,10 @@ class basicLayout extends HTMLElement {
         // Append styleTemplate to shadowRoot to activate css styling
         this.shadowRoot.appendChild(styleTemplate.content.cloneNode(true));
         this.shadowRoot.innerHTML += this.innerHTML;
-        let navbar = this.shadowRoot.querySelector(".tmplit-navBar-container");
+
+        let navbar = (nested === 'NESTED' ? this.shadowRoot.querySelector(".tmplit-nested-navBar-container") :
+                                             this.shadowRoot.querySelector(".tmplit-navBar-container"))
+        
         for(let i in labels){
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
