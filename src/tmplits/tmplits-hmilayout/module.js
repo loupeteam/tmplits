@@ -219,7 +219,6 @@ class basicLayout extends HTMLElement {
         // console.log(mainContent.innerHTML)
         // let footer = this.getAttribute('footer')
         let footer = this.querySelector('[slot="footer"]')
-        // console.log(footer)
 
         // if (footer !== "disable") {
             // let footerLiDOM = this.querySelector('[slot="footer"]')
@@ -229,13 +228,17 @@ class basicLayout extends HTMLElement {
             // footerContent.innerHTML = footerLiDOM.innerHTML
         // }
         
-           
+        
+
         if(+templatesIndex < templates.length){            
             this.innerHTML = templates[templatesIndex].innerHTML
             // if (footer !== "disable") {
                 // this.append(footerContent.innerHTML)
             // }
-            this.append(footer)
+
+            if (footer !== null){
+                this.append(footer)
+            }            
         }
         else{
             this.innerHTML = "Not Found"         
