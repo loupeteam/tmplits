@@ -152,6 +152,8 @@ class basicLayout extends HTMLElement {
         let navBarLoc = this.getAttribute('navBar')
         let footer = this.getAttribute('footer')
         this.attachShadow({mode: 'open'})
+
+        //Create Shadow Root structure
         this.shadowRoot.innerHTML = `
         <div class=" ${nested === 'NESTED' ? 'tmplit-nested-layout-grid' : 'tmplit-layout-grid'}">
             <div class="tmplit-main-container
@@ -185,6 +187,7 @@ class basicLayout extends HTMLElement {
         let navbar = (nested === 'NESTED' ? this.shadowRoot.querySelector(".tmplit-nested-navBar-container") :
                                              this.shadowRoot.querySelector(".tmplit-navBar-container"))
         
+        //Create nav bar button divs
         for(let i in labels){
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
