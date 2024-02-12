@@ -228,24 +228,10 @@ class basicLayout extends HTMLElement {
         let mainContent = mainSlot.assignedNodes()[0]
         // console.log(mainContent.innerHTML)
         // let footer = this.getAttribute('footer')
-        let footer = this.querySelector('[slot="footer"]')
-
-        // if (footer !== "disable") {
-            // let footerLiDOM = this.querySelector('[slot="footer"]')
-            // let footerShDOM = this.shadowRoot.querySelector('slot[name="footer"]')
-            // console.log(footerShDOM.assignedNodes()[0])
-            // let footerContent = footerShDOM.assignedNodes()[0]
-            // footerContent.innerHTML = footerLiDOM.innerHTML
-        // }
-        
-        
+        let footer = this.querySelector('[slot="footer"]')        
 
         if(+templatesIndex < templates.length){            
             this.innerHTML = templates[templatesIndex].innerHTML
-            // if (footer !== "disable") {
-                // this.append(footerContent.innerHTML)
-            // }
-
             if (footer !== null){
                 this.append(footer)
             }            
