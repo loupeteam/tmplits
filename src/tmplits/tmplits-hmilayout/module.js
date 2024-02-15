@@ -84,6 +84,10 @@ styleTemplate.innerHTML =
     font-size: var(--navBar-buttons-text-size, Large);
 }
 
+.tmplit-navBar-button.selected{
+    background-color: var(--navBar-button-indicator-background-color, rgb(182, 182, 182));
+}
+
 /* Main Content */
 .tmplit-main-content{
     flex-grow: 1;
@@ -192,9 +196,12 @@ class basicLayout extends HTMLElement {
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
             button.innerHTML = labels[i] ? labels[i] : +i + 1;
-            button.addEventListener('click', ()=>{this.setAttribute('value',i)})
+            button.addEventListener('click', ()=>{
+                this.setAttribute('value',i)
+                button.classList.add('selected')})
             navbar.appendChild( button )
         }
+
         if(!this.hasAttribute('value')){           
             this.setAttribute('value', 0)
             this.selectPage(this.getAttribute('value'))
@@ -243,6 +250,7 @@ class basicLayout extends HTMLElement {
             this.innerHTML = "Not Found"         
         }
     }
+
     get value(){
         return this.getAttribute('value');
     }
