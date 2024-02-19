@@ -196,9 +196,7 @@ class basicLayout extends HTMLElement {
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
             button.innerHTML = labels[i] ? labels[i] : +i + 1;
-            button.addEventListener('click', ()=>{
-                this.setAttribute('value',i)
-                button.classList.add('selected')})
+            button.addEventListener('click', ()=>{this.setAttribute('value',i)})
             navbar.appendChild( button )
         }
 
@@ -233,18 +231,16 @@ class basicLayout extends HTMLElement {
 
     selectPage(templatesIndex){
         let templates = this.shadowRoot.querySelectorAll('template')
-        // let mainSlot = this.shadowRoot.querySelector('slot[name="mainSlot"]')
         let mainSlot = this.shadowRoot.querySelector('slot:not([name])')
         let mainContent = mainSlot.assignedNodes()[0]
-        // console.log(mainContent.innerHTML)
-        // let footer = this.getAttribute('footer')
         let footer = this.querySelector('[slot="footer"]')   
         
-        //Look for nav buttons with 'selected' class and remove the 'selected' class
-        let buttons = this.shadowRoot.querySelectorAll('.tmplit-navBar-button').forEach(function (activeButton){
-            activeButton.classList.remove('selected')
-        })
-
+        //Add - Remove Navigation Button Indicator
+        let buttons = this.shadowRoot.querySelectorAll('.tmplit-navBar-button')
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].classList.remove('selected')
+            buttons[templatesIndex].classList.add('selected')
+        }
 
         if(+templatesIndex < templates.length){          
             this.innerHTML = templates[templatesIndex].innerHTML
