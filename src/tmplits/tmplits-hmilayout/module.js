@@ -238,9 +238,15 @@ class basicLayout extends HTMLElement {
         let mainContent = mainSlot.assignedNodes()[0]
         // console.log(mainContent.innerHTML)
         // let footer = this.getAttribute('footer')
-        let footer = this.querySelector('[slot="footer"]')        
+        let footer = this.querySelector('[slot="footer"]')   
+        
+        //Look for nav buttons with 'selected' class and remove the 'selected' class
+        let buttons = this.shadowRoot.querySelectorAll('.tmplit-navBar-button').forEach(function (activeButton){
+            activeButton.classList.remove('selected')
+        })
 
-        if(+templatesIndex < templates.length){            
+
+        if(+templatesIndex < templates.length){          
             this.innerHTML = templates[templatesIndex].innerHTML
             if (footer !== null){
                 this.append(footer)
