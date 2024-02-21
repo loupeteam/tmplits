@@ -457,6 +457,76 @@ input::-webkit-inner-spin-button {
     background-color: var(--tmplit-multiselect-item-background-color, var(--md-sys-color-secondary, lightblue));
     color: var(--tmplit-multiselect-item-color, var(--md-sys-color-on-secondary, black))
 }
+
+/* tableselect */
+
+.tmplit-tableselect-container {
+    width: var(--tmplit-tableselect-container-width, 100%);
+    position: var(--tmplit-tableselect-container-position, relative);
+    display: var(--tmplit-tableselect-container-display, inline-flex);
+    border-collapse: var(--tmplit-tableselect-container-border-collapse, separate);
+}
+
+.tmplit-tableselect-field {
+    width: var(--tmplit-tableselect-field-width, calc(100% - 40px));
+    height: var(--tmplit-tableselect-field-height, 40px);
+    border-width: var(--tmplit-tableselect-field-border-width, 1px);
+    border-style: var(--tmplit-tableselect-field-border-style, solid);
+    border-color: var(--tmplit-tableselect-field-border-color, var(--md-sys-color-outline-variant, black));
+    border-radius: var(--tmplit-tableselect-field-border-radius, 4px);
+    background-color: var(--tmplit-tableselect-background-color, var(--md-sys-color-surface, white));
+    color: var(--tmplit-tableselect-color, var(--md-sys-color-on-surface, black));
+}
+
+.tmplit-tableselect-field:first-child {
+    border-top-right-radius: var(--tmplit-table-select-field-border-top-right-radius, 0);
+    border-bottom-right-radius: var(--tmplit-table-select-field-border-bottom-right-radius, 0);
+}
+
+.tmplit-tableselect-button {
+    font-weight: var(--tmplit-tableselect-button-font-weight, 400);
+    color: var(--tmplit-tableselect-button-color, var(--md-sys-color-on-primary, black));
+    background-color: var(--tmplit-tableselect-button-background-color, var(--md-sys-color-primary, white));
+    border-width: var(--tmplit-tableselect-button-border-width, 1px);
+    border-style: var(--tmplit-tableselect-button-border-style, solid);
+    border-color: var(--tmplit-tableselect-button-border-color, var(--md-sys-color-outline-variant, black));
+    border-radius: var(--tmplit-tableselect-button-border-radius, 4px);
+    padding: var(--tmplit-tableselect-button-padding, 7px);
+    cursor: var(--tmplit-tableselect-button-cursor, pointer);
+}
+
+.tmplit-tableselect-button:last-child {
+    border-left: var(--tmplit-table-select-button-border-left, 0);
+    border-top-left-radius: var(--tmplit-table-select-button-border-top-left-radius, 0);
+    border-bottom-left-radius: var(--tmplit-table-select-button-border-bottom-left-radius, 0);
+}
+
+.table>tbody>tr>td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: var(--md-sys-color-surface, transparent);
+}
+
 body {
     font-family: Helvetica, sans-serif, Verdana, Arial;
     color: var(--md-sys-color-on-surface, black);
