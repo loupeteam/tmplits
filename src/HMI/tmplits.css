@@ -162,11 +162,11 @@ input::-webkit-inner-spin-button {
 
 .tmplit-led-label {
     font-family: var(--tmplit-led-label-font-family, sans-serif);
-    font-size: var(--tmplit-checkbox-label-font-size, 22px);
-    font-weight: var(--tmplit-checkbox-label-font-weight, 500);
+    font-size: var(--tmplit-led-label-font-size, 22px);
+    font-weight: var(--tmplit-led-label-font-weight, 500);
     line-height: var(--tmplit-led-label-line-height, 1.42857143);
 
-    color: var(--tmplit-led-label-color, var(--md-sys-color-on-surface));
+    color: var(--tmplit-led-label-color, var(--md-sys-color-on-surface, black));
 }
 
 /* checkbox */
@@ -185,13 +185,13 @@ input::-webkit-inner-spin-button {
       'wght' 400,
       'GRAD' 200,
       'opsz' 40;
-    color: var(--tmplit-checkbox-checked-color, var(--md-sys-color-on-surface-variant));
+    color: var(--tmplit-checkbox-unchecked-color, var(--md-sys-color-on-surface-variant));
   }
   
 
 .tmplit-checkbox-container {
     display: var(--tmplit-checkbox-label-display, inline-flex);
-    align-items: var(--tmplit-checkbox-label-align-itmes, center);
+    align-items: var(--tmplit-checkbox-label-align-items, center);
     border-collapse: var(--tmplit-checkbox-label-border-collapse, separate);
     width: var(--tmplit-checkbox-label-width, 100%);
     height: var(--tmplit-checkbox-label-height, 34px);
@@ -234,7 +234,7 @@ input::-webkit-inner-spin-button {
     border-radius: var(--tmplit-numeric-label-border-radius, 4px);
     width: var(--tmplit-numeric-label-width, 1%);
     white-space: var(--tmplit-numeric-label-white-space, nowrap);
-    vertical-align: var(--tmplit-numeric-label-border-radius, middle);
+    vertical-align: var(--tmplit-numeric-label-vertical-align, middle);
     display: var(--tmplit-numeric-label-display, table-cell);
     border-width: var(--tmplit-numeric-label-border-width, 1px);
     border-style: var(--tmplit-numeric-label-border-style, solid);
