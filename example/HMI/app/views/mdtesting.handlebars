@@ -1,9 +1,9 @@
 {{#tmplit 'Columns' 'Button'}}
-    {{tmplit 'Button' 'Title' data-var-name='tmplitTest:tmplit.Led'}}
+    {{tmplit 'Button' 'Title' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
 {{/tmplit}}
 {{#tmplit 'Columns' 'Led'}}
     {{tmplit 'Led' data-var-name='tmplitTest:tmplit.Led'}}
-    {{tmplit 'Led' 'Led' data-var-name='tmplitTest:tmplit.Led'}}
+    {{tmplit 'Led' 'Led' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
 {{/tmplit}}
 {{#tmplit 'Columns' 'CheckBox'}}
     {{tmplit 'CheckBox' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
