@@ -19,7 +19,7 @@ Below are the css vars used for styling. These are read into the css properties 
 | ------------ | --------------------- | ------- |
 | --tmplit-numeric-container-position |||
 | --tmplit-numeric-container-display |||
-| --tmplit-numeric-container |||
+| --tmplit-numeric-container-border-collapse |||
 
 ### .tmplit-numeric-label
 | Tmplit Token | Material Design Token | Comment |
@@ -36,7 +36,6 @@ Below are the css vars used for styling. These are read into the css properties 
 | --tmplit-numeric-label-vertical-align |||
 | --tmplit-numeric-label-display |||
 | --tmplit-numeric-label-border-width |||
-| --tmplit-numeric-label-text-align |||
 | --tmplit-numeric-label-border-style |||
 | --tmplit-numeric-label-background-color | --md-sys-color-primary ||
 | --tmplit-numeric-label-border-color | --md-sys-color-outline-variant ||
