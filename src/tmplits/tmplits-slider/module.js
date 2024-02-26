@@ -53,7 +53,7 @@ export function TmplitSlider(context, args) {
         luiClasses,
         luiAttr,
     } = util.cleanArgs(_args)
-    classList = classList.concat(['lui-slider-scope', 'slider'])
+    classList = classList.concat(['lui-slider-scope', 'slider', 'tmplit-slider-container'])
     inputStyle = `position:relative;width:150%;top:0%;border-style:none;background:transparent;display:none` + inputStyle
     let innerClassList = ['lui-slider-value']
     innerClassList.push(...luiClasses)
@@ -70,6 +70,7 @@ export function TmplitSlider(context, args) {
 
     let bar = document.createElement("div");
     bar.classList.add('slider-bar');
+    bar.classList.add('tmplit-slider-bar');
     bar.style.position = "relative";
     bar.style.margin = "0px";
     bar.style.borderRadius = '3px'

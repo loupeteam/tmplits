@@ -68,7 +68,7 @@ export function TmplitMultiSelect(context, args) {
             let dataValue = e.getAttribute('data-value')
             let click = `multiOptionSelector.selected(this, '${e.getAttribute('onclick') }');`
 
-            e = util.htmlToElement(`<div class="option"> ${e.innerHTML} </div>`)
+            e = util.htmlToElement(`<div class="option tmplit-multiselect-item"> ${e.innerHTML} </div>`)
             if( dataValue != null ){
                 e.setAttribute('data-value', dataValue)            
             }
@@ -82,7 +82,7 @@ export function TmplitMultiSelect(context, args) {
                 if (e.getAttribute) {
                     let dataValue = e.getAttribute('data-value')
                     let click = `multiOptionSelector.selected(this, '${e.getAttribute('onclick') }');`
-                    e = util.htmlToElement(`<div class="option"> ${e.outerHTML} </div>`)
+                    e = util.htmlToElement(`<div class="option tmplit-multiselect-item"> ${e.outerHTML} </div>`)
                     if( dataValue != null){
                         e.setAttribute('data-value', dataValue)            
                     }

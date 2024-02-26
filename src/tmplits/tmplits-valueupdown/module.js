@@ -53,11 +53,8 @@ export function TmplitValueUpDown(context, args) {
         classList,
         attr
     } = util.cleanArgs(_args)
-    classList = classList.concat(['lui-increment-scope'])
-    style = 'display:inline-flex; grid-template-columns: auto 1fr auto; border-style:solid; border-radius: 40px;width:fit-content;height:fit-content;' + style;
-    buttonStyle = ';padding:20px; font-size:20px;' + buttonStyle
-    inputStyle = `;padding: 1px;margin: -1px;text-align: center;width: 100px;font-size: 20px;font-weight: bold;border-width: 1px;` + inputStyle
-    let innerClassList = ['lui-increment-value']
+    classList = classList.concat(['lui-increment-scope', 'tmplit-valueupdown-container'])
+    let innerClassList = ['lui-increment-value', 'tmplit-valueupdown-field']
     if (dataVarName) {
         innerClassList.push('lux-num-value')
     }
@@ -71,9 +68,9 @@ export function TmplitValueUpDown(context, args) {
 
     return `
     <div class="${classList.join(' ')}" style='${style}'>
-        <span class='glyphicon glyphicon-chevron-down lui-increment' increment=${-increment} min=${min} style="${buttonStyle}"></span>
+        <span class="material-symbols-outlined lui-increment tmplit-valueupdown-button" increment=${-increment} min=${min} style="${buttonStyle}">remove</span>    
             ${inner}
-        <span class='glyphicon glyphicon-chevron-up lui-increment' increment=${increment} max=${max} style="${buttonStyle}"></span>
+        <span class="material-symbols-outlined lui-increment tmplit-valueupdown-button" increment=${+increment} max=${max} style="${buttonStyle}">add</span>
     </div>
 
 `

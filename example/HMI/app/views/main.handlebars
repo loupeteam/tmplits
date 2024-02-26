@@ -108,7 +108,8 @@
                 {{tmplit "Led" 'Input 4' data-var-name='tmplitTest:tmplit.PosLimit'}}
             {{/tmplit}}
             {{#tmplit 'Columns' 'Outputs' maxColumns=1}}
-                {{#tmplit 'Columns' maxColumns=2}}
+                {{#tmplit 'Columns' maxColumns=3}}
+                    <div>label:</div>
                     {{tmplit "Led" 'Home' buttonType='set' data-var-name='tmplitTest:tmplit.AtHome'}}
                     {{tmplit "Led" 'Home' buttonType='set' data-set-value="false" data-reset-value="true" data-var-name='tmplitTest:tmplit.AtHome'}}
                 {{/tmplit}}

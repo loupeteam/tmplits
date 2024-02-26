@@ -43,7 +43,7 @@ export function TmplitLed(context, args) {
     let result;
     let finalResult;
     if (args.children == "" && context[0]) {
-        args.children = `<h3>${context[0]}</h3><h3/>`
+        args.children = `<div>${context[0]}</div>`
         result = args.children.replace(/([A-Z])/g, " $1");
         finalResult = result.charAt(0).toUpperCase() + result.slice(1);
         switch (side.trim().toLowerCase()) {
@@ -68,19 +68,19 @@ export function TmplitLed(context, args) {
 
     let label = '' 
     if (context[0]){
-        classList.push(['input-group', 'form-control', 'label-led' ])
-        label = `<div class='led-label' style='${labelStyle}' >${finalResult}</div>`
+        classList.push(['tmplit-led-container'])
+        label = `<div class='tmplit-led-label' style='${labelStyle}' >${finalResult}</div>`
     } else {
         classList.push(['tmplit-led-unlabled-container'])
     }
 
     // add the led class to the class list
-    let ledClassList = ['lux-led', 'led', ...luiClasses];
+    let ledClassList = ['lux-led', 'tmplit-led-icon', ...luiClasses];
 
     return `
         <div class="${classList.join(' ')}" ${attr}>
-        <div class="${ledClassList.join(' ')}" data-led-false=${dataLedFalse} data-led-true='${dataLedTrue}' data-var-name='${dataVarName}' ${attr} ${luiAttr} ></div>
-        ${label}
+            <div class="${ledClassList.join(' ')}" data-led-false=${dataLedFalse} data-led-true='${dataLedTrue}' data-var-name='${dataVarName}' ${attr} ${luiAttr} ></div>
+            ${label}
         </div>
     `
 }

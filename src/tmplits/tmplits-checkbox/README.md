@@ -1,77 +1,66 @@
-This is a template gizmo
+# TmplitCheckbox
 
-Use this template by running:
+This is a tmplit for checkboxes. The checkboxes can be given a title as the first context and a buttonType as an argument.
+
+Loupe Docs Link: https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs/tmplitcomponents/booleantmplit.html
+
+# Usage
+
 ```
-lpm install tmplits-gizmo
-```
-then modify it for your needs.
-
-Settings up the template:
-
-This gizmo can be installed using NPM install and will get loaded by the tmplit system
-the important parts are a 
-- library.handlebars - this is your template
-- loader.js - js file that will run after loading the templates. This can do work to instantiate things or contain function tmplits
-- Package.json that includes a name with the prefix 
-    - @loupeteam/tmplit-[your tmplits name]
-    - Version number
-    - Link to repo the repo (the local one or tmplits, this is important because it is how the package gets it's access rights)    
-```json
-{
-    "name": "@loupeteam/tmplits-[TmplitName]",
-    "version": "x.x.x",
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/loupeteam/tmplits.git"
-    },
-}
+{{tmplit 'CheckBox' 'Checkbox' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
 ```
 
-The entire page template will be loaded with the name [your tmplit name] and any tmplits inside scripts will also be available
+# CSS
 
-Usage:
+Below are the css vars used for styling. These are read into the css properties and are empty by default. If they are null the html uses static default values. See the example on how to populate these variable in an application:
 
+### .tmplit-checkbox-checked
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-checkbox-checked-color | --md-sys-color-primary ||
 
-```json
-//Application Package.json
-{
-{
-  "name": "@loupeteam/tmplit-template",
-  "version": "0.0.2",
-  ...
-  "dependencies": {
-    "@loupeteam/tmplits": "0.0.2",
-    "@loupeteam/tmplits-gizmo": "0.0.1",    
-  }
-}
-}
-``````
+### .tmplit-checkbox-unchecked
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-checkbox-unchecked-color | --md-sys-color-on-surface-variant ||
 
-```json
-//Gizmo Package.json
-{
-    "name": "@loupeteam/tmplits-gizmo",
-    "version": "0.0.1",
-}
-``````
+### .tmplit-checkbox-container
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-checkbox-label-display | --md-sys-color-on-surface-variant ||
+| --tmplit-checkbox-label-align-items |||
+| --tmplit-checkbox-label-border-collapse |||
+| --tmplit-checkbox-label-width |||
+| --tmplit-checkbox-label-height |||
+| --tmplit-checkbox-padding |||
+| --tmplit-checkbox-label-border-width |||
+| --tmplit-checkbox-label-border-style |||
+| --tmplit-checkbox-label-border-radius |||
+| --tmplit-checkbox-button-cursor |||
+| --tmplit-checkbox-label-user-select |||
+| --tmplit-checkbox-label-position |||
+| --tmplit-checkbox-label-background-color | --md-sys-color-surface ||
+| --tmplit-checkbox-label-border-color | --md-sys-color-outline-variant ||
 
-```handlebars
-<!--library.handlebars-->
-<div>Hello World<div>
+### .tmplit-checkbox-label
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-checkbox-label-family | --md-sys-color-on-surface-variant ||
+| --tmplit-checkbox-label-font-size |||
+| --tmplit-checkbox-label-border-collapse |||
+| --tmplit-checkbox-label-font-weight |||
+| --tmplit-checkbox-label-line-height |||
+| --tmplit-checkbox-color | --md-sys-color-on-surface ||
+
+```
+<style>
+    :root {
+        --tmplit-checkbox-checked-color: red;
+    }
+</style>
 ```
 
-```javascript
-//loader.js
-console.log("Loaded gizmo!")
-function TmplitCustomTmplit( ... ){
- ...
-}
-```
-```handlebars
-<!--main.handlbars-->
-{{> gizmo}}
-{{W CustomTmplit}}
-```
+The "md-sys-color-..." vars are intended to be used with material design themes. However the theme can be overriden if assigned to the tmplit-checkbox-background-color for example.
 
 ## Licensing
 

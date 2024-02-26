@@ -1,0 +1,43 @@
+{{#tmplit 'Columns' 'Button'}}
+    {{tmplit 'Button' 'Title' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
+{{/tmplit}}
+{{#tmplit 'Columns' 'Led'}}
+    {{tmplit 'Led' data-var-name='tmplitTest:tmplit.Led'}}
+    {{tmplit 'Led' 'Led' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
+{{/tmplit}}
+{{#tmplit 'Columns' 'CheckBox'}}
+    {{tmplit 'CheckBox' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
+    {{tmplit 'CheckBox' 'Checkbox' buttonType='toggle' data-var-name='tmplitTest:tmplit.Led'}}
+{{/tmplit}}
+{{#tmplit 'Columns' 'Numeric'}}
+    {{tmplit 'Numeric' type='output' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{tmplit 'Numeric' 'Numeric Output' type='output' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+    {{tmplit 'Numeric' 'Numeric Input' type='input' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+{{/tmplit}}
+{{#tmplit 'Columns' 'Text'}}
+    {{tmplit 'Text' type='output' data-var-name='tmplitTest:tmplit.TextOutput'}}
+    {{tmplit 'Text' 'Text Output' type='output' data-var-name='tmplitTest:tmplit.TextOutput'}}
+    {{tmplit 'Text' 'Text Input' type='input' data-var-name='tmplitTest:tmplit.TextOutput'}}
+{{/tmplit}}
+{{#tmplit 'Columns' 'ValueUpDown'}}
+    {{tmplit 'ValueUpDown' data-var-name='tmplitTest:tmplit.NumericOutput'}}
+{{/tmplit}}
+{{#tmplit 'Columns' 'Slider'}}
+    {{tmplit 'Slider' min=0 max=100 data-var-name='tmplitTest:tmplit.Slider'}}
+    {{tmplit 'Numeric' type='output' data-var-name='tmplitTest:tmplit.Slider'}}
+{{/tmplit}}
+{{#tmplit 'Columns' 'MultiSelect'}}
+        {{tmplit 'Numeric' type='input' data-var-name='tmplitTest:tmplit.MultiSelect_INT' style='height:40px; margin:auto' }}
+        {{tmplit 'Text' type='input' data-var-name='tmplitTest:tmplit.MultiSelect_STRING' style='height:40px; margin:auto' }}
+        {{#tmplit 'MultiSelect' maxColumns=10 data-var-name="tmplitTest:tmplit.MultiSelect_INT" data-var-name-field="tmplitTest:tmplit.MultiSelect_STRING"}}
+        <options>
+            <div>A</div>
+            <div>B</div>
+            <div>C</div>
+            <div>D</div>
+        </options>
+        {{/tmplit}}
+{{/tmplit}}
+{{#tmplit 'Columns' 'DirectoryBrowserWindow'}}
+    {{tmplit 'DirectoryBrowserWindow' data-var-name='tmplitTest:f.in.cwd' data-var-name-files='tmplitTest:Directory' data-var-name-willopen='tmplitTest:f.in.refresh' style='height:300px'}}
+{{/tmplit}}

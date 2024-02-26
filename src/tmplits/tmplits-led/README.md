@@ -1,77 +1,64 @@
-This is a template gizmo
+# TmplitLed
 
-Use this template by running:
+This is a tmplit for Led. The led can be given a title as the first context and a buttonType as an argument.
+
+Loupe Docs Link: https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs/tmplitcomponents/booleantmplit.html
+
+# Usage
+
 ```
-lpm install tmplits-gizmo
-```
-then modify it for your needs.
-
-Settings up the template:
-
-This gizmo can be installed using NPM install and will get loaded by the tmplit system
-the important parts are a 
-- library.handlebars - this is your template
-- loader.js - js file that will run after loading the templates. This can do work to instantiate things or contain function tmplits
-- Package.json that includes a name with the prefix 
-    - @loupeteam/tmplit-[your tmplits name]
-    - Version number
-    - Link to repo the repo (the local one or tmplits, this is important because it is how the package gets it's access rights)    
-```json
-{
-    "name": "@loupeteam/tmplits-[TmplitName]",
-    "version": "x.x.x",
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/loupeteam/tmplits.git"
-    },
-}
+{{tmplit 'Led' 'Title' data-var-name='tmplitTest:tmplit.Led'}}
 ```
 
-The entire page template will be loaded with the name [your tmplit name] and any tmplits inside scripts will also be available
+# CSS
 
-Usage:
+Below are the css vars used for styling. These are read into the css properties and are empty by default. If they are null the html uses static default values. See the example on how to populate these variable in an application:
 
+### .tmplit-led-container
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-led-label-display | --md-sys-color-primary ||
+| --tmplit-led-label-align-items |||
+| --tmplit-led-label-position |||
+| --tmplit-led-label-border-collapse |||
+| --tmplit-led-label-width |||
+| --tmplit-led-label-height |||
+| --tmplit-led-label-border-width |||
+| --tmplit-led-label-border-style |||
+| --tmplit-led-label-border-radius |||
+| --tmplit-led-label-background-color | --md-sys-color-surface ||
+| --tmplit-led-label-border-color | --md-sys-color-outline-variant ||
 
-```json
-//Application Package.json
-{
-{
-  "name": "@loupeteam/tmplit-template",
-  "version": "0.0.2",
-  ...
-  "dependencies": {
-    "@loupeteam/tmplits": "0.0.2",
-    "@loupeteam/tmplits-gizmo": "0.0.1",    
-  }
-}
-}
-``````
+### .tmplit-led-icon
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-led-width |||
+| --tmplit-led-height |||
+| --tmplit-led-box-shadow |||
+| --tmplit-led-display |||
+| --tmplit-led-border-radius |||
+| --tmplit-led-margin |||
+| --tmplit-led-background-color |||
 
-```json
-//Gizmo Package.json
-{
-    "name": "@loupeteam/tmplits-gizmo",
-    "version": "0.0.1",
-}
-``````
+### .tmplit-led-label
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-led-label-font-family |||
+| --tmplit-led-label-font-size |||
+| --tmplit-led-label-font-weight |||
+| --tmplit-led-label-line-height |||
+| --tmplit-led-label-color | --md-sys-color-on-surface ||
 
-```handlebars
-<!--library.handlebars-->
-<div>Hello World<div>
+```
+<style>
+    :root {
+        --tmplit-led-width: 20px;
+        --tmplit-led-height: 20px;
+    }
+</style>
 ```
 
-```javascript
-//loader.js
-console.log("Loaded gizmo!")
-function TmplitCustomTmplit( ... ){
- ...
-}
-```
-```handlebars
-<!--main.handlbars-->
-{{> gizmo}}
-{{W CustomTmplit}}
-```
+The "md-sys-color-..." vars are intended to be used with material design themes. However the theme can be overriden if assigned to the tmplit-led-icon-background-color for example.
 
 ## Licensing
 

@@ -79,7 +79,7 @@ export function TmplitTableSelect(context, args) {
         }
     }
     if (field == '') {
-        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='${set ?"":' noset'} lui-select-text${dataVarNameField ? ' lux-text-value' : ''} list-viewer-selected-file-name'>`
+        field = `<input ${dataVarNameField ? 'data-var-name="' + dataVarNameField + '"' : '' } class='${set ?"":' noset'} lui-select-text${dataVarNameField ? ' lux-text-value' : ''} list-viewer-selected-file-name tmplit-tableselect-field'>`
     }
     if( dataVarName ){
         field += `<invisible-input class='lux-num-value lui-select-value list-viewer-selected-file-name' style='display:none' data-var-name='${dataVarName}' ></invisible-input>`
@@ -100,13 +100,14 @@ export function TmplitTableSelect(context, args) {
     <div style="overflow:auto;" class="list-view list-viewer-window">    
         ${dropdown}
     </div>
-        <div class="input-group" style="width:100%">
-            ${field} 
-            <button type="button" 
+        <div class=" tmplit-tableselect-container" style="width:100%">
+            ${field}
+            
+            <span type="button" 
                 ${willOpenButton}
-                class="input-group-addon dropdown-toggle${willOpenPV ? " lux-btn-set" : ''} list-viewer-refresh-button" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown" aria-hidden="true">
-                <span class="glyphicon glyphicon-refresh"></span>
-            </button>
+                class="material-symbols-outlined tmplit-tableselect-button dropdown-toggle${willOpenPV ? " lux-btn-set" : ''} list-viewer-refresh-button" ${willOpenPV ? "data-var-name='" + willOpenPV +"'" : ''} data-toggle="dropdown">
+                refresh
+            </span>
         </div>
     </div>
     ${children}

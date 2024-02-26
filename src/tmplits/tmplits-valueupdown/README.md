@@ -1,79 +1,82 @@
-This is a template gizmo
+# TmplitValueUpDown
 
-Use this template by running:
+This is a tmplit for ValueUpDown. It allows incrementing or decrementing of a bound variable with increase or decrease buttons. A value can also be entered by clicking on the numeric field. The increment amount can be specified as an argument. A minimum and maximum value can also be specified as arguments.
+
+Loupe Docs Link: https://loupeteam.github.io/LoupeDocs/libraries/tmplitdocs/tmplitcomponents/numerictmplit.html
+
+# Usage
+
 ```
-lpm install tmplits-gizmo
-```
-then modify it for your needs.
-
-Settings up the template:
-
-This gizmo can be installed using NPM install and will get loaded by the tmplit system
-the important parts are a 
-- library.handlebars - this is your template
-- loader.js - js file that will run after loading the templates. This can do work to instantiate things or contain function tmplits
-- Package.json that includes a name with the prefix 
-    - @loupeteam/tmplit-[your tmplits name]
-    - Version number
-    - Link to repo the repo (the local one or tmplits, this is important because it is how the package gets it's access rights)    
-```json
-{
-    "name": "@loupeteam/tmplits-[TmplitName]",
-    "version": "x.x.x",
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/loupeteam/tmplits.git"
-    },
-}
+{{tmplit 'ValueUpDown' increment=2 min=0 max=100 data-var-name='tmplitTest:tmplit.NumericOutput'}}
 ```
 
-The entire page template will be loaded with the name [your tmplit name] and any tmplits inside scripts will also be available
+# CSS
 
-Usage:
+Below are the css vars used for styling. These are read into the css properties and are empty by default. If they are null the html uses static default values. See the example on how to populate these variable in an application:
 
+### .tmplit-valueupdown-container
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-valueupdown-container-display |||
+| --tmplit-valueupdown-container-width |||
+| --tmplit-valueupdown-container-border-height |||
 
-```json
-//Application Package.json
-{
-{
-  "name": "@loupeteam/tmplit-template",
-  "version": "0.0.2",
-  ...
-  "dependencies": {
-    "@loupeteam/tmplits": "0.0.2",
-    "@loupeteam/tmplits-gizmo": "0.0.1",    
-  }
-}
-}
-``````
+### .tmplit-valueupdown-button
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-valueupdown-valueupdown-padding |||
+| --tmplit-valueupdown-valueupdown-font-size |||
+| --tmplit-valueupdown-valueupdown-border-radius |||
+| --tmplit-valueupdown-valueupdown-border-width |||
+| --tmplit-valueupdown-valueupdown-border-style |||
+| --tmplit-valueupdown-valueupdown-cursor |||
+| --tmplit-valueupdown-valueupdown-user-select |||
+| --tmplit-valueupdown-valueupdown-background-color | --md-sys-color-primary ||
+| --tmplit-valueupdown-valueupdown-button-color | --md-sys-color-on-primary ||
+| --tmplit-valueupdown-valueupdown-border-color | --md-sys-color-primary ||
 
-```json
-//Gizmo Package.json
-{
-    "name": "@loupeteam/tmplits-gizmo",
-    "version": "0.0.1",
-}
-``````
+### .tmplit-valueupdown-button:active
+| --tmplit-valueupdown-valueupdown-background-color | --md-sys-color-primary-container ||
+| --tmplit-valueupdown-valueupdown-button-color | --md-sys-color-on-primary-container ||
+| --tmplit-valueupdown-valueupdown-border-color | --md-sys-color-primary-container ||
 
-```handlebars
-<!--library.handlebars-->
-<div>Hello World<div>
+### .tmplit-valueupdown-button:first-child
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-valueupdown-button-border-top-right-radius |||
+| --tmplit-valueupdown-button-border-bottom-right-radius |||
+
+### .tmplit-valueupdown-button:last-child
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-valueupdown-label-border-top-left-radius |||
+| --tmplit-valueupdown-label-border-bottom-left-radius |||
+
+### .tmplit-valueupdown-field
+| Tmplit Token | Material Design Token | Comment |
+| ------------ | --------------------- | ------- |
+| --tmplit-valueupdown-field-padding |||
+| --tmplit-valueupdown-field-text-align |||
+| --tmplit-valueupdown-field-width |||
+| --tmplit-valueupdown-field-font-size |||
+| --tmplit-valueupdown-field-font-weight |||
+| --tmplit-valueupdown-field-border-width |||
+| --tmplit-valueupdown-field-border-style |||
+| --tmplit-valueupdown-field-border-color | --md-sys-color-outline-variant ||
+| --tmplit-valueupdown-field-outline-radius |||
+| --tmplit-valueupdown-field-background-color | --md-sys-color-surface ||
+| --tmplit-valueupdown-field-color | --md-sys-color-on-surface ||
+
+```
+<style>
+    :root {
+        --tmplit-valueupdown-field-color: blue;
+    }
+</style>
 ```
 
-```javascript
-//loader.js
-console.log("Loaded gizmo!")
-function TmplitCustomTmplit( ... ){
- ...
-}
-```
-```handlebars
-<!--main.handlbars-->
-{{> gizmo}}
-{{W CustomTmplit}}
-```
+The "md-sys-color-..." vars are intended to be used with material design themes. However the theme can be overriden if assigned to the tmplit-valueupdown-field-color for example.
 
 ## Licensing
 
 This project is licensed under the [MIT License]LICENSE.
-

@@ -1,7 +1,7 @@
 {
     "startPage": {
         "container": "main",
-        "name": "main"
+        "name": "mdtesting"
     },
     "pages": [
         {
@@ -11,6 +11,10 @@
         {
             "name": "components",
             "file": "app/views/components.handlebars"
+        },
+        {
+            "name": "mdtesting",
+            "file": "app/views/mdtesting.handlebars"
         }
     ],
     "libraries": [
