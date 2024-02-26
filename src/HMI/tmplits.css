@@ -296,7 +296,7 @@ input::-webkit-inner-spin-button {
 .tmplit-text-container {
     position: var(--tmplit-text-container-position, relative);
     display: var(--tmplit-text-container-display, table);
-    border-collapse: var(--tmplit-text-container, separate);
+    border-collapse: var(--tmplit-text-container-border-collapse, separate);
 }
 
 .tmplit-text-label {
@@ -309,7 +309,7 @@ input::-webkit-inner-spin-button {
     border-radius: var(--tmplit-text-label-border-radius, 4px);
     width: var(--tmplit-text-label-width, 1%);
     white-space: var(--tmplit-text-label-white-space, nowrap);
-    vertical-align: var(--tmplit-text-label-border-radius, middle);
+    vertical-align: var(--tmplit-text-label-vertical-align, middle);
     display: var(--tmplit-text-label-display, table-cell);
     border-width: var(--tmplit-text-label-border-width, 1px);
     border-style: var(--tmplit-text-label-border-style, solid);
@@ -379,13 +379,13 @@ input::-webkit-inner-spin-button {
     font-size: var(--tmplit-valueupdown-button-font-size, 20px);  
     border-radius: var(--tmplit-valueupdown-button-border-radius, 40px);
     border-width: var(--tmplit-valueupdown-button-border-width, 1px);
-    border-style: var(--tmplit-valueupdown-button-outline-style, solid);
+    border-style: var(--tmplit-valueupdown-button-border-style, solid);
     cursor: var(--tmplit-valueupdown-button-cursor, pointer);
     user-select: var(--tmplit-valueupdown-button-user-select, none);
 
     background-color: var(--tmplit-valueupdown-button-background-color, var(--md-sys-color-primary, rgb(60 96 144)));
     color: var(--tmplit-valueupdown-button-color, var(--md-sys-color-on-primary, rgb(255 255 255)));
-    border-color: var(--tmplit-valueupdown-button-outline-color, var(--md-sys-color-primary, black));
+    border-color: var(--tmplit-valueupdown-button-border-color, var(--md-sys-color-primary, black));
 }
 
 .tmplit-valueupdown-button:active {
@@ -400,8 +400,8 @@ input::-webkit-inner-spin-button {
 }
 
 .tmplit-valueupdown-button:last-child {
-    border-top-left-radius: var(--tmplit-valueupdown-button-border-top-right-radius, 0);
-    border-bottom-left-radius: var(--tmplit-valueupdown-button-border-bottom-right-radius, 0);
+    border-top-left-radius: var(--tmplit-valueupdown-button-border-top-left-radius, 0);
+    border-bottom-left-radius: var(--tmplit-valueupdown-button-border-bottom-left-radius, 0);
 }
 
 .tmplit-valueupdown-field {
@@ -411,8 +411,8 @@ input::-webkit-inner-spin-button {
     font-size: var(--tmplit-valueupdown-font-size, 20px);
     font-weight: var(--tmplit-valueupdown-font-weight, bold);
     border-width: var(--tmplit-valueupdown-field-border-width, 1px);
-    border-style: var(--tmplit-valueupdown-field-outline-style, solid);
-    border-color: var(--tmplit-valueupdown-field-outline-color, var(--md-sys-color-outline-variant, black));
+    border-style: var(--tmplit-valueupdown-field-border-style, solid);
+    border-color: var(--tmplit-valueupdown-field-border-color, var(--md-sys-color-outline-variant, black));
     border-radius: var(--tmplit-valueupdown-field-outline-radius, 0);
     background-color: var(--tmplit-valueupdown-field-background-color, var(--md-sys-color-surface));
     color: var(--tmplit-valueupdown-field-color, var(--md-sys-color-on-surface))
