@@ -139,14 +139,17 @@ class basicLayout extends HTMLElement {
         //Find the template tags and move them to the shadow dom
         let nodes = this.querySelectorAll('template')
         let labels = []
-
+        let icons = []
+        
         for (let i in nodes) {
             let el = nodes[i]
+            
             switch (el.tagName) {
                 case undefined:
                     break;
                 case 'TEMPLATE':
                     labels.push(el.getAttribute("title"))
+                    icons.push(el.getAttribute("img"))
                     break;
                 default:
                     break;
@@ -192,10 +195,22 @@ class basicLayout extends HTMLElement {
                                              this.shadowRoot.querySelector(".tmplit-navBar-container"))
         
         //Create nav bar button divs
-        for(let i in labels){
+        //Text Buttons
+        // for(let i in labels){
+        //     let button = document.createElement(`div`);
+        //     button.classList.add('tmplit-navBar-button')
+        //     button.innerHTML = labels[i] ? labels[i] : +i + 1;
+        //     console.log(button)
+        //     button.addEventListener('click', ()=>{this.setAttribute('value',i)})
+        //     navbar.appendChild( button )
+        // }
+
+        //Icon Buttons
+        for(let i in icons){
+            let iconSource=''
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
-            button.innerHTML = labels[i] ? labels[i] : +i + 1;
+            button.innerHTML = icons[i] ? (iconSource.concat('<img ',icons[i],'/>')) : +i + 1;
             button.addEventListener('click', ()=>{this.setAttribute('value',i)})
             navbar.appendChild( button )
         }

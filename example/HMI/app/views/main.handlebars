@@ -1,18 +1,26 @@
 <lui-basic-layout navBar="left">
-    <template title="Button 1">
+    <template img='src="../app/assets/logo.png"'>
         {{!-- {{>OpenBridge }} --}}
         <lui-basic-layout navBar="top" footer="disable" nested="NESTED">
+            {{!-- <template title="Inner 1"> --}}
             <template title="Inner 1">
                 {{>OpenBridge }}
+                {{!-- <img src="../app/assets/logo.png"/> --}}
+            </template>
+            <template title="Inner 2">
+                {{>testComponents }}
+            </template>
+            <template title="Inner 3">
+                {{>nav }}
             </template>
         </lui-basic-layout>
     </template>
     
-    <template title="Button 2">
+    <template img='src="../app/assets/CSS.jpg"'>
         {{>testComponents }}
     </template>   
 
-    <template title="Button 3">
+    <template img='src="../app/assets/HTML.jpg"'>
         {{>nav}}
     </template>
 
