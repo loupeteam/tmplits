@@ -148,8 +148,12 @@ class basicLayout extends HTMLElement {
                 case undefined:
                     break;
                 case 'TEMPLATE':
-                    labels.push(el.getAttribute("title"))
-                    icons.push(el.getAttribute("img"))
+                    if (el.getAttribute("title")){
+                        labels.push(el.getAttribute("title"))
+                    }
+                    else if (el.getAttribute("img")){
+                        labels.push(el.getAttribute("img"))
+                    }
                     break;
                 default:
                     break;
@@ -194,23 +198,20 @@ class basicLayout extends HTMLElement {
         let navbar = (nested === 'NESTED' ? this.shadowRoot.querySelector(".tmplit-nested-navBar-container") :
                                              this.shadowRoot.querySelector(".tmplit-navBar-container"))
         
-        //Create nav bar button divs
-        //Text Buttons
-        // for(let i in labels){
-        //     let button = document.createElement(`div`);
-        //     button.classList.add('tmplit-navBar-button')
-        //     button.innerHTML = labels[i] ? labels[i] : +i + 1;
-        //     console.log(button)
-        //     button.addEventListener('click', ()=>{this.setAttribute('value',i)})
-        //     navbar.appendChild( button )
-        // }
-
-        //Icon Buttons
-        for(let i in icons){
+        //Create nav bar button divs 
+        for(let i in labels){
             let iconSource=''
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
-            button.innerHTML = icons[i] ? (iconSource.concat('<img ',icons[i],'/>')) : +i + 1;
+
+            //Icon as button if first 4 characters == src=
+            if (labels[i].substring(0,4) == 'src='){
+                button.innerHTML = labels[i] ? (iconSource.concat('<img ',labels[i],'/>')) : +i + 1;
+            }
+            //Text as button
+            else{
+                button.innerHTML = labels[i] ? labels[i] : +i + 1;
+            }
             button.addEventListener('click', ()=>{this.setAttribute('value',i)})
             navbar.appendChild( button )
         }
