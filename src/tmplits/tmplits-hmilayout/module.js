@@ -204,12 +204,18 @@ class basicLayout extends HTMLElement {
 
         let navbar = (nested === 'NESTED' ? this.shadowRoot.querySelector(".tmplit-nested-navBar-container") :
                                              this.shadowRoot.querySelector(".tmplit-navBar-container"))
+
+        //Assign ::part() to navBar container
+        navbar.setAttribute('part','navBarContainer')
         
         //Create nav bar button divs 
         for(let i in labels){
             let iconSource=''
             let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
+
+            //Assign ::part() to button
+            button.setAttribute('part','button')
 
             //Icon as button if first 4 characters == src=
             if (labels[i].substring(0,4) == 'src='){
