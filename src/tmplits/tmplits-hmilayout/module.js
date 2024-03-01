@@ -49,7 +49,7 @@ styleTemplate.innerHTML =
 .tmplit-nested-navBar-container{
     flex-shrink: 1;
     display: flex;
-    background-color: var(--navBar-background-color,  rgb(0, 230, 230));
+    background-color: var(--navBar-background-color,  rgb(230, 230, 230));
     overflow: var(--navBar-container-overflow, auto);
 }
 
@@ -77,15 +77,22 @@ styleTemplate.innerHTML =
 .tmplit-navBar-button{
     width: 100%;
     text-wrap: nowrap;  
-    text-align: var(--navBar-buttons-text-align, left);
     padding: var(--navBar-buttons-padding, 0 0 0 0);
     margin: var(--navBar-buttons-margin, 0 0 0 0);
     color: var(--navBar-buttons-color, none);
     font-size: var(--navBar-buttons-text-size, Large);
 }
 
+.tmplit-navBar-button > img {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .tmplit-navBar-button.selected{
     background-color: var(--navBar-button-indicator-background-color, rgb(182, 182, 182));
+    border-radius: 20px;
 }
 
 /* Main Content */
