@@ -75,10 +75,10 @@ footer{
 
 /* All buttons within the nav Bar */
 lui-basic-layout::part(navBarContainer){
- 
+    
 }
 
 /* Only active button */
 lui-basic-layout::part(button){
-
+    text-align: center;
 }

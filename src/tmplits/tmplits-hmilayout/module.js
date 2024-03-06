@@ -67,39 +67,27 @@ styleTemplate.innerHTML =
 .tmplit-navBar-container-top{
     flex-direction: row;
     order: 0;
-    align-items: center;
 }
 
 .tmplit-navBar-container-bottom{
     flex-direction: row;
     order: 1;
-    align-items: center;
 }
 
-.tmplit-navBar-button-wrapper{
-    display:flex;
-    justify-content: center;
+.tmplit-navBar-button{
     width: 100%;
     text-wrap: nowrap;  
     padding: var(--navBar-buttons-padding, 0 0 0 0);
     margin: var(--navBar-buttons-margin, 0 0 0 0);
     color: var(--navBar-buttons-color, none);
     font-size: var(--navBar-buttons-text-size, Large);
-    
 }
 
-.tmplit-navBar-button {
-    display:flex;
-    justify-content: center;
-    flex-basis: 150px;
-}
-
-.tmplit-navBar-button.selected img{
-    
-    /* svg -> #0066cc */
-    /* handy conversion tool: https://codepen.io/sosuke/pen/Pjoqqp */
-    filter: invert(20%) sepia(69%) saturate(3221%) hue-rotate(195deg) brightness(103%) contrast(111%);
-    
+.tmplit-navBar-button > img {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .tmplit-navBar-button.selected{
@@ -219,30 +207,26 @@ class basicLayout extends HTMLElement {
 
         //Assign ::part() to navBar container
         navbar.setAttribute('part','navBarContainer')
-    
+        
         //Create nav bar button divs 
         for(let i in labels){
             let iconSource=''
-            let buttonWrapper = document.createElement(`div`);
-            buttonWrapper.classList.add('tmplit-navBar-button-wrapper')
-            let button = document.createElement('div')
+            let button = document.createElement(`div`);
             button.classList.add('tmplit-navBar-button')
 
             //Assign ::part() to button
-            buttonWrapper.setAttribute('part','button')
+            button.setAttribute('part','button')
 
             //Icon as button if first 4 characters == src=
             if (labels[i].substring(0,4) == 'src='){
                 button.innerHTML = labels[i] ? (iconSource.concat('<img ',labels[i],'/>')) : +i + 1;
-                buttonWrapper.append(button)
             }
             //Text as button
             else{
                 button.innerHTML = labels[i] ? labels[i] : +i + 1;
-                buttonWrapper.append(button)
             }
-            buttonWrapper.addEventListener('click', ()=>{this.setAttribute('value',i)})
-            navbar.appendChild( buttonWrapper )
+            button.addEventListener('click', ()=>{this.setAttribute('value',i)})
+            navbar.appendChild( button )
         }
 
         if(!this.hasAttribute('value')){           
