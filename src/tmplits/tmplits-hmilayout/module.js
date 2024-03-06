@@ -44,6 +44,7 @@ styleTemplate.innerHTML =
     display: flex;
     background-color: var(--navBar-background-color,  rgb(230, 230, 230));
     overflow: var(--navBar-container-overflow, auto);
+    align-items: center;
 }
 
 .tmplit-nested-navBar-container{
@@ -51,12 +52,12 @@ styleTemplate.innerHTML =
     display: flex;
     background-color: var(--navBar-background-color,  rgb(230, 230, 230));
     overflow: var(--navBar-container-overflow, auto);
+    align-items: center;
 }
-
 
 .tmplit-navBar-container-left{
     flex-direction: column;
-    order: 0;
+    order: 0; 
 }
 
 .tmplit-navBar-container-right{
@@ -67,27 +68,33 @@ styleTemplate.innerHTML =
 .tmplit-navBar-container-top{
     flex-direction: row;
     order: 0;
+    justify-content: center;
 }
 
 .tmplit-navBar-container-bottom{
     flex-direction: row;
     order: 1;
+    justify-content: center;
 }
 
 .tmplit-navBar-button{
-    width: 100%;
     text-wrap: nowrap;  
     padding: var(--navBar-buttons-padding, 0 0 0 0);
     margin: var(--navBar-buttons-margin, 0 0 0 0);
     color: var(--navBar-buttons-color, none);
     font-size: var(--navBar-buttons-text-size, Large);
+
+    border-width: var(--navBar-buttons-border-width, 0);
+    background-color: var(--navBar-buttons-background-color, inherit);
 }
 
-.tmplit-navBar-button > img {
-    display: block;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+.tmplit-navBar-container-top .tmplit-navBar-button, .tmplit-navBar-container-bottom .tmplit-navBar-button{ 
+    width: 25%;
+    height: 70%;
+}
+.tmplit-navBar-container-left .tmplit-navBar-button, .tmplit-navBar-container-right .tmplit-navBar-button{
+    height: auto;
+    width: 60%;
 }
 
 .tmplit-navBar-button.selected{
@@ -131,8 +138,8 @@ styleTemplate.innerHTML =
 }
 
 .tmplit-navBar-container-height-size{
-    min-height: var(--navBar-minheight, 5%);
-    max-height: var(--navBar-maxheight, 10%);
+    min-height: var(--navBar-minheight, 10%);
+    max-height: var(--navBar-maxheight, 15%);
 }
 </style>
 `;
@@ -211,7 +218,7 @@ class basicLayout extends HTMLElement {
         //Create nav bar button divs 
         for(let i in labels){
             let iconSource=''
-            let button = document.createElement(`div`);
+            let button = document.createElement(`button`);
             button.classList.add('tmplit-navBar-button')
 
             //Assign ::part() to button
