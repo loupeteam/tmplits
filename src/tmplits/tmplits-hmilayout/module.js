@@ -42,15 +42,16 @@ styleTemplate.innerHTML =
 .tmplit-navBar-container{
     flex-shrink: 1;
     display: flex;
-    background-color: var(--navBar-background-color,  rgb(230, 230, 230));
+    background-color: var(--navBar-background-color, rgb(230, 230, 230));
     overflow: var(--navBar-container-overflow, auto);
     align-items: center;
+    
 }
 
 .tmplit-nested-navBar-container{
     flex-shrink: 1;
     display: flex;
-    background-color: var(--navBar-background-color,  rgb(230, 230, 230));
+    background-color: var(--navBar-background-color, rgb(230, 230, 230));
     overflow: var(--navBar-container-overflow, auto);
     align-items: center;
 }
@@ -81,7 +82,7 @@ styleTemplate.innerHTML =
     text-wrap: nowrap;  
     padding: var(--navBar-buttons-padding, 0 0 0 0);
     margin: var(--navBar-buttons-margin, 0 0 0 0);
-    color: var(--navBar-buttons-color, none);
+    color: var(--navBar-buttons-color, var(--md-sys-color-primary, none));
     font-size: var(--navBar-buttons-text-size, Large);
 
     border-width: var(--navBar-buttons-border-width, 0);
