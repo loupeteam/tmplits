@@ -30,11 +30,23 @@ styleTemplate.innerHTML =
     height:100%;
 }
 
-.tmplit-main-container-left-right{
+.tmplit-layout-grid[navBar='left'] .tmplit-main-container,
+.tmplit-layout-grid[navBar='right'] .tmplit-main-container{
     flex-direction: row;
 }
 
-.tmplit-main-container-top-bottom{
+.tmplit-layout-grid[navBar='top'] .tmplit-main-container,
+.tmplit-layout-grid[navBar='bottom'] .tmplit-main-container{
+    flex-direction: column;
+}
+
+.tmplit-nested-layout-grid[navBar='left'] .tmplit-main-container,
+.tmplit-nested-layout-grid[navBar='right'] .tmplit-main-container{
+    flex-direction: row;
+}
+
+.tmplit-nested-layout-grid[navBar='top'] .tmplit-main-container,
+.tmplit-nested-layout-grid[navBar='bottom'] .tmplit-main-container{
     flex-direction: column;
 }
 
@@ -183,10 +195,8 @@ class basicLayout extends HTMLElement {
         
         //Create Shadow Root structure
         this.shadowRoot.innerHTML = `
-        <div class=" ${nested ? 'tmplit-nested-layout-grid' : 'tmplit-layout-grid'}">
-            <div class="tmplit-main-container
-                        ${navBarLoc ==='left' || navBarLoc ==='right' ? 'tmplit-main-container-left-right' : 
-                        navBarLoc ==='top' || navBarLoc ==='bottom' ? 'tmplit-main-container-top-bottom' :'mplit-main-container-left-right'}">
+        <div class="${nested ? 'tmplit-nested-layout-grid' : 'tmplit-layout-grid'}" navBar=${navBarLoc}>
+            <div class="tmplit-main-container">
                 <div class=" ${nested ? 'tmplit-nested-navBar-container' : 'tmplit-navBar-container'}
                             ${navBarLoc ==='left' ? 'tmplit-navBar-container-left tmplit-navBar-container-width-size' :
                             navBarLoc ==='right' ? 'tmplit-navBar-container-right tmplit-navBar-container-width-size' :
