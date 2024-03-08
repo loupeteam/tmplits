@@ -176,8 +176,7 @@ class basicLayout extends HTMLElement {
         }
 
         //Check for nested lui-basic-layout tmplit
-        let nested = (this.parentElement.tagName === 'lui-basic-layout' ? true : false)
-        // let testNested = (nested ? '-nested' : '')
+        let nested = (this.parentElement.tagName === 'LUI-BASIC-LAYOUT' ? true : false)
         let navBarLoc = this.getAttribute('navBar')
         let footer = this.getAttribute('footer')
         this.attachShadow({mode: 'open'})
