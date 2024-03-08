@@ -174,18 +174,21 @@ class basicLayout extends HTMLElement {
                     break;
             }
         }
-        let nested = this.getAttribute('nested')
+
+        //Check for nested lui-basic-layout tmplit
+        let nested = (this.parentElement.tagName === 'lui-basic-layout' ? true : false)
+        // let testNested = (nested ? '-nested' : '')
         let navBarLoc = this.getAttribute('navBar')
         let footer = this.getAttribute('footer')
         this.attachShadow({mode: 'open'})
-
+        
         //Create Shadow Root structure
         this.shadowRoot.innerHTML = `
-        <div class=" ${nested === 'NESTED' ? 'tmplit-nested-layout-grid' : 'tmplit-layout-grid'}">
+        <div class=" ${nested ? 'tmplit-nested-layout-grid' : 'tmplit-layout-grid'}">
             <div class="tmplit-main-container
                         ${navBarLoc ==='left' || navBarLoc ==='right' ? 'tmplit-main-container-left-right' : 
                         navBarLoc ==='top' || navBarLoc ==='bottom' ? 'tmplit-main-container-top-bottom' :'mplit-main-container-left-right'}">
-                <div class=" ${nested === 'NESTED' ? 'tmplit-nested-navBar-container' : 'tmplit-navBar-container'}
+                <div class=" ${nested ? 'tmplit-nested-navBar-container' : 'tmplit-navBar-container'}
                             ${navBarLoc ==='left' ? 'tmplit-navBar-container-left tmplit-navBar-container-width-size' :
                             navBarLoc ==='right' ? 'tmplit-navBar-container-right tmplit-navBar-container-width-size' :
                             navBarLoc ==='top' ? 'tmplit-navBar-container-top tmplit-navBar-container-height-size' :
@@ -210,8 +213,8 @@ class basicLayout extends HTMLElement {
         this.shadowRoot.appendChild(styleTemplate.content.cloneNode(true));
         this.shadowRoot.innerHTML += this.innerHTML;
 
-        let navbar = (nested === 'NESTED' ? this.shadowRoot.querySelector(".tmplit-nested-navBar-container") :
-                                             this.shadowRoot.querySelector(".tmplit-navBar-container"))
+        let navbar = (nested ? this.shadowRoot.querySelector(".tmplit-nested-navBar-container") : 
+                                this.shadowRoot.querySelector(".tmplit-navBar-container"))
 
         //Assign ::part() to navBar container
         navbar.setAttribute('part','navBarContainer')
