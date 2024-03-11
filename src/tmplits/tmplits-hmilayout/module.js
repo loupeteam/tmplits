@@ -13,13 +13,10 @@ styleTemplate.innerHTML =
     width: 100vw;
 
 }
-.tmplit-nested-layout-grid{
-    display: grid;
-    grid-template-rows: 1fr;
+.tmplit-layout-grid[nested='nested']{
     height: 100%; 
     width: 100%;
-
-}
+}   
 
 /* Main Wrapper */
 .tmplit-main-container{
@@ -31,16 +28,12 @@ styleTemplate.innerHTML =
 }
 
 .tmplit-layout-grid[navBar='left'] .tmplit-main-container,
-.tmplit-layout-grid[navBar='right'] .tmplit-main-container,
-.tmplit-nested-layout-grid[navBar='left'] .tmplit-main-container,
-.tmplit-nested-layout-grid[navBar='right'] .tmplit-main-container{
+.tmplit-layout-grid[navBar='right'] .tmplit-main-container{
     flex-direction: row;
 }
 
 .tmplit-layout-grid[navBar='top'] .tmplit-main-container,
-.tmplit-layout-grid[navBar='bottom'] .tmplit-main-container,
-.tmplit-nested-layout-grid[navBar='top'] .tmplit-main-container,
-.tmplit-nested-layout-grid[navBar='bottom'] .tmplit-main-container{
+.tmplit-layout-grid[navBar='bottom'] .tmplit-main-container{
     flex-direction: column;
 }
 
@@ -54,52 +47,40 @@ styleTemplate.innerHTML =
     
 }
 
-.tmplit-nested-navBar-container{
-    flex-shrink: 1;
-    display: flex;
-    background-color: var(--navBar-background-color, rgb(230, 230, 230));
-    overflow: var(--navBar-container-overflow, auto);
-    align-items: center;
-}
-
-.tmplit-layout-grid[navBar='left'] .tmplit-navBar-container.tmplit-navBar-container-width-size,
-.tmplit-nested-layout-grid[navBar='left'] .tmplit-nested-navBar-container.tmplit-navBar-container-width-size{
+.tmplit-layout-grid[navBar='left'] .tmplit-navBar-container{
     flex-direction: column;
     order: 0; 
 }
 
-.tmplit-layout-grid[navBar='right'] .tmplit-navBar-container.tmplit-navBar-container-width-size,
-.tmplit-nested-layout-grid[navBar='right'] .tmplit-nested-navBar-container.tmplit-navBar-container-width-size{
+.tmplit-layout-grid[navBar='right'] .tmplit-navBar-container{
     flex-direction: column;
     order: 1;
 }
 
-.tmplit-layout-grid[navBar='top'] .tmplit-navBar-container.tmplit-navBar-container-height-size,
-.tmplit-nested-layout-grid[navBar='top'] .tmplit-nested-navBar-container.tmplit-navBar-container-height-size{
+.tmplit-layout-grid[navBar='top'] .tmplit-navBar-container{
     flex-direction: row;
     order: 0;
     justify-content: center;
+    min-height: var(--navBar-minheight, 10%);
+    max-height: var(--navBar-maxheight, 15%);
 }
 
-.tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container.tmplit-navBar-container-height-size,
-.tmplit-nested-layout-grid[navBar='bottom'] .tmplit-nested-navBar-container.tmplit-navBar-container-height-size{
+.tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
     flex-direction: row;
     order: 1;
     justify-content: center;
+    min-height: var(--navBar-minheight, 10%);
+    max-height: var(--navBar-maxheight, 15%);
 }
 
 .tmplit-layout-grid[navBar='left'] .tmplit-navBar-button,
-.tmplit-layout-grid[navBar='right'] .tmplit-navBar-button,
-.tmplit-nested-layout-grid[navBar='left'] .tmplit-navBar-button,
-.tmplit-nested-layout-grid[navBar='right'] .tmplit-navBar-button{
+.tmplit-layout-grid[navBar='right'] .tmplit-navBar-button{
     height: auto;
     width: 60%;
 }
 
 .tmplit-layout-grid[navBar='top'] .tmplit-navBar-button,
-.tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-button,
-.tmplit-nested-layout-grid[navBar='top'] .tmplit-navBar-button,
-.tmplit-nested-layout-grid[navBar='bottom'] .tmplit-navBar-button{
+.tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-button{
     width: 25%;
     height: 70%;
 }
@@ -133,7 +114,8 @@ styleTemplate.innerHTML =
 }
 
 @media (max-width: 992px){
-    .tmplit-navBar-container-width-size{
+    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container-width-size,
+    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container-width-size{
         min-width: var(--navBar-minwidth, 10%);
         max-width: var(--navBar-maxwidth, 15%);
     }
@@ -141,7 +123,8 @@ styleTemplate.innerHTML =
 
 /* Medium Screen Size */
 @media (min-width: 992px) and (max-width: 1200px){
-    .tmplit-navBar-container-width-size{
+    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container-width-size,
+    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container-width-size{
         min-width: var(--navBar-minwidth, 15%);
         max-width: var(--navBar-maxwidth, 20%);
     }
@@ -149,7 +132,8 @@ styleTemplate.innerHTML =
 
 /* Large Screen Size */
 @media (min-width: 1200px){
-    .tmplit-navBar-container-width-size{
+    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container-width-size,
+    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container-width-size{
         min-width: var(--navBar-minwidth, 20%);
         max-width: var(--navBar-maxwidth, 25%);
     }
@@ -192,22 +176,17 @@ class basicLayout extends HTMLElement {
             }
         }
 
-        //Check for nested lui-basic-layout tmplit
-        let nested = (this.parentElement.localName == 'lui-basic-layout' ? true : false)
+        //Check for nested lui-basic-layout tmplit.  If there parent tag is lui-basic-layout, then it is nested
+        let nested = (this.parentElement.localName == 'lui-basic-layout' ? 'nested' : '')
         let navBarLoc = this.getAttribute('navBar')
         let footer = this.getAttribute('footer')
         this.attachShadow({mode: 'open'})
         
         //Create Shadow Root structure
         this.shadowRoot.innerHTML = `
-        <div class="${nested ? 'tmplit-nested-layout-grid' : 'tmplit-layout-grid'}" navBar=${navBarLoc}>
+        <div class="tmplit-layout-grid" navBar=${navBarLoc} nested=${nested}>
             <div class="tmplit-main-container">
-                <div class=" ${nested ? 'tmplit-nested-navBar-container' : 'tmplit-navBar-container'}
-                            ${navBarLoc ==='left' ? 'tmplit-navBar-container-width-size' :
-                            navBarLoc ==='right' ? 'tmplit-navBar-container-width-size' :
-                            navBarLoc ==='top' ? 'tmplit-navBar-container-height-size' :
-                            navBarLoc ==='bottom' ? 'tmplit-navBar-container-height-size' : 
-                            'tmplit-navBar-container-width-size'}">
+                <div class="tmplit-navBar-container tmplit-navBar-container-width-size">
                 </div>
 
                 <div class="tmplit-main-content">
@@ -226,9 +205,8 @@ class basicLayout extends HTMLElement {
         // Append styleTemplate to shadowRoot to activate css styling
         this.shadowRoot.appendChild(styleTemplate.content.cloneNode(true));
         this.shadowRoot.innerHTML += this.innerHTML;
-
-        let navbar = (nested ? this.shadowRoot.querySelector(".tmplit-nested-navBar-container") : 
-                                this.shadowRoot.querySelector(".tmplit-navBar-container"))
+                                
+        let navbar = this.shadowRoot.querySelector(".tmplit-navBar-container")
 
         //Assign ::part() to navBar container
         navbar.setAttribute('part','navBarContainer')
