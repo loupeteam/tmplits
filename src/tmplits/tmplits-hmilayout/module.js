@@ -31,20 +31,14 @@ styleTemplate.innerHTML =
 }
 
 .tmplit-layout-grid[navBar='left'] .tmplit-main-container,
-.tmplit-layout-grid[navBar='right'] .tmplit-main-container{
-    flex-direction: row;
-}
-
-.tmplit-layout-grid[navBar='top'] .tmplit-main-container,
-.tmplit-layout-grid[navBar='bottom'] .tmplit-main-container{
-    flex-direction: column;
-}
-
+.tmplit-layout-grid[navBar='right'] .tmplit-main-container,
 .tmplit-nested-layout-grid[navBar='left'] .tmplit-main-container,
 .tmplit-nested-layout-grid[navBar='right'] .tmplit-main-container{
     flex-direction: row;
 }
 
+.tmplit-layout-grid[navBar='top'] .tmplit-main-container,
+.tmplit-layout-grid[navBar='bottom'] .tmplit-main-container,
 .tmplit-nested-layout-grid[navBar='top'] .tmplit-main-container,
 .tmplit-nested-layout-grid[navBar='bottom'] .tmplit-main-container{
     flex-direction: column;
@@ -68,26 +62,46 @@ styleTemplate.innerHTML =
     align-items: center;
 }
 
-.tmplit-navBar-container-left{
+.tmplit-layout-grid[navBar='left'] .tmplit-navBar-container.tmplit-navBar-container-width-size,
+.tmplit-nested-layout-grid[navBar='left'] .tmplit-nested-navBar-container.tmplit-navBar-container-width-size{
     flex-direction: column;
     order: 0; 
 }
 
-.tmplit-navBar-container-right{
+.tmplit-layout-grid[navBar='right'] .tmplit-navBar-container.tmplit-navBar-container-width-size,
+.tmplit-nested-layout-grid[navBar='right'] .tmplit-nested-navBar-container.tmplit-navBar-container-width-size{
     flex-direction: column;
     order: 1;
 }
 
-.tmplit-navBar-container-top{
+.tmplit-layout-grid[navBar='top'] .tmplit-navBar-container.tmplit-navBar-container-height-size,
+.tmplit-nested-layout-grid[navBar='top'] .tmplit-nested-navBar-container.tmplit-navBar-container-height-size{
     flex-direction: row;
     order: 0;
     justify-content: center;
 }
 
-.tmplit-navBar-container-bottom{
+.tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container.tmplit-navBar-container-height-size,
+.tmplit-nested-layout-grid[navBar='bottom'] .tmplit-nested-navBar-container.tmplit-navBar-container-height-size{
     flex-direction: row;
     order: 1;
     justify-content: center;
+}
+
+.tmplit-layout-grid[navBar='left'] .tmplit-navBar-button,
+.tmplit-layout-grid[navBar='right'] .tmplit-navBar-button,
+.tmplit-nested-layout-grid[navBar='left'] .tmplit-navBar-button,
+.tmplit-nested-layout-grid[navBar='right'] .tmplit-navBar-button{
+    height: auto;
+    width: 60%;
+}
+
+.tmplit-layout-grid[navBar='top'] .tmplit-navBar-button,
+.tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-button,
+.tmplit-nested-layout-grid[navBar='top'] .tmplit-navBar-button,
+.tmplit-nested-layout-grid[navBar='bottom'] .tmplit-navBar-button{
+    width: 25%;
+    height: 70%;
 }
 
 .tmplit-navBar-button{
@@ -99,15 +113,6 @@ styleTemplate.innerHTML =
 
     border-width: var(--navBar-buttons-border-width, 0);
     background-color: var(--navBar-buttons-background-color, inherit);
-}
-
-.tmplit-navBar-container-top .tmplit-navBar-button, .tmplit-navBar-container-bottom .tmplit-navBar-button{ 
-    width: 25%;
-    height: 70%;
-}
-.tmplit-navBar-container-left .tmplit-navBar-button, .tmplit-navBar-container-right .tmplit-navBar-button{
-    height: auto;
-    width: 60%;
 }
 
 .tmplit-navBar-button.selected{
@@ -198,11 +203,11 @@ class basicLayout extends HTMLElement {
         <div class="${nested ? 'tmplit-nested-layout-grid' : 'tmplit-layout-grid'}" navBar=${navBarLoc}>
             <div class="tmplit-main-container">
                 <div class=" ${nested ? 'tmplit-nested-navBar-container' : 'tmplit-navBar-container'}
-                            ${navBarLoc ==='left' ? 'tmplit-navBar-container-left tmplit-navBar-container-width-size' :
-                            navBarLoc ==='right' ? 'tmplit-navBar-container-right tmplit-navBar-container-width-size' :
-                            navBarLoc ==='top' ? 'tmplit-navBar-container-top tmplit-navBar-container-height-size' :
-                            navBarLoc ==='bottom' ? 'tmplit-navBar-container-bottom tmplit-navBar-container-height-size' : 
-                            'tmplit-navBar-container-left tmplit-navBar-container-width-size'}">
+                            ${navBarLoc ==='left' ? 'tmplit-navBar-container-width-size' :
+                            navBarLoc ==='right' ? 'tmplit-navBar-container-width-size' :
+                            navBarLoc ==='top' ? 'tmplit-navBar-container-height-size' :
+                            navBarLoc ==='bottom' ? 'tmplit-navBar-container-height-size' : 
+                            'tmplit-navBar-container-width-size'}">
                 </div>
 
                 <div class="tmplit-main-content">
