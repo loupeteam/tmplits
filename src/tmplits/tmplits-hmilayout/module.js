@@ -43,8 +43,7 @@ styleTemplate.innerHTML =
     display: flex;
     background-color: var(--navBar-background-color, rgb(230, 230, 230));
     overflow: var(--navBar-container-overflow, auto);
-    align-items: center;
-    
+    align-items: center;    
 }
 
 .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container{
@@ -61,16 +60,24 @@ styleTemplate.innerHTML =
     flex-direction: row;
     order: 0;
     justify-content: center;
-    min-height: var(--navBar-minheight, 10%);
-    max-height: var(--navBar-maxheight, 15%);
+
 }
 
 .tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
     flex-direction: row;
     order: 1;
     justify-content: center;
-    min-height: var(--navBar-minheight, 10%);
-    max-height: var(--navBar-maxheight, 15%);
+}
+
+.tmplit-navBar-button{
+    text-wrap: nowrap;  
+    padding: var(--navBar-buttons-padding, 0 0 0 0);
+    margin: var(--navBar-buttons-margin, 0 0 0 0);
+    color: var(--navBar-buttons-color, var(--md-sys-color-primary, none));
+    font-size: var(--navBar-buttons-text-size, Large);
+
+    border-width: var(--navBar-buttons-border-width, 0);
+    background-color: var(--navBar-buttons-background-color, inherit);
 }
 
 .tmplit-layout-grid[navBar='left'] .tmplit-navBar-button,
@@ -83,17 +90,6 @@ styleTemplate.innerHTML =
 .tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-button{
     width: 25%;
     height: 70%;
-}
-
-.tmplit-navBar-button{
-    text-wrap: nowrap;  
-    padding: var(--navBar-buttons-padding, 0 0 0 0);
-    margin: var(--navBar-buttons-margin, 0 0 0 0);
-    color: var(--navBar-buttons-color, var(--md-sys-color-primary, none));
-    font-size: var(--navBar-buttons-text-size, Large);
-
-    border-width: var(--navBar-buttons-border-width, 0);
-    background-color: var(--navBar-buttons-background-color, inherit);
 }
 
 .tmplit-navBar-button.selected{
@@ -114,34 +110,45 @@ styleTemplate.innerHTML =
 }
 
 @media (max-width: 992px){
-    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container-width-size,
-    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container-width-size{
+    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container,
+    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container{
         min-width: var(--navBar-minwidth, 10%);
         max-width: var(--navBar-maxwidth, 15%);
+    }
+
+    .tmplit-layout-grid[navBar='top'] .tmplit-navBar-container,
+    .tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
+        min-height: var(--navBar-minheight, 10%);
+        max-height: var(--navBar-maxheight, 15%);
     }
 }
 
 /* Medium Screen Size */
 @media (min-width: 992px) and (max-width: 1200px){
-    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container-width-size,
-    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container-width-size{
+    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container,
+    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container{
         min-width: var(--navBar-minwidth, 15%);
         max-width: var(--navBar-maxwidth, 20%);
+    }
+    .tmplit-layout-grid[navBar='top'] .tmplit-navBar-container,
+    .tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
+        min-height: var(--navBar-minheight, 10%);
+        max-height: var(--navBar-maxheight, 15%);
     }
 }
 
 /* Large Screen Size */
 @media (min-width: 1200px){
-    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container-width-size,
-    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container-width-size{
+    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container,
+    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container{
         min-width: var(--navBar-minwidth, 20%);
         max-width: var(--navBar-maxwidth, 25%);
     }
-}
-
-.tmplit-navBar-container-height-size{
-    min-height: var(--navBar-minheight, 10%);
-    max-height: var(--navBar-maxheight, 15%);
+    .tmplit-layout-grid[navBar='top'] .tmplit-navBar-container,
+    .tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
+        min-height: var(--navBar-minheight, 10%);
+        max-height: var(--navBar-maxheight, 15%);
+    }
 }
 </style>
 `;
@@ -186,7 +193,7 @@ class basicLayout extends HTMLElement {
         this.shadowRoot.innerHTML = `
         <div class="tmplit-layout-grid" navBar=${navBarLoc} nested=${nested}>
             <div class="tmplit-main-container">
-                <div class="tmplit-navBar-container tmplit-navBar-container-width-size">
+                <div class="tmplit-navBar-container">
                 </div>
 
                 <div class="tmplit-main-content">
