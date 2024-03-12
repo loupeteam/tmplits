@@ -13,28 +13,19 @@ styleTemplate.innerHTML =
     width: 100vw;
 
 }
+/* Nested grid */
 .tmplit-layout-grid[nested='nested']{
     height: 100%; 
     width: 100%;
 }   
 
-/* Main Wrapper */
+/* Main Container */
 .tmplit-main-container{
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
     display: flex;
     overflow: var(--main-container-overflow, auto);
     height:100%;
-}
-
-.tmplit-layout-grid[navBar='left'] .tmplit-main-container,
-.tmplit-layout-grid[navBar='right'] .tmplit-main-container{
-    flex-direction: row;
-}
-
-.tmplit-layout-grid[navBar='top'] .tmplit-main-container,
-.tmplit-layout-grid[navBar='bottom'] .tmplit-main-container{
-    flex-direction: column;
 }
 
 /* Nav Bar*/
@@ -46,29 +37,7 @@ styleTemplate.innerHTML =
     align-items: center;    
 }
 
-.tmplit-layout-grid[navBar='left'] .tmplit-navBar-container{
-    flex-direction: column;
-    order: 0; 
-}
-
-.tmplit-layout-grid[navBar='right'] .tmplit-navBar-container{
-    flex-direction: column;
-    order: 1;
-}
-
-.tmplit-layout-grid[navBar='top'] .tmplit-navBar-container{
-    flex-direction: row;
-    order: 0;
-    justify-content: center;
-
-}
-
-.tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
-    flex-direction: row;
-    order: 1;
-    justify-content: center;
-}
-
+/* Nav Bar Buttons */
 .tmplit-navBar-button{
     text-wrap: nowrap;  
     padding: var(--navBar-buttons-padding, 0 0 0 0);
@@ -80,21 +49,53 @@ styleTemplate.innerHTML =
     background-color: var(--navBar-buttons-background-color, inherit);
 }
 
-.tmplit-layout-grid[navBar='left'] .tmplit-navBar-button,
-.tmplit-layout-grid[navBar='right'] .tmplit-navBar-button{
-    height: auto;
-    width: 60%;
-}
-
-.tmplit-layout-grid[navBar='top'] .tmplit-navBar-button,
-.tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-button{
-    width: 25%;
-    height: 70%;
-}
-
 .tmplit-navBar-button.selected{
     background-color: var(--navBar-button-indicator-background-color, rgb(182, 182, 182));
     border-radius: 20px;
+}
+
+/* Additional styling for different nav bar locations */
+/* Main Container Layout Per Nav Bar Location */
+.tmplit-main-container[navBar='left'],
+.tmplit-main-container[navBar='right']{
+    flex-direction: row;
+
+    .tmplit-navBar-container{
+        flex-direction: column;
+    }
+
+    .tmplit-navBar-button{
+        height: auto;
+        width: 60%;
+    }
+}
+
+.tmplit-main-container[navBar='top'],
+.tmplit-main-container[navBar='bottom']{
+    flex-direction: column;
+
+    .tmplit-navBar-container{
+        flex-direction: row;
+        justify-content: center;
+        min-height: var(--navBar-minheight, 10%);
+        max-height: var(--navBar-maxheight, 15%);
+    }
+
+    .tmplit-navBar-button{
+        width: 25%;
+        height: 70%;
+    }
+}
+
+/* Nav Bar Location */
+.tmplit-main-container[navBar='left'] .tmplit-navBar-container,
+.tmplit-main-container[navBar='top'] .tmplit-navBar-container{
+    order: 0; 
+}
+
+.tmplit-main-container[navBar='right'] .tmplit-navBar-container,
+.tmplit-main-container[navBar='bottom'] .tmplit-navBar-container{
+    order: 1;
 }
 
 /* Main Content */
@@ -110,44 +111,28 @@ styleTemplate.innerHTML =
 }
 
 @media (max-width: 992px){
-    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container,
-    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container{
+    .tmplit-main-container[navBar='left'] .tmplit-navBar-container,
+    .tmplit-main-container[navBar='right'] .tmplit-navBar-container{
         min-width: var(--navBar-minwidth, 10%);
         max-width: var(--navBar-maxwidth, 15%);
-    }
-
-    .tmplit-layout-grid[navBar='top'] .tmplit-navBar-container,
-    .tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
-        min-height: var(--navBar-minheight, 10%);
-        max-height: var(--navBar-maxheight, 15%);
     }
 }
 
 /* Medium Screen Size */
 @media (min-width: 992px) and (max-width: 1200px){
-    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container,
-    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container{
+    .tmplit-main-container[navBar='left'] .tmplit-navBar-container,
+    .tmplit-main-container[navBar='right'] .tmplit-navBar-container{
         min-width: var(--navBar-minwidth, 15%);
         max-width: var(--navBar-maxwidth, 20%);
-    }
-    .tmplit-layout-grid[navBar='top'] .tmplit-navBar-container,
-    .tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
-        min-height: var(--navBar-minheight, 10%);
-        max-height: var(--navBar-maxheight, 15%);
     }
 }
 
 /* Large Screen Size */
 @media (min-width: 1200px){
-    .tmplit-layout-grid[navBar='left'] .tmplit-navBar-container,
-    .tmplit-layout-grid[navBar='right'] .tmplit-navBar-container{
+    .tmplit-main-container[navBar='left'] .tmplit-navBar-container,
+    .tmplit-main-container[navBar='right'] .tmplit-navBar-container{
         min-width: var(--navBar-minwidth, 20%);
         max-width: var(--navBar-maxwidth, 25%);
-    }
-    .tmplit-layout-grid[navBar='top'] .tmplit-navBar-container,
-    .tmplit-layout-grid[navBar='bottom'] .tmplit-navBar-container{
-        min-height: var(--navBar-minheight, 10%);
-        max-height: var(--navBar-maxheight, 15%);
     }
 }
 </style>
@@ -191,8 +176,8 @@ class basicLayout extends HTMLElement {
         
         //Create Shadow Root structure
         this.shadowRoot.innerHTML = `
-        <div class="tmplit-layout-grid" navBar=${navBarLoc} nested=${nested}>
-            <div class="tmplit-main-container">
+        <div class="tmplit-layout-grid" nested=${nested}>
+            <div class="tmplit-main-container" navBar=${navBarLoc}>
                 <div class="tmplit-navBar-container">
                 </div>
 
