@@ -29,72 +29,76 @@ styleTemplate.innerHTML =
 }
 
 /* Nav Bar*/
-.tmplit-navBar-container{
+.tmplit-navbar-container{
     flex-shrink: 1;
     display: flex;
-    background-color: var(--navBar-background-color, rgb(230, 230, 230));
-    overflow: var(--navBar-container-overflow, auto);
+    background-color: var(--navbar-background-color, rgb(230, 230, 230));
+    overflow: var(--navbar-container-overflow, auto);
     align-items: center;    
 }
 
 /* Nav Bar Buttons */
-.tmplit-navBar-button{
+.tmplit-navbar-button{
     text-wrap: nowrap;  
-    padding: var(--navBar-buttons-padding, 0 0 0 0);
-    margin: var(--navBar-buttons-margin, 0 0 0 0);
-    color: var(--navBar-buttons-color, var(--md-sys-color-primary, none));
-    font-size: var(--navBar-buttons-text-size, Large);
+    padding: var(--navbar-buttons-padding, 0 0 0 0);
+    margin: var(--navbar-buttons-margin, 0 0 0 0);
+    color: var(--navbar-buttons-color, var(--md-sys-color-primary, none));
+    font-size: var(--navbar-buttons-text-size, Large);
 
-    border-width: var(--navBar-buttons-border-width, 0);
-    background-color: var(--navBar-buttons-background-color, inherit);
+    border-width: var(--navbar-buttons-border-width, 0);
+    background-color: var(--navbar-buttons-background-color, inherit);
 }
 
-.tmplit-navBar-button.selected{
-    background-color: var(--navBar-button-indicator-background-color, rgb(182, 182, 182));
+.tmplit-navbar-button.selected{
+    background-color: var(--navbar-button-indicator-background-color, rgb(182, 182, 182));
     border-radius: 20px;
 }
 
 /* Additional styling for different nav bar locations */
 /* Main Container Layout Per Nav Bar Location */
-.tmplit-main-container[navBar='left'],
-.tmplit-main-container[navBar='right']{
+.tmplit-main-container[navbar='left'],
+.tmplit-main-container[navbar='right']{
     flex-direction: row;
-
-    .tmplit-navBar-container{
-        flex-direction: column;
-    }
-
-    .tmplit-navBar-button{
-        height: auto;
-        width: 60%;
-    }
 }
 
-.tmplit-main-container[navBar='top'],
-.tmplit-main-container[navBar='bottom']{
+.tmplit-main-container[navbar='left'] .tmplit-navbar-container,
+.tmplit-main-container[navbar='right'] .tmplit-navbar-container{
     flex-direction: column;
+}
 
-    .tmplit-navBar-container{
-        flex-direction: row;
-        justify-content: center;
-        min-height: var(--navBar-minheight, 10%);
-        max-height: var(--navBar-maxheight, 15%);
-    }
+.tmplit-main-container[navbar='left'] .tmplit-navbar-button,
+.tmplit-main-container[navbar='right'] .tmplit-navbar-button{
+    height: auto;
+    width: 60%;
+}
 
-    .tmplit-navBar-button{
-        width: 25%;
-        height: 70%;
-    }
+.tmplit-main-container[navbar='top'],
+.tmplit-main-container[navbar='bottom']{
+    flex-direction: column;
+}
+
+.tmplit-main-container[navbar='top'] .tmplit-navbar-container,
+.tmplit-main-container[navbar='bottom'] .tmplit-navbar-container{
+    flex-direction: row;
+    justify-content: center;
+    min-height: var(--navbar-minheight, 10%);
+    max-height: var(--navbar-maxheight, 15%);
+}
+
+.tmplit-main-container[navbar='top'] .tmplit-navbar-button,
+.tmplit-main-container[navbar='bottom'] .tmplit-navbar-button{
+    width: 25%;
+    height: 70%;
 }
 
 /* Nav Bar Location */
-.tmplit-main-container[navBar='left'] .tmplit-navBar-container,
-.tmplit-main-container[navBar='top'] .tmplit-navBar-container{
+.tmplit-main-container[navbar='left'] .tmplit-navbar-container,
+.tmplit-main-container[navbar='top'] .tmplit-navbar-container{
     order: 0; 
 }
 
-.tmplit-main-container[navBar='right'] .tmplit-navBar-container,
-.tmplit-main-container[navBar='bottom'] .tmplit-navBar-container{
+.tmplit-main-container[navbar='right'] .tmplit-navbar-container,
+.tmplit-main-container[navbar='bottom'] .tmplit-navbar-container{
     order: 1;
 }
 
@@ -111,28 +115,28 @@ styleTemplate.innerHTML =
 }
 
 @media (max-width: 992px){
-    .tmplit-main-container[navBar='left'] .tmplit-navBar-container,
-    .tmplit-main-container[navBar='right'] .tmplit-navBar-container{
-        min-width: var(--navBar-minwidth, 10%);
-        max-width: var(--navBar-maxwidth, 15%);
+    .tmplit-main-container[navbar='left'] .tmplit-navbar-container,
+    .tmplit-main-container[navbar='right'] .tmplit-navbar-container{
+        min-width: var(--navbar-minwidth, 10%);
+        max-width: var(--navbar-maxwidth, 15%);
     }
 }
 
 /* Medium Screen Size */
 @media (min-width: 992px) and (max-width: 1200px){
-    .tmplit-main-container[navBar='left'] .tmplit-navBar-container,
-    .tmplit-main-container[navBar='right'] .tmplit-navBar-container{
-        min-width: var(--navBar-minwidth, 15%);
-        max-width: var(--navBar-maxwidth, 20%);
+    .tmplit-main-container[navbar='left'] .tmplit-navbar-container,
+    .tmplit-main-container[navbar='right'] .tmplit-navbar-container{
+        min-width: var(--navbar-minwidth, 15%);
+        max-width: var(--navbar-maxwidth, 20%);
     }
 }
 
 /* Large Screen Size */
 @media (min-width: 1200px){
-    .tmplit-main-container[navBar='left'] .tmplit-navBar-container,
-    .tmplit-main-container[navBar='right'] .tmplit-navBar-container{
-        min-width: var(--navBar-minwidth, 20%);
-        max-width: var(--navBar-maxwidth, 25%);
+    .tmplit-main-container[navbar='left'] .tmplit-navbar-container,
+    .tmplit-main-container[navbar='right'] .tmplit-navbar-container{
+        min-width: var(--navbar-minwidth, 20%);
+        max-width: var(--navbar-maxwidth, 25%);
     }
 }
 </style>
@@ -169,16 +173,17 @@ class basicLayout extends HTMLElement {
         }
 
         //Check for nested lui-basic-layout tmplit.  If there parent tag is lui-basic-layout, then it is nested
-        let nested = (this.parentElement.localName == 'lui-basic-layout' ? 'nested' : '')
-        let navBarLoc = this.getAttribute('navBar')
+        let nestedLayout = (this.parentElement.localName == 'lui-basic-layout' ? 'nested' : '')
+        let navBarLoc = this.getAttribute('navbar')
         let footer = this.getAttribute('footer')
         this.attachShadow({mode: 'open'})
         
         //Create Shadow Root structure
+        //::part(footer) is assigned to footer
         this.shadowRoot.innerHTML = `
-        <div class="tmplit-layout-grid" nested=${nested}>
-            <div class="tmplit-main-container" navBar=${navBarLoc}>
-                <div class="tmplit-navBar-container">
+        <div class="tmplit-layout-grid" nested=${nestedLayout}>
+            <div class="tmplit-main-container" navbar=${navBarLoc}>
+                <div class="tmplit-navbar-container">
                 </div>
 
                 <div class="tmplit-main-content">
@@ -189,7 +194,7 @@ class basicLayout extends HTMLElement {
             </div>
 
             ${footer !== 'disable' ? 
-            `<div class="tmplit-footer-wrapper">
+            `<div class="tmplit-footer-wrapper" part="footer">
                 <slot name="footer">
                     DEFAULT FOOTER
                 </slot>
@@ -198,16 +203,16 @@ class basicLayout extends HTMLElement {
         this.shadowRoot.appendChild(styleTemplate.content.cloneNode(true));
         this.shadowRoot.innerHTML += this.innerHTML;
                                 
-        let navbar = this.shadowRoot.querySelector(".tmplit-navBar-container")
+        let navbar = this.shadowRoot.querySelector(".tmplit-navbar-container")
 
-        //Assign ::part() to navBar container
-        navbar.setAttribute('part','navBarContainer')
+        //Assign ::part() to navbar container
+        navbar.setAttribute('part','navbar-container')
         
         //Create nav bar button divs 
         for(let i in labels){
             let iconSource=''
             let button = document.createElement(`button`);
-            button.classList.add('tmplit-navBar-button')
+            button.classList.add('tmplit-navbar-button')
 
             //Assign ::part() to button
             button.setAttribute('part','button')
@@ -260,7 +265,7 @@ class basicLayout extends HTMLElement {
         let footer = this.querySelector('[slot="footer"]')   
         
         //Add - Remove Navigation Button Indicator
-        let buttons = this.shadowRoot.querySelectorAll('.tmplit-navBar-button')
+        let buttons = this.shadowRoot.querySelectorAll('.tmplit-navbar-button')
         for (let i = 0; i < buttons.length; i++){
             buttons[i].classList.remove('selected')
             buttons[templatesIndex].classList.add('selected')
