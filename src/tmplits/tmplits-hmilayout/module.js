@@ -215,7 +215,7 @@ class basicLayout extends HTMLElement {
             button.classList.add('tmplit-navbar-button')
 
             //Assign ::part() to button
-            button.setAttribute('part','button')
+            button.setAttribute('part','nav-button')
 
             //Icon as button if first 4 characters == src=
             if (labels[i].substring(0,4) == 'src='){
@@ -268,7 +268,12 @@ class basicLayout extends HTMLElement {
         let buttons = this.shadowRoot.querySelectorAll('.tmplit-navbar-button')
         for (let i = 0; i < buttons.length; i++){
             buttons[i].classList.remove('selected')
+            let oldPart = buttons[i]['part']
+            oldPart.remove('selected')
+
             buttons[templatesIndex].classList.add('selected')
+            let newPart = buttons[templatesIndex]['part']
+            newPart.add('selected')
         }
 
         if(+templatesIndex < templates.length){          
