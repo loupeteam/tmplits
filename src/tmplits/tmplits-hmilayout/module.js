@@ -186,7 +186,7 @@ class basicLayout extends HTMLElement {
                 <div class="tmplit-navbar-container">
                 </div>
 
-                <div class="tmplit-main-content">
+                <div class="tmplit-main-content" part="main-content">
                     <slot>
                         DEFAULT SLOT
                     </slot>
