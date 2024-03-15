@@ -44,9 +44,13 @@ styleTemplate.innerHTML =
     margin: var(--navbar-buttons-margin, 0 0 0 0);
     color: var(--navbar-buttons-color, var(--md-sys-color-primary, none));
     font-size: var(--navbar-buttons-text-size, Large);
-
+    line-height: 1;
     border-width: var(--navbar-buttons-border-width, 0);
     background-color: var(--navbar-buttons-background-color, inherit);
+}
+
+.tmplit-navbar-button > img {
+    vertical-align: middle;
 }
 
 .tmplit-navbar-button.selected{
@@ -88,7 +92,7 @@ styleTemplate.innerHTML =
 .tmplit-main-container[navbar='top'] .tmplit-navbar-button,
 .tmplit-main-container[navbar='bottom'] .tmplit-navbar-button{
     width: 25%;
-    height: 70%;
+    height: 80%;
 }
 
 /* Nav Bar Location */
@@ -265,6 +269,7 @@ class basicLayout extends HTMLElement {
         let footer = this.querySelector('[slot="footer"]')   
         
         //Add - Remove Navigation Button Indicator
+        //::part(selected) is assigned to active button
         let buttons = this.shadowRoot.querySelectorAll('.tmplit-navbar-button')
         for (let i = 0; i < buttons.length; i++){
             buttons[i].classList.remove('selected')
