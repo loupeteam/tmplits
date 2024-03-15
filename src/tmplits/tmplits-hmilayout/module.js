@@ -212,18 +212,19 @@ class basicLayout extends HTMLElement {
         //Assign ::part() to navbar container
         navbar.setAttribute('part','navbar-container')
         
-        //Create nav bar button divs 
+        //Create nav bar button
+        //Assign ::part() to button
         for(let i in labels){
-            let iconSource=''
+            let iconSourceStart = '<img '
+            let iconSourceEnd = ' part = "button-img"/>'
             let button = document.createElement(`button`);
             button.classList.add('tmplit-navbar-button')
-
-            //Assign ::part() to button
             button.setAttribute('part','nav-button')
 
             //Icon as button if first 4 characters == src=
             if (labels[i].substring(0,4) == 'src='){
-                button.innerHTML = labels[i] ? (iconSource.concat('<img ',labels[i],'/>')) : +i + 1;
+                button.innerHTML = labels[i] ? (iconSourceStart.concat(labels[i],iconSourceEnd)) : +i + 1;
+                console.log(button.innerHTML)
             }
             //Text as button
             else{
