@@ -225,7 +225,6 @@ class basicLayout extends HTMLElement {
             //Icon as button if first 4 characters == src=
             if (labels[i].substring(0,4) == 'src='){
                 button.innerHTML = labels[i] ? (iconSourceStart.concat(labels[i],iconSourceEnd)) : +i + 1;
-                console.log(button.innerHTML)
             }
             //Text as button
             else{
@@ -266,9 +265,7 @@ class basicLayout extends HTMLElement {
 
     selectPage(templatesIndex){
         let templates = this.shadowRoot.querySelectorAll('template')
-        let mainSlot = this.shadowRoot.querySelector('slot:not([name])')
-        let mainContent = mainSlot.assignedNodes()[0]
-        let footer = this.querySelector('[slot="footer"]')   
+        let footer = this.querySelector('[slot="footer"]')      
         
         //Add - Remove Navigation Button Indicator
         //::part(selected) is assigned to active button
