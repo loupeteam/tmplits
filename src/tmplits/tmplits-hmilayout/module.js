@@ -116,8 +116,9 @@ styleTemplate.innerHTML =
 .tmplit-footer-wrapper{
     background-color: var(--footer-background-color, rgb(150, 150, 150));
     height: var(--footer-height, 50px);
+    display:flex;
+    align-items: center;
 }
-
 @media (max-width: 992px){
     .tmplit-main-container[navbar='left'] .tmplit-navbar-container,
     .tmplit-main-container[navbar='right'] .tmplit-navbar-container{
