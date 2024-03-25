@@ -38,7 +38,7 @@ This is required because the template uses three.js and three.js addons which ty
 }}
 ```
 
-### Define the onrender callback in your javascript file
+### Define the onrender callback in your javascript file (app.js most likely)
 
 ```Javascript
 //This function will be called every frame
