@@ -35,7 +35,7 @@ export class RobotSceneElement extends HTMLElement {
 				this.robotData.onrenderCallback = () => { };
 			}
 		} catch (e) {
-
+			console.error('Error parsing onrender callback: ', e)
 		}
 
 		this.robotData.loadRobotModel(robotFile)

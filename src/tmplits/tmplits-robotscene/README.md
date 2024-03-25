@@ -12,21 +12,17 @@ npm install @loupeteam/tmplits-robotscene
 
 ### Add the an import map to your html file
 
-This is required because the template uses three.js and three.js addons which typically require a build step to be used in the browser. The import map allows you to use the modules directly in the browser by mapping the module name to the file path.
+This is required because the template uses three.js and three.js addons which typically require a build step to be used in the browser. The import map allows you to use the modules directly in the browser by mapping the module name to the file path. Place the following `<script>` tag in the `<head>` of the HTML file:
 
 ```html
-<head>
-  ...
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "./three/build/three.module.js",
-        "three/addons/": "./three/examples/jsm/"
-      }
+<script type="importmap">
+  {
+    "imports": {
+      "three": "./three/build/three.module.js",
+      "three/addons/": "./three/examples/jsm/"
     }
-  </script>
-  ...
-</head>
+  }
+</script>
 ```
 
 ### Use the template and use it in your html file
@@ -42,7 +38,7 @@ This is required because the template uses three.js and three.js addons which ty
 }}
 ```
 
-### Define the onrender callback in your javascript file
+### Define the onrender callback in your javascript file (app.js most likely)
 
 ```Javascript
 //This function will be called every frame
